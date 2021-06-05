@@ -1,69 +1,100 @@
 {
-  "name": "cdk-iot-device-management",
+  "name": "@softchef/cdk-iot-device-management",
   "repository": {
     "type": "git",
     "url": "git@github.com:SoftChef/cdk-iot-device-management.git"
   },
   "scripts": {
-    "projen": "npx projen",
-    "start": "npx projen start",
     "clobber": "npx projen clobber",
     "compile": "npx projen compile",
     "test:compile": "npx projen test:compile",
     "test": "npx projen test",
     "build": "npx projen build",
-    "bump": "npx projen bump",
-    "release": "npx projen release",
     "test:watch": "npx projen test:watch",
     "test:update": "npx projen test:update",
-    "projen:upgrade": "npx projen projen:upgrade",
+    "bump": "npx projen bump",
+    "unbump": "npx projen unbump",
+    "upgrade-dependencies": "npx projen upgrade-dependencies",
+    "upgrade-projen": "npx projen upgrade-projen",
+    "default": "npx projen default",
     "watch": "npx projen watch",
     "package": "npx projen package",
     "eslint": "npx projen eslint",
     "compat": "npx projen compat",
-    "docgen": "npx projen docgen"
+    "docgen": "npx projen docgen",
+    "projen": "npx projen",
+    "start": "npx projen start"
   },
   "author": {
-    "name": "MinChe Tsai",
-    "email": "tirme0812@gmail.com",
+    "name": "softchef-iot-lab",
+    "email": "poke@softchef.com",
     "organization": false
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.73.0",
+    "@aws-cdk/assert": "^1.107.0",
     "@types/jest": "^26.0.23",
     "@types/node": "^10.17.0",
     "@typescript-eslint/eslint-plugin": "^4.26.0",
     "@typescript-eslint/parser": "^4.26.0",
-    "eslint": "^7.27.0",
+    "aws-sdk-mock": "^5.1.0",
+    "eslint": "^7.28.0",
     "eslint-import-resolver-node": "^0.3.4",
     "eslint-import-resolver-typescript": "^2.4.0",
     "eslint-plugin-import": "^2.23.4",
-    "jest": "^27.0.3",
+    "jest": "^27.0.4",
     "jest-junit": "^12",
     "jsii": "^1.30.0",
     "jsii-diff": "^1.30.0",
-    "jsii-docgen": "^1.8.85",
+    "jsii-docgen": "^1.8.86",
     "jsii-pacmak": "^1.30.0",
     "json-schema": "^0.3.0",
-    "projen": "^0.16.36",
+    "npm-check-updates": "^11",
+    "projen": "0.22.0",
     "standard-version": "^9",
-    "ts-jest": "^27.0.2",
     "typescript": "^4.3.2"
   },
   "peerDependencies": {
+    "@aws-cdk/aws-apigateway": "^1.107.0",
+    "@aws-cdk/aws-lambda": "^1.107.0",
+    "@aws-cdk/aws-lambda-nodejs": "^1.107.0",
+    "@aws-cdk/core": "^1.107.0",
     "constructs": "^3.2.27"
   },
-  "bundledDependencies": [],
+  "dependencies": {
+    "@aws-cdk/aws-apigateway": "^1.107.0",
+    "@aws-cdk/aws-lambda": "^1.107.0",
+    "@aws-cdk/aws-lambda-nodejs": "^1.107.0",
+    "@aws-cdk/core": "^1.107.0",
+    "@softchef/cdk-restapi": "^0.0.13",
+    "@types/semver": "^7.3.6",
+    "aws-sdk": "^2.922.0",
+    "joi": "^17.4.0",
+    "semver": "^7.3.5"
+  },
+  "bundledDependencies": [
+    "@softchef/cdk-restapi",
+    "@types/semver",
+    "aws-sdk",
+    "joi",
+    "semver"
+  ],
   "keywords": [
+    "CDK",
+    "Device Management",
+    "IoT",
+    "IoT Job",
+    "OTA",
     "cdk"
   ],
   "main": "lib/index.js",
   "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "0.0.0",
   "jest": {
     "testMatch": [
-      "**/__tests__/**/*.ts?(x)",
-      "**/?(*.)+(spec|test).ts?(x)"
+      "**/lib/__tests__/**/?(*.)+(spec|test).js?(x)"
     ],
     "clearMocks": true,
     "collectCoverage": true,
@@ -81,7 +112,8 @@
       "/node_modules/"
     ],
     "watchPathIgnorePatterns": [
-      "/node_modules/"
+      "/node_modules/",
+      "/src/"
     ],
     "reporters": [
       "default",
@@ -92,12 +124,7 @@
         }
       ]
     ],
-    "preset": "ts-jest",
-    "globals": {
-      "ts-jest": {
-        "tsconfig": "tsconfig.jest.json"
-      }
-    }
+    "snapshotResolver": "./.projen/jest-snapshot-resolver.js"
   },
   "types": "lib/index.d.ts",
   "stability": "stable",

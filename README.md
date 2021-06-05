@@ -9,7 +9,8 @@ exports.ThingTypeApi = class ThingTypeApi extends cdk.Construct {
 - GET /thing-types - Get thing type list
 - GET /thing-types/{thing-type-name} - Get thing type by name
 - POST /thing-types - Create new thing type
-- PUT /thing-types/{thing-type-name}/deprecated - Deprecated or Undeprecate thing type by name
+- PUT /thing-types/{thing-type-name}/deprecate - Deprecated thing type by name
+- PUT /thing-types/{thing-type-name}/undeprecate - Undeprecate thing type by name
 - DELETE /thing-types/{thing-type-name} - Delete thing type
 
 ---
