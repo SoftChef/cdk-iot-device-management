@@ -18,6 +18,7 @@ const project = new AwsCdkConstructLibrary({
     '@aws-cdk/aws-apigateway',
     '@aws-cdk/aws-lambda',
     '@aws-cdk/aws-lambda-nodejs',
+    '@aws-cdk/aws-dynamodb',
   ],
   bundledDeps: [
     'joi',

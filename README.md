@@ -40,8 +40,10 @@ exports.ThingGroupApi = class ThingGroupApi extends cdk.Construct {
 - POST /thing-groups - Create new thing group
 - PUT /thing-groups/{thingGroupName} - Update thing group by name
 - DELETE /thing-groups/{thingGroupName} - Delete thing group by name
+
 - PUT /thing-groups/{thingGroupName}/things/{thingName} - Add thing to thing group by name
 - DELETE /thing-groups/{thingGroupName}/things/{thingName} - Remove thing to thing group by name
+
 - POST /dynamic-thing-groups - Create new dynamic thing group
 - PUT /dynamic-thing-groups/{thingGroupName} - Update dynamic thing group by name
 - DELETE /dynamic-thing-groups/{thingGroupName} - Delete dynamic thing group by name
@@ -59,7 +61,9 @@ exports.FileApi = class FileApi extends cdk.Construct {
 - GET /categories - Get root category list
 - GET /categories/{categoryId} - Get category by ID, if category is root will return children category list
 - POST /categories - Create new category
+- PUT /categories/{categoryId} - Update category by ID
 - DELETE /categories/{categoryId} - Delete category by ID
+
 - GET /files/{categoryId} - Get files by category ID
 - GET /files/{fileId} - Get file by ID
 - POST /files - Create new file
@@ -99,14 +103,15 @@ exports.FileApi = class FileApi extends cdk.Construct {
 - GET /jobs - Get job list
 - GET /jobs/{jobId} - Get job by ID
 - GET /jobs/{jobId}/things/{thingName} - Get job's thing status by job ID and thing name
-- GET /job-templates - Get job template list
-- GET /job-templates/{jobTemplateId} - Get job template by ID
-- POST /job-templates - Create new job template
-- DELETE /job-templates/{jobTemplateId} - Delete job template by ID
 - POST /jobs - Create new job
 - PUT /jobs/{jobId} - Update job by ID
 - DELETE /jobs/{jobId} - Delete job by ID
 - DELETE /jobs/{jobId}/things/{thingName} - Delete job's thing by job ID and thing name
+
+- GET /job-templates - Get job template list
+- GET /job-templates/{jobTemplateId} - Get job template by ID
+- POST /job-templates - Create new job template
+- DELETE /job-templates/{jobTemplateId} - Delete job template by ID
 
 ### POST /jobs Body
 ```
