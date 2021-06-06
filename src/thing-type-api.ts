@@ -27,7 +27,7 @@ export class ThingTypeApi extends cdk.Construct {
         {
           path: '/thing-types',
           httpMethod: HttpMethod.GET,
-          lambdaFunction: this.createGetThingTypeListFunction(),
+          lambdaFunction: this.createListThingTypeFunction(),
         },
         {
           path: '/thing-types/{thingTypeName}',
@@ -73,11 +73,11 @@ export class ThingTypeApi extends cdk.Construct {
     return createThingTypeFunction;
   }
 
-  private createGetThingTypeListFunction(): lambda.NodejsFunction {
-    const getThingTypeListFunction = new lambda.NodejsFunction(this, 'GetThingTypeListFunction', {
+  private createListThingTypeFunction(): lambda.NodejsFunction {
+    const listThingTypeFunction = new lambda.NodejsFunction(this, 'ListThingTypeFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/list-thing-types/app.ts`,
     });
-    getThingTypeListFunction.role?.attachInlinePolicy(
+    listThingTypeFunction.role?.attachInlinePolicy(
       new iam.Policy(this, 'iot-list-thing-types-policy', {
         statements: [
           new iam.PolicyStatement({
@@ -89,7 +89,7 @@ export class ThingTypeApi extends cdk.Construct {
         ],
       }),
     );
-    return getThingTypeListFunction;
+    return listThingTypeFunction;
   }
 
   private createGetThingTypeFunction(): lambda.NodejsFunction {

@@ -93,9 +93,9 @@ exports.FileApi = class FileApi extends cdk.Construct {
 - GET /jobs/{jobId} - Get job by ID
 - GET /jobs/{jobId}/things/{thingName} - Get job's thing status by job ID and thing name
 - GET /job-templates - Get job template list
-- GET /job-templates/{job-template-id} - Get job template by ID
+- GET /job-templates/{jobTemplateId} - Get job template by ID
 - POST /job-templates - Create new job template
-- DELETE /job-templates/{job-template-id} - Delete job template by ID
+- DELETE /job-templates/{jobTemplateId} - Delete job template by ID
 - POST /jobs - Create new job
 - PUT /jobs/{jobId} - Update job by ID
 - DELETE /jobs/{jobId} - Delete job by ID
