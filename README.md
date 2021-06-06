@@ -37,9 +37,16 @@ exports.ThingGroupApi = class ThingGroupApi extends cdk.Construct {
 ```
 - GET /thing-groups - Get thing group list
 - GET /thing-groups/{thingGroupName} - Get thing group by name
-- POST /thing-groups - Create new thing group, include static and dynamic thing group
+- POST /thing-groups - Create new thing group
 - PUT /thing-groups/{thingGroupName} - Update thing group by name
 - DELETE /thing-groups/{thingGroupName} - Delete thing group by name
+- PUT /thing-groups/{thingGroupName}/things/{thingName} - Add thing to thing group by name
+- DELETE /thing-groups/{thingGroupName}/things/{thingName} - Remove thing to thing group by name
+- POST /dynamic-thing-groups - Create new dynamic thing group
+- PUT /dynamic-thing-groups/{thingGroupName} - Update dynamic thing group by name
+- DELETE /dynamic-thing-groups/{thingGroupName} - Delete dynamic thing group by name
+
+// BillingGroup not join
 
 ---
 
