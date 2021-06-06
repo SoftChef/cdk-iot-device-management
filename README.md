@@ -7,11 +7,11 @@ exports.ThingTypeApi = class ThingTypeApi extends cdk.Construct {
 }
 ```
 - GET /thing-types - Get thing type list
-- GET /thing-types/{thing-type-name} - Get thing type by name
+- GET /thing-types/{thingTypeName} - Get thing type by name
 - POST /thing-types - Create new thing type
-- PUT /thing-types/{thing-type-name}/deprecate - Deprecated thing type by name
-- PUT /thing-types/{thing-type-name}/undeprecate - Undeprecate thing type by name
-- DELETE /thing-types/{thing-type-name} - Delete thing type
+- PUT /thing-types/{thingTypeName}/deprecate - Deprecated thing type by name
+- PUT /thing-types/{thingTypeName}/undeprecate - Undeprecate thing type by name
+- DELETE /thing-types/{thingTypeName} - Delete thing type
 
 ---
 
@@ -22,10 +22,10 @@ exports.ThingApi = class ThingApi extends cdk.Construct {
 }
 ```
 - GET /things - Get thing list
-- GET /things/{thing-name} - Get thing by name
+- GET /things/{thingName} - Get thing by name
 - POST /things - Create new thing
-- PUT /things/{thing-name} - Update thing by name
-- DELETE /things/{thing-name} - Delete thing by name
+- PUT /things/{thingName} - Update thing by name
+- DELETE /things/{thingName} - Delete thing by name
 
 ---
 
@@ -36,10 +36,10 @@ exports.ThingGroupApi = class ThingGroupApi extends cdk.Construct {
 }
 ```
 - GET /thing-groups - Get thing group list
-- GET /thing-groups/{thing-group-name} - Get thing group by name
+- GET /thing-groups/{thingGroupName} - Get thing group by name
 - POST /thing-groups - Create new thing group, include static and dynamic thing group
-- PUT /thing-groups/{thing-group-name} - Update thing group by name
-- DELETE /thing-groups/{thing-group-name} - Delete thing group by name
+- PUT /thing-groups/{thingGroupName} - Update thing group by name
+- DELETE /thing-groups/{thingGroupName} - Delete thing group by name
 
 ---
 
@@ -50,14 +50,14 @@ exports.FileApi = class FileApi extends cdk.Construct {
 }
 ```
 - GET /categories - Get root category list
-- GET /categories/{category-id} - Get category by ID, if category is root will return children category list
+- GET /categories/{categoryId} - Get category by ID, if category is root will return children category list
 - POST /categories - Create new category
-- DELETE /categories/{category-id} - Delete category by ID
-- GET /files/{category-id} - Get files by category ID
-- GET /files/{file-id} - Get file by ID
+- DELETE /categories/{categoryId} - Delete category by ID
+- GET /files/{categoryId} - Get files by category ID
+- GET /files/{fileId} - Get file by ID
 - POST /files - Create new file
-- PUT /files/{file-id} - Update file by ID
-- DELETE /files/{file-id} - Delete file by ID
+- PUT /files/{fileId} - Update file by ID
+- DELETE /files/{fileId} - Delete file by ID
 
 ### POST /categories Body
 ```
@@ -90,16 +90,16 @@ exports.FileApi = class FileApi extends cdk.Construct {
 }
 ```
 - GET /jobs - Get job list
-- GET /jobs/{job-id} - Get job by ID
-- GET /jobs/{job-id}/things/{thing-name} - Get job's thing status by job ID and thing name
+- GET /jobs/{jobId} - Get job by ID
+- GET /jobs/{jobId}/things/{thingName} - Get job's thing status by job ID and thing name
 - GET /job-templates - Get job template list
 - GET /job-templates/{job-template-id} - Get job template by ID
 - POST /job-templates - Create new job template
 - DELETE /job-templates/{job-template-id} - Delete job template by ID
 - POST /jobs - Create new job
-- PUT /jobs/{job-id} - Update job by ID
-- DELETE /jobs/{job-id} - Delete job by ID
-- DELETE /jobs/{job-id}/things/{thing-name} - Delete job's thing by job ID and thing name
+- PUT /jobs/{jobId} - Update job by ID
+- DELETE /jobs/{jobId} - Delete job by ID
+- DELETE /jobs/{jobId}/things/{thingName} - Delete job's thing by job ID and thing name
 
 ### POST /jobs Body
 ```

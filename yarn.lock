@@ -195,7 +195,7 @@
     "@aws-cdk/core" "1.107.0"
     constructs "^3.3.69"
 
-"@aws-cdk/aws-iam@1.107.0":
+"@aws-cdk/aws-iam@1.107.0", "@aws-cdk/aws-iam@^1.107.0":
   version "1.107.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-iam/-/aws-iam-1.107.0.tgz#7ab84fb9ab133599aaaa6f041009d4177b1c55b0"
   integrity sha512-ZSULS+IdMK82VjcxNyLATlnYN1bQVD1om8MXGYxAkFuQLb3XL+uAa7NLVeHZtEKkPYqr8BcYlCXpB1JvGImJkA==
@@ -1108,10 +1108,10 @@
   resolved "https://registry.yarnpkg.com/@sinonjs/text-encoding/-/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
   integrity sha512-+iTbntw2IZPb/anVDbypzfQa+ay64MW0Zo8aJ8gZPWMMK6/OubMVb6lUPMagqjOPnmtauXnFCACVl3O7ogjeqQ==
 
-"@softchef/cdk-restapi@^0.0.13":
-  version "0.0.13"
-  resolved "https://registry.yarnpkg.com/@softchef/cdk-restapi/-/cdk-restapi-0.0.13.tgz#f9f7ae7cbc8f97725bca4b62d83d8060262affe2"
-  integrity sha512-uSi7TElxTDSu29drQGeTggWUoyO/eCEtpCBX81ZhNRHw0XakMUJ09yxY3Lm00Edesyt7gtHeSAwe4Ru0KPqNLg==
+"@softchef/cdk-restapi@^0.0.14":
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/@softchef/cdk-restapi/-/cdk-restapi-0.0.14.tgz#e8a43c5419845e3c421bec596233fced5da2763e"
+  integrity sha512-qIejOZXB789vFWSf+ErMeQgw4rdWFd7q/oCl0EcT33B34jYHWmHxtow6reJm3kzjFBJzCoc+oFXI+JWyTGoiQw==
   dependencies:
     "@aws-cdk/aws-apigateway" "^1.107.0"
     "@aws-cdk/aws-lambda" "^1.107.0"

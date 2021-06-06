@@ -12,12 +12,16 @@ export async function handler(event: { [key: string]: any }) {
   if (validated.error) {
     return response.error(validated, 422);
   }
-  const iotClient = new Iot();
-  const thingType = await iotClient.createThingType({
-    thingTypeName: request.input('name'),
-  }).promise();
-  return response.json({
-    created: true,
-    thingType,
-  });
+  try {
+    const iotClient = new Iot();
+    const thingType = await iotClient.createThingType({
+      thingTypeName: request.input('name'),
+    }).promise();
+    return response.json({
+      created: true,
+      thingType,
+    });
+  } catch (error) {
+    return response.error(error);
+  }
 }

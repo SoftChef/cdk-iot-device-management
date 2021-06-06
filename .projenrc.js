@@ -14,6 +14,7 @@ const project = new AwsCdkConstructLibrary({
   repositoryUrl: 'git@github.com:SoftChef/cdk-iot-device-management.git',
   cdkDependencies: [
     '@aws-cdk/core',
+    '@aws-cdk/aws-iam',
     '@aws-cdk/aws-apigateway',
     '@aws-cdk/aws-lambda',
     '@aws-cdk/aws-lambda-nodejs',

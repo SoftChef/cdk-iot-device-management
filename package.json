@@ -55,6 +55,7 @@
   },
   "peerDependencies": {
     "@aws-cdk/aws-apigateway": "^1.107.0",
+    "@aws-cdk/aws-iam": "^1.107.0",
     "@aws-cdk/aws-lambda": "^1.107.0",
     "@aws-cdk/aws-lambda-nodejs": "^1.107.0",
     "@aws-cdk/core": "^1.107.0",
@@ -62,10 +63,11 @@
   },
   "dependencies": {
     "@aws-cdk/aws-apigateway": "^1.107.0",
+    "@aws-cdk/aws-iam": "^1.107.0",
     "@aws-cdk/aws-lambda": "^1.107.0",
     "@aws-cdk/aws-lambda-nodejs": "^1.107.0",
     "@aws-cdk/core": "^1.107.0",
-    "@softchef/cdk-restapi": "^0.0.13",
+    "@softchef/cdk-restapi": "^0.0.14",
     "@types/semver": "^7.3.6",
     "aws-sdk": "^2.922.0",
     "joi": "^17.4.0",

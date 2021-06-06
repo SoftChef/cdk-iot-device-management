@@ -121,6 +121,11 @@
       "type": "peer"
     },
     {
+      "name": "@aws-cdk/aws-iam",
+      "version": "^1.107.0",
+      "type": "peer"
+    },
+    {
       "name": "@aws-cdk/aws-lambda-nodejs",
       "version": "^1.107.0",
       "type": "peer"
@@ -142,6 +147,11 @@
     },
     {
       "name": "@aws-cdk/aws-apigateway",
+      "version": "^1.107.0",
+      "type": "runtime"
+    },
+    {
+      "name": "@aws-cdk/aws-iam",
       "version": "^1.107.0",
       "type": "runtime"
     },
