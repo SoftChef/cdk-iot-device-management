@@ -19,7 +19,7 @@ test('Create thing type API', async() => {
   });
   const response = await createThingType.handler({
     body: {
-      name: 'Test',
+      thingTypeName: 'Test',
     },
   });
   const body = JSON.parse(response.body);

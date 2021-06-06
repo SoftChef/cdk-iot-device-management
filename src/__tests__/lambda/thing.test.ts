@@ -2,24 +2,23 @@ import * as AWS from 'aws-sdk';
 import * as AWSMock from 'aws-sdk-mock';
 import * as createThing from '../../lambda-assets/things/create-thing/app';
 import * as deleteThing from '../../lambda-assets/things/delete-thing/app';
-// import * as deprecateThing from '../../lambda-assets/things/deprecate-thing/app';
-// import * as getThingList from '../../lambda-assets/things/get-thing-list/app';
+// import * as updateThing from '../../lambda-assets/things/update-thing/app';
+// import * as listThings from '../../lambda-assets/things/list-things/app';
 // import * as getThing from '../../lambda-assets/things/get-thing/app';
-// import * as undeprecateThing from '../../lambda-assets/things/undeprecate-thing/app';
 
 AWS.config.region = 'local';
 AWSMock.setSDKInstance(AWS);
 
 test('Create thing API', async() => {
   AWSMock.mock('Iot', 'createThing', (parameters: { [key: string]: any }, callback: (error: any, response: any) => void) => {
-    expect(parameters).toStrictEqual({ thingTypeName: 'Test' });
+    expect(parameters).toStrictEqual({ thingName: 'Test' });
     callback(null, {
-      thingType: 'Test',
+      thingName: 'Test',
     });
   });
   const response = await createThing.handler({
     body: {
-      name: 'Test',
+      thingName: 'Test',
     },
   });
   const body = JSON.parse(response.body);
@@ -31,24 +30,24 @@ test('Get thing API', async() => {
   // const response = await getThing.handler({});
 });
 
-test('Get thing list API', async() => {
-  // const response = await getThingList.handler({});
+test('List things API', async() => {
+  // const response = await listThings.handler({});
 });
 
 test('Update thing API', async() => {
-  // const response = await deprecateThing.handler({});
+  // const response = await updateThing.handler({});
 });
 
 test('Delete thing API', async() => {
   AWSMock.mock('Iot', 'deleteThing', (parameters: { [key: string]: any }, callback: (error: any, response: any) => void) => {
-    expect(parameters).toStrictEqual({ thingTypeName: 'Test' });
+    expect(parameters).toStrictEqual({ thingName: 'Test' });
     callback(null, {
-      thingType: 'Test',
+      thingName: 'Test',
     });
   });
   const response = await deleteThing.handler({
     pathParameters: {
-      thingTypeName: 'Test',
+      thingName: 'Test',
     },
   });
   const body = JSON.parse(response.body);

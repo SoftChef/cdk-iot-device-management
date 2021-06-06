@@ -6,7 +6,7 @@ export async function handler(event: { [key: string]: any }) {
   const response = new Response();
   const validated = request.validate(joi => {
     return {
-      name: joi.string().required(),
+      thingTypeName: joi.string().required(),
     };
   });
   if (validated.error) {
@@ -15,7 +15,7 @@ export async function handler(event: { [key: string]: any }) {
   try {
     const iotClient = new Iot();
     const thingType = await iotClient.createThingType({
-      thingTypeName: request.input('name'),
+      thingTypeName: request.input('thingTypeName'),
     }).promise();
     return response.json({
       created: true,
