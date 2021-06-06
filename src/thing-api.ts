@@ -30,17 +30,17 @@ export class ThingApi extends cdk.Construct {
           lambdaFunction: this.createListThingsFunction(),
         },
         {
-          path: '/things/{thingTypeName}',
+          path: '/things/{thingName}',
           httpMethod: HttpMethod.GET,
           lambdaFunction: this.createGetThingFunction(),
         },
         {
-          path: '/things/{thingTypeName}',
+          path: '/things/{thingName}',
           httpMethod: HttpMethod.PUT,
           lambdaFunction: this.createUpdateThingFunction(),
         },
         {
-          path: '/things/{thingTypeName}',
+          path: '/things/{thingName}',
           httpMethod: HttpMethod.DELETE,
           lambdaFunction: this.createDeleteThingFunction(),
         },
@@ -51,7 +51,7 @@ export class ThingApi extends cdk.Construct {
 
   private createCreateThingFunction(): lambda.NodejsFunction {
     const createThingFunction = new lambda.NodejsFunction(this, 'CreateThingFunction', {
-      entry: `${LAMBDA_ASSETS_PATH}/get-thing/app.ts`,
+      entry: `${LAMBDA_ASSETS_PATH}/create-thing/app.ts`,
     });
     createThingFunction.role?.attachInlinePolicy(
       new iam.Policy(this, 'iot-create-thing-policy', {
