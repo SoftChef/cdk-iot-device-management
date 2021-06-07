@@ -5,7 +5,7 @@ import * as lambda from '@aws-cdk/aws-lambda-nodejs';
 import * as cdk from '@aws-cdk/core';
 import { RestApi, HttpMethod } from '@softchef/cdk-restapi';
 
-const LAMBDA_ASSETS_PATH = path.resolve(__dirname, '../src/lambda-assets/files');
+const LAMBDA_ASSETS_PATH = path.resolve(__dirname, '../lambda-assets/files');
 
 // interface FileApiProps {
 
@@ -102,6 +102,9 @@ export class FileApi extends cdk.Construct {
   private createCreateCategoryFunction(): lambda.NodejsFunction {
     const createCategoryFunction = new lambda.NodejsFunction(this, 'CreateCategoryFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/get-category/app.ts`,
+      environment: {
+        CATEGORY_TABLE_NAME: this.categoryTable.tableName,
+      },
     });
     createCategoryFunction.role?.attachInlinePolicy(
       new iam.Policy(this, 'create-category-policy', {
@@ -123,6 +126,9 @@ export class FileApi extends cdk.Construct {
   private createListCategoriesFunction(): lambda.NodejsFunction {
     const listCategoriesFunction = new lambda.NodejsFunction(this, 'ListCategoriesFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/list-categories/app.ts`,
+      environment: {
+        CATEGORY_TABLE_NAME: this.categoryTable.tableName,
+      },
     });
     listCategoriesFunction.role?.attachInlinePolicy(
       new iam.Policy(this, 'list-categories-policy', {
@@ -144,6 +150,9 @@ export class FileApi extends cdk.Construct {
   private createGetCategoryFunction(): lambda.NodejsFunction {
     const getCategoryFunction = new lambda.NodejsFunction(this, 'GetCategoryFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/get-category/app.ts`,
+      environment: {
+        CATEGORY_TABLE_NAME: this.categoryTable.tableName,
+      },
     });
     getCategoryFunction.role?.attachInlinePolicy(
       new iam.Policy(this, 'get-category-policy', {
@@ -165,6 +174,9 @@ export class FileApi extends cdk.Construct {
   private createUpdateCategoryFunction(): lambda.NodejsFunction {
     const updateCategoryFunction = new lambda.NodejsFunction(this, 'UpdateCategoryFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/update-category/app.ts`,
+      environment: {
+        CATEGORY_TABLE_NAME: this.categoryTable.tableName,
+      },
     });
     updateCategoryFunction.role?.attachInlinePolicy(
       new iam.Policy(this, 'update-category-policy', {
@@ -186,6 +198,9 @@ export class FileApi extends cdk.Construct {
   private createDeleteCategoryFunction(): lambda.NodejsFunction {
     const deleteCategoryFunction = new lambda.NodejsFunction(this, 'DeleteCategoryFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/delete-category/app.ts`,
+      environment: {
+        CATEGORY_TABLE_NAME: this.categoryTable.tableName,
+      },
     });
     deleteCategoryFunction.role?.attachInlinePolicy(
       new iam.Policy(this, 'delete-category-policy', {
@@ -206,7 +221,7 @@ export class FileApi extends cdk.Construct {
 
   private createCreateFileFunction(): lambda.NodejsFunction {
     const createFileFunction = new lambda.NodejsFunction(this, 'CreateFileFunction', {
-      entry: `${LAMBDA_ASSETS_PATH}/get-file/app.ts`,
+      entry: `${LAMBDA_ASSETS_PATH}/create-file/app.ts`,
     });
     createFileFunction.role?.attachInlinePolicy(
       new iam.Policy(this, 'create-file-policy', {
