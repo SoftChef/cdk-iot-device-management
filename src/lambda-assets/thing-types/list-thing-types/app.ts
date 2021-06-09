@@ -11,6 +11,6 @@ export async function handler(event: { [key: string]: any }) {
     }).promise();
     return response.json(thingTypes);
   } catch (error) {
-    return response.json(error);
+    return response.error(error);
   }
 }

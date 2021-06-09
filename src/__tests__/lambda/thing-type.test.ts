@@ -11,7 +11,7 @@ AWS.config.region = 'local';
 AWSMock.setSDKInstance(AWS);
 
 test('Create thing type API', async() => {
-  AWSMock.mock('Iot', 'createThingType', (parameters: { [key: string]: any }, callback: (error: any, response: any) => void) => {
+  AWSMock.mock('Iot', 'createThingType', (parameters: AWS.Iot.Types.CreateThingTypeRequest, callback: Function) => {
     expect(parameters).toStrictEqual({ thingTypeName: 'Test' });
     callback(null, {
       thingType: 'Test',
@@ -44,7 +44,7 @@ test('Undeprecate thing type API', async() => {
 });
 
 test('Delete thing type API', async() => {
-  AWSMock.mock('Iot', 'deleteThingType', (parameters: { [key: string]: any }, callback: (error: any, response: any) => void) => {
+  AWSMock.mock('Iot', 'deleteThingType', (parameters: AWS.Iot.Types.DeleteThingTypeRequest, callback: Function) => {
     expect(parameters).toStrictEqual({ thingTypeName: 'Test' });
     callback(null, {
       thingType: 'Test',

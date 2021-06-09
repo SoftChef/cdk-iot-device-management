@@ -15,6 +15,6 @@ export async function handler(event: { [key: string]: any }) {
       deleted: true,
     });
   } catch (error) {
-    return response.json(error);
+    return response.error(error);
   }
 }

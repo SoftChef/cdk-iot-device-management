@@ -15,7 +15,7 @@ AWS.config.region = 'local';
 AWSMock.setSDKInstance(AWS);
 
 test('Create thing group API', async() => {
-  AWSMock.mock('Iot', 'createThingGroup', (parameters: { [key: string]: any }, callback: (error: any, response: any) => void) => {
+  AWSMock.mock('Iot', 'createThingGroup', (parameters: AWS.Iot.Types.CreateThingGroupRequest, callback: Function) => {
     expect(parameters).toStrictEqual({ thingGroupName: 'Test' });
     callback(null, {
       thingGroupName: 'Test',
@@ -44,7 +44,7 @@ test('Update thing group API', async() => {
 });
 
 test('Delete thing group API', async() => {
-  AWSMock.mock('Iot', 'deleteThingGroup', (parameters: { [key: string]: any }, callback: (error: any, response: any) => void) => {
+  AWSMock.mock('Iot', 'deleteThingGroup', (parameters: AWS.Iot.Types.DeleteThingGroupRequest, callback: Function) => {
     expect(parameters).toStrictEqual({ thingGroupName: 'Test' });
     callback(null, {
       thingGroup: 'Test',
