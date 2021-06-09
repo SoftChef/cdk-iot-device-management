@@ -9,7 +9,23 @@ export async function handler(event: { [key: string]: any }) {
     const documentClient = new DynamoDB.DocumentClient();
     const parentId = request.get('parentId', undefined);
     if (parentId) {
-      const parameters: { [k: string]: any } = {
+      const hasNextTokenParameters = {
+        TableName: `${CATEGORY_TABLE_NAME}`,
+        IndexName: 'query-by-parent-id',
+        KeyConditionExpression: '#parentId = :parentId',
+        ExpressionAttributeNames: {
+          '#name': 'name',
+          '#parentId': 'parentId',
+        },
+        ExpressionAttributeValues: {
+          ':parentId': parentId,
+        },
+        FilterExpression: 'attribute_not_exists(#name)',
+        ExclusiveStartKey: {
+          Key: request.get('nextToken', undefined),
+        },
+      };
+      const parameters = {
         TableName: `${CATEGORY_TABLE_NAME}`,
         IndexName: 'query-by-parent-id',
         KeyConditionExpression: '#parentId = :parentId',
@@ -22,12 +38,8 @@ export async function handler(event: { [key: string]: any }) {
         },
         FilterExpression: 'attribute_not_exists(#name)',
       };
-      if (request.has('nextToken')) {
-        parameters.ExclusiveStartKey = {
-          Key: request.get('nextToken'),
-        }
-      }
-      const categories = await documentClient.query(parameters).promise();
+      const nextToken = request.get('nextToken', undefined);
+      const categories = await documentClient.query(nextToken ? hasNextTokenParameters : parameters).promise();
       return response.json({
         data: categories.Items,
         nextToken: categories.LastEvaluatedKey,

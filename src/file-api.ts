@@ -101,7 +101,7 @@ export class FileApi extends cdk.Construct {
 
   private createCreateCategoryFunction(): lambda.NodejsFunction {
     const createCategoryFunction = new lambda.NodejsFunction(this, 'CreateCategoryFunction', {
-      entry: `${LAMBDA_ASSETS_PATH}/get-category/app.ts`,
+      entry: `${LAMBDA_ASSETS_PATH}/create-category/app.ts`,
       environment: {
         CATEGORY_TABLE_NAME: this.categoryTable.tableName,
       },
@@ -149,7 +149,7 @@ export class FileApi extends cdk.Construct {
 
   private createGetCategoryFunction(): lambda.NodejsFunction {
     const getCategoryFunction = new lambda.NodejsFunction(this, 'GetCategoryFunction', {
-      entry: `${LAMBDA_ASSETS_PATH}/get-category/app.ts`,
+      entry: `${LAMBDA_ASSETS_PATH}/create-category/app.ts`,
       environment: {
         CATEGORY_TABLE_NAME: this.categoryTable.tableName,
       },
