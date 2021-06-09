@@ -23,7 +23,6 @@ import * as listJobs from '../../lambda-assets/jobs/list-jobs/app';
 
 // AWS.config.region = 'local';
 AWSMock.setSDKInstance(AWS);
-AWS.config.region = 'ap-northeast-1';
 
 const expectedJob = {
   jobArn: 'arn:aws:iot:ap-northeast-1:012345678901:job/85f6509f-023c-48fb-8252-981653ffd561',
@@ -44,6 +43,10 @@ const expected = {
       operation: 'Work',
     }),
     description: expectedJob.description,
+  },
+  forceDeleteJob: {
+    jobId: expectedJob.jobId,
+    force: true,
   },
   job: expectedJob,
   listJobs: {
@@ -177,14 +180,20 @@ test('Update job success', async() => {
 
 test('Delete job success', async() => {
   AWSMock.mock('Iot', 'deleteJob', (parameters: AWS.Iot.Types.DeleteJobRequest, callback: Function) => {
-    expect(parameters).toStrictEqual({ jobId: 'Test' });
+    expect(parameters).toStrictEqual({
+      jobId: expected.forceDeleteJob.jobId,
+      force: expected.forceDeleteJob.force,
+    });
     callback(null, {
-      jobId: 'Test',
+      deleted: true,
     });
   });
   const response = await deleteJob.handler({
     pathParameters: {
-      jobId: 'Test',
+      jobId: expected.forceDeleteJob.jobId,
+    },
+    queryStringParameters: {
+      force: true,
     },
   });
   const body = JSON.parse(response.body);

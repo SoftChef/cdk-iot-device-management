@@ -8,6 +8,7 @@ export async function handler(event: { [key: string]: any }) {
     const iotClient = new Iot();
     await iotClient.deleteJob({
       jobId: request.parameter('jobId'),
+      force: true,
     }).promise();
     return response.json({
       deleted: true,
