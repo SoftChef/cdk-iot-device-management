@@ -23,6 +23,7 @@ const project = new AwsCdkConstructLibrary({
   bundledDeps: [
     'joi',
     'semver',
+    'esbuild',
     'uuid',
     '@types/uuid',
     '@types/semver',
