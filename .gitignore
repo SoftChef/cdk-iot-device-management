@@ -40,12 +40,12 @@ yarn-error.log*
 !/.github/workflows/upgrade-dependencies.yml
 !/.npmignore
 !/.projen/deps.json
-!/.projen/jest-snapshot-resolver.js
 !/.projen/tasks.json
 !/.projenrc.js
 !/API.md
 !/LICENSE
 !/package.json
 !/src
-!/src/__tests__
+!/test
 !/tsconfig.eslint.json
+!/tsconfig.jest.json
