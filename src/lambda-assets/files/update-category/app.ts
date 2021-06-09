@@ -10,7 +10,7 @@ export async function handler(event: { [key: string]: any }) {
     await documentClient.update({
       TableName: `${CATEGORY_TABLE_NAME}`,
       Key: {
-        frameNumber: request.parameter('categoryId'),
+        categoryId: request.parameter('categoryId'),
       },
       AttributeUpdates: {
         description: {
@@ -23,6 +23,6 @@ export async function handler(event: { [key: string]: any }) {
       updated: true,
     });
   } catch (error) {
-    return response.json(error);
+    return response.error(error);
   }
 }

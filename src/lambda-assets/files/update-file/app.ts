@@ -10,6 +10,6 @@ export async function handler(event: { [key: string]: any }) {
       category: request.parameter('categoryId'),
     });
   } catch (error) {
-    return response.json(error);
+    return response.error(error);
   }
 }

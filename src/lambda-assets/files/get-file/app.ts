@@ -9,6 +9,6 @@ export async function handler(event: { [key: string]: any }) {
       file: request.parameter('fileId'),
     });
   } catch (error) {
-    return response.json(error);
+    return response.error(error);
   }
 }

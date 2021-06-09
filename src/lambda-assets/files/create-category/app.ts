@@ -8,31 +8,32 @@ export async function handler(event: { [key: string]: any }) {
   try {
     const validated = request.validate(joi => {
       return {
-        name: joi.string().required(),
+        parentId: joi.string().required(),
       };
     });
     if (validated.error) {
       return response.error(validated, 422);
     }
     const timestamp = Date.now();
-    const name = request.input('name');
+    const name = request.input('name', null);
     const parentId = request.input('parentId');
     const documentClient = new DynamoDB.DocumentClient();
-    await documentClient.put({
+    const parameters = {
       TableName: `${CATEGORY_TABLE_NAME}`,
       Item: {
-        categoryId: `${name}${parentId}`,
+        categoryId: name ? `${parentId}-${name}` : parentId,
         parentId,
         name,
         description: request.input('description'),
         createdAt: timestamp,
         updatedAt: timestamp,
       },
-    }).promise();
+    };
+    await documentClient.put(parameters).promise();
     return response.json({
       created: true,
     });
   } catch (error) {
-    return response.json(error);
+    return response.error(error);
   }
 }

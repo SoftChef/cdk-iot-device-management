@@ -17,6 +17,6 @@ export async function handler(event: { [key: string]: any }) {
       data,
     });
   } catch (error) {
-    return response.json(error);
+    return response.error(error);
   }
 }

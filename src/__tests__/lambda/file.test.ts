@@ -1,37 +1,94 @@
 import * as AWS from 'aws-sdk';
 import * as AWSMock from 'aws-sdk-mock';
-// import * as createCategory from '../../lambda-assets/files/create-category/app';
+import * as createCategory from '../../lambda-assets/files/create-category/app';
 // import * as createFile from '../../lambda-assets/files/create-file/app';
-// import * as deleteCategory from '../../lambda-assets/files/delete-category/app';
+import * as deleteCategory from '../../lambda-assets/files/delete-category/app';
 // import * as deleteFile from '../../lambda-assets/files/delete-file/app';
-// import * as getCategory from '../../lambda-assets/files/get-category/app';
+import * as getCategory from '../../lambda-assets/files/get-category/app';
 // import * as getFile from '../../lambda-assets/files/get-file/app';
-// import * as listCategories from '../../lambda-assets/files/list-categories/app';
+import * as listCategories from '../../lambda-assets/files/list-categories/app';
 // import * as listFiles from '../../lambda-assets/files/list-files/app';
-// import * as updateCategory from '../../lambda-assets/files/update-category/app';
+import * as updateCategory from '../../lambda-assets/files/update-category/app';
 // import * as updateFile from '../../lambda-assets/files/update-file/app';
 
 AWS.config.region = 'local';
 AWSMock.setSDKInstance(AWS);
 
-test('Create category API', async() => {
-  // const response = await createCategory.handler({});
+test('Create category API', async () => {
+  AWSMock.mock('DynamoDB.DocumentClient', 'put', (parameters: AWS.DynamoDB.PutItemInput, callback: Function) => {
+    expect(parameters).resolves;
+    callback(null, { pk: 'foo', sk: 'bar' });
+  });
+  const response = await createCategory.handler({
+    body: {
+      parentId: 'scvs',
+    },
+  });
+  expect(response.statusCode).toEqual(200);
 });
 
-test('Get category API', async() => {
-  // const response = await getCategory.handler({});
+test('Get category API', async () => {
+  AWSMock.mock('DynamoDB.DocumentClient', 'get', (parameters: AWS.DynamoDB.GetItemInput, callback: Function) => {
+    expect(parameters).resolves;
+    callback(null, { categoryId: 'foo', sk: 'bar' });
+  });
+  const response = await getCategory.handler({
+    pathParameters: {
+      categoryId: 'scvs',
+    },
+  });
+  expect(response.statusCode).toEqual(200);
 });
 
-test('List categories API', async() => {
-  // const response = await listCategories.handler({});
+test('List categories API', async () => {
+  AWSMock.mock('DynamoDB.DocumentClient', 'scan', (parameters: AWS.DynamoDB.ScanInput, callback: Function) => {
+    expect(parameters).resolves;
+    callback(null, { categoryId: 'foo', sk: 'bar' });
+  });
+  const response = await listCategories.handler({});
+  expect(response.statusCode).toEqual(200);
 });
 
-test('Update category API', async() => {
-  // const response = await updateCategory.handler({});
+test('List categories API', async () => {
+  AWSMock.mock('DynamoDB.DocumentClient', 'query', (parameters: AWS.DynamoDB.QueryInput, callback: Function) => {
+    expect(parameters).resolves;
+    callback(null, { categoryId: 'foo', sk: 'bar' });
+  });
+  const response = await listCategories.handler({
+    queryStringParameters: {
+      categoryId: 'scvs',
+    },
+  });
+  expect(response.statusCode).toEqual(200);
 });
 
-test('Delete category API', async() => {
-  // const response = await deleteCategory.handler({});
+test('Update category API', async () => {
+  AWSMock.mock('DynamoDB.DocumentClient', 'update', (parameters: AWS.DynamoDB.GetItemInput, callback: Function) => {
+    expect(parameters).resolves;
+    callback(null, {});
+  });
+  const response = await updateCategory.handler({
+    pathParameters: {
+      categoryId: 'scvs',
+    },
+    body: {
+      description: 'scvs',
+    },
+  });
+  expect(response.statusCode).toEqual(200);
+});
+
+test('Delete category API', async () => {
+  AWSMock.mock('DynamoDB.DocumentClient', 'delete', (parameters: AWS.DynamoDB.GetItemInput, callback: Function) => {
+    expect(parameters).resolves;
+    callback(null, {});
+  });
+  const response = await deleteCategory.handler({
+    pathParameters: {
+      categoryId: 'scvs',
+    },
+  });
+  expect(response.statusCode).toEqual(200);
 });
 
 test('Create file API', async() => {
