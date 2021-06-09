@@ -23,10 +23,6 @@ import * as listJobs from '../../lambda-assets/jobs/list-jobs/app';
 
 // AWS.config.region = 'local';
 AWSMock.setSDKInstance(AWS);
-AWS.config.region = 'ap-northeast-1';
-AWS.config.credentials = new AWS.SharedIniFileCredentials({
-  profile: 'lab-cli',
-});
 
 const expectedJob = {
   jobArn: 'arn:aws:iot:ap-northeast-1:012345678901:job/85f6509f-023c-48fb-8252-981653ffd561',
