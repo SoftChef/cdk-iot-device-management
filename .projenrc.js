@@ -23,6 +23,8 @@ const project = new AwsCdkConstructLibrary({
   bundledDeps: [
     'joi',
     'semver',
+    'uuid',
+    '@types/uuid',
     '@types/semver',
     '@softchef/cdk-restapi',
     'aws-sdk',
@@ -41,6 +43,7 @@ const project = new AwsCdkConstructLibrary({
   mergify: false,
   gitignore: [
     'src/**/dist',
+    'cdk.out',
   ],
 });
 
