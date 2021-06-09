@@ -42,6 +42,7 @@ const project = new AwsCdkConstructLibrary({
   mergify: false,
   gitignore: [
     'src/**/dist',
+    'test/**/dist',
     'cdk.out',
   ],
 });
