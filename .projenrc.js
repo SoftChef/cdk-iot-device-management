@@ -39,10 +39,11 @@ const project = new AwsCdkConstructLibrary({
     'IoT Job',
     'OTA',
   ],
-  testdir: 'src/__tests__',
   mergify: false,
   gitignore: [
     'src/**/dist',
+    'lambda-assets/**/dist',
+    'test/**/dist',
     'cdk.out',
   ],
 });

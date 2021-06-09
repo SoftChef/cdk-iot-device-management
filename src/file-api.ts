@@ -5,7 +5,7 @@ import * as lambda from '@aws-cdk/aws-lambda-nodejs';
 import * as cdk from '@aws-cdk/core';
 import { RestApi, HttpMethod } from '@softchef/cdk-restapi';
 
-const LAMBDA_ASSETS_PATH = path.resolve(__dirname, '../src/lambda-assets/files');
+const LAMBDA_ASSETS_PATH = path.resolve(__dirname, '../lambda-assets/files');
 
 // interface FileApiProps {
 

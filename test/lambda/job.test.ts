@@ -48,6 +48,10 @@ const expected = {
     }),
     description: expectedJob.description,
   },
+  forceDeleteJob: {
+    jobId: expectedJob.jobId,
+    force: true,
+  },
   job: expectedJob,
   listJobs: {
     jobs: [
@@ -179,15 +183,21 @@ test('Update job success', async() => {
 });
 
 test('Delete job success', async() => {
-  // AWSMock.mock('Iot', 'deleteJob', (parameters: AWS.Iot.Types.DeleteJobRequest, callback: Function) => {
-  //   expect(parameters).toStrictEqual({ jobId: 'Test' });
-  //   callback(null, {
-  //     jobId: 'Test',
-  //   });
-  // });
+  AWSMock.mock('Iot', 'deleteJob', (parameters: AWS.Iot.Types.DeleteJobRequest, callback: Function) => {
+    expect(parameters).toStrictEqual({
+      jobId: expected.forceDeleteJob.jobId,
+      force: expected.forceDeleteJob.force,
+    });
+    callback(null, {
+      deleted: true,
+    });
+  });
   const response = await deleteJob.handler({
     pathParameters: {
-      jobId: expected.job.jobId,
+      jobId: expected.forceDeleteJob.jobId,
+    },
+    queryStringParameters: {
+      force: true,
     },
   });
   const body = JSON.parse(response.body);
