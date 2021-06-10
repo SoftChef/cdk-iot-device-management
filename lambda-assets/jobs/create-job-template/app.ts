@@ -1,4 +1,10 @@
-// import { Iot } from 'aws-sdk';
+/**
+ * @todo
+ * 1. verify document "JSON" format
+ */
+
+import { CreateJobTemplateCommand, IoTClient } from '@aws-sdk/client-iot';
+import { v4 as uuidv4 } from 'uuid';
 import { Request, Response } from '../../utils';
 
 export async function handler(event: { [key: string]: any }) {
@@ -7,15 +13,21 @@ export async function handler(event: { [key: string]: any }) {
   try {
     const validated = request.validate(joi => {
       return {
-        targets: joi.required(),
+        document: joi.string().required(),
+        description: joi.string().required(),
       };
     });
     if (validated.error) {
-      return response.error(validated, 422);
+      return response.error(validated.details, 422);
     }
-    // const iotClient = new Iot();
-    // const jobTemplate = await iotClient.createJobTemplate({
-    // }).promise();
+    const iotClient = new IoTClient({});
+    await iotClient.send(
+      new CreateJobTemplateCommand({
+        jobTemplateId: uuidv4(),
+        document: request.input('document'),
+        description: request.input('description'),
+      }),
+    );
     return response.json({
       created: true,
     });
