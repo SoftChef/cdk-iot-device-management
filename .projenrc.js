@@ -24,12 +24,14 @@ const project = new AwsCdkConstructLibrary({
     'joi',
     'semver',
     'uuid',
-    '@types/node@latest',
+    '@types/node@15.12.2',
     '@types/uuid',
     '@types/semver',
     '@softchef/cdk-restapi',
     'aws-sdk',
     '@aws-sdk/client-iot',
+    '@aws-sdk/client-dynamodb',
+    '@aws-sdk/lib-dynamodb',
   ],
   devDeps: [
     'aws-sdk-mock',
@@ -49,6 +51,14 @@ const project = new AwsCdkConstructLibrary({
     'test/**/dist',
     'cdk.out',
   ],
+  tsconfig: {
+    compilerOptions: {
+      lib: [
+        'ES2018',
+        'DOM',
+      ],
+    },
+  },
 });
 
 project.synth();
