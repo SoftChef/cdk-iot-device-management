@@ -4,7 +4,7 @@ const project = new AwsCdkConstructLibrary({
   author: 'softchef-iot-lab',
   authorEmail: 'poke@softchef.com',
   npmAccess: NpmAccess.PUBLIC,
-  cdkVersion: '1.107.0',
+  cdkVersion: '1.108.0',
   projenVersion: '0.22.0',
   initialVersion: '0.0.0',
   defaultReleaseBranch: 'main',
@@ -52,6 +52,14 @@ const project = new AwsCdkConstructLibrary({
     'test/**/dist',
     'cdk.out',
   ],
+  tsconfig: {
+    compilerOptions: {
+      lib: [
+        'ES2018',
+        'DOM',
+      ],
+    },
+  },
 });
 
 project.synth();

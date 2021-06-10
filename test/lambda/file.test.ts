@@ -1,7 +1,7 @@
-import * as AWS from 'aws-sdk';
-import * as AWSMock from 'aws-sdk-mock';
-import { mockClient } from 'aws-sdk-client-mock';
 import { DynamoDBDocumentClient, GetCommand } from '@aws-sdk/lib-dynamodb';
+import * as AWS from 'aws-sdk';
+import { mockClient } from 'aws-sdk-client-mock';
+import * as AWSMock from 'aws-sdk-mock';
 import * as createCategory from '../../lambda-assets/files/create-category/app';
 // import * as createFile from '../../lambda-assets/files/create-file/app';
 import * as deleteCategory from '../../lambda-assets/files/delete-category/app';
@@ -13,12 +13,8 @@ import * as listCategories from '../../lambda-assets/files/list-categories/app';
 import * as updateCategory from '../../lambda-assets/files/update-category/app';
 // import * as updateFile from '../../lambda-assets/files/update-file/app';
 
-// AWS.config.region = 'local';
+AWS.config.region = 'local';
 AWSMock.setSDKInstance(AWS);
-AWS.config.region = 'ap-southeast-1';
-// AWS.config.credentials = new AWS.SharedIniFileCredentials({
-//   profile: 'bls-develop',
-// });
 const ddbMock = mockClient(DynamoDBDocumentClient);
 
 test('Create category API', async () => {
@@ -36,7 +32,7 @@ test('Create category API', async () => {
 
 test('Get category API', async () => {
   ddbMock.on(GetCommand).resolves({
-    Item: [{ categoryId: 'a', sk: 'b' }],
+    Item: [{ categoryId: 'scvs', sk: 'b' }],
   });
   const response = await getCategory.handler({
     pathParameters: {

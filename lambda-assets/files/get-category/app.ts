@@ -8,21 +8,13 @@ export async function handler(event: { [key: string]: any }) {
   const response = new Response();
   try {
     const client = new DynamoDBClient();
-    // const documentClient = new DynamoDB.DocumentClient();
-    const ddbDocClient = new DynamoDBDocumentClient.from(client);
-    // const command = new GetCommand()
+    const ddbDocClient = DynamoDBDocumentClient.from(client);
     const results = await ddbDocClient.send(new GetCommand({
       TableName: `${CATEGORY_TABLE_NAME}`,
       Key: {
         categoryId: request.parameter('categoryId'),
       },
     }));
-    // const { Item: data } = await documentClient.get({
-    //   TableName: `${CATEGORY_TABLE_NAME}`,
-    //   Key: {
-    //     categoryId: request.parameter('categoryId'),
-    //   },
-    // }).promise();
     return response.json({
       data: results,
     });

@@ -120,7 +120,16 @@
       "type": "bundled"
     },
     {
-      "name": "@types",
+      "name": "@types/node",
+      "version": "latest",
+      "type": "bundled"
+    },
+    {
+      "name": "@types/semver",
+      "type": "bundled"
+    },
+    {
+      "name": "@types/uuid",
       "type": "bundled"
     },
     {
