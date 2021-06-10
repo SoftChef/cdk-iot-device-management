@@ -1,14 +1,16 @@
-import { Iot } from 'aws-sdk';
+import { IoTClient, ListThingTypesCommand } from '@aws-sdk/client-iot';
 import { Request, Response } from '../../utils';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
   const response = new Response();
   try {
-    const iotClient = new Iot();
-    const thingTypes = await iotClient.listThingTypes({
-      nextToken: request.get('nextToken', undefined),
-    }).promise();
+    const iotClient = new IoTClient({});
+    const thingTypes = await iotClient.send(
+      new ListThingTypesCommand({
+        nextToken: request.get('nextToken', undefined),
+      }),
+    );
     return response.json(thingTypes);
   } catch (error) {
     return response.error(error);

@@ -1,14 +1,16 @@
-import { Iot } from 'aws-sdk';
+import { IoTClient, DescribeThingGroupCommand } from '@aws-sdk/client-iot';
 import { Request, Response } from '../../utils';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
   const response = new Response();
   try {
-    const iotClient = new Iot();
-    const thingGroup = await iotClient.describeThingGroup({
-      thingGroupName: request.parameter('thingGroupName'),
-    }).promise();
+    const iotClient = new IoTClient({});
+    const thingGroup = await iotClient.send(
+      new DescribeThingGroupCommand({
+        thingGroupName: request.parameter('thingGroupName'),
+      }),
+    );
     return response.json({
       thingGroup,
     });
