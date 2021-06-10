@@ -25,7 +25,7 @@ const project = new AwsCdkConstructLibrary({
     'semver',
     'esbuild',
     'uuid',
-    '@types/node@latest',
+    '@types/node@15.12.2',
     '@types/uuid',
     '@types/semver',
     '@softchef/cdk-restapi',
