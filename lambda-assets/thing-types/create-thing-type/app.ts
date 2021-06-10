@@ -1,4 +1,4 @@
-import { Iot } from 'aws-sdk';
+import { IoTClient, CreateThingTypeCommand } from '@aws-sdk/client-iot';
 import { Request, Response } from '../../utils';
 
 export async function handler(event: { [key: string]: any }) {
@@ -13,10 +13,12 @@ export async function handler(event: { [key: string]: any }) {
     return response.error(validated, 422);
   }
   try {
-    const iotClient = new Iot();
-    const thingType = await iotClient.createThingType({
-      thingTypeName: request.input('thingTypeName'),
-    }).promise();
+    const iotClient = new IoTClient({});
+    const thingType = await iotClient.send(
+      new CreateThingTypeCommand({
+        thingTypeName: request.input('thingTypeName'),
+      }),
+    );
     return response.json({
       created: true,
       thingType,
