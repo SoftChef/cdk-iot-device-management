@@ -1,4 +1,4 @@
-import { Iot } from 'aws-sdk';
+import { IoTClient, ListJobsCommand } from '@aws-sdk/client-iot';
 import { Request, Response } from '../../utils';
 
 export async function handler(event: { [key: string]: any }) {
@@ -9,11 +9,12 @@ export async function handler(event: { [key: string]: any }) {
     if (request.has('nextToken')) {
       parameters.nextToken = request.get('nextToken');
     }
-    const iotClient = new Iot();
-    const jobs = await iotClient.listJobs(parameters).promise();
+    const iotClient = new IoTClient({});
+    const jobs = await iotClient.send(
+      new ListJobsCommand(parameters),
+    );
     return response.json(jobs);
   } catch (error) {
-    console.log('error', error);
     return response.error(error);
   }
 }
