@@ -7,8 +7,9 @@ export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
   const response = new Response();
   try {
-    const client = new DynamoDBClient();
-    const ddbDocClient = DynamoDBDocumentClient.from(client);
+    const ddbDocClient = DynamoDBDocumentClient.from(
+      new DynamoDBClient()
+    );
     const results = await ddbDocClient.send(new GetCommand({
       TableName: `${CATEGORY_TABLE_NAME}`,
       Key: {

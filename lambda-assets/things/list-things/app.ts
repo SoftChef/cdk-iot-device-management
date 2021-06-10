@@ -6,11 +6,12 @@ export async function handler(event: { [key: string]: any }) {
   const response = new Response();
   try {
     const iotClient = new Iot();
-    const things = await iotClient.listThings({
+    const { things, nextToken } = await iotClient.listThings({
       nextToken: request.get('nextToken', undefined),
     }).promise();
     return response.json({
       things,
+      nextToken
     });
   } catch (error) {
     return response.error(error);

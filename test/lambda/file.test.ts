@@ -1,4 +1,4 @@
-import { DynamoDBDocumentClient, GetCommand } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBDocumentClient, ScanCommand, QueryCommand, PutCommand, GetCommand, UpdateCommand, DeleteCommand } from '@aws-sdk/lib-dynamodb';
 import * as AWS from 'aws-sdk';
 import { mockClient } from 'aws-sdk-client-mock';
 import * as AWSMock from 'aws-sdk-mock';
@@ -17,14 +17,37 @@ AWS.config.region = 'local';
 AWSMock.setSDKInstance(AWS);
 const ddbMock = mockClient(DynamoDBDocumentClient);
 
+const categorySeedList = [
+  {
+    categoryId: 'aa',
+    parentId: 'aa',
+    name: '',
+    description: 'b',
+    createdAt: Date.now(),
+    updatedAt: Date.now(),
+  }, {
+    categoryId: 'bb',
+    parentId: 'bb',
+    name: '',
+    description: 'cc',
+    createdAt: Date.now(),
+    updatedAt: Date.now(),
+  }, {
+    categoryId: 'aa-11',
+    parentId: 'aa',
+    name: '11',
+    description: 'qazqaz',
+    createdAt: Date.now(),
+    updatedAt: Date.now(),
+  },
+];
+
 test('Create category API', async () => {
-  AWSMock.mock('DynamoDB.DocumentClient', 'put', (parameters: AWS.DynamoDB.PutItemInput, callback: Function) => {
-    expect(parameters).resolves;
-    callback(null, {});
-  });
+  ddbMock.on(PutCommand).resolves;
   const response = await createCategory.handler({
     body: {
-      parentId: 'scvs',
+      parentId: categorySeedList[0].parentId,
+      description: categorySeedList[0].description,
     },
   });
   expect(response.statusCode).toEqual(200);
@@ -32,62 +55,54 @@ test('Create category API', async () => {
 
 test('Get category API', async () => {
   ddbMock.on(GetCommand).resolves({
-    Item: [{ categoryId: 'scvs', sk: 'b' }],
+    Item: categorySeedList[0],
   });
   const response = await getCategory.handler({
     pathParameters: {
-      categoryId: 'scvs',
+      categoryId: categorySeedList[0].categoryId,
     },
   });
   expect(response.statusCode).toEqual(200);
 });
 
 test('List categories API', async () => {
-  AWSMock.mock('DynamoDB.DocumentClient', 'scan', (parameters: AWS.DynamoDB.ScanInput, callback: Function) => {
-    expect(parameters).resolves;
-    callback(null, {});
+  ddbMock.on(ScanCommand).resolves({
+    Items: categorySeedList,
   });
   const response = await listCategories.handler({});
   expect(response.statusCode).toEqual(200);
 });
 
 test('List categories API', async () => {
-  AWSMock.mock('DynamoDB.DocumentClient', 'query', (parameters: AWS.DynamoDB.QueryInput, callback: Function) => {
-    expect(parameters).resolves;
-    callback(null, { categoryId: 'foo', sk: 'bar' });
+  ddbMock.on(QueryCommand).resolves({
+    Items: categorySeedList,
   });
   const response = await listCategories.handler({
     queryStringParameters: {
-      categoryId: 'scvs',
+      parentId: categorySeedList[0].parentId,
     },
   });
   expect(response.statusCode).toEqual(200);
 });
 
 test('Update category API', async () => {
-  AWSMock.mock('DynamoDB.DocumentClient', 'update', (parameters: AWS.DynamoDB.GetItemInput, callback: Function) => {
-    expect(parameters).resolves;
-    callback(null, {});
-  });
+  ddbMock.on(UpdateCommand).resolves;
   const response = await updateCategory.handler({
     pathParameters: {
-      categoryId: 'scvs',
+      categoryId: categorySeedList[0].categoryId,
     },
     body: {
-      description: 'scvs',
+      description: categorySeedList[0],
     },
   });
   expect(response.statusCode).toEqual(200);
 });
 
 test('Delete category API', async () => {
-  AWSMock.mock('DynamoDB.DocumentClient', 'delete', (parameters: AWS.DynamoDB.GetItemInput, callback: Function) => {
-    expect(parameters).resolves;
-    callback(null, {});
-  });
+  ddbMock.on(DeleteCommand).resolves;
   const response = await deleteCategory.handler({
     pathParameters: {
-      categoryId: 'scvs',
+      categoryId: categorySeedList[0].categoryId,
     },
   });
   expect(response.statusCode).toEqual(200);

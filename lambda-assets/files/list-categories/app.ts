@@ -1,4 +1,5 @@
-import { DynamoDB } from 'aws-sdk';
+const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
+const { DynamoDBDocumentClient, ScanCommand, QueryCommand } = require("@aws-sdk/lib-dynamodb");
 import { Request, Response } from '../../utils';
 const { CATEGORY_TABLE_NAME } = process.env;
 
@@ -6,7 +7,9 @@ export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
   const response = new Response();
   try {
-    const documentClient = new DynamoDB.DocumentClient();
+    const ddbDocClient = DynamoDBDocumentClient.from(
+      new DynamoDBClient()
+    );
     const parentId = request.get('parentId', undefined);
     if (parentId) {
       const hasNextTokenParameters = {
@@ -39,10 +42,12 @@ export async function handler(event: { [key: string]: any }) {
         FilterExpression: 'attribute_exists(#name)',
       };
       const nextToken = request.get('nextToken', undefined);
-      const categories = await documentClient.query(nextToken ? hasNextTokenParameters : parameters).promise();
+      const { Items: categories, LastEvaluatedKey } = await ddbDocClient.send(
+        new QueryCommand(nextToken ? hasNextTokenParameters : parameters)
+      )
       return response.json({
-        data: categories.Items,
-        nextToken: categories.LastEvaluatedKey,
+        data: categories,
+        nextToken: LastEvaluatedKey,
       });
     } else {
       const hasNextTokenParameters = {
@@ -63,7 +68,9 @@ export async function handler(event: { [key: string]: any }) {
         FilterExpression: 'attribute_not_exists(#name)',
       };
       const nextToken = request.get('nextToken', undefined);
-      const { Items: categories, LastEvaluatedKey } = await documentClient.scan(nextToken ? hasNextTokenParameters : parameters).promise();
+      const { Items: categories, LastEvaluatedKey } = await ddbDocClient.send(
+        new ScanCommand(nextToken ? hasNextTokenParameters : parameters)
+      )
       return response.json({
         data: categories,
         nextToken: LastEvaluatedKey,

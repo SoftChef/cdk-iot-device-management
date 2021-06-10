@@ -1,4 +1,5 @@
-import { DynamoDB } from 'aws-sdk';
+const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
+const { DynamoDBDocumentClient, PutCommand } = require("@aws-sdk/lib-dynamodb");
 import { Request, Response } from '../../utils';
 const { CATEGORY_TABLE_NAME } = process.env;
 
@@ -17,7 +18,9 @@ export async function handler(event: { [key: string]: any }) {
     const timestamp = Date.now();
     const name = request.input('name', null);
     const parentId = request.input('parentId');
-    const documentClient = new DynamoDB.DocumentClient();
+    const ddbDocClient = DynamoDBDocumentClient.from(
+      new DynamoDBClient()
+    );
     let parameters
     if (name) {
       parameters = {
@@ -43,7 +46,7 @@ export async function handler(event: { [key: string]: any }) {
         },
       };
     }
-    await documentClient.put(parameters).promise();
+    await ddbDocClient.send(new PutCommand(parameters));
     return response.json({
       created: true,
     });
