@@ -1,10 +1,7 @@
-import * as AWS from 'aws-sdk';
+import { CognitoIdentityProviderClient, AdminGetUserCommand } from '@aws-sdk/client-cognito-identity-provider';
 import * as Joi from 'joi';
 
 import './validator';
-
-const cognitoIdentityServiceProvider = new AWS.CognitoIdentityServiceProvider();
-
 export class Request {
 
   public readonly event: {
@@ -120,10 +117,13 @@ export class Request {
         authProvider = identity.cognitoAuthenticationProvider ?? {};
         if (/^.*,[\w.-]*\/(.*):.*:(.*)/.test(authProvider)) {
           [authProvider, userPoolId, userSub] = authProvider.match(/^.*,[\w.-]*\/(.*):.*:(.*)/);
-          const cognitoUser = await cognitoIdentityServiceProvider.adminGetUser({
-            UserPoolId: userPoolId,
-            Username: userSub,
-          }).promise();
+          const cognitoIdentityProviderClient = new CognitoIdentityProviderClient({});
+          const cognitoUser = await cognitoIdentityProviderClient.send(
+            new AdminGetUserCommand({
+              UserPoolId: userPoolId,
+              Username: userSub,
+            }),
+          );
           // const attributes = {};
           return cognitoUser;
           // for (const attribute of cognitoUser.UserAttributes) {

@@ -104,6 +104,10 @@
       "type": "build"
     },
     {
+      "name": "@aws-sdk/client-cognito-identity-provider",
+      "type": "bundled"
+    },
+    {
       "name": "@aws-sdk/client-dynamodb",
       "type": "bundled"
     },

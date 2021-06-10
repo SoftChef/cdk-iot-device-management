@@ -32,6 +32,7 @@ const project = new AwsCdkConstructLibrary({
     '@aws-sdk/client-iot',
     '@aws-sdk/client-dynamodb',
     '@aws-sdk/lib-dynamodb',
+    '@aws-sdk/client-cognito-identity-provider',
   ],
   devDeps: [
     'aws-sdk-mock',
