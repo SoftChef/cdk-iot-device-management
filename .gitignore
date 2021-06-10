@@ -21,6 +21,7 @@ cdk.out
 coverage
 jspm_packages/
 junit.xml
+lambda-assets/**/dist
 lerna-debug.log*
 lib-cov
 logs

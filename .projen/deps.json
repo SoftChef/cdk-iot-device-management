@@ -23,6 +23,10 @@
       "type": "build"
     },
     {
+      "name": "aws-sdk-client-mock",
+      "type": "build"
+    },
+    {
       "name": "aws-sdk-mock",
       "type": "build"
     },
@@ -100,15 +104,23 @@
       "type": "build"
     },
     {
+      "name": "@aws-sdk/client-dynamodb",
+      "type": "bundled"
+    },
+    {
+      "name": "@aws-sdk/client-iot",
+      "type": "bundled"
+    },
+    {
+      "name": "@aws-sdk/lib-dynamodb",
+      "type": "bundled"
+    },
+    {
       "name": "@softchef/cdk-restapi",
       "type": "bundled"
     },
     {
-      "name": "@types/semver",
-      "type": "bundled"
-    },
-    {
-      "name": "@types/uuid",
+      "name": "@types",
       "type": "bundled"
     },
     {

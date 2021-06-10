@@ -36,6 +36,7 @@
     "@types/node": "^10.17.0",
     "@typescript-eslint/eslint-plugin": "^4.26.0",
     "@typescript-eslint/parser": "^4.26.0",
+    "aws-sdk-client-mock": "^0.5.0",
     "aws-sdk-mock": "^5.1.0",
     "eslint": "^7.28.0",
     "eslint-import-resolver-node": "^0.3.4",
@@ -49,7 +50,7 @@
     "jsii-pacmak": "^1.30.0",
     "json-schema": "^0.3.0",
     "npm-check-updates": "^11",
-    "projen": "0.22.0",
+    "projen": "^0.23.0",
     "standard-version": "^9",
     "ts-jest": "^27.0.3",
     "typescript": "^4.3.2"
@@ -70,7 +71,9 @@
     "@aws-cdk/aws-lambda": "^1.107.0",
     "@aws-cdk/aws-lambda-nodejs": "^1.107.0",
     "@aws-cdk/core": "^1.107.0",
+    "@aws-sdk/client-iot": "^3.18.0",
     "@softchef/cdk-restapi": "^0.0.14",
+    "@types/node": "latest",
     "@types/semver": "^7.3.6",
     "@types/uuid": "^8.3.0",
     "aws-sdk": "^2.922.0",
@@ -80,7 +83,9 @@
     "uuid": "^8.3.2"
   },
   "bundledDependencies": [
+    "@aws-sdk/client-iot",
     "@softchef/cdk-restapi",
+    "@types/node",
     "@types/semver",
     "@types/uuid",
     "aws-sdk",

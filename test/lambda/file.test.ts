@@ -1,5 +1,7 @@
 import * as AWS from 'aws-sdk';
 import * as AWSMock from 'aws-sdk-mock';
+import { mockClient } from 'aws-sdk-client-mock';
+import { DynamoDBDocumentClient, GetCommand } from '@aws-sdk/lib-dynamodb';
 import * as createCategory from '../../lambda-assets/files/create-category/app';
 // import * as createFile from '../../lambda-assets/files/create-file/app';
 import * as deleteCategory from '../../lambda-assets/files/delete-category/app';
@@ -11,13 +13,18 @@ import * as listCategories from '../../lambda-assets/files/list-categories/app';
 import * as updateCategory from '../../lambda-assets/files/update-category/app';
 // import * as updateFile from '../../lambda-assets/files/update-file/app';
 
-AWS.config.region = 'local';
+// AWS.config.region = 'local';
 AWSMock.setSDKInstance(AWS);
+AWS.config.region = 'ap-southeast-1';
+// AWS.config.credentials = new AWS.SharedIniFileCredentials({
+//   profile: 'bls-develop',
+// });
+const ddbMock = mockClient(DynamoDBDocumentClient);
 
 test('Create category API', async () => {
   AWSMock.mock('DynamoDB.DocumentClient', 'put', (parameters: AWS.DynamoDB.PutItemInput, callback: Function) => {
     expect(parameters).resolves;
-    callback(null, { pk: 'foo', sk: 'bar' });
+    callback(null, {});
   });
   const response = await createCategory.handler({
     body: {
@@ -28,9 +35,8 @@ test('Create category API', async () => {
 });
 
 test('Get category API', async () => {
-  AWSMock.mock('DynamoDB.DocumentClient', 'get', (parameters: AWS.DynamoDB.GetItemInput, callback: Function) => {
-    expect(parameters).resolves;
-    callback(null, { categoryId: 'foo', sk: 'bar' });
+  ddbMock.on(GetCommand).resolves({
+    Item: [{ categoryId: 'a', sk: 'b' }],
   });
   const response = await getCategory.handler({
     pathParameters: {
@@ -43,7 +49,7 @@ test('Get category API', async () => {
 test('List categories API', async () => {
   AWSMock.mock('DynamoDB.DocumentClient', 'scan', (parameters: AWS.DynamoDB.ScanInput, callback: Function) => {
     expect(parameters).resolves;
-    callback(null, { categoryId: 'foo', sk: 'bar' });
+    callback(null, {});
   });
   const response = await listCategories.handler({});
   expect(response.statusCode).toEqual(200);

@@ -29,6 +29,13 @@ export class FileApi extends cdk.Construct {
       readCapacity: 1,
       writeCapacity: 1,
     });
+    this.categoryTable.addGlobalSecondaryIndex({
+      indexName: 'query-by-parent-id',
+      partitionKey: { name: 'parentId', type: dynamodb.AttributeType.STRING },
+      projectionType: dynamodb.ProjectionType.ALL,
+      readCapacity: 1,
+      writeCapacity: 1,
+    });
     this.fileTable = new dynamodb.Table(this, 'FileTable', {
       partitionKey: {
         name: 'fileId',
@@ -111,7 +118,7 @@ export class FileApi extends cdk.Construct {
         statements: [
           new iam.PolicyStatement({
             actions: [
-              'dynamodb:PutItem',
+              'dynamodb:*',
             ],
             resources: [
               this.categoryTable.tableArn,
@@ -135,10 +142,11 @@ export class FileApi extends cdk.Construct {
         statements: [
           new iam.PolicyStatement({
             actions: [
-              'dynamodb:Query',
+              'dynamodb:*',
             ],
             resources: [
               this.categoryTable.tableArn,
+              `${this.categoryTable.tableArn}/index/*`,
             ],
           }),
         ],
@@ -159,7 +167,7 @@ export class FileApi extends cdk.Construct {
         statements: [
           new iam.PolicyStatement({
             actions: [
-              'dynamodb:Get',
+              'dynamodb:*',
             ],
             resources: [
               this.categoryTable.tableArn,
@@ -183,7 +191,7 @@ export class FileApi extends cdk.Construct {
         statements: [
           new iam.PolicyStatement({
             actions: [
-              'dynamodb:UpdateItem',
+              'dynamodb:*',
             ],
             resources: [
               this.categoryTable.tableArn,
@@ -207,7 +215,7 @@ export class FileApi extends cdk.Construct {
         statements: [
           new iam.PolicyStatement({
             actions: [
-              'dynamodb:DeleteItem',
+              'dynamodb:*',
             ],
             resources: [
               this.categoryTable.tableArn,
@@ -228,7 +236,7 @@ export class FileApi extends cdk.Construct {
         statements: [
           new iam.PolicyStatement({
             actions: [
-              'dynamodb:PutItem',
+              'dynamodb:*',
             ],
             resources: [
               this.fileTable.tableArn,
@@ -249,7 +257,7 @@ export class FileApi extends cdk.Construct {
         statements: [
           new iam.PolicyStatement({
             actions: [
-              'dynamodb:Query',
+              'dynamodb:*',
             ],
             resources: [
               this.fileTable.tableArn,
@@ -270,7 +278,7 @@ export class FileApi extends cdk.Construct {
         statements: [
           new iam.PolicyStatement({
             actions: [
-              'dynamodb:Get',
+              'dynamodb:*',
             ],
             resources: [
               this.fileTable.tableArn,
@@ -291,7 +299,7 @@ export class FileApi extends cdk.Construct {
         statements: [
           new iam.PolicyStatement({
             actions: [
-              'dynamodb:UpdateItem',
+              'dynamodb:*',
             ],
             resources: [
               this.fileTable.tableArn,
@@ -312,7 +320,7 @@ export class FileApi extends cdk.Construct {
         statements: [
           new iam.PolicyStatement({
             actions: [
-              'dynamodb:DeleteItem',
+              'dynamodb:*',
             ],
             resources: [
               this.fileTable.tableArn,

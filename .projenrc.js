@@ -25,13 +25,18 @@ const project = new AwsCdkConstructLibrary({
     'semver',
     'esbuild',
     'uuid',
+    '@types/node@latest',
     '@types/uuid',
     '@types/semver',
     '@softchef/cdk-restapi',
     'aws-sdk',
+    '@aws-sdk/client-iot',
+    '@aws-sdk/client-dynamodb',
+    '@aws-sdk/lib-dynamodb',
   ],
   devDeps: [
     'aws-sdk-mock',
+    'aws-sdk-client-mock',
   ],
   keywords: [
     'CDK',
@@ -43,6 +48,7 @@ const project = new AwsCdkConstructLibrary({
   mergify: false,
   gitignore: [
     'src/**/dist',
+    'lambda-assets/**/dist',
     'test/**/dist',
     'cdk.out',
   ],

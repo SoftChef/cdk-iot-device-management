@@ -60,7 +60,7 @@ export class Request {
     }
     return parameter;
   }
-  get(key: string, defaultValue: any = null): string {
+  get(key: string, defaultValue: any = null): any {
     let result = this.queries[key];
     if (result === undefined) {
       result = defaultValue;
@@ -156,22 +156,20 @@ export class Request {
         ...options,
       },
     );
+    let details: {
+      [key: string]: string;
+    }[] = [];
     if (result.error) {
-      // let messages = {
-      //   [key: string]: string
-      // };
-      // for (let error of result.error.details) {
-      //   const context = error.context ?? {};
-      //   const key = context.key ?? 'unknow';
-      //   messages[key] = error.message;
-      // }
-      return {
-        error: true,
-        details: result.error.details,
-      };
+      for (let detail of result.error.details) {
+        details.push({
+          ...detail.context,
+          message: detail.message,
+        });
+      }
     }
     return {
-      error: false,
+      error: details.length > 0,
+      details: details,
     };
   }
 

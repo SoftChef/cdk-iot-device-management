@@ -20,7 +20,7 @@ export async function handler(event: { [key: string]: any }) {
         ExpressionAttributeValues: {
           ':parentId': parentId,
         },
-        FilterExpression: 'attribute_not_exists(#name)',
+        FilterExpression: 'attribute_exists(#name)',
         ExclusiveStartKey: {
           Key: request.get('nextToken', undefined),
         },
@@ -36,7 +36,7 @@ export async function handler(event: { [key: string]: any }) {
         ExpressionAttributeValues: {
           ':parentId': parentId,
         },
-        FilterExpression: 'attribute_not_exists(#name)',
+        FilterExpression: 'attribute_exists(#name)',
       };
       const nextToken = request.get('nextToken', undefined);
       const categories = await documentClient.query(nextToken ? hasNextTokenParameters : parameters).promise();
@@ -50,7 +50,7 @@ export async function handler(event: { [key: string]: any }) {
         ExpressionAttributeNames: {
           '#name': 'name',
         },
-        FilterExpression: 'attribute_exists(#name)',
+        FilterExpression: 'attribute_not_exists(#name)',
         ExclusiveStartKey: {
           Key: request.get('nextToken', undefined),
         },
@@ -60,7 +60,7 @@ export async function handler(event: { [key: string]: any }) {
         ExpressionAttributeNames: {
           '#name': 'name',
         },
-        FilterExpression: 'attribute_exists(#name)',
+        FilterExpression: 'attribute_not_exists(#name)',
       };
       const nextToken = request.get('nextToken', undefined);
       const { Items: categories, LastEvaluatedKey } = await documentClient.scan(nextToken ? hasNextTokenParameters : parameters).promise();
