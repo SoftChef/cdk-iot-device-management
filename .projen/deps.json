@@ -23,6 +23,10 @@
       "type": "build"
     },
     {
+      "name": "aws-sdk-client-mock",
+      "type": "build"
+    },
+    {
       "name": "aws-sdk-mock",
       "type": "build"
     },
@@ -77,11 +81,6 @@
       "type": "build"
     },
     {
-      "name": "npm-check-updates",
-      "version": "^11",
-      "type": "build"
-    },
-    {
       "name": "projen",
       "version": "0.22.0",
       "type": "build"
@@ -100,7 +99,16 @@
       "type": "build"
     },
     {
+      "name": "@aws-sdk/client-iot",
+      "type": "bundled"
+    },
+    {
       "name": "@softchef/cdk-restapi",
+      "type": "bundled"
+    },
+    {
+      "name": "@types/node",
+      "version": "latest",
       "type": "bundled"
     },
     {

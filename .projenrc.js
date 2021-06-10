@@ -24,13 +24,16 @@ const project = new AwsCdkConstructLibrary({
     'joi',
     'semver',
     'uuid',
+    '@types/node@latest',
     '@types/uuid',
     '@types/semver',
     '@softchef/cdk-restapi',
     'aws-sdk',
+    '@aws-sdk/client-iot',
   ],
   devDeps: [
     'aws-sdk-mock',
+    'aws-sdk-client-mock',
   ],
   keywords: [
     'CDK',

@@ -3,7 +3,7 @@
  * 1. verify targets "ARN" format
  * 2. verify document "JSON" format
  */
-import { Iot } from 'aws-sdk';
+import { CreateJobCommand, IoTClient } from '@aws-sdk/client-iot';
 import { v4 as uuidv4 } from 'uuid';
 import { Request, Response } from '../../utils';
 
@@ -19,16 +19,18 @@ export async function handler(event: { [key: string]: any }) {
       };
     });
     if (validated.error) {
-      return response.error(validated, 422);
+      return response.error(validated.details, 422);
     }
-    const iotClient = new Iot();
-    const job = await iotClient.createJob({
-      jobId: uuidv4(),
-      targets: request.input('targets', []),
-      document: request.input('document'),
-      targetSelection: request.input('targetSelection', 'SNAPSHOT') === 'SNAPSHOT' ? 'SNAPSHOT' : 'CONTINUOUS',
-      description: request.input('description', ''),
-    }).promise();
+    const iotClient = new IoTClient({});
+    const job = await iotClient.send(
+      new CreateJobCommand({
+        jobId: uuidv4(),
+        targets: request.input('targets', []),
+        document: request.input('document'),
+        targetSelection: request.input('targetSelection', 'SNAPSHOT') === 'SNAPSHOT' ? 'SNAPSHOT' : 'CONTINUOUS',
+        description: request.input('description', ''),
+      }),
+    );
     return response.json({
       created: true,
       job,
