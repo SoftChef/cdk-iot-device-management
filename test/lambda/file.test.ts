@@ -1,7 +1,5 @@
 import { DynamoDBDocumentClient, ScanCommand, QueryCommand, PutCommand, GetCommand, UpdateCommand, DeleteCommand } from '@aws-sdk/lib-dynamodb';
-import * as AWS from 'aws-sdk';
 import { mockClient } from 'aws-sdk-client-mock';
-import * as AWSMock from 'aws-sdk-mock';
 import * as createCategory from '../../lambda-assets/files/create-category/app';
 // import * as createFile from '../../lambda-assets/files/create-file/app';
 import * as deleteCategory from '../../lambda-assets/files/delete-category/app';
@@ -13,8 +11,6 @@ import * as listCategories from '../../lambda-assets/files/list-categories/app';
 import * as updateCategory from '../../lambda-assets/files/update-category/app';
 // import * as updateFile from '../../lambda-assets/files/update-file/app';
 
-AWS.config.region = 'local';
-AWSMock.setSDKInstance(AWS);
 const ddbMock = mockClient(DynamoDBDocumentClient);
 
 const categorySeedList = [
