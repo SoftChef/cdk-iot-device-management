@@ -19,6 +19,8 @@ export async function handler(event: { [key: string]: any }) {
         checksum: joi.string().required(),
       };
     });
+    console.log(request.input("checksumType"))
+    console.log(validated)
     if (validated.error) {
       return response.error(validated, 422);
     }
