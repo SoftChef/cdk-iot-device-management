@@ -1,18 +1,22 @@
-import { Iot } from 'aws-sdk';
+import { IoTClient, DescribeJobCommand } from '@aws-sdk/client-iot';
 import { Request, Response } from '../../utils';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
   const response = new Response();
   try {
-    const iotClient = new Iot();
-    const { job } = await iotClient.describeJob({
-      jobId: request.parameter('jobId'),
-    }).promise();
-    return response.json({
-      job,
-    });
+    const iotClient = new IoTClient({});
+    const job = await iotClient.send(
+      new DescribeJobCommand({
+        jobId: request.parameter('jobId'),
+      }),
+    );
+    return response.json(job);
   } catch (error) {
-    return response.error(error);
+    if (error.Code === 'ResourceNotFoundException') {
+      return response.error(error, 404);
+    } else {
+      return response.error(error);
+    }
   }
 }

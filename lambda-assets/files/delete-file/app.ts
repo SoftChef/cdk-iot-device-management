@@ -1,5 +1,6 @@
-import { DynamoDB } from 'aws-sdk';
-const db = new DynamoDB.DocumentClient();
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, DeleteCommand } from '@aws-sdk/lib-dynamodb'; 
+
 const { FILE_TABLE_NAME } = process.env;
 
 import { Request, Response } from '../../utils';
@@ -9,13 +10,16 @@ export async function handler(event: { [key: string]: any }) {
   const response = new Response();
 
   try {
-    await db.delete ({
-      TableName: `${FILE_TABLE_NAME}`,
-      Key: {
-        fileId: request.parameter("fileId")
-      },
-    }).promise()
-    
+    const client = new DynamoDBClient({});
+    const ddbDocClient = DynamoDBDocumentClient.from(client);
+    await ddbDocClient.send(
+      new DeleteCommand({
+        TableName: `${FILE_TABLE_NAME}`,
+        Key: {
+          fileID: request.parameter("fileID")
+        }
+      })
+    )
     return response.json({
       deleted: true,
     });

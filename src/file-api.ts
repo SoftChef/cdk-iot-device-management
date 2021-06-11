@@ -41,6 +41,16 @@ export class FileApi extends cdk.Construct {
       readCapacity: 1,
       writeCapacity: 1,
     });
+    this.fileTable.addGlobalSecondaryIndex({
+      indexName: 'query-by-category-id',
+      partitionKey: {
+        name: 'categoryId',
+        type: dynamodb.AttributeType.STRING,
+      },
+      projectionType: dynamodb.ProjectionType.ALL,
+      readCapacity: 1,
+      writeCapacity: 1,
+    });
     const restApi = new RestApi(this, 'FileRestApi', {
       enableCors: true,
       resources: [
@@ -75,7 +85,7 @@ export class FileApi extends cdk.Construct {
           lambdaFunction: this.createCreateFileFunction(),
         },
         {
-          path: '/files',
+          path: '/files/{categoryId}',
           httpMethod: HttpMethod.GET,
           lambdaFunction: this.createListFilesFunction(),
         },

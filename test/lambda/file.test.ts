@@ -1,5 +1,8 @@
+import { DynamoDBDocumentClient, GetCommand, PutCommand, UpdateCommand, DeleteCommand, QueryCommand } from '@aws-sdk/lib-dynamodb';
 import * as AWS from 'aws-sdk';
+import { mockClient } from 'aws-sdk-client-mock';
 import * as AWSMock from 'aws-sdk-mock';
+
 // import * as createCategory from '../../lambda-assets/files/create-category/app';
 import * as createFile from '../../lambda-assets/files/create-file/app';
 //import * as deleteCategory from '../../lambda-assets/files/delete-category/app';
@@ -13,6 +16,8 @@ import * as updateFile from '../../lambda-assets/files/update-file/app';
 
 AWS.config.region = 'local';
 AWSMock.setSDKInstance(AWS);
+
+const ddbMock = mockClient(DynamoDBDocumentClient);
 
 test('Create category API', async () => {
   // const response = await createCategory.handler({});
@@ -35,10 +40,7 @@ test('Delete category API', async () => {
 });
 
 test('Create file API', async () => {
-  AWSMock.mock('DynamoDB.DocumentClient', 'put', (parameters: AWS.DynamoDB.PutItemInput, callback: Function) => {
-    expect(parameters).resolves;
-    callback(null, {});
-  });
+  ddbMock.on(PutCommand).resolves({});
   const response = await createFile.handler({
     body: {
       location: 'Test',
@@ -52,13 +54,16 @@ test('Create file API', async () => {
 });
 
 test('Get file API', async () => {
-  AWSMock.mock('DynamoDB.DocumentClient', 'get', (parameters: AWS.DynamoDB.GetItemInput, callback: Function) => {
-    expect(parameters).resolves;
-    callback(null, {
-      Item: {
-        fileId: 'Test',
-      },
-    });
+  ddbMock.on(GetCommand).resolves({
+    Item: {
+      fileId: 'Test',
+      version: 'Test',
+      categoryId: 'Test',
+      location: 'Test',
+      description: 'Test',
+      createAt: 'Test',
+      updatedAt: 'Test',
+    },
   });
   const response = await getFile.handler({
     pathParameters: {
@@ -69,9 +74,36 @@ test('Get file API', async () => {
 });
 
 test('List files API', async () => {
-  AWSMock.mock('DynamoDB.DocumentClient', 'query', (parameters: AWS.DynamoDB.ListTablesInput, callback: Function) => {
-    expect(parameters).resolves;
-    callback(null, {});
+  ddbMock.on(QueryCommand).resolves({
+    Items: [
+      {
+        fileId: 'Test',
+        version: 'Test',
+        categoryId: 'Test',
+        location: 'Test',
+        description: 'Test',
+        createAt: 'Test',
+        updatedAt: 'Test',
+      },
+      {
+        fileId: 'Test',
+        version: 'Test',
+        categoryId: 'Test',
+        location: 'Test',
+        description: 'Test',
+        createAt: 'Test',
+        updatedAt: 'Test',
+      },
+      {
+        fileId: 'Test',
+        version: 'Test',
+        categoryId: 'Test',
+        location: 'Test',
+        description: 'Test',
+        createAt: 'Test',
+        updatedAt: 'Test',
+      },
+    ],
   });
   const response = await listFiles.handler({});
   console.log(response);
@@ -79,10 +111,7 @@ test('List files API', async () => {
 });
 
 test('Update file API', async () => {
-  AWSMock.mock('DynamoDB.DocumentClient', 'put', (parameters: AWS.DynamoDB.UpdateItemInput, callback: Function) => {
-    expect(parameters).resolves;
-    callback(null, {});
-  });
+  ddbMock.on(UpdateCommand).resolves({});
   const response = await updateFile.handler({
     pathParameters: {
       categoryId: 'Test',
@@ -95,14 +124,7 @@ test('Update file API', async () => {
 });
 
 test('Delete file API', async () => {
-  AWSMock.mock('DynamoDB.DocumentClient', 'delete', (parameters: AWS.DynamoDB.DeleteItemInput, callback: Function) => {
-    expect(parameters).resolves;
-    callback(null, {
-      Item: {
-        fileId: 'Test',
-      },
-    });
-  });
+  ddbMock.on(DeleteCommand).resolves({});
   const response = await deleteFile.handler({
     queryStringParameters: {
       fileId: 'Test',
