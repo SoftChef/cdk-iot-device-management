@@ -24,7 +24,7 @@ const project = new AwsCdkConstructLibrary({
     'joi',
     'semver',
     'uuid',
-    '@types/node@latest',
+    '@types/node@15.12.2',
     '@types/uuid',
     '@types/semver',
     '@softchef/cdk-restapi',
@@ -32,6 +32,7 @@ const project = new AwsCdkConstructLibrary({
     '@aws-sdk/client-iot',
     '@aws-sdk/client-dynamodb',
     '@aws-sdk/lib-dynamodb',
+    '@aws-sdk/client-cognito-identity-provider',
   ],
   devDeps: [
     'aws-sdk-mock',
