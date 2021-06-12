@@ -4,8 +4,8 @@ const project = new AwsCdkConstructLibrary({
   author: 'softchef-iot-lab',
   authorEmail: 'poke@softchef.com',
   npmAccess: NpmAccess.PUBLIC,
-  cdkVersion: '1.107.0',
-  projenVersion: '0.22.0',
+  cdkVersion: '1.108.0',
+  projenVersion: '0.24.0',
   initialVersion: '0.0.0',
   defaultReleaseBranch: 'main',
   dependabot: false,
@@ -32,6 +32,7 @@ const project = new AwsCdkConstructLibrary({
     '@aws-sdk/client-iot',
     '@aws-sdk/client-dynamodb',
     '@aws-sdk/lib-dynamodb',
+    '@aws-sdk/client-cognito-identity-provider',
   ],
   devDeps: [
     'aws-sdk-mock',
