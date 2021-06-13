@@ -17,6 +17,10 @@ exports.ThingTypeApi = class ThingTypeApi extends cdk.Construct {
 
 ## Thing API
 ```
+ThingApiProps: {
+  enableSearchIndex: boolean
+}
+
 exports.ThingApi = class ThingApi extends cdk.Construct {
   // Define the resources
 }
@@ -27,10 +31,16 @@ exports.ThingApi = class ThingApi extends cdk.Construct {
 - PUT /things/{thingName} - Update thing by name
 - DELETE /things/{thingName} - Delete thing by name
 
+- GET /search
+
 ---
 
 ## Thing Group API
 ```
+ThingGroupApiProps: {
+  enableSearchIndex: boolean
+}
+
 exports.ThingGroupApi = class ThingGroupApi extends cdk.Construct {
   // Define the resources
 }
@@ -47,7 +57,6 @@ exports.ThingGroupApi = class ThingGroupApi extends cdk.Construct {
 - POST /dynamic-thing-groups - Create new dynamic thing group
 - PUT /dynamic-thing-groups/{thingGroupName} - Update dynamic thing group by name
 - DELETE /dynamic-thing-groups/{thingGroupName} - Delete dynamic thing group by name
-
 // BillingGroup not join
 
 ---

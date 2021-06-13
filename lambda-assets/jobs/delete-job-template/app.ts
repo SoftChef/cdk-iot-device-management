@@ -1,4 +1,4 @@
-import { IoTClient } from '@aws-sdk/client-iot';
+import { DeleteJobTemplateCommand, IoTClient } from '@aws-sdk/client-iot';
 import { Request, Response } from '../../utils';
 
 export async function handler(event: { [key: string]: any }) {
@@ -6,13 +6,19 @@ export async function handler(event: { [key: string]: any }) {
   const response = new Response();
   try {
     const iotClient = new IoTClient({});
-    await iotClient.deleteJobTemplate({
-      jobTemplateId: request.parameter('jobTemplateId'),
-    }).promise();
+    await iotClient.send(
+      new DeleteJobTemplateCommand({
+        jobTemplateId: request.parameter('jobTemplateId'),
+      }),
+    );
     return response.json({
       deleted: true,
     });
   } catch (error) {
-    return response.error(error);
+    if (error.Code === 'ResourceNotFoundException') {
+      return response.error(error, 404);
+    } else {
+      return response.error(error);
+    }
   }
 }

@@ -16,7 +16,7 @@ export async function handler(event: { [key: string]: any }) {
         targets: joi.array().items(joi.string()).required(),
         targetSelection: joi.string().allow('SNAPSHOT', 'CONTINUOUS'),
         document: joi.string().required(),
-        description: joi.string(),
+        description: joi.string().allow(null),
       };
     });
     if (validated.error) {

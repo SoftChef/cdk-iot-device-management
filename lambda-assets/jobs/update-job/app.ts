@@ -7,7 +7,7 @@ export async function handler(event: { [key: string]: any }) {
   try {
     const validated = request.validate(joi => {
       return {
-        description: joi.string(),
+        description: joi.string().allow(null),
       };
     });
     if (validated.error) {
@@ -17,7 +17,7 @@ export async function handler(event: { [key: string]: any }) {
     await iotClient.send(
       new UpdateJobCommand({
         jobId: request.parameter('jobId'),
-        description: request.input('description'),
+        description: request.input('description', ''),
       }),
     );
     return response.json({
