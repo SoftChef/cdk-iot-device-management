@@ -32,12 +32,12 @@ export async function handler(event: { [key: string]: any }) {
           location: request.input('location'),
           description: request.input('description'),
           createdAt: Date.now(),
-          updatedAt: Date.now()
+          updatedAt: Date.now(),
         },
       })
     )
     return response.json({
-      created: true
+      created: true,
     });
   } catch (error) {
     return response.error(error);
