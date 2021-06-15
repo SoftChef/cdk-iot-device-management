@@ -1,0 +1,19 @@
+{
+  "Version": "2008-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity E26I4YH8FHPGQB"
+      },
+      "Action": "s3:*",
+      "Resource": "arn:aws:s3:::file-hyweb-e-books-dev/*"
+    },
+    {
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:*",
+      "Resource": "arn:aws:s3:::file-hyweb-e-books-dev/*"
+    }
+  ]
+}

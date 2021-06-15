@@ -48,6 +48,13 @@ export class FileApi extends cdk.Construct {
       readCapacity: 1,
       writeCapacity: 1,
     });
+    this.fileTable.addGlobalSecondaryIndex({
+      indexName: 'query-by-category-id',
+      partitionKey: { name: 'categoryId', type: dynamodb.AttributeType.STRING },
+      projectionType: dynamodb.ProjectionType.ALL,
+      readCapacity: 1,
+      writeCapacity: 1,
+    });
     const restApi = new RestApi(this, 'FileRestApi', {
       enableCors: true,
       resources: [
@@ -65,6 +72,11 @@ export class FileApi extends cdk.Construct {
           path: '/categories/{categoryId}',
           httpMethod: HttpMethod.GET,
           lambdaFunction: this.createGetCategoryFunction(),
+        },
+        {
+          path: '/categories/{categoryId}/files',
+          httpMethod: HttpMethod.GET,
+          lambdaFunction: this.createListFilesByCategoryFunction(),
         },
         {
           path: '/categories/{categoryId}',
@@ -179,6 +191,31 @@ export class FileApi extends cdk.Construct {
     return getCategoryFunction;
   }
 
+  private createListFilesByCategoryFunction(): lambda.NodejsFunction {
+    const listFilesByCategoryFunction = new lambda.NodejsFunction(this, 'ListFilesByCategoryFunction', {
+      entry: `${LAMBDA_ASSETS_PATH}/list-files-by-category/app.ts`,
+      environment: {
+        FILE_TABLE_NAME: this.fileTable.tableName,
+      },
+    });
+    listFilesByCategoryFunction.role?.attachInlinePolicy(
+      new iam.Policy(this, 'list-files-by-category-policy', {
+        statements: [
+          new iam.PolicyStatement({
+            actions: [
+              'dynamodb:*',
+            ],
+            resources: [
+              this.categoryTable.tableArn,
+              `${this.categoryTable.tableArn}/index/*`,
+            ],
+          }),
+        ],
+      }),
+    );
+    return listFilesByCategoryFunction;
+  }
+
   private createUpdateCategoryFunction(): lambda.NodejsFunction {
     const updateCategoryFunction = new lambda.NodejsFunction(this, 'UpdateCategoryFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/update-category/app.ts`,
@@ -230,6 +267,9 @@ export class FileApi extends cdk.Construct {
   private createCreateFileFunction(): lambda.NodejsFunction {
     const createFileFunction = new lambda.NodejsFunction(this, 'CreateFileFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/create-file/app.ts`,
+      environment: {
+        FILE_TABLE_NAME: this.fileTable.tableName,
+      },
     });
     createFileFunction.role?.attachInlinePolicy(
       new iam.Policy(this, 'create-file-policy', {
@@ -251,6 +291,9 @@ export class FileApi extends cdk.Construct {
   private createListFilesFunction(): lambda.NodejsFunction {
     const listFilesFunction = new lambda.NodejsFunction(this, 'ListFilesFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/list-files/app.ts`,
+      environment: {
+        FILE_TABLE_NAME: this.fileTable.tableName,
+      },
     });
     listFilesFunction.role?.attachInlinePolicy(
       new iam.Policy(this, 'list-files-policy', {
@@ -272,6 +315,9 @@ export class FileApi extends cdk.Construct {
   private createGetFileFunction(): lambda.NodejsFunction {
     const getFileFunction = new lambda.NodejsFunction(this, 'GetFileFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/get-file/app.ts`,
+      environment: {
+        FILE_TABLE_NAME: this.fileTable.tableName,
+      },
     });
     getFileFunction.role?.attachInlinePolicy(
       new iam.Policy(this, 'get-file-policy', {
@@ -293,6 +339,9 @@ export class FileApi extends cdk.Construct {
   private createUpdateFileFunction(): lambda.NodejsFunction {
     const updateFileFunction = new lambda.NodejsFunction(this, 'UpdateFileFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/update-file/app.ts`,
+      environment: {
+        FILE_TABLE_NAME: this.fileTable.tableName,
+      },
     });
     updateFileFunction.role?.attachInlinePolicy(
       new iam.Policy(this, 'update-file-policy', {
@@ -314,6 +363,9 @@ export class FileApi extends cdk.Construct {
   private createDeleteFileFunction(): lambda.NodejsFunction {
     const deleteFileFunction = new lambda.NodejsFunction(this, 'DeleteFileFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/delete-file/app.ts`,
+      environment: {
+        FILE_TABLE_NAME: this.fileTable.tableName,
+      },
     });
     deleteFileFunction.role?.attachInlinePolicy(
       new iam.Policy(this, 'delete-file-policy', {

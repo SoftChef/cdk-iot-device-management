@@ -1,5 +1,5 @@
-const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
-const { DynamoDBDocumentClient, PutCommand } = require("@aws-sdk/lib-dynamodb");
+const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
+const { DynamoDBDocumentClient, PutCommand } = require('@aws-sdk/lib-dynamodb');
 const { FILE_TABLE_NAME } = process.env;
 import { Request, Response } from '../../utils';
 
@@ -12,7 +12,7 @@ export async function handler(event: { [key: string]: any }) {
         categoryId: joi.string().required(),
         location: joi.string().uri().required(),
         version: joi.string().required(), // validate semanticVersion
-        checksumType: joi.string().allow(['md5', 'crc32', 'sha1']),
+        checksumType: joi.string().allow(...['md5', 'crc32', 'sha1']),
         checksum: joi.string().required(),
       };
     });
@@ -26,13 +26,13 @@ export async function handler(event: { [key: string]: any }) {
       new PutCommand({
         TableName: `${FILE_TABLE_NAME}`,
         Item: {
-          fileId: request.input("checksum"),
-          version: request.input("version"),
-          categoryId: request.input("categoryId"),
-          location: request.input("location"),
-          description: request.input("description"),
-          createAt: Date.now(),
-          updateAt: Date.now()
+          fileId: request.input('checksum'),
+          version: request.input('version'),
+          categoryId: request.input('categoryId'),
+          location: request.input('location'),
+          description: request.input('description'),
+          createdAt: Date.now(),
+          updatedAt: Date.now()
         },
       })
     )
@@ -40,6 +40,6 @@ export async function handler(event: { [key: string]: any }) {
       created: true
     });
   } catch (error) {
-    return response.json(error);
+    return response.error(error);
   }
 }

@@ -10,14 +10,14 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient()
     );
-    const results = await ddbDocClient.send(new GetCommand({
+    const { Item: data } = await ddbDocClient.send(new GetCommand({
       TableName: `${CATEGORY_TABLE_NAME}`,
       Key: {
         categoryId: request.parameter('categoryId'),
       },
     }));
     return response.json({
-      data: results,
+      data,
     });
   } catch (error) {
     return response.error(error);

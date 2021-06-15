@@ -10,7 +10,7 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient()
     );
-    const data = await ddbDocClient.send(
+    const { Item: data } = await ddbDocClient.send(
       new GetCommand({
         TableName: `${FILE_TABLE_NAME}`,
         Key: {
@@ -19,7 +19,7 @@ export async function handler(event: { [key: string]: any }) {
       }),
     );
     return response.json({
-      Item: data,
+      data,
     });
   } catch (error) {
     return response.json(error);

@@ -10,14 +10,15 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient()
     );
-    const data = await ddbDocClient.send(
+    const { Items: data, LastEvaluatedKey } = await ddbDocClient.send(
       new ScanCommand({
         TableName: `${FILE_TABLE_NAME}`,
+        ExclusiveStartKey: request.get('nextToken', undefined),
       })
     )
     return response.json({
-      Item: data,
-      nextToken: request.get('nextToken', undefined),
+      data,
+      nextToken: LastEvaluatedKey,
     });
   } catch (error) {
     return response.json(error);

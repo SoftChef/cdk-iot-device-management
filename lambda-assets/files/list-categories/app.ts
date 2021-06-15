@@ -11,65 +11,46 @@ export async function handler(event: { [key: string]: any }) {
       new DynamoDBClient()
     );
     const parentId = request.get('parentId', undefined);
+    const nextToken = request.get('nextToken', undefined);
     if (parentId) {
-      const hasNextTokenParameters = {
+      let parameters: { [key: string]: any } = {
         TableName: `${CATEGORY_TABLE_NAME}`,
         IndexName: 'query-by-parent-id',
         KeyConditionExpression: '#parentId = :parentId',
         ExpressionAttributeNames: {
-          '#name': 'name',
           '#parentId': 'parentId',
         },
         ExpressionAttributeValues: {
           ':parentId': parentId,
         },
-        FilterExpression: 'attribute_exists(#name)',
-        ExclusiveStartKey: {
-          Key: request.get('nextToken', undefined),
-        },
-      };
-      const parameters = {
-        TableName: `${CATEGORY_TABLE_NAME}`,
-        IndexName: 'query-by-parent-id',
-        KeyConditionExpression: '#parentId = :parentId',
-        ExpressionAttributeNames: {
-          '#name': 'name',
-          '#parentId': 'parentId',
-        },
-        ExpressionAttributeValues: {
-          ':parentId': parentId,
-        },
-        FilterExpression: 'attribute_exists(#name)',
-      };
-      const nextToken = request.get('nextToken', undefined);
+      }
+      if (nextToken) {
+        parameters.ExclusiveStartKey = {
+          Key: nextToken,
+        }
+      }
       const { Items: categories, LastEvaluatedKey } = await ddbDocClient.send(
-        new QueryCommand(nextToken ? hasNextTokenParameters : parameters)
+        new QueryCommand(parameters)
       )
       return response.json({
         data: categories,
         nextToken: LastEvaluatedKey,
       });
     } else {
-      const hasNextTokenParameters = {
+      let parameters: { [key: string]: any } = {
         TableName: `${CATEGORY_TABLE_NAME}`,
         ExpressionAttributeNames: {
-          '#name': 'name',
+          '#parentId': 'parentId',
         },
-        FilterExpression: 'attribute_not_exists(#name)',
-        ExclusiveStartKey: {
-          Key: request.get('nextToken', undefined),
-        },
-      };
-      const parameters = {
-        TableName: `${CATEGORY_TABLE_NAME}`,
-        ExpressionAttributeNames: {
-          '#name': 'name',
-        },
-        FilterExpression: 'attribute_not_exists(#name)',
-      };
-      const nextToken = request.get('nextToken', undefined);
+        FilterExpression: 'attribute_not_exists(#parentId)',
+      }
+      if (nextToken) {
+        parameters.ExclusiveStartKey = {
+          Key: nextToken,
+        }
+      }
       const { Items: categories, LastEvaluatedKey } = await ddbDocClient.send(
-        new ScanCommand(nextToken ? hasNextTokenParameters : parameters)
+        new ScanCommand(parameters)
       )
       return response.json({
         data: categories,

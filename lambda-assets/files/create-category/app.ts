@@ -1,6 +1,7 @@
 const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
 const { DynamoDBDocumentClient, PutCommand } = require("@aws-sdk/lib-dynamodb");
 import { Request, Response } from '../../utils';
+const md5 = require('md5')
 const { CATEGORY_TABLE_NAME } = process.env;
 
 export async function handler(event: { [key: string]: any }) {
@@ -9,7 +10,9 @@ export async function handler(event: { [key: string]: any }) {
   try {
     const validated = request.validate(joi => {
       return {
-        parentId: joi.string().required(),
+        name: joi.string().required(),
+        parentId: joi.string().allow(null),
+        description: joi.string(),
       };
     });
     if (validated.error) {
@@ -21,30 +24,19 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient()
     );
-    let parameters
-    if (name) {
-      parameters = {
-        TableName: `${CATEGORY_TABLE_NAME}`,
-        Item: {
-          categoryId: `${parentId}-${name}`,
-          parentId,
-          name,
-          description: request.input('description'),
-          createdAt: timestamp,
-          updatedAt: timestamp,
-        },
-      };
-    } else {
-      parameters = {
-        TableName: `${CATEGORY_TABLE_NAME}`,
-        Item: {
-          categoryId: parentId,
-          parentId,
-          description: request.input('description'),
-          createdAt: timestamp,
-          updatedAt: timestamp,
-        },
-      };
+    let parameters: { [key: string]: any } = {
+      TableName: `${CATEGORY_TABLE_NAME}`,
+      Item: {
+        categoryId: md5(name),
+        name,
+        description: request.input('description'),
+        createdAt: timestamp,
+        updatedAt: timestamp,
+      },
+    };
+    if (parentId) {
+      parameters.Item.categoryId = md5(`${parentId}-${name}`);
+      parameters.Item.parentId = parentId;
     }
     await ddbDocClient.send(new PutCommand(parameters));
     return response.json({
