@@ -1,4 +1,5 @@
 import * as path from 'path';
+import * as apigateway from '@aws-cdk/aws-apigateway';
 import * as dynamodb from '@aws-cdk/aws-dynamodb';
 import * as iam from '@aws-cdk/aws-iam';
 import * as lambda from '@aws-cdk/aws-lambda-nodejs';
@@ -7,9 +8,10 @@ import { RestApi, HttpMethod } from '@softchef/cdk-restapi';
 
 const LAMBDA_ASSETS_PATH = path.resolve(__dirname, '../lambda-assets/files');
 
-// interface FileApiProps {
-
-// }
+export interface FileApiProps {
+  readonly authorizationType?: apigateway.AuthorizationType;
+  readonly authorizer?: apigateway.IAuthorizer | undefined;
+}
 
 export class FileApi extends cdk.Construct {
 
@@ -19,7 +21,7 @@ export class FileApi extends cdk.Construct {
 
   private readonly fileTable: dynamodb.Table;
 
-  constructor(scope: cdk.Construct, id: string) {
+  constructor(scope: cdk.Construct, id: string, props?: FileApiProps) {
     super(scope, id);
     this.categoryTable = new dynamodb.Table(this, 'CategoryTable', {
       partitionKey: {
@@ -43,6 +45,8 @@ export class FileApi extends cdk.Construct {
     });
     const restApi = new RestApi(this, 'FileRestApi', {
       enableCors: true,
+      authorizationType: props?.authorizationType ?? apigateway.AuthorizationType.NONE,
+      authorizer: props?.authorizer ?? undefined,
       resources: [
         {
           path: '/categories',
