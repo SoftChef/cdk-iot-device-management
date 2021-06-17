@@ -81,6 +81,7 @@
     "@types/uuid": "^8.3.0",
     "aws-sdk": "^2.925.0",
     "joi": "^17.4.0",
+    "lodash": "^4.17.21",
     "semver": "^7.3.5",
     "uuid": "^8.3.2"
   },
@@ -95,6 +96,7 @@
     "@types/uuid",
     "aws-sdk",
     "joi",
+    "lodash",
     "semver",
     "uuid"
   ],

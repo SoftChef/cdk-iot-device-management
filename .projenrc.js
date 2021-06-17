@@ -24,6 +24,7 @@ const project = new AwsCdkConstructLibrary({
     'joi',
     'semver',
     'uuid',
+    'lodash',
     '@types/node@15.12.2',
     '@types/uuid',
     '@types/semver',
