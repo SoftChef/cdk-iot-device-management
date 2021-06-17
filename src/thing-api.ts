@@ -1,4 +1,5 @@
 import * as path from 'path';
+import * as apigateway from '@aws-cdk/aws-apigateway';
 import * as iam from '@aws-cdk/aws-iam';
 import * as lambda from '@aws-cdk/aws-lambda-nodejs';
 import * as cdk from '@aws-cdk/core';
@@ -6,18 +7,21 @@ import { RestApi, HttpMethod } from '@softchef/cdk-restapi';
 
 const LAMBDA_ASSETS_PATH = path.resolve(__dirname, '../lambda-assets/things');
 
-// interface ThingApiProps {
-
-// }
+export interface ThingApiProps {
+  readonly authorizationType?: apigateway.AuthorizationType;
+  readonly authorizer?: apigateway.IAuthorizer | undefined;
+}
 
 export class ThingApi extends cdk.Construct {
 
   public readonly restApiId: string;
 
-  constructor(scope: cdk.Construct, id: string) {
+  constructor(scope: cdk.Construct, id: string, props?: ThingApiProps) {
     super(scope, id);
     const restApi = new RestApi(this, 'ThingRestApi', {
       enableCors: true,
+      authorizationType: props?.authorizationType ?? apigateway.AuthorizationType.NONE,
+      authorizer: props?.authorizer ?? undefined,
       resources: [
         {
           path: '/things',
