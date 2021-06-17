@@ -52,6 +52,7 @@ const project = new AwsCdkConstructLibrary({
     'lambda-assets/**/dist',
     'test/**/dist',
     'cdk.out',
+    '.DS_Store'
   ],
   tsconfig: {
     compilerOptions: {
