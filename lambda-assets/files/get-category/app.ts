@@ -22,7 +22,6 @@ export async function handler(event: { [key: string]: any }) {
     }
     return response.json(category);
   } catch (error) {
-    console.log(error)
     return response.error(error);
   }
 }

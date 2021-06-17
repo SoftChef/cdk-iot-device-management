@@ -23,6 +23,7 @@ const project = new AwsCdkConstructLibrary({
   bundledDeps: [
     'joi',
     'semver',
+    'lodash',
     'uuid',
     '@types/node@15.12.2',
     '@types/uuid',
