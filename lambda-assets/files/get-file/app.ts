@@ -1,7 +1,8 @@
-const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
-const { DynamoDBDocumentClient, GetCommand } = require("@aws-sdk/lib-dynamodb");
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, GetCommand } from '@aws-sdk/lib-dynamodb';
 import { Request, Response } from '../../utils';
-const { isEmpty } = require('lodash');
+import { isEmpty } from 'lodash';
+
 const { FILE_TABLE_NAME } = process.env;
 
 export async function handler(event: { [key: string]: any }) {
@@ -9,7 +10,7 @@ export async function handler(event: { [key: string]: any }) {
   const response = new Response();
   try {
     const ddbDocClient = DynamoDBDocumentClient.from(
-      new DynamoDBClient()
+      new DynamoDBClient({})
     );
     const { Item: file } = await ddbDocClient.send(
       new GetCommand({
@@ -22,7 +23,7 @@ export async function handler(event: { [key: string]: any }) {
     );
     if (isEmpty(file)) {
       return response.error('Not found.', 404);
-    }
+    };
     return response.json(file);
   } catch (error) {
     return response.error(error);

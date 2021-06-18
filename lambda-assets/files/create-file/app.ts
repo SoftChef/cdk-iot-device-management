@@ -1,7 +1,8 @@
-const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
-const { DynamoDBDocumentClient, PutCommand } = require('@aws-sdk/lib-dynamodb');
-const { FILE_TABLE_NAME } = process.env;
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
 import { Request, Response } from '../../utils';
+
+const { FILE_TABLE_NAME } = process.env;
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
@@ -13,14 +14,14 @@ export async function handler(event: { [key: string]: any }) {
         checksum: joi.string().required(),
         checksumType: joi.string().allow('md5', 'crc32', 'sha1'),
         version: joi.string().required(),
-        categoryId: joi.string().required()
+        categoryId: joi.string().required(),
       };
     });
     if (validated.error) {
       return response.error(validated.details, 422);
     }
     const ddbDocClient = DynamoDBDocumentClient.from(
-      new DynamoDBClient()
+      new DynamoDBClient({})
     );
     await ddbDocClient.send(
       new PutCommand({
@@ -35,7 +36,7 @@ export async function handler(event: { [key: string]: any }) {
           updatedAt: Date.now(),
         },
       })
-    )
+    );
     return response.json({
       created: true,
     });

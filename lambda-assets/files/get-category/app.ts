@@ -1,7 +1,8 @@
-const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
-const { DynamoDBDocumentClient, GetCommand } = require('@aws-sdk/lib-dynamodb');
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, GetCommand } from '@aws-sdk/lib-dynamodb';
 import { Request, Response } from '../../utils';
-const { isEmpty } = require('lodash');
+import { isEmpty } from 'lodash';
+
 const { CATEGORY_TABLE_NAME } = process.env;
 
 export async function handler(event: { [key: string]: any }) {
@@ -9,9 +10,9 @@ export async function handler(event: { [key: string]: any }) {
   const response = new Response();
   try {
     const ddbDocClient = DynamoDBDocumentClient.from(
-      new DynamoDBClient()
+      new DynamoDBClient({})
     );
-    const { Item: category } = await ddbDocClient.send(
+    const category = await ddbDocClient.send(
       new GetCommand({
         TableName: `${CATEGORY_TABLE_NAME}`,
         Key: {
@@ -19,10 +20,12 @@ export async function handler(event: { [key: string]: any }) {
         },
       })
     );
-    if (isEmpty(category)) {
+    if (isEmpty(category.Item)) {
       return response.error('Not found.', 404);
-    }
-    return response.json(category);
+    };
+    return response.json({
+      category: category.Item,
+    });
   } catch (error) {
     return response.error(error);
   }

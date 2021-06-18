@@ -1,7 +1,8 @@
-const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
-const { DynamoDBDocumentClient, PutCommand } = require("@aws-sdk/lib-dynamodb");
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
 import { Request, Response } from '../../utils';
-const md5 = require('md5')
+import *  as crypto from 'crypto';
+
 const { CATEGORY_TABLE_NAME } = process.env;
 
 export async function handler(event: { [key: string]: any }) {
@@ -17,28 +18,32 @@ export async function handler(event: { [key: string]: any }) {
     });
     if (validated.error) {
       return response.error(validated.details, 422);
-    }
+    };
     const timestamp = Date.now();
     const name = request.input('name', null);
     const parentId = request.input('parentId');
     const ddbDocClient = DynamoDBDocumentClient.from(
-      new DynamoDBClient()
+      new DynamoDBClient({})
     );
-    let parameters: { [key: string]: any } = {
-      TableName: `${CATEGORY_TABLE_NAME}`,
-      Item: {
-        categoryId: md5(name),
-        name,
-        description: request.input('description'),
-        createdAt: timestamp,
-        updatedAt: timestamp,
-      },
-    };
+    const md5 = crypto.createHash('md5');
+    let parameters: { [key: string]: any } = {};
     if (request.has('parentId')) {
-      parameters.Item.categoryId = md5(`${parentId}-${name}`);
+      parameters.Item.categoryId = md5.update(`${parentId}-${name}`).digest('hex');
       parameters.Item.parentId = parentId;
-    }
-    await ddbDocClient.send(new PutCommand(parameters));
+    };
+    await ddbDocClient.send(
+        new PutCommand({
+          TableName: `${CATEGORY_TABLE_NAME}`,
+          Item: {
+            categoryId: md5.update(name).digest('hex'),
+            name,
+            description: request.input('description'),
+            createdAt: timestamp,
+            updatedAt: timestamp,
+          },
+          ...parameters
+      })
+    );
     return response.json({
       created: true,
     });

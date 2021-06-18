@@ -1,6 +1,7 @@
-const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
-const { DynamoDBDocumentClient, QueryCommand } = require("@aws-sdk/lib-dynamodb");
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, QueryCommand } from '@aws-sdk/lib-dynamodb';
 import { Request, Response } from '../../utils';
+
 const { FILE_TABLE_NAME } = process.env;
 
 export async function handler(event: { [key: string]: any }) {
@@ -8,7 +9,7 @@ export async function handler(event: { [key: string]: any }) {
   const response = new Response();
   try {
     const ddbDocClient = DynamoDBDocumentClient.from(
-      new DynamoDBClient()
+      new DynamoDBClient({})
     );
     const { Items: files, LastEvaluatedKey } = await ddbDocClient.send(
       new QueryCommand({
@@ -23,7 +24,7 @@ export async function handler(event: { [key: string]: any }) {
         },
         ExclusiveStartKey: request.get('nextToken', undefined),
       })
-    )
+    );
     return response.json({
       files,
       nextToken: LastEvaluatedKey,
