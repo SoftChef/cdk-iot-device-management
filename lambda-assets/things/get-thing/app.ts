@@ -4,6 +4,7 @@ import { Request, Response } from '../../utils';
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
   const response = new Response();
+  console.log(request.parameter('thingName'));
   try {
     const iotClient = new IoTClient({});
     const thing = await iotClient.send(
@@ -11,6 +12,7 @@ export async function handler(event: { [key: string]: any }) {
         thingName: request.parameter('thingName'),
       }),
     );
+    console.log(thing);
     return response.json({
       thing,
     });

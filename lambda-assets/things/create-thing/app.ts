@@ -11,7 +11,7 @@ export async function handler(event: { [key: string]: any }) {
       };
     });
     if (validated.error) {
-      return response.error(validated, 422);
+      return response.error(validated.details, 422);
     }
     const iotClient = new IoTClient({});
     const thing = await iotClient.send(
