@@ -11,12 +11,14 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient()
     );
-    const { Item: category } = await ddbDocClient.send(new GetCommand({
-      TableName: `${CATEGORY_TABLE_NAME}`,
-      Key: {
-        categoryId: request.parameter('categoryId'),
-      },
-    }));
+    const { Item: category } = await ddbDocClient.send(
+      new GetCommand({
+        TableName: `${CATEGORY_TABLE_NAME}`,
+        Key: {
+          categoryId: request.parameter('categoryId'),
+        },
+      })
+    );
     if (isEmpty(category)) {
       return response.error('Not found.', 404);
     }

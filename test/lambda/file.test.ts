@@ -98,12 +98,6 @@ test('Create category with invalid inputs expect failure', async () => {
       value: null,
       message: expect.any(String),
     },
-    {
-      label: 'description',
-      key: 'description',
-      value: null,
-      message: expect.any(String),
-    },
   ]);
 });
 

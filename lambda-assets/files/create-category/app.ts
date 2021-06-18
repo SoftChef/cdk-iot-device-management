@@ -12,7 +12,7 @@ export async function handler(event: { [key: string]: any }) {
       return {
         name: joi.string().required(),
         parentId: joi.string().allow(null),
-        description: joi.string(),
+        description: joi.string().allow(null),
       };
     });
     if (validated.error) {
@@ -34,7 +34,7 @@ export async function handler(event: { [key: string]: any }) {
         updatedAt: timestamp,
       },
     };
-    if (parentId) {
+    if (request.has('parentId')) {
       parameters.Item.categoryId = md5(`${parentId}-${name}`);
       parameters.Item.parentId = parentId;
     }

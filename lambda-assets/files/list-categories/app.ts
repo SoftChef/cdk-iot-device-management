@@ -12,7 +12,7 @@ export async function handler(event: { [key: string]: any }) {
     );
     const parentId = request.get('parentId', undefined);
     const nextToken = request.get('nextToken', undefined);
-    if (parentId) {
+    if (request.has('parentId')) {
       let parameters: { [key: string]: any } = {
         TableName: `${CATEGORY_TABLE_NAME}`,
         IndexName: 'query-by-parent-id',
