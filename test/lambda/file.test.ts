@@ -9,19 +9,19 @@ import {
 } from '@aws-sdk/lib-dynamodb';
 import {
   mockClient,
-  // AwsError,
+  AwsError,
 } from 'aws-sdk-client-mock';
 import * as createCategory from '../../lambda-assets/files/create-category/app';
-// import * as createFile from '../../lambda-assets/files/create-file/app';
+import * as createFile from '../../lambda-assets/files/create-file/app';
 import * as deleteCategory from '../../lambda-assets/files/delete-category/app';
-// import * as deleteFile from '../../lambda-assets/files/delete-file/app';
+import * as deleteFile from '../../lambda-assets/files/delete-file/app';
 import * as getCategory from '../../lambda-assets/files/get-category/app';
-// import * as getFile from '../../lambda-assets/files/get-file/app';
+import * as getFile from '../../lambda-assets/files/get-file/app';
 import * as listCategories from '../../lambda-assets/files/list-categories/app';
-// import * as listFiles from '../../lambda-assets/files/list-files/app';
-// import * as listFilesByCategory from '../../lambda-assets/files/list-files-by-category/app';
+import * as listFilesByCategory from '../../lambda-assets/files/list-files-by-category/app';
+import * as listFiles from '../../lambda-assets/files/list-files/app';
 import * as updateCategory from '../../lambda-assets/files/update-category/app';
-// import * as updateFile from '../../lambda-assets/files/update-file/app';
+import * as updateFile from '../../lambda-assets/files/update-file/app';
 
 const expectedCategory = {
   Item: {
@@ -53,23 +53,23 @@ const expected = {
   },
 };
 
-// const expectedFile = {
-//   DBData: {
-//     fileId: 'Test', //checksum
-//     checksumType: 'md5',
-//     version: 'Test',
-//     categoryId: 'Test',
-//     location: 'https://example.com/Test',
-//     nextToken: '12345',
-//     description: 'Test',
-//     createAt: 'Test',
-//     updatedAt: 'Test',
-//   },
-//   //: expectedInvalidJob,
-//   invalidDBError: <AwsError>{
-//     Code: 'ResourceNotFoundException',
-//   },
-// };
+const expectedFile = {
+  DBData: {
+    fileId: 'Test', //checksum
+    checksumType: 'md5',
+    version: 'Test',
+    categoryId: 'Test',
+    location: 'https://example.com/Test',
+    nextToken: '12345',
+    description: 'Test',
+    createAt: 'Test',
+    updatedAt: 'Test',
+  },
+  //: expectedInvalidJob,
+  invalidDBError: <AwsError>{
+    Code: 'ResourceNotFoundException',
+  },
+};
 
 test('Create category success', async () => {
   const ddbMock = mockClient(DynamoDBDocumentClient);
@@ -83,6 +83,7 @@ test('Create category success', async () => {
   const body = JSON.parse(response.body);
   expect(response.statusCode).toEqual(200);
   expect(body.created).toEqual(true);
+  ddbMock.restore();
 });
 
 test('Create category with invalid inputs expect failure', async () => {
@@ -99,6 +100,7 @@ test('Create category with invalid inputs expect failure', async () => {
       message: expect.any(String),
     },
   ]);
+  ddbMock.restore();
 });
 
 test('Get category success', async () => {
@@ -114,6 +116,7 @@ test('Get category success', async () => {
     },
   });
   expect(response.statusCode).toEqual(200);
+  ddbMock.restore();
 });
 
 test('Get category with invalid jobId expect failure', async () => {
@@ -127,6 +130,7 @@ test('Get category with invalid jobId expect failure', async () => {
     },
   });
   expect(response.statusCode).toEqual(404);
+  ddbMock.restore();
 });
 
 test('Calss 1: List categories success', async () => {
@@ -138,6 +142,7 @@ test('Calss 1: List categories success', async () => {
     },
   });
   expect(response.statusCode).toEqual(200);
+  ddbMock.restore();
 });
 
 test('Calss 2: List categories success', async () => {
@@ -149,6 +154,7 @@ test('Calss 2: List categories success', async () => {
     },
   });
   expect(response.statusCode).toEqual(200);
+  ddbMock.restore();
 });
 
 test('Update category success', async () => {
@@ -165,6 +171,7 @@ test('Update category success', async () => {
   const body = JSON.parse(response.body);
   expect(response.statusCode).toEqual(200);
   expect(body.updated).toEqual(true);
+  ddbMock.restore();
 });
 
 test('Delete category success', async () => {
@@ -178,203 +185,212 @@ test('Delete category success', async () => {
   const body = JSON.parse(response.body);
   expect(response.statusCode).toEqual(200);
   expect(body.deleted).toEqual(true);
+  ddbMock.restore();
 });
 
-// test('Create file API success', async () => {
-//   const ddbMock = mockClient(DynamoDBDocumentClient);
-//   ddbMock.on(PutCommand).resolves({});
-//   const response = await createFile.handler({
-//     body: {
-//       location: expectedFile.DBData.location,
-//       checksum: expectedFile.DBData.fileId,
-//       checksumType: expectedFile.DBData.checksumType,
-//       version: expectedFile.DBData.version,
-//       categoryId: expectedFile.DBData.categoryId,
-//       describe: expectedFile.DBData.description,
-//     },
-//   });
-//   const body = JSON.parse(response.body);
-//   expect(response.statusCode).toEqual(200);
-//   expect(body.created).toEqual(true);
-// });
+test('Create file API success', async () => {
+  const ddbMock = mockClient(DynamoDBDocumentClient);
+  ddbMock.on(PutCommand).resolves({});
+  const response = await createFile.handler({
+    body: {
+      location: expectedFile.DBData.location,
+      checksum: expectedFile.DBData.fileId,
+      checksumType: expectedFile.DBData.checksumType,
+      version: expectedFile.DBData.version,
+      categoryId: expectedFile.DBData.categoryId,
+      describe: expectedFile.DBData.description,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(response.statusCode).toEqual(200);
+  expect(body.created).toEqual(true);
+  ddbMock.restore();
+});
 
-// test('Create file with invalid inputs expect failure', async () => {
-//   const response = await createFile.handler({});
-//   const body = JSON.parse(response.body);
-//   expect(response.statusCode).toEqual(422);
-//   expect(body.error).toEqual([
-//     {
-//       label: 'location',
-//       key: 'location',
-//       value: null,
-//       message: expect.any(String),
-//     },
-//     {
-//       label: 'checksum',
-//       key: 'checksum',
-//       value: null,
-//       message: expect.any(String),
-//     },
-//     {
-//       label: 'checksumType',
-//       key: 'checksumType',
-//       value: null,
-//       message: expect.any(String),
-//     },
-//     {
-//       label: 'version',
-//       key: 'version',
-//       value: null,
-//       message: expect.any(String),
-//     },
-//     {
-//       label: 'categoryId',
-//       key: 'categoryId',
-//       value: null,
-//       message: expect.any(String),
-//     },
-//   ]);
-// });
+test('Create file with invalid inputs expect failure', async () => {
+  const ddbMock = mockClient(DynamoDBDocumentClient);
+  const response = await createFile.handler({});
+  const body = JSON.parse(response.body);
+  expect(response.statusCode).toEqual(422);
+  expect(body.error).toEqual([
+    {
+      label: 'location',
+      key: 'location',
+      value: null,
+      message: expect.any(String),
+    },
+    {
+      label: 'checksum',
+      key: 'checksum',
+      value: null,
+      message: expect.any(String),
+    },
+    {
+      label: 'checksumType',
+      key: 'checksumType',
+      value: null,
+      message: expect.any(String),
+    },
+    {
+      label: 'version',
+      key: 'version',
+      value: null,
+      message: expect.any(String),
+    },
+    {
+      label: 'categoryId',
+      key: 'categoryId',
+      value: null,
+      message: expect.any(String),
+    },
+  ]);
+  ddbMock.restore();
+});
 
-// test('Get file API success', async () => {
-//   const ddbMock = mockClient(DynamoDBDocumentClient);
-//   ddbMock.on(GetCommand).resolves({
-//     Item: {
-//       fileId: expectedFile.DBData.fileId,
-//       version: expectedFile.DBData.version,
-//       categoryId: expectedFile.DBData.categoryId,
-//       location: expectedFile.DBData.location,
-//       description: expectedFile.DBData.description,
-//       createAt: expectedFile.DBData.createAt,
-//       updatedAt: expectedFile.DBData.updatedAt,
-//     },
-//   });
-//   const response = await getFile.handler({
-//     pathParameters: {
-//       fileId: expectedFile.DBData.fileId,
-//     },
-//   });
-//   expect(response.statusCode).toEqual(200);
-// });
+test('Get file API success', async () => {
+  const ddbMock = mockClient(DynamoDBDocumentClient);
+  ddbMock.on(GetCommand).resolves({
+    Item: {
+      fileId: expectedFile.DBData.fileId,
+      version: expectedFile.DBData.version,
+      categoryId: expectedFile.DBData.categoryId,
+      location: expectedFile.DBData.location,
+      description: expectedFile.DBData.description,
+      createAt: expectedFile.DBData.createAt,
+      updatedAt: expectedFile.DBData.updatedAt,
+    },
+  });
+  const response = await getFile.handler({
+    pathParameters: {
+      fileId: expectedFile.DBData.fileId,
+    },
+  });
+  expect(response.statusCode).toEqual(200);
+  ddbMock.restore();
+});
 
-// test('Get file with invalid inputs expect failure', async () => {
-//   const ddbMock = mockClient(DynamoDBDocumentClient);
-//   ddbMock.on(GetCommand).resolves({
-//     Item: {}
-//   })
-//   const response = await getFile.handler({
-//     pathParameters: {
-//       fileId: '',
-//       version: '',
-//     },
-//   });
-//   expect(response.statusCode).toEqual(404);
-// })
+test('Get file with invalid inputs expect failure', async () => {
+  const ddbMock = mockClient(DynamoDBDocumentClient);
+  ddbMock.on(GetCommand).resolves({
+    Item: {},
+  });
+  const response = await getFile.handler({
+    pathParameters: {
+      fileId: '',
+      version: '',
+    },
+  });
+  expect(response.statusCode).toEqual(404);
+  ddbMock.restore();
+});
 
-// test('List files API success', async () => {
-//   const ddbMock = mockClient(DynamoDBDocumentClient);
-//   ddbMock.on(ScanCommand).resolves({
-//     Items: [
-//       {
-//         fileId: expectedFile.DBData.fileId,
-//         version: expectedFile.DBData.version,
-//         categoryId: expectedFile.DBData.categoryId,
-//         location: expectedFile.DBData.location,
-//         description: expectedFile.DBData.description,
-//         createAt: expectedFile.DBData.createAt,
-//         updatedAt: expectedFile.DBData.updatedAt,
-//       },
-//       {
-//         fileId: expectedFile.DBData.fileId,
-//         version: expectedFile.DBData.version,
-//         categoryId: expectedFile.DBData.categoryId,
-//         location: expectedFile.DBData.location,
-//         description: expectedFile.DBData.description,
-//         createAt: expectedFile.DBData.createAt,
-//         updatedAt: expectedFile.DBData.updatedAt,
-//       },
-//       {
-//         fileId: expectedFile.DBData.fileId,
-//         version: expectedFile.DBData.version,
-//         categoryId: expectedFile.DBData.categoryId,
-//         location: expectedFile.DBData.location,
-//         description: expectedFile.DBData.description,
-//         createAt: expectedFile.DBData.createAt,
-//         updatedAt: expectedFile.DBData.updatedAt,
-//       },
-//     ],
-//   });
-//   const response = await listFiles.handler({
-//     pathParameters: {
-//       categoryId: expectedFile.DBData.categoryId,
-//     },
-//   });
-//   expect(response.statusCode).toEqual(200);
-// });
+test('List files API success', async () => {
+  const ddbMock = mockClient(DynamoDBDocumentClient);
+  ddbMock.on(ScanCommand).resolves({
+    Items: [
+      {
+        fileId: expectedFile.DBData.fileId,
+        version: expectedFile.DBData.version,
+        categoryId: expectedFile.DBData.categoryId,
+        location: expectedFile.DBData.location,
+        description: expectedFile.DBData.description,
+        createAt: expectedFile.DBData.createAt,
+        updatedAt: expectedFile.DBData.updatedAt,
+      },
+      {
+        fileId: expectedFile.DBData.fileId,
+        version: expectedFile.DBData.version,
+        categoryId: expectedFile.DBData.categoryId,
+        location: expectedFile.DBData.location,
+        description: expectedFile.DBData.description,
+        createAt: expectedFile.DBData.createAt,
+        updatedAt: expectedFile.DBData.updatedAt,
+      },
+      {
+        fileId: expectedFile.DBData.fileId,
+        version: expectedFile.DBData.version,
+        categoryId: expectedFile.DBData.categoryId,
+        location: expectedFile.DBData.location,
+        description: expectedFile.DBData.description,
+        createAt: expectedFile.DBData.createAt,
+        updatedAt: expectedFile.DBData.updatedAt,
+      },
+    ],
+  });
+  const response = await listFiles.handler({
+    pathParameters: {
+      categoryId: expectedFile.DBData.categoryId,
+    },
+  });
+  expect(response.statusCode).toEqual(200);
+  ddbMock.restore();
+});
 
-// test('List files by category API success', async () => {
-//   const ddbMock = mockClient(DynamoDBDocumentClient);
-//   ddbMock.on(QueryCommand).resolves({
-//     Items: [
-//       {
-//         fileId: expectedFile.DBData.fileId,
-//         version: expectedFile.DBData.version,
-//         categoryId: expectedFile.DBData.categoryId,
-//         location: expectedFile.DBData.location,
-//         description: expectedFile.DBData.description,
-//         createAt: expectedFile.DBData.createAt,
-//         updatedAt: expectedFile.DBData.updatedAt,
-//       },
-//       {
-//         fileId: expectedFile.DBData.fileId,
-//         version: expectedFile.DBData.version,
-//         categoryId: expectedFile.DBData.categoryId,
-//         location: expectedFile.DBData.location,
-//         description: expectedFile.DBData.description,
-//         createAt: expectedFile.DBData.createAt,
-//         updatedAt: expectedFile.DBData.updatedAt,
-//       },
-//       {
-//         fileId: expectedFile.DBData.fileId,
-//         version: expectedFile.DBData.version,
-//         categoryId: expectedFile.DBData.categoryId,
-//         location: expectedFile.DBData.location,
-//         description: expectedFile.DBData.description,
-//         createAt: expectedFile.DBData.createAt,
-//         updatedAt: expectedFile.DBData.updatedAt,
-//       },
-//     ],
-//   });
-//   const response = await listFilesByCategory.handler({
-//     pathParameters: {
-//       categoryId: expectedFile.DBData.categoryId,
-//     },
-//   });
-//   expect(response.statusCode).toEqual(200);
-// });
+test('List files by category API success', async () => {
+  const ddbMock = mockClient(DynamoDBDocumentClient);
+  ddbMock.on(QueryCommand).resolves({
+    Items: [
+      {
+        fileId: expectedFile.DBData.fileId,
+        version: expectedFile.DBData.version,
+        categoryId: expectedFile.DBData.categoryId,
+        location: expectedFile.DBData.location,
+        description: expectedFile.DBData.description,
+        createAt: expectedFile.DBData.createAt,
+        updatedAt: expectedFile.DBData.updatedAt,
+      },
+      {
+        fileId: expectedFile.DBData.fileId,
+        version: expectedFile.DBData.version,
+        categoryId: expectedFile.DBData.categoryId,
+        location: expectedFile.DBData.location,
+        description: expectedFile.DBData.description,
+        createAt: expectedFile.DBData.createAt,
+        updatedAt: expectedFile.DBData.updatedAt,
+      },
+      {
+        fileId: expectedFile.DBData.fileId,
+        version: expectedFile.DBData.version,
+        categoryId: expectedFile.DBData.categoryId,
+        location: expectedFile.DBData.location,
+        description: expectedFile.DBData.description,
+        createAt: expectedFile.DBData.createAt,
+        updatedAt: expectedFile.DBData.updatedAt,
+      },
+    ],
+  });
+  const response = await listFilesByCategory.handler({
+    pathParameters: {
+      categoryId: expectedFile.DBData.categoryId,
+    },
+  });
+  expect(response.statusCode).toEqual(200);
+  ddbMock.restore();
+});
 
-// test('Update file API', async () => {
-//   const ddbMock = mockClient(DynamoDBDocumentClient);
-//   ddbMock.on(UpdateCommand).resolves({});
-//   const response = await updateFile.handler({
-//     pathParameters: {
-//       categoryId: expectedFile.DBData.categoryId,
-//     },
-//     body: {
-//       categoryId: expectedFile.DBData.categoryId,
-//     },
-//   });
-//   expect(response.statusCode).toEqual(200);
-// });
+test('Update file API', async () => {
+  const ddbMock = mockClient(DynamoDBDocumentClient);
+  ddbMock.on(UpdateCommand).resolves({});
+  const response = await updateFile.handler({
+    pathParameters: {
+      categoryId: expectedFile.DBData.categoryId,
+    },
+    body: {
+      categoryId: expectedFile.DBData.categoryId,
+    },
+  });
+  expect(response.statusCode).toEqual(200);
+  ddbMock.restore();
+});
 
-// test('Delete file API', async () => {
-//   const ddbMock = mockClient(DynamoDBDocumentClient);
-//   ddbMock.on(DeleteCommand).resolves({});
-//   const response = await deleteFile.handler({
-//     pathParameters: {
-//       fileId: 'meow',
-//     },
-//   });
-//   console.log(response)
-//   expect(response.statusCode).toEqual(200);
-// });
+test('Delete file API', async () => {
+  const ddbMock = mockClient(DynamoDBDocumentClient);
+  ddbMock.on(DeleteCommand).resolves({});
+  const response = await deleteFile.handler({
+    pathParameters: {
+      fileId: 'meow',
+    },
+  });
+  expect(response.statusCode).toEqual(200);
+  ddbMock.restore();
+});

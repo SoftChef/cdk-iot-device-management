@@ -12,7 +12,7 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({})
     );
-    const { Item: file } = await ddbDocClient.send(
+    const file = await ddbDocClient.send(
       new GetCommand({
         TableName: `${FILE_TABLE_NAME}`,
         Key: {
@@ -21,10 +21,12 @@ export async function handler(event: { [key: string]: any }) {
         },
       }),
     );
-    if (isEmpty(file)) {
+    if (isEmpty(file.Item)) {
       return response.error('Not found.', 404);
     };
-    return response.json(file);
+    return response.json({
+      file: file.Item
+    });
   } catch (error) {
     return response.error(error);
   }
