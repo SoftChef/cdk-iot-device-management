@@ -14,14 +14,13 @@ export async function handler(event: { [key: string]: any }) {
       return response.error(validated.details, 422);
     }
     const iotClient = new IoTClient({});
-    const thingGroup = await iotClient.send(
+    await iotClient.send(
       new CreateThingGroupCommand({
         thingGroupName: request.input('thingGroupName'),
       }),
     );
     return response.json({
       created: true,
-      thingGroup,
     });
   } catch (error) {
     return response.error(error);

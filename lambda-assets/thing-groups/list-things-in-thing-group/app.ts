@@ -18,6 +18,10 @@ export async function handler(event: { [key: string]: any }) {
     );
     return response.json(things);
   } catch (error) {
-    return response.error(error);
+    if (error.Code === 'ResourceNotFoundException') {
+      return response.error(error, 404);
+    } else {
+      return response.error(error);
+    }
   }
 }
