@@ -16,7 +16,7 @@ export async function handler(event: { [key: string]: any }) {
     const iotClient = new IoTClient({});
     const thing = await iotClient.send(
       new UpdateThingCommand({
-        thingName: request.parameter('thingName'),
+        thingName: request.input('thingName'),
       }),
     );
     return response.json({
@@ -24,6 +24,10 @@ export async function handler(event: { [key: string]: any }) {
       thing,
     });
   } catch (error) {
-    return response.error(error);
+    if (error.Code === 'ResourceNotFoundException') {
+      return response.error(error, 404);
+    } else {
+      return response.error(error);
+    }
   }
 }
