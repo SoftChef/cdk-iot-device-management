@@ -14,9 +14,7 @@ export async function handler(event: { [key: string]: any }) {
         },
       }),
     );
-    return response.json({
-      thingGroup,
-    });
+    return response.json(thingGroup);
   } catch (error) {
     return response.error(error);
   }

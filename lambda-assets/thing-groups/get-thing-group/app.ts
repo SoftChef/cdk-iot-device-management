@@ -11,9 +11,7 @@ export async function handler(event: { [key: string]: any }) {
         thingGroupName: request.parameter('thingGroupName'),
       }),
     );
-    return response.json({
-      thingGroup,
-    });
+    return response.json(thingGroup);
   } catch (error) {
     return response.error(error);
   }
