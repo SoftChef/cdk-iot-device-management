@@ -11,7 +11,8 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({})
     );
-    await ddbDocClient.send(new DeleteCommand({
+    await ddbDocClient.send(
+      new DeleteCommand({
         TableName: `${CATEGORY_TABLE_NAME}`,
         Key: {
           categoryId: request.parameter('categoryId'),

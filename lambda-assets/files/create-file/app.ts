@@ -23,6 +23,7 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({})
     );
+    const currentTime = Date.now();
     await ddbDocClient.send(
       new PutCommand({
         TableName: `${FILE_TABLE_NAME}`,
@@ -32,8 +33,8 @@ export async function handler(event: { [key: string]: any }) {
           categoryId: request.input('categoryId'),
           location: request.input('location'),
           description: request.input('description'),
-          createdAt: Date.now(),
-          updatedAt: Date.now(),
+          createdAt: currentTime,
+          updatedAt: currentTime,
         },
       })
     );

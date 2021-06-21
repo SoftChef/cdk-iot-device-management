@@ -72,8 +72,8 @@ const expectedFile = {
 };
 
 test('Create category success', async () => {
-  const ddbMock = mockClient(DynamoDBDocumentClient);
-  ddbMock.on(PutCommand).resolves;
+  const documentClientMock = mockClient(DynamoDBDocumentClient);
+  documentClientMock.on(PutCommand).resolves;
   const response = await createCategory.handler({
     body: {
       name: expected.newCategory.name,
@@ -83,12 +83,12 @@ test('Create category success', async () => {
   const body = JSON.parse(response.body);
   expect(response.statusCode).toEqual(200);
   expect(body.created).toEqual(true);
-  ddbMock.restore();
+  documentClientMock.restore();
 });
 
 test('Create category with invalid inputs expect failure', async () => {
-  const ddbMock = mockClient(DynamoDBDocumentClient);
-  ddbMock.on(PutCommand).resolves;
+  const documentClientMock = mockClient(DynamoDBDocumentClient);
+  documentClientMock.on(PutCommand).resolves;
   const response = await createCategory.handler({});
   const body = JSON.parse(response.body);
   expect(response.statusCode).toEqual(422);
@@ -100,12 +100,12 @@ test('Create category with invalid inputs expect failure', async () => {
       message: expect.any(String),
     },
   ]);
-  ddbMock.restore();
+  documentClientMock.restore();
 });
 
 test('Get category success', async () => {
-  const ddbMock = mockClient(DynamoDBDocumentClient);
-  ddbMock.on(GetCommand, {
+  const documentClientMock = mockClient(DynamoDBDocumentClient);
+  documentClientMock.on(GetCommand, {
     Key: {
       categoryId: expected.category.Item.categoryId,
     },
@@ -116,12 +116,12 @@ test('Get category success', async () => {
     },
   });
   expect(response.statusCode).toEqual(200);
-  ddbMock.restore();
+  documentClientMock.restore();
 });
 
 test('Get category with invalid jobId expect failure', async () => {
-  const ddbMock = mockClient(DynamoDBDocumentClient);
-  ddbMock.on(GetCommand).resolves({
+  const documentClientMock = mockClient(DynamoDBDocumentClient);
+  documentClientMock.on(GetCommand).resolves({
     Item: {},
   });
   const response = await getCategory.handler({
@@ -130,36 +130,36 @@ test('Get category with invalid jobId expect failure', async () => {
     },
   });
   expect(response.statusCode).toEqual(404);
-  ddbMock.restore();
+  documentClientMock.restore();
 });
 
 test('Calss 1: List categories success', async () => {
-  const ddbMock = mockClient(DynamoDBDocumentClient);
-  ddbMock.on(ScanCommand).resolves(expected.listCategories);
+  const documentClientMock = mockClient(DynamoDBDocumentClient);
+  documentClientMock.on(ScanCommand).resolves(expected.listCategories);
   const response = await listCategories.handler({
     queryStringParameters: {
       nextToken: expected.listCategories.nextToken,
     },
   });
   expect(response.statusCode).toEqual(200);
-  ddbMock.restore();
+  documentClientMock.restore();
 });
 
 test('Calss 2: List categories success', async () => {
-  const ddbMock = mockClient(DynamoDBDocumentClient);
-  ddbMock.on(QueryCommand).resolves(expected.listCategories);
+  const documentClientMock = mockClient(DynamoDBDocumentClient);
+  documentClientMock.on(QueryCommand).resolves(expected.listCategories);
   const response = await listCategories.handler({
     queryStringParameters: {
       parentId: expected.category.Item.parentId,
     },
   });
   expect(response.statusCode).toEqual(200);
-  ddbMock.restore();
+  documentClientMock.restore();
 });
 
 test('Update category success', async () => {
-  const ddbMock = mockClient(DynamoDBDocumentClient);
-  ddbMock.on(UpdateCommand).resolves;
+  const documentClientMock = mockClient(DynamoDBDocumentClient);
+  documentClientMock.on(UpdateCommand).resolves;
   const response = await updateCategory.handler({
     pathParameters: {
       categoryId: expected.category.Item.categoryId,
@@ -171,12 +171,12 @@ test('Update category success', async () => {
   const body = JSON.parse(response.body);
   expect(response.statusCode).toEqual(200);
   expect(body.updated).toEqual(true);
-  ddbMock.restore();
+  documentClientMock.restore();
 });
 
 test('Delete category success', async () => {
-  const ddbMock = mockClient(DynamoDBDocumentClient);
-  ddbMock.on(DeleteCommand).resolves;
+  const documentClientMock = mockClient(DynamoDBDocumentClient);
+  documentClientMock.on(DeleteCommand).resolves;
   const response = await deleteCategory.handler({
     pathParameters: {
       categoryId: expected.category.Item.categoryId,
@@ -185,12 +185,12 @@ test('Delete category success', async () => {
   const body = JSON.parse(response.body);
   expect(response.statusCode).toEqual(200);
   expect(body.deleted).toEqual(true);
-  ddbMock.restore();
+  documentClientMock.restore();
 });
 
 test('Create file API success', async () => {
-  const ddbMock = mockClient(DynamoDBDocumentClient);
-  ddbMock.on(PutCommand).resolves({});
+  const documentClientMock = mockClient(DynamoDBDocumentClient);
+  documentClientMock.on(PutCommand).resolves({});
   const response = await createFile.handler({
     body: {
       location: expectedFile.DBData.location,
@@ -204,11 +204,11 @@ test('Create file API success', async () => {
   const body = JSON.parse(response.body);
   expect(response.statusCode).toEqual(200);
   expect(body.created).toEqual(true);
-  ddbMock.restore();
+  documentClientMock.restore();
 });
 
 test('Create file with invalid inputs expect failure', async () => {
-  const ddbMock = mockClient(DynamoDBDocumentClient);
+  const documentClientMock = mockClient(DynamoDBDocumentClient);
   const response = await createFile.handler({});
   const body = JSON.parse(response.body);
   expect(response.statusCode).toEqual(422);
@@ -244,12 +244,12 @@ test('Create file with invalid inputs expect failure', async () => {
       message: expect.any(String),
     },
   ]);
-  ddbMock.restore();
+  documentClientMock.restore();
 });
 
 test('Get file API success', async () => {
-  const ddbMock = mockClient(DynamoDBDocumentClient);
-  ddbMock.on(GetCommand).resolves({
+  const documentClientMock = mockClient(DynamoDBDocumentClient);
+  documentClientMock.on(GetCommand).resolves({
     Item: {
       fileId: expectedFile.DBData.fileId,
       version: expectedFile.DBData.version,
@@ -266,12 +266,12 @@ test('Get file API success', async () => {
     },
   });
   expect(response.statusCode).toEqual(200);
-  ddbMock.restore();
+  documentClientMock.restore();
 });
 
 test('Get file with invalid inputs expect failure', async () => {
-  const ddbMock = mockClient(DynamoDBDocumentClient);
-  ddbMock.on(GetCommand).resolves({
+  const documentClientMock = mockClient(DynamoDBDocumentClient);
+  documentClientMock.on(GetCommand).resolves({
     Item: {},
   });
   const response = await getFile.handler({
@@ -281,12 +281,12 @@ test('Get file with invalid inputs expect failure', async () => {
     },
   });
   expect(response.statusCode).toEqual(404);
-  ddbMock.restore();
+  documentClientMock.restore();
 });
 
 test('List files API success', async () => {
-  const ddbMock = mockClient(DynamoDBDocumentClient);
-  ddbMock.on(ScanCommand).resolves({
+  const documentClientMock = mockClient(DynamoDBDocumentClient);
+  documentClientMock.on(ScanCommand).resolves({
     Items: [
       {
         fileId: expectedFile.DBData.fileId,
@@ -323,12 +323,12 @@ test('List files API success', async () => {
     },
   });
   expect(response.statusCode).toEqual(200);
-  ddbMock.restore();
+  documentClientMock.restore();
 });
 
 test('List files by category API success', async () => {
-  const ddbMock = mockClient(DynamoDBDocumentClient);
-  ddbMock.on(QueryCommand).resolves({
+  const documentClientMock = mockClient(DynamoDBDocumentClient);
+  documentClientMock.on(QueryCommand).resolves({
     Items: [
       {
         fileId: expectedFile.DBData.fileId,
@@ -365,12 +365,12 @@ test('List files by category API success', async () => {
     },
   });
   expect(response.statusCode).toEqual(200);
-  ddbMock.restore();
+  documentClientMock.restore();
 });
 
 test('Update file API', async () => {
-  const ddbMock = mockClient(DynamoDBDocumentClient);
-  ddbMock.on(UpdateCommand).resolves({});
+  const documentClientMock = mockClient(DynamoDBDocumentClient);
+  documentClientMock.on(UpdateCommand).resolves({});
   const response = await updateFile.handler({
     pathParameters: {
       categoryId: expectedFile.DBData.categoryId,
@@ -380,17 +380,17 @@ test('Update file API', async () => {
     },
   });
   expect(response.statusCode).toEqual(200);
-  ddbMock.restore();
+  documentClientMock.restore();
 });
 
 test('Delete file API', async () => {
-  const ddbMock = mockClient(DynamoDBDocumentClient);
-  ddbMock.on(DeleteCommand).resolves({});
+  const documentClientMock = mockClient(DynamoDBDocumentClient);
+  documentClientMock.on(DeleteCommand).resolves({});
   const response = await deleteFile.handler({
     pathParameters: {
       fileId: 'meow',
     },
   });
   expect(response.statusCode).toEqual(200);
-  ddbMock.restore();
+  documentClientMock.restore();
 });

@@ -19,7 +19,7 @@ export async function handler(event: { [key: string]: any }) {
     if (validated.error) {
       return response.error(validated.details, 422);
     };
-    const timestamp = Date.now();
+    const currentTime = Date.now();
     const name = request.input('name', null);
     const parentId = request.input('parentId');
     const ddbDocClient = DynamoDBDocumentClient.from(
@@ -38,8 +38,8 @@ export async function handler(event: { [key: string]: any }) {
             categoryId: md5.update(name).digest('hex'),
             name,
             description: request.input('description'),
-            createdAt: timestamp,
-            updatedAt: timestamp,
+            createdAt: currentTime,
+            updatedAt: currentTime,
           },
           ...parameters
       })

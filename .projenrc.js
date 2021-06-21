@@ -23,13 +23,11 @@ const project = new AwsCdkConstructLibrary({
   bundledDeps: [
     'joi',
     'semver',
-    'md5',
     'lodash',
     'uuid',
     '@types/node@15.12.2',
     '@types/uuid',
     '@types/semver',
-    '@types/md5',
     '@types/lodash',
     '@softchef/cdk-restapi',
     'aws-sdk',
