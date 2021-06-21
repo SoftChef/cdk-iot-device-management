@@ -11,7 +11,9 @@ export async function handler(event: { [key: string]: any }) {
         thingGroupName: request.parameter('thingGroupName'),
       }),
     );
-    return response.json(thingGroup);
+    return response.json({
+      thingGroup,
+    });
   } catch (error) {
     if (error.Code === 'ResourceNotFoundException') {
       return response.error(error, 404);

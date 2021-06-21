@@ -22,7 +22,9 @@ export async function handler(event: { [key: string]: any }) {
         },
       }),
     );
-    return response.json(thingGroup);
+    return response.json({
+      thingGroup,
+    });
   } catch (error) {
     if (error.Code === 'ResourceNotFoundException') {
       return response.error(error, 404);
