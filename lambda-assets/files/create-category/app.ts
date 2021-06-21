@@ -26,22 +26,23 @@ export async function handler(event: { [key: string]: any }) {
       new DynamoDBClient({})
     );
     const md5 = crypto.createHash('md5');
-    let parameters: { [key: string]: any } = {};
+    let itemParameters: { [key: string]: any } = {};
     if (request.has('parentId')) {
-      parameters.Item.categoryId = md5.update(`${parentId}-${name}`).digest('hex');
-      parameters.Item.parentId = parentId;
+      itemParameters.categoryId = md5.update(`${parentId}-${name}`).digest('hex');
+      itemParameters.parentId = parentId;
+    } else {
+      itemParameters.categoryId = md5.update(name).digest('hex');
     };
     await ddbDocClient.send(
         new PutCommand({
           TableName: `${CATEGORY_TABLE_NAME}`,
           Item: {
-            categoryId: md5.update(name).digest('hex'),
+            ...itemParameters,
             name,
             description: request.input('description'),
             createdAt: currentTime,
             updatedAt: currentTime,
           },
-          ...parameters
       })
     );
     return response.json({
