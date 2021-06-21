@@ -12,11 +12,10 @@ export async function handler(event: { [key: string]: any }) {
       new DynamoDBClient({})
     );
     const parentId = request.get('parentId', undefined);
-    const nextToken = request.get('nextToken', undefined);
     let parameters: { [key: string]: any } = {};
-    if (nextToken) {
+    if (request.has('nextToken')) {
       parameters.ExclusiveStartKey = {
-        Key: nextToken,
+        Key: request.get('nextToken'),
       }
     };
     if (request.has('parentId')) {
@@ -28,30 +27,30 @@ export async function handler(event: { [key: string]: any }) {
       parameters.ExpressionAttributeValues = {
         ':parentId': parentId,
       };
-      const { Items: categories, LastEvaluatedKey } = await ddbDocClient.send(
+      const { Items: categories, LastEvaluatedKey: lastEvaluatedKey } = await ddbDocClient.send(
         new QueryCommand({
           TableName: `${CATEGORY_TABLE_NAME}`,
           ...parameters,
         })
       );
       return response.json({
-        data: categories,
-        nextToken: LastEvaluatedKey,
+        categories,
+        nextToken: lastEvaluatedKey,
       });
     } else {
       parameters.ExpressionAttributeNames = {
         '#parentId': 'parentId',
       };
       parameters.FilterExpression = 'attribute_not_exists(#parentId)';
-      const { Items: categories, LastEvaluatedKey } = await ddbDocClient.send(
+      const { Items: categories, LastEvaluatedKey: nextToken } = await ddbDocClient.send(
           new ScanCommand({
           TableName: `${CATEGORY_TABLE_NAME}`,
           ...parameters,
         })
       );
       return response.json({
-        data: categories,
-        nextToken: LastEvaluatedKey,
+        categories,
+        nextToken,
       });
     };
   } catch (error) {

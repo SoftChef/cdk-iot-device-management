@@ -11,15 +11,21 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({})
     );
-    const { Items: files, LastEvaluatedKey } = await ddbDocClient.send(
+    let parameters: { [key: string]: any } = {};
+    if (request.has('nextToken')) {
+      parameters.ExclusiveStartKey = {
+        Key: request.get('nextToken'),
+      }
+    };
+    const { Items: files, LastEvaluatedKey: nextToken } = await ddbDocClient.send(
       new ScanCommand({
         TableName: `${FILE_TABLE_NAME}`,
-        ExclusiveStartKey: request.get('nextToken', undefined),
+        ...parameters,
       })
     );
     return response.json({
       files,
-      nextToken: LastEvaluatedKey,
+      nextToken,
     });
   } catch (error) {
     return response.error(error);
