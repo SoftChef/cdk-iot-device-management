@@ -276,6 +276,7 @@ test('Delete thing group with invalid thingGroupName expect failure', async () =
   const body = JSON.parse(response.body);
   expect(response.statusCode).toEqual(200);
   expect(body.deleted).toEqual(true);
+  iotClientMock.restore();
 });
 
 test('Add thing to thing group success', async () => {
