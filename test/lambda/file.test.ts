@@ -223,14 +223,14 @@ test('Create file with invalid inputs expect failure', async () => {
       message: expect.any(String),
     },
     {
-      label: 'checksum',
-      key: 'checksum',
+      label: 'checksumType',
+      key: 'checksumType',
       value: null,
       message: expect.any(String),
     },
     {
-      label: 'checksumType',
-      key: 'checksumType',
+      label: 'checksum',
+      key: 'checksum',
       value: null,
       message: expect.any(String),
     },
@@ -375,10 +375,9 @@ test('Update file API', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
   documentClientMock.on(UpdateCommand).resolves({});
   const response = await updateFile.handler({
-    pathParameters: {
-      fileId: expected.files.Item.fileId,
-    },
     body: {
+      fileId: expected.files.Item.fileId,
+      checksumType: 'md5',
       version: expected.files.Item.version,
     },
   });

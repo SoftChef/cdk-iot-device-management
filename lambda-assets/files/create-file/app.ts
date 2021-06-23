@@ -11,10 +11,13 @@ export async function handler(event: { [key: string]: any }) {
     const validated = request.validate(joi => {
       return {
         location: joi.string().uri().required(),
-        checksum: joi.string().required(),
-        checksumType: joi.string().allow('md5', 'crc32', 'sha1'),
+        checksumType: joi.string().allow('md5', 'crc32', 'sha1'), 
+        checksum: joi.string().when('checksumType', { is: 'md5', then: joi.string().length(32).required()})
+        .concat(joi.string().when('checksumType', { is: 'crc32', then: joi.string().length(8).required()}))
+        .concat(joi.string().when('checksumType', { is: 'sha1', then: joi.string().length(40).required()})),
         version: joi.string().required(),
         categoryId: joi.string().required(),
+        //checkMD5Length: joi.string().when('checksumType', { is: 'md5', then: joi.string().length(32).required})
       };
     });
     if (validated.error) {
