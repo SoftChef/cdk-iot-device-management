@@ -9,7 +9,6 @@ import {
 } from '@aws-sdk/lib-dynamodb';
 import {
   mockClient,
-  AwsError,
 } from 'aws-sdk-client-mock';
 import * as createCategory from '../../lambda-assets/files/create-category/app';
 import * as createFile from '../../lambda-assets/files/create-file/app';
@@ -34,6 +33,19 @@ const expectedCategory = {
   },
 };
 
+const expectedFiles = {
+  Item: {
+    fileId: "0CBC6611F5540BD0809A388DC95A615B", //checksum
+    checksumType: "md5",
+    version: 'Test',
+    categoryId: 'Test',
+    location: 'https://example.com/Test',
+    description: 'Test',
+    createAt: Date.now(),
+    updatedAt: Date.now(),
+  },
+};
+
 const expected = {
   newCategory: {
     categoryId: expectedCategory.Item.categoryId,
@@ -51,29 +63,20 @@ const expected = {
       categoryId: '48cc48e0d55bfd83114031498f21d640',
     },
   },
-};
-
-const expectedFile = {
-  DBData: {
-    fileId: 'Test', //checksum
-    checksumType: 'md5',
-    version: 'Test',
-    categoryId: 'Test',
+  newFiles: {
     location: 'https://example.com/Test',
-    nextToken: '12345',
-    description: 'Test',
-    createAt: 'Test',
-    updatedAt: 'Test',
+    checksum: "0CBC6611F5540BD0809A388DC95A615B", //fileId
+    checksumType: "md5",
+    version: 'Test',
+    categoryId: '48cc48e0d55bfd83114031498f21d640',
+    description: "Test",
   },
-  //: expectedInvalidJob,
-  invalidDBError: <AwsError>{
-    Code: 'ResourceNotFoundException',
-  },
+  files: expectedFiles,
 };
 
 test('Create category success', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(PutCommand).resolves;
+  documentClientMock.on(PutCommand).resolves({});
   const response = await createCategory.handler({
     body: {
       name: expected.newCategory.name,
@@ -133,7 +136,7 @@ test('Get category with invalid jobId expect failure', async () => {
   documentClientMock.restore();
 });
 
-test('Calss 1: List categories success', async () => {
+test('Class 1: List categories success', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
   documentClientMock.on(ScanCommand).resolves(expected.listCategories);
   const response = await listCategories.handler({
@@ -145,7 +148,7 @@ test('Calss 1: List categories success', async () => {
   documentClientMock.restore();
 });
 
-test('Calss 2: List categories success', async () => {
+test('Class 2: List categories success', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
   documentClientMock.on(QueryCommand).resolves(expected.listCategories);
   const response = await listCategories.handler({
@@ -193,12 +196,12 @@ test('Create file API success', async () => {
   documentClientMock.on(PutCommand).resolves({});
   const response = await createFile.handler({
     body: {
-      location: expectedFile.DBData.location,
-      checksum: expectedFile.DBData.fileId,
-      checksumType: expectedFile.DBData.checksumType,
-      version: expectedFile.DBData.version,
-      categoryId: expectedFile.DBData.categoryId,
-      describe: expectedFile.DBData.description,
+      location: expected.newFiles.location,
+      checksum: expected.newFiles.checksum,
+      checksumType: expected.newFiles.checksumType,
+      version: expected.newFiles.version,
+      categoryId: expected.newFiles.categoryId,
+      describe: expected.newFiles.description,
     },
   });
   const body = JSON.parse(response.body);
@@ -251,18 +254,18 @@ test('Get file API success', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
   documentClientMock.on(GetCommand).resolves({
     Item: {
-      fileId: expectedFile.DBData.fileId,
-      version: expectedFile.DBData.version,
-      categoryId: expectedFile.DBData.categoryId,
-      location: expectedFile.DBData.location,
-      description: expectedFile.DBData.description,
-      createAt: expectedFile.DBData.createAt,
-      updatedAt: expectedFile.DBData.updatedAt,
+      fileId: expected.files.Item.fileId,
+      version: expected.files.Item.version,
+      categoryId: expected.files.Item.categoryId,
+      location: expected.files.Item.location,
+      description: expected.files.Item.description,
+      createAt: expected.files.Item.createAt,
+      updatedAt: expected.files.Item.updatedAt,
     },
   });
   const response = await getFile.handler({
     pathParameters: {
-      fileId: expectedFile.DBData.fileId,
+      fileId: expected.files.Item.fileId,
     },
   });
   expect(response.statusCode).toEqual(200);
@@ -289,37 +292,37 @@ test('List files API success', async () => {
   documentClientMock.on(ScanCommand).resolves({
     Items: [
       {
-        fileId: expectedFile.DBData.fileId,
-        version: expectedFile.DBData.version,
-        categoryId: expectedFile.DBData.categoryId,
-        location: expectedFile.DBData.location,
-        description: expectedFile.DBData.description,
-        createAt: expectedFile.DBData.createAt,
-        updatedAt: expectedFile.DBData.updatedAt,
+        fileId: expected.files.Item.fileId,
+        version: expected.files.Item.version,
+        categoryId: expected.files.Item.categoryId,
+        location: expected.files.Item.location,
+        description: expected.files.Item.description,
+        createAt: expected.files.Item.createAt,
+        updatedAt: expected.files.Item.updatedAt,
       },
       {
-        fileId: expectedFile.DBData.fileId,
-        version: expectedFile.DBData.version,
-        categoryId: expectedFile.DBData.categoryId,
-        location: expectedFile.DBData.location,
-        description: expectedFile.DBData.description,
-        createAt: expectedFile.DBData.createAt,
-        updatedAt: expectedFile.DBData.updatedAt,
+        fileId: expected.files.Item.fileId,
+        version: expected.files.Item.version,
+        categoryId: expected.files.Item.categoryId,
+        location: expected.files.Item.location,
+        description: expected.files.Item.description,
+        createAt: expected.files.Item.createAt,
+        updatedAt: expected.files.Item.updatedAt,
       },
       {
-        fileId: expectedFile.DBData.fileId,
-        version: expectedFile.DBData.version,
-        categoryId: expectedFile.DBData.categoryId,
-        location: expectedFile.DBData.location,
-        description: expectedFile.DBData.description,
-        createAt: expectedFile.DBData.createAt,
-        updatedAt: expectedFile.DBData.updatedAt,
+        fileId: expected.files.Item.fileId,
+        version: expected.files.Item.version,
+        categoryId: expected.files.Item.categoryId,
+        location: expected.files.Item.location,
+        description: expected.files.Item.description,
+        createAt: expected.files.Item.createAt,
+        updatedAt: expected.files.Item.updatedAt,
       },
     ],
   });
   const response = await listFiles.handler({
     pathParameters: {
-      categoryId: expectedFile.DBData.categoryId,
+      categoryId: expected.files.Item.categoryId,
     },
   });
   expect(response.statusCode).toEqual(200);
@@ -331,37 +334,37 @@ test('List files by category API success', async () => {
   documentClientMock.on(QueryCommand).resolves({
     Items: [
       {
-        fileId: expectedFile.DBData.fileId,
-        version: expectedFile.DBData.version,
-        categoryId: expectedFile.DBData.categoryId,
-        location: expectedFile.DBData.location,
-        description: expectedFile.DBData.description,
-        createAt: expectedFile.DBData.createAt,
-        updatedAt: expectedFile.DBData.updatedAt,
+        fileId: expected.files.Item.fileId,
+        version: expected.files.Item.version,
+        categoryId: expected.files.Item.categoryId,
+        location: expected.files.Item.location,
+        description: expected.files.Item.description,
+        createAt: expected.files.Item.createAt,
+        updatedAt: expected.files.Item.updatedAt,
       },
       {
-        fileId: expectedFile.DBData.fileId,
-        version: expectedFile.DBData.version,
-        categoryId: expectedFile.DBData.categoryId,
-        location: expectedFile.DBData.location,
-        description: expectedFile.DBData.description,
-        createAt: expectedFile.DBData.createAt,
-        updatedAt: expectedFile.DBData.updatedAt,
+        fileId: expected.files.Item.fileId,
+        version: expected.files.Item.version,
+        categoryId: expected.files.Item.categoryId,
+        location: expected.files.Item.location,
+        description: expected.files.Item.description,
+        createAt: expected.files.Item.createAt,
+        updatedAt: expected.files.Item.updatedAt,
       },
       {
-        fileId: expectedFile.DBData.fileId,
-        version: expectedFile.DBData.version,
-        categoryId: expectedFile.DBData.categoryId,
-        location: expectedFile.DBData.location,
-        description: expectedFile.DBData.description,
-        createAt: expectedFile.DBData.createAt,
-        updatedAt: expectedFile.DBData.updatedAt,
+        fileId: expected.files.Item.fileId,
+        version: expected.files.Item.version,
+        categoryId: expected.files.Item.categoryId,
+        location: expected.files.Item.location,
+        description: expected.files.Item.description,
+        createAt: expected.files.Item.createAt,
+        updatedAt: expected.files.Item.updatedAt,
       },
     ],
   });
   const response = await listFilesByCategory.handler({
     pathParameters: {
-      categoryId: expectedFile.DBData.categoryId,
+      categoryId: expected.files.Item.categoryId,
     },
   });
   expect(response.statusCode).toEqual(200);
@@ -373,10 +376,10 @@ test('Update file API', async () => {
   documentClientMock.on(UpdateCommand).resolves({});
   const response = await updateFile.handler({
     pathParameters: {
-      categoryId: expectedFile.DBData.categoryId,
+      categoryId: expected.files.Item.categoryId,
     },
     body: {
-      categoryId: expectedFile.DBData.categoryId,
+      categoryId: expected.files.Item.categoryId,
     },
   });
   expect(response.statusCode).toEqual(200);
@@ -388,7 +391,7 @@ test('Delete file API', async () => {
   documentClientMock.on(DeleteCommand).resolves({});
   const response = await deleteFile.handler({
     pathParameters: {
-      fileId: 'meow',
+      fileId: expected.files.Item.fileId,
     },
   });
   expect(response.statusCode).toEqual(200);
