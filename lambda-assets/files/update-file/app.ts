@@ -8,6 +8,15 @@ export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
   const response = new Response();
   try {
+    const validated = request.validate(joi => {
+      return {
+        fileId: joi.string().required(),
+        version: joi.string().required(),
+      };
+    });
+    if (validated.error) {
+      return response.error(validated.details, 422);
+    }
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({})
     );
@@ -31,6 +40,10 @@ export async function handler(event: { [key: string]: any }) {
       updated: true,
     });
   } catch (error) {
-    return response.error(error);
+    if (error.Code === 'ResourceNotFoundException') {
+      return response.error(error, 404);
+    } else {
+      return response.error(error);
+    }
   }
 }
