@@ -84,6 +84,11 @@ export class FileApi extends cdk.Construct {
           lambdaFunction: this.createListFilesFunction(),
         },
         {
+          path: '/files/{categoryId}',
+          httpMethod: HttpMethod.GET,
+          lambdaFunction: this.createListFilesByCategoryFunction(),
+        },
+        {
           path: '/files/{fileId}',
           httpMethod: HttpMethod.GET,
           lambdaFunction: this.createGetFileFunction(),
@@ -248,6 +253,27 @@ export class FileApi extends cdk.Construct {
       }),
     );
     return listFilesFunction;
+  }
+
+  private createListFilesByCategoryFunction(): lambda.NodejsFunction {
+    const listFilesByCategoryFunction = new lambda.NodejsFunction(this, 'ListFilesByCategoryFunction', {
+      entry: `${LAMBDA_ASSETS_PATH}/list-files-by-category/app.ts`,
+    });
+    listFilesByCategoryFunction.role?.attachInlinePolicy(
+      new iam.Policy(this, 'list-files-by-category-policy', {
+        statements: [
+          new iam.PolicyStatement({
+            actions: [
+              'dynamodb:Query',
+            ],
+            resources: [
+              this.fileTable.tableArn,
+            ],
+          }),
+        ],
+      }),
+    );
+    return listFilesByCategoryFunction;
   }
 
   private createGetFileFunction(): lambda.NodejsFunction {
