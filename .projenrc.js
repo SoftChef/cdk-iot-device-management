@@ -30,6 +30,7 @@ const project = new AwsCdkConstructLibrary({
     '@softchef/cdk-restapi',
     'aws-sdk',
     '@aws-sdk/client-iot',
+    '@aws-sdk/client-iot-data-plane',
     '@aws-sdk/client-dynamodb',
     '@aws-sdk/lib-dynamodb',
     '@aws-sdk/client-cognito-identity-provider',
