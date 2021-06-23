@@ -10,11 +10,11 @@ export async function handler(event: { [key: string]: any }) {
   try {
     const validated = request.validate(joi => {
       return {
-        fileId: joi.string().required(),
-        version: joi.string().required(),
+        version: joi.string(), 
       };
     });
     if (validated.error) {
+      console.log(validated.details)
       return response.error(validated.details, 422);
     }
     const ddbDocClient = DynamoDBDocumentClient.from(

@@ -35,8 +35,8 @@ const expectedCategory = {
 
 const expectedFiles = {
   Item: {
-    fileId: "0CBC6611F5540BD0809A388DC95A615B", //checksum
-    checksumType: "md5",
+    fileId: '0CBC6611F5540BD0809A388DC95A615B', //checksum
+    checksumType: 'md5',
     version: 'Test',
     categoryId: 'Test',
     location: 'https://example.com/Test',
@@ -65,11 +65,11 @@ const expected = {
   },
   newFiles: {
     location: 'https://example.com/Test',
-    checksum: "0CBC6611F5540BD0809A388DC95A615B", //fileId
-    checksumType: "md5",
+    checksum: '0CBC6611F5540BD0809A388DC95A615B', //fileId
+    checksumType: 'md5',
     version: 'Test',
     categoryId: '48cc48e0d55bfd83114031498f21d640',
-    description: "Test",
+    description: 'Test',
   },
   files: expectedFiles,
 };
@@ -376,10 +376,10 @@ test('Update file API', async () => {
   documentClientMock.on(UpdateCommand).resolves({});
   const response = await updateFile.handler({
     pathParameters: {
-      categoryId: expected.files.Item.categoryId,
+      fileId: expected.files.Item.fileId,
     },
     body: {
-      categoryId: expected.files.Item.categoryId,
+      version: expected.files.Item.version,
     },
   });
   expect(response.statusCode).toEqual(200);

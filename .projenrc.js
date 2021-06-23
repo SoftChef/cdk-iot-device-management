@@ -23,7 +23,6 @@ const project = new AwsCdkConstructLibrary({
   bundledDeps: [
     'joi',
     'semver',
-    'lodash',
     'uuid',
     '@types/node@15.12.2',
     '@types/uuid',
@@ -49,6 +48,7 @@ const project = new AwsCdkConstructLibrary({
   ],
   mergify: false,
   gitignore: [
+    '.DS_Store',
     'src/**/dist',
     'lambda-assets/**/dist',
     'test/**/dist',
