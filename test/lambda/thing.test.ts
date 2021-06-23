@@ -94,7 +94,6 @@ test('Get thing success', async () => {
     thingName: expected.thing.thingName,
     thingTypeName: 'test',
   });
-  console.log(expected.thing.thingName);
   const response = await getThing.handler({
     pathParameters: {
       thingName: expected.thing.thingName,
@@ -159,11 +158,25 @@ test('Update thing success', async () => {
 
 test('Update thing with invalid input expect failure', async() => {
   const iotClientMock = mockClient(IoTClient);
-
-  // const response = await updateThing.handler({});
-  // const body = JSON.parse(response.body);
-  // expect(response.statusCode).toEqual(422);
-  iotClientMock.restore;
+  iotClientMock.on(UpdateThingCommand, {
+    thingName: '',
+  }).rejects(expected.invalidThingError);
+  const response = await updateThing.handler({
+    body: {
+      thingName: '',
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(response.statusCode).toEqual(422);
+  expect(body.error).toEqual([
+    {
+      key: 'thingName',
+      label: 'thingName',
+      message: expect.any(String),
+      value: '',
+    },
+  ]);
+  iotClientMock.restore();
 });
 
 test('Update thing with invalid thingName expect failure', async () => {
@@ -186,7 +199,7 @@ test('Delete thing success', async () => {
     thingName: expected.thing.thingName,
   }).resolves({});
   const response = await deleteThing.handler({
-    pathParameters: {
+    body: {
       thingName: expected.thing.thingName,
     },
   });
@@ -197,7 +210,15 @@ test('Delete thing success', async () => {
 });
 
 test('Delete thing with invalid thingName expect failure', async () => {
-  // const response = await deleteThing.handler({});
-  // const body = JSON.parse(response.body);
-  // expect(response.statusCode).toEqual(404);
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(DeleteThingCommand, {
+    thingName: '(((ﾟДﾟ;)))',
+  }).rejects(expected.invalidThingError);
+  const response = await deleteThing.handler({
+    body: {
+      thingName: '(((ﾟДﾟ;)))',
+    },
+  });
+  expect(response.statusCode).toEqual(404);
+  iotClientMock.restore();
 });
