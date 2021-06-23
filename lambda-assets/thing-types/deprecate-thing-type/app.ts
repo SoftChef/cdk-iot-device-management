@@ -1,4 +1,4 @@
-import { IoTClient } from '@aws-sdk/client-iot';
+import { IoTClient, DeprecateThingTypeCommand } from '@aws-sdk/client-iot';
 import { Request, Response } from '../../utils';
 
 export async function handler(event: { [key: string]: any }) {
@@ -6,14 +6,20 @@ export async function handler(event: { [key: string]: any }) {
   const response = new Response();
   try {
     const iotClient = new IoTClient({});
-    const thingType = await iotClient.deprecateThingType({
-      thingTypeName: request.parameter('thingTypeName'),
-    }).promise();
+    const thingType = await iotClient.send(
+      new DeprecateThingTypeCommand({
+        thingTypeName: request.parameter('thingTypeName'),
+      }),
+    );
     return response.json({
       deprecated: true,
       thingType,
     });
   } catch (error) {
-    return response.error(error);
+    if (error.Code === 'ResourceNotFoundException') {
+      return response.error(error, 404);
+    } else {
+        return response.error(error);
+    }
   }
 }
