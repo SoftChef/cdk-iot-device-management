@@ -105,7 +105,7 @@ export class FileApi extends cdk.Construct {
 
   private createCreateCategoryFunction(): lambda.NodejsFunction {
     const createCategoryFunction = new lambda.NodejsFunction(this, 'CreateCategoryFunction', {
-      entry: `${LAMBDA_ASSETS_PATH}/get-category/app.ts`,
+      entry: `${LAMBDA_ASSETS_PATH}/create-category/app.ts`,
     });
     createCategoryFunction.role?.attachInlinePolicy(
       new iam.Policy(this, 'create-category-policy', {
@@ -210,7 +210,7 @@ export class FileApi extends cdk.Construct {
 
   private createCreateFileFunction(): lambda.NodejsFunction {
     const createFileFunction = new lambda.NodejsFunction(this, 'CreateFileFunction', {
-      entry: `${LAMBDA_ASSETS_PATH}/get-file/app.ts`,
+      entry: `${LAMBDA_ASSETS_PATH}/create-file/app.ts`,
     });
     createFileFunction.role?.attachInlinePolicy(
       new iam.Policy(this, 'create-file-policy', {
