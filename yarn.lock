@@ -553,7 +553,7 @@
     tslib "^2.0.0"
     uuid "^8.3.2"
 
-"@aws-sdk/client-iot-data-plane@*":
+"@aws-sdk/client-iot-data-plane@^3.18.0":
   version "3.18.0"
   resolved "https://registry.yarnpkg.com/@aws-sdk/client-iot-data-plane/-/client-iot-data-plane-3.18.0.tgz#5dfdcb7eba661639c6702f4c55b2c53eb8c3da15"
   integrity sha512-wjwGmXNMrMHNIBbii9pzH/c6x4kga8A89Twxr3VsNsWMZnCwLywRzyNfA6hqDyQof1tk3/OdZWLFQyq4LSxeSA==
@@ -997,7 +997,7 @@
   resolved "https://registry.yarnpkg.com/@aws-sdk/service-error-classification/-/service-error-classification-3.18.0.tgz#5e8a9609a6fcd64f1f3f0e71b8a0bbd3bed9b21c"
   integrity sha512-bgKy3fl1sIimpXUKqN9Mmb6tRtdtFQDYd/eX0LISSbdtJiVnMgiTxwTPEX72pN54L8zun3zU6xOuwoZP1Af6YA==
 
-"@aws-sdk/shared-ini-file-loader@3.18.0":
+"@aws-sdk/shared-ini-file-loader@3.18.0", "@aws-sdk/shared-ini-file-loader@^1.108.0":
   version "3.18.0"
   resolved "https://registry.yarnpkg.com/@aws-sdk/shared-ini-file-loader/-/shared-ini-file-loader-3.18.0.tgz#9cc4cd96753862a1c0aaefa903353e4bc17dda6a"
   integrity sha512-YpBCZWRvJhnPHbdFLzRvLIfx7Zxre8/5YsWrrNNBWRJ90z/6czzPdOn9jab/AVfLPpC/VSSubf4v4b8Cjeb4eA==

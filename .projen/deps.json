@@ -182,6 +182,11 @@
       "type": "peer"
     },
     {
+      "name": "@aws-sdk/shared-ini-file-loader",
+      "version": "^1.108.0",
+      "type": "peer"
+    },
+    {
       "name": "constructs",
       "version": "^3.2.27",
       "type": "peer"
@@ -213,6 +218,11 @@
     },
     {
       "name": "@aws-cdk/core",
+      "version": "^1.108.0",
+      "type": "runtime"
+    },
+    {
+      "name": "@aws-sdk/shared-ini-file-loader",
       "version": "^1.108.0",
       "type": "runtime"
     }

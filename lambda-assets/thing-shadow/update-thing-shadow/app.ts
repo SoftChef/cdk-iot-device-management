@@ -1,5 +1,4 @@
 import { IoTDataPlaneClient, UpdateThingShadowCommand } from "@aws-sdk/client-iot-data-plane";
-import { updateLocale } from "yargs";
 import { Request, Response } from '../../utils';
 
 export async function handler(event: { [key: string]: any }) {
@@ -9,10 +8,14 @@ export async function handler(event: { [key: string]: any }) {
     const client = new IoTDataPlaneClient({});
     const shadow = await client.send(
       new UpdateThingShadowCommand({
-        thingName: request.parameter('shadowName'),
-        payload:,
+        thingName: request.parameter('thingName'),
+        payload: request.input('thingName')
       }),
     );
+    let payloadString: string = '';
+    //payload.forEach(num => {
+    //  payloadString += String.fromCharCode(num);
+    //});
     return response.json({
       shadow,
     });

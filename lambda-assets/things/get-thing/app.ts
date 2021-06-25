@@ -11,6 +11,13 @@ export async function handler(event: { [key: string]: any }) {
         thingName: request.parameter('thingName'),
       }),
     );
+    /*const client = new IoTDataPlaneClient();
+    const thingShadow = await client.send(
+      new GetThingShadowCommand({
+        thingName: request.parameter('thingName'),
+        shadowName: request.parameter('shadowName'),
+      }),
+    );*/
     return response.json({
       thing,
     });

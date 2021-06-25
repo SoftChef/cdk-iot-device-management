@@ -6,13 +6,13 @@ export async function handler(event: { [key: string]: any }) {
   const response = new Response();
   try {
     const client = new IoTDataPlaneClient({ region: "REGION" });
-    const things = await client.send(
+    const thingShadow = await client.send(
       new ListNamedShadowsForThingCommand({
         thingName: request.parameter('shadowName'),
       }),
     );
     return response.json({
-      things,
+      thingShadow,
     });
   } catch (error) {
     return response.error(error);
