@@ -14,7 +14,7 @@ export async function handler(event: { [key: string]: any }) {
     const parentId = request.get('parentId', undefined);
     let parameters: { [key: string]: any } = {};
     if (request.has('nextToken')) {
-      parameters.ExclusiveStartKey = {
+        parameters.ExclusiveStartKey = {
         Key: request.get('nextToken'),
       }
     };
