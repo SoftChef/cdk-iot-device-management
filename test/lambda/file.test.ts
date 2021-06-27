@@ -22,6 +22,9 @@ import * as listFiles from '../../lambda-assets/files/list-files/app';
 import * as updateCategory from '../../lambda-assets/files/update-category/app';
 import * as updateFile from '../../lambda-assets/files/update-file/app';
 
+const CATEGORY_TABLE_NAME = 'category_table_name';
+const FILE_TABLE_NAME = 'file_table_name';
+
 const expectedCategory = {
   Item: {
     categoryId: '48cc48e0d68bfd83fa4031498f21d640',
@@ -31,6 +34,10 @@ const expectedCategory = {
     createdAt: Date.now(),
     updatedAt: Date.now(),
   },
+};
+
+const expectedInvalidCategoryExecution = {
+  categoryId: '3afcc48lfdldbfd83fa4031498f21d64',
 };
 
 const expectedFiles = {
@@ -46,6 +53,11 @@ const expectedFiles = {
   },
 };
 
+const expectedInvalidFileExecution = {
+  fileId: 'not-exists-file-id',
+  version: 'not-exists-version',
+};
+
 const expected = {
   newCategory: {
     categoryId: expectedCategory.Item.categoryId,
@@ -57,9 +69,9 @@ const expected = {
   category: expectedCategory,
   listCategories: {
     Items: [
-      expectedCategory,
+      expectedCategory.Item,
     ],
-    nextToken: {
+    LastEvaluatedKey: {
       categoryId: '48cc48e0d55bfd83114031498f21d640',
     },
   },
@@ -74,9 +86,19 @@ const expected = {
   files: expectedFiles,
 };
 
+beforeEach(() => {
+  process.env = {
+    CATEGORY_TABLE_NAME,
+    FILE_TABLE_NAME,
+  };
+});
+
 test('Create category success', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(PutCommand).resolves({});
+  documentClientMock.on(PutCommand, {
+    TableName: CATEGORY_TABLE_NAME,
+    ...expectedCategory,
+  }).resolves({});
   const response = await createCategory.handler({
     body: {
       name: expected.newCategory.name,
@@ -91,7 +113,7 @@ test('Create category success', async () => {
 
 test('Create category with invalid inputs expect failure', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(PutCommand).resolves;
+  documentClientMock.on(PutCommand).resolves({});
   const response = await createCategory.handler({});
   const body = JSON.parse(response.body);
   expect(response.statusCode).toEqual(422);
@@ -109,6 +131,7 @@ test('Create category with invalid inputs expect failure', async () => {
 test('Get category success', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
   documentClientMock.on(GetCommand, {
+    TableName: CATEGORY_TABLE_NAME,
     Key: {
       categoryId: expected.category.Item.categoryId,
     },
@@ -124,12 +147,17 @@ test('Get category success', async () => {
 
 test('Get category with invalid jobId expect failure', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(GetCommand).resolves({
+  documentClientMock.on(GetCommand, {
+    TableName: CATEGORY_TABLE_NAME,
+    Key: {
+      categoryId: expectedInvalidCategoryExecution.categoryId,
+    },
+  }).resolves({
     Item: {},
   });
   const response = await getCategory.handler({
     pathParameters: {
-      categoryId: expected.category.Item.categoryId,
+      categoryId: expectedInvalidCategoryExecution.categoryId,
     },
   });
   expect(response.statusCode).toEqual(404);
@@ -138,10 +166,17 @@ test('Get category with invalid jobId expect failure', async () => {
 
 test('Class 1: List categories success', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(ScanCommand).resolves(expected.listCategories);
+  documentClientMock.on(ScanCommand, {
+    TableName: CATEGORY_TABLE_NAME,
+    ExclusiveStartKey: {
+      Key: expected.listCategories.LastEvaluatedKey,
+    },
+  }).resolves(expected.listCategories);
   const response = await listCategories.handler({
     queryStringParameters: {
-      nextToken: expected.listCategories.nextToken,
+      nextToken: Buffer.from(
+        JSON.stringify(expected.listCategories.LastEvaluatedKey),
+      ).toString('base64'),
     },
   });
   expect(response.statusCode).toEqual(200);
@@ -150,7 +185,17 @@ test('Class 1: List categories success', async () => {
 
 test('Class 2: List categories success', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(QueryCommand).resolves(expected.listCategories);
+  documentClientMock.on(QueryCommand, {
+    TableName: CATEGORY_TABLE_NAME,
+    IndexName: 'query-by-parent-id',
+    KeyConditionExpression: '#parentId = :parentId',
+    ExpressionAttributeNames: {
+      '#parentId': 'parentId',
+    },
+    ExpressionAttributeValues: {
+      ':parentId': expectedCategory.Item.parentId,
+    },
+  }).resolves(expected.listCategories);
   const response = await listCategories.handler({
     queryStringParameters: {
       parentId: expected.category.Item.parentId,
@@ -162,7 +207,12 @@ test('Class 2: List categories success', async () => {
 
 test('Update category success', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(UpdateCommand).resolves;
+  documentClientMock.on(UpdateCommand, {
+    TableName: CATEGORY_TABLE_NAME,
+    Key: {
+      categoryId: expected.category.Item.categoryId,
+    },
+  }).resolves({});
   const response = await updateCategory.handler({
     pathParameters: {
       categoryId: expected.category.Item.categoryId,
@@ -179,7 +229,12 @@ test('Update category success', async () => {
 
 test('Delete category success', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(DeleteCommand).resolves;
+  documentClientMock.on(DeleteCommand, {
+    TableName: CATEGORY_TABLE_NAME,
+    Key: {
+      categoryId: expected.category.Item.categoryId,
+    },
+  }).resolves({});
   const response = await deleteCategory.handler({
     pathParameters: {
       categoryId: expected.category.Item.categoryId,
@@ -193,7 +248,19 @@ test('Delete category success', async () => {
 
 test('Create file API success', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(PutCommand).resolves({});
+  const currentTime = Date.now();
+  documentClientMock.on(PutCommand, {
+    TableName: FILE_TABLE_NAME,
+    Item: {
+      fileId: expected.newFiles.checksum,
+      version: expected.newFiles.version,
+      categoryId: expected.newFiles.categoryId,
+      location: expected.newFiles.location,
+      description: expected.newFiles.description,
+      createdAt: currentTime,
+      updatedAt: currentTime,
+    },
+  }).resolves({});
   const response = await createFile.handler({
     body: {
       location: expected.newFiles.location,
@@ -252,7 +319,13 @@ test('Create file with invalid inputs expect failure', async () => {
 
 test('Get file API success', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(GetCommand).resolves({
+  documentClientMock.on(GetCommand, {
+    TableName: FILE_TABLE_NAME,
+    Key: {
+      fileId: expected.files.Item.fileId,
+      version: expected.files.Item.version,
+    },
+  }).resolves({
     Item: {
       fileId: expected.files.Item.fileId,
       version: expected.files.Item.version,
@@ -266,6 +339,7 @@ test('Get file API success', async () => {
   const response = await getFile.handler({
     pathParameters: {
       fileId: expected.files.Item.fileId,
+      version: expected.files.Item.version,
     },
   });
   expect(response.statusCode).toEqual(200);
@@ -274,13 +348,19 @@ test('Get file API success', async () => {
 
 test('Get file with invalid inputs expect failure', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(GetCommand).resolves({
+  documentClientMock.on(GetCommand, {
+    TableName: FILE_TABLE_NAME,
+    Key: {
+      fileId: expectedInvalidFileExecution.fileId,
+      version: expectedInvalidFileExecution.version,
+    },
+  }).resolves({
     Item: {},
   });
   const response = await getFile.handler({
     pathParameters: {
-      fileId: '',
-      version: '',
+      fileId: expectedInvalidFileExecution.fileId,
+      version: expectedInvalidFileExecution.version,
     },
   });
   expect(response.statusCode).toEqual(404);
@@ -289,7 +369,9 @@ test('Get file with invalid inputs expect failure', async () => {
 
 test('List files API success', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(ScanCommand).resolves({
+  documentClientMock.on(ScanCommand, {
+    TableName: FILE_TABLE_NAME,
+  }).resolves({
     Items: [
       {
         fileId: expected.files.Item.fileId,
@@ -331,7 +413,17 @@ test('List files API success', async () => {
 
 test('List files by category API success', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(QueryCommand).resolves({
+  documentClientMock.on(QueryCommand, {
+    TableName: FILE_TABLE_NAME,
+    IndexName: 'query-by-category-id',
+    KeyConditionExpression: '#categoryId = :categoryId',
+    ExpressionAttributeNames: {
+      '#categoryId': 'categoryId',
+    },
+    ExpressionAttributeValues: {
+      ':categoryId': expected.files.Item.categoryId,
+    },
+  }).resolves({
     Items: [
       {
         fileId: expected.files.Item.fileId,
@@ -373,7 +465,20 @@ test('List files by category API success', async () => {
 
 test('Update file API', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(UpdateCommand).resolves({});
+  documentClientMock.on(UpdateCommand, {
+    TableName: FILE_TABLE_NAME,
+    Key: {
+      fileId: expected.files.Item.fileId,
+      version: expected.files.Item.version,
+    },
+    UpdateExpression: 'set #description = :description',
+    ExpressionAttributeNames: {
+      '#description': 'description',
+    },
+    ExpressionAttributeValues: {
+      ':description': expected.files.Item.description,
+    },
+  }).resolves({});
   const response = await updateFile.handler({
     body: {
       fileId: expected.files.Item.fileId,
@@ -387,10 +492,17 @@ test('Update file API', async () => {
 
 test('Delete file API', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(DeleteCommand).resolves({});
+  documentClientMock.on(DeleteCommand, {
+    TableName: FILE_TABLE_NAME,
+    Key: {
+      fileId: expected.files.Item.fileId,
+      version: expected.files.Item.version,
+    },
+  }).resolves({});
   const response = await deleteFile.handler({
     pathParameters: {
       fileId: expected.files.Item.fileId,
+      version: expected.files.Item.version,
     },
   });
   expect(response.statusCode).toEqual(200);

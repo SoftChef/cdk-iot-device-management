@@ -3,8 +3,6 @@ import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
 import { Request, Response } from '../../utils';
 import *  as crypto from 'crypto';
 
-const { CATEGORY_TABLE_NAME } = process.env;
-
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
   const response = new Response();
@@ -35,7 +33,7 @@ export async function handler(event: { [key: string]: any }) {
     };
     await ddbDocClient.send(
         new PutCommand({
-          TableName: `${CATEGORY_TABLE_NAME}`,
+          TableName: process.env.CATEGORY_TABLE_NAME,
           Item: {
             ...itemParameters,
             name,
