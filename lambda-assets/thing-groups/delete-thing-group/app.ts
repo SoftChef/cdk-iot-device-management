@@ -6,19 +6,16 @@ export async function handler(event: { [key: string]: any }) {
   const response = new Response();
   try {
     const iotClient = new IoTClient({});
-    await iotClient.send(
+    const thingGroup = await iotClient.send(
       new DeleteThingGroupCommand({
         thingGroupName: request.parameter('thingGroupName'),
       }),
     );
     return response.json({
       deleted: true,
+      thingGroup,
     });
   } catch (error) {
-    if (error.Code === 'ResourceNotFoundException') {
-      return response.error(error, 404);
-    } else {
-      return response.error(error);
-    }
+    return response.error(error);
   }
 }
