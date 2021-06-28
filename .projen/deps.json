@@ -119,7 +119,15 @@
       "type": "bundled"
     },
     {
+      "name": "@aws-sdk/util-dynamodb",
+      "type": "bundled"
+    },
+    {
       "name": "@softchef/cdk-restapi",
+      "type": "bundled"
+    },
+    {
+      "name": "@softchef/lambda-events",
       "type": "bundled"
     },
     {

@@ -74,6 +74,11 @@ export class FileApi extends cdk.Construct {
           lambdaFunction: this.createDeleteCategoryFunction(),
         },
         {
+          path: '/categories/{categoryId}/files',
+          httpMethod: HttpMethod.GET,
+          lambdaFunction: this.createListFilesByCategoryFunction(),
+        },
+        {
           path: '/files',
           httpMethod: HttpMethod.POST,
           lambdaFunction: this.createCreateFileFunction(),
@@ -105,7 +110,7 @@ export class FileApi extends cdk.Construct {
 
   private createCreateCategoryFunction(): lambda.NodejsFunction {
     const createCategoryFunction = new lambda.NodejsFunction(this, 'CreateCategoryFunction', {
-      entry: `${LAMBDA_ASSETS_PATH}/get-category/app.ts`,
+      entry: `${LAMBDA_ASSETS_PATH}/create-category/app.ts`,
     });
     createCategoryFunction.role?.attachInlinePolicy(
       new iam.Policy(this, 'create-category-policy', {
@@ -210,7 +215,7 @@ export class FileApi extends cdk.Construct {
 
   private createCreateFileFunction(): lambda.NodejsFunction {
     const createFileFunction = new lambda.NodejsFunction(this, 'CreateFileFunction', {
-      entry: `${LAMBDA_ASSETS_PATH}/get-file/app.ts`,
+      entry: `${LAMBDA_ASSETS_PATH}/create-file/app.ts`,
     });
     createFileFunction.role?.attachInlinePolicy(
       new iam.Policy(this, 'create-file-policy', {
@@ -248,6 +253,27 @@ export class FileApi extends cdk.Construct {
       }),
     );
     return listFilesFunction;
+  }
+
+  private createListFilesByCategoryFunction(): lambda.NodejsFunction {
+    const listFilesByCategoryFunction = new lambda.NodejsFunction(this, 'ListFilesByCategoryFunction', {
+      entry: `${LAMBDA_ASSETS_PATH}/list-files-by-category/app.ts`,
+    });
+    listFilesByCategoryFunction.role?.attachInlinePolicy(
+      new iam.Policy(this, 'list-files-by-category-policy', {
+        statements: [
+          new iam.PolicyStatement({
+            actions: [
+              'dynamodb:Query',
+            ],
+            resources: [
+              this.fileTable.tableArn,
+            ],
+          }),
+        ],
+      }),
+    );
+    return listFilesByCategoryFunction;
   }
 
   private createGetFileFunction(): lambda.NodejsFunction {
