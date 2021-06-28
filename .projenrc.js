@@ -21,23 +21,24 @@ const project = new AwsCdkConstructLibrary({
     '@aws-cdk/aws-dynamodb',
   ],
   bundledDeps: [
+    '@aws-sdk/client-cognito-identity-provider',
+    '@aws-sdk/client-dynamodb',
+    '@aws-sdk/client-iot',
+    '@aws-sdk/lib-dynamodb',
+    '@aws-sdk/util-dynamodb',
+    '@softchef/cdk-restapi',
+    '@softchef/cdk-schedule-function',
+    '@softchef/lambda-events',
+    '@types/node@15.12.2',
+    '@types/semver',
+    '@types/uuid',
+    'aws-sdk', // deprecated
     'joi',
     'semver',
     'uuid',
-    '@types/node@15.12.2',
-    '@types/uuid',
-    '@types/semver',
-    '@softchef/cdk-restapi',
-    '@softchef/lambda-events',
-    'aws-sdk',
-    '@aws-sdk/client-iot',
-    '@aws-sdk/client-dynamodb',
-    '@aws-sdk/util-dynamodb',
-    '@aws-sdk/lib-dynamodb',
-    '@aws-sdk/client-cognito-identity-provider',
   ],
   devDeps: [
-    'aws-sdk-mock',
+    'aws-sdk-mock', // deprecated
     'aws-sdk-client-mock',
   ],
   keywords: [
@@ -57,7 +58,7 @@ const project = new AwsCdkConstructLibrary({
   tsconfig: {
     compilerOptions: {
       lib: [
-        'ES2018',
+        'ES2020',
         'DOM',
       ],
     },

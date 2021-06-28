@@ -77,6 +77,7 @@ new JobApi(scope: Construct, id: string, props?: JobApiProps)
 * **props** (<code>[JobApiProps](#softchef-cdk-iot-device-management-jobapiprops)</code>)  *No description*
   * **authorizationType** (<code>[AuthorizationType](#aws-cdk-aws-apigateway-authorizationtype)</code>)  *No description* __*Optional*__
   * **authorizer** (<code>[IAuthorizer](#aws-cdk-aws-apigateway-iauthorizer)</code>)  *No description* __*Optional*__
+  * **scheduleFunction** (<code>any</code>)  *No description* __*Optional*__
 
 
 
@@ -213,6 +214,7 @@ Name | Type | Description
 -----|------|-------------
 **authorizationType**? | <code>[AuthorizationType](#aws-cdk-aws-apigateway-authorizationtype)</code> | __*Optional*__
 **authorizer**? | <code>[IAuthorizer](#aws-cdk-aws-apigateway-iauthorizer)</code> | __*Optional*__
+**scheduleFunction**? | <code>any</code> | __*Optional*__
 
 
 
