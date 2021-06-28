@@ -9,7 +9,15 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({})
     );
-    const { Items: files, LastEvaluatedKey } = await ddbDocClient.send(
+    let parameters: { [key: string]: any } = {};
+    if (request.has('nextToken')) {
+      parameters.ExclusiveStartKey = {
+        Key: JSON.parse(
+          Buffer.from(request.get('nextToken'), 'base64').toString('utf8')
+        ),
+      }
+    };
+    const { Items: files, LastEvaluatedKey: lastEvaluatedKey } = await ddbDocClient.send(
       new QueryCommand({
         TableName: process.env.FILE_TABLE_NAME,
         IndexName: 'query-by-category-id',
@@ -20,12 +28,18 @@ export async function handler(event: { [key: string]: any }) {
         ExpressionAttributeValues: {
           ':categoryId': request.parameter('categoryId'),
         },
-        ExclusiveStartKey: request.get('nextToken', undefined),
+        ...parameters,
       })
     );
+    let nextToken = null;
+    if (lastEvaluatedKey) {
+      nextToken = Buffer.from(
+        JSON.stringify(lastEvaluatedKey)
+      ).toString('base64')
+    }
     return response.json({
       files,
-      nextToken: LastEvaluatedKey,
+      nextToken,
     });
   } catch (error) {
     return response.error(error);
