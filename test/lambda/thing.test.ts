@@ -236,11 +236,11 @@ test('Delete thing success', async () => {
 test('Delete thing with invalid thingName expect failure', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(DeleteThingCommand, {
-    thingName: '(((ﾟДﾟ;)))',
+    thingName: expected.invalidThing.thingName,
   }).rejects(expected.invalidThingError);
   const response = await deleteThing.handler({
     pathParameters: {
-      thingName: '(((ﾟДﾟ;)))',
+      thingName: expected.invalidThing.thingName,
     },
   });
   expect(response.statusCode).toEqual(404);
