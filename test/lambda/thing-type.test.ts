@@ -4,7 +4,6 @@ import {
   DeprecateThingTypeCommand,
   DescribeThingTypeCommand,
   ListThingTypesCommand,
-  //ThingTypeDefinition,
   DeleteThingTypeCommand,
 } from '@aws-sdk/client-iot';
 import {
