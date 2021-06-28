@@ -11,7 +11,9 @@ export async function handler(event: { [key: string]: any }) {
         nextToken: request.get('nextToken', undefined),
       }),
     );
-    return response.json(thingGroups);
+    return response.json({
+      thingGroups,
+    });
   } catch (error) {
     return response.error(error);
   }
