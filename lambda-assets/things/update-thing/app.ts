@@ -7,7 +7,10 @@ export async function handler(event: { [key: string]: any }) {
   try {
     const validated = request.validate(joi => {
       return {
-        thingName: joi.string().required(),
+        thingTypeName: joi.string().allow(null),
+        attributePayload: joi.object().allow(null),
+        expectedVersion: joi.number().allow(null),
+        removeThingType: joi.boolean().allow(null),
       };
     });
     if (validated.error) {
@@ -16,7 +19,11 @@ export async function handler(event: { [key: string]: any }) {
     const iotClient = new IoTClient({});
     const thing = await iotClient.send(
       new UpdateThingCommand({
-        thingName: request.input('thingName'),
+        thingName: request.parameter('thingName'),
+        thingTypeName: request.input('thingTypeName'),
+        attributePayload: request.input('attributePayload'),
+        expectedVersion: request.input('expectedVersion'),
+        removeThingType: request.input('removeThingType'),
       }),
     );
     return response.json({

@@ -2,10 +2,9 @@ import {
   IoTClient,
   CreateThingCommand,
   UpdateThingCommand,
-  //DescribeThingCommand,
+  DescribeThingCommand,
   ListThingsCommand,
   DeleteThingCommand,
-  DescribeThingCommand,
 } from '@aws-sdk/client-iot';
 import {
   mockClient,
@@ -16,8 +15,6 @@ import * as getThing from '../../lambda-assets/things/get-thing/app';
 import * as listThings from '../../lambda-assets/things/list-things/app';
 import * as updateThing from '../../lambda-assets/things/update-thing/app';
 
-//const iotClientMock = mockClient(IoTClient);
-
 const expectedThing = {
   thingArn: 'arn:aws:iot:ap-northeast-1:012345678901:thing/85f6509f-023c-48fb-8252-981653ffd561',
   thingId: '85f6509f-023c-48fb-8252-981653ffd561',
@@ -27,6 +24,13 @@ const expectedThing = {
 
 const expectedInvalidThing = {
   thingName: 'NotExistsThing',
+  attributePayload: {
+    attributes: {
+      payload: 'payload',
+    },
+  },
+  expectedVersion: 1,
+  removeThingType: true,
 };
 
 const expected = {
@@ -40,6 +44,22 @@ const expected = {
       expectedThing,
     ],
     nextToken: '12345',
+  },
+  updateThing: {
+    thingTypeName: 'thingTypeName',
+    attributePayload: {
+      attributes: {
+        payload: 'payload',
+      },
+    },
+    expectedVersion: 1,
+    removeThingType: true,
+  },
+  UpdateInvalidInput: {
+    thingTypeName: 1,
+    attributePayload: '',
+    expectedVersion: '',
+    removeThingType: 'true',
   },
   invalidThing: expectedInvalidThing,
   invalidThingError: <AwsError>{
@@ -144,10 +164,20 @@ test('Update thing success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(UpdateThingCommand, {
     thingName: expected.thing.thingName,
+    thingTypeName: expected.updateThing.thingTypeName,
+    attributePayload: expected.updateThing.attributePayload,
+    expectedVersion: expected.updateThing.expectedVersion,
+    removeThingType: expected.updateThing.removeThingType,
   }).resolves({});
   const response = await updateThing.handler({
-    body: {
+    pathParameters: {
       thingName: expected.thing.thingName,
+    },
+    body: {
+      thingTypeName: expected.updateThing.thingTypeName,
+      attributePayload: expected.updateThing.attributePayload,
+      expectedVersion: expected.updateThing.expectedVersion,
+      removeThingType: expected.updateThing.removeThingType,
     },
   });
   const body = JSON.parse(response.body);
@@ -158,35 +188,29 @@ test('Update thing success', async () => {
 
 test('Update thing with invalid input expect failure', async() => {
   const iotClientMock = mockClient(IoTClient);
-  iotClientMock.on(UpdateThingCommand, {
-    thingName: '',
-  }).rejects(expected.invalidThingError);
   const response = await updateThing.handler({
-    body: {
+    pathParameters: {
       thingName: '',
     },
-  });
-  const body = JSON.parse(response.body);
-  expect(response.statusCode).toEqual(422);
-  expect(body.error).toEqual([
-    {
-      key: 'thingName',
-      label: 'thingName',
-      message: expect.any(String),
-      value: '',
+    body: {
+      thingTypeName: expected.UpdateInvalidInput.thingTypeName,
+      attributePayload: expected.UpdateInvalidInput.attributePayload,
+      expectedVersion: expected.UpdateInvalidInput.expectedVersion,
+      removeThingType: expected.UpdateInvalidInput.removeThingType,
     },
-  ]);
+  });
+  expect(response.statusCode).toEqual(422);
   iotClientMock.restore();
 });
 
 test('Update thing with invalid thingName expect failure', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(UpdateThingCommand, {
-    thingName: '(((ﾟДﾟ;)))',
+    thingName: expected.invalidThing.thingName,
   }).rejects(expected.invalidThingError);
   const response = await updateThing.handler({
-    body: {
-      thingName: '(((ﾟДﾟ;)))',
+    pathParameters: {
+      thingName: expected.invalidThing.thingName,
     },
   });
   expect(response.statusCode).toEqual(404);
@@ -199,7 +223,7 @@ test('Delete thing success', async () => {
     thingName: expected.thing.thingName,
   }).resolves({});
   const response = await deleteThing.handler({
-    body: {
+    pathParameters: {
       thingName: expected.thing.thingName,
     },
   });
@@ -215,7 +239,7 @@ test('Delete thing with invalid thingName expect failure', async () => {
     thingName: '(((ﾟДﾟ;)))',
   }).rejects(expected.invalidThingError);
   const response = await deleteThing.handler({
-    body: {
+    pathParameters: {
       thingName: '(((ﾟДﾟ;)))',
     },
   });
