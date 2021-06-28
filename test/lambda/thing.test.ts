@@ -9,7 +9,7 @@ import {
 import {
   mockClient,
   AwsError,
-} from 'aws-sdk-client-mock';import * as createThing from '../../lambda-assets/things/create-thing/app';
+} from 'aws-sdk-client-mock'; import * as createThing from '../../lambda-assets/things/create-thing/app';
 import * as deleteThing from '../../lambda-assets/things/delete-thing/app';
 import * as getThing from '../../lambda-assets/things/get-thing/app';
 import * as listThings from '../../lambda-assets/things/list-things/app';
@@ -34,7 +34,6 @@ const expectedInvalidThing = {
 };
 
 const expected = {
-
   thing: expectedThing,
   newThing: {
     thingName: 'NewTestThing',
@@ -125,6 +124,20 @@ test('Get thing success', async () => {
   iotClientMock.restore();
 });
 
+test('Get thing with invalid thingName expect failure', async () => {
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(DescribeThingCommand, {
+    thingName: expected.invalidThing.thingName,
+  }).rejects(expected.invalidThingError);
+  const response = await getThing.handler({
+    pathParameters: {
+      thingName: expected.invalidThing.thingName,
+    },
+  });
+  expect(response.statusCode).toEqual(404);
+  iotClientMock.restore();
+});
+
 test('List things success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(ListThingsCommand, {
@@ -186,7 +199,7 @@ test('Update thing success', async () => {
   iotClientMock.restore();
 });
 
-test('Update thing with invalid input expect failure', async() => {
+test('Update thing with invalid input expect failure', async () => {
   const iotClientMock = mockClient(IoTClient);
   const response = await updateThing.handler({
     pathParameters: {
