@@ -183,7 +183,7 @@ test('Update thing success', async () => {
   const body = JSON.parse(response.body);
   expect(response.statusCode).toEqual(200);
   expect(body.updated).toEqual(true);
-  iotClientMock.restore;
+  iotClientMock.restore();
 });
 
 test('Update thing with invalid input expect failure', async() => {
