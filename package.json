@@ -65,20 +65,6 @@
     "constructs": "^3.2.27"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "@aws-cdk/aws-apigateway": "^1.108.0",
-    "@aws-cdk/aws-dynamodb": "^1.108.0",
-    "@aws-cdk/aws-iam": "^1.108.0",
-    "@aws-cdk/aws-lambda": "^1.108.0",
-    "@aws-cdk/aws-lambda-nodejs": "^1.108.0",
-    "@aws-cdk/core": "^1.108.0",
-    "@aws-sdk/client-cognito-identity-provider": "^3.18.0",
-    "@aws-sdk/client-dynamodb": "^3.18.0",
-    "@aws-sdk/client-iot": "^3.18.0",
-    "@aws-sdk/lib-dynamodb": "^3.18.0",
-    "@softchef/cdk-restapi": "^0.0.24",
-    "@types/lodash": "^4.14.170",
-=======
     "@aws-cdk/aws-apigateway": "^1.110.0",
     "@aws-cdk/aws-dynamodb": "^1.110.0",
     "@aws-cdk/aws-iam": "^1.110.0",
@@ -90,7 +76,6 @@
     "@aws-sdk/client-iot": "^3.19.0",
     "@aws-sdk/lib-dynamodb": "^3.19.0",
     "@softchef/cdk-restapi": "^0.0.26",
->>>>>>> dda299750f85fee48b1101ef8a431e17372b1b4b
     "@types/node": "15.12.2",
     "@types/semver": "^7.3.6",
     "@types/uuid": "^8.3.0",
