@@ -113,6 +113,7 @@ test('Get thing type with invalid thingTypeName expect failure', async () => {
     },
   });
   expect(response.statusCode).toEqual(404);
+  iotClientMock.restore();
 });
 
 test('List thing types success', async () => {
