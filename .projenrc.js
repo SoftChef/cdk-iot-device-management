@@ -28,6 +28,7 @@ const project = new AwsCdkConstructLibrary({
     '@types/uuid',
     '@types/semver',
     '@softchef/cdk-restapi',
+    '@softchef/lambda-events',
     'aws-sdk',
     '@aws-sdk/client-iot',
     '@aws-sdk/client-dynamodb',
