@@ -566,6 +566,43 @@
     tslib "^2.0.0"
     uuid "^8.3.2"
 
+"@aws-sdk/client-iot-data-plane@^3.19.0":
+  version "3.19.0"
+  resolved "https://registry.yarnpkg.com/@aws-sdk/client-iot-data-plane/-/client-iot-data-plane-3.19.0.tgz#e96752ff372c6c253288bf16f830c4b1a28f6f29"
+  integrity sha512-mhWuhEKBi2eDRnJiqJ5n705QG3f2POa+G2JxpEIp7Mqi76LQCACk1OciUHiOYuRpWUPFTkffQgs/LNQhSa3big==
+  dependencies:
+    "@aws-crypto/sha256-browser" "^1.0.0"
+    "@aws-crypto/sha256-js" "^1.0.0"
+    "@aws-sdk/client-sts" "3.19.0"
+    "@aws-sdk/config-resolver" "3.19.0"
+    "@aws-sdk/credential-provider-node" "3.19.0"
+    "@aws-sdk/fetch-http-handler" "3.18.0"
+    "@aws-sdk/hash-node" "3.18.0"
+    "@aws-sdk/invalid-dependency" "3.18.0"
+    "@aws-sdk/middleware-content-length" "3.18.0"
+    "@aws-sdk/middleware-host-header" "3.18.0"
+    "@aws-sdk/middleware-logger" "3.18.0"
+    "@aws-sdk/middleware-retry" "3.19.0"
+    "@aws-sdk/middleware-serde" "3.18.0"
+    "@aws-sdk/middleware-signing" "3.19.0"
+    "@aws-sdk/middleware-stack" "3.18.0"
+    "@aws-sdk/middleware-user-agent" "3.18.0"
+    "@aws-sdk/node-config-provider" "3.19.0"
+    "@aws-sdk/node-http-handler" "3.18.0"
+    "@aws-sdk/protocol-http" "3.18.0"
+    "@aws-sdk/smithy-client" "3.19.0"
+    "@aws-sdk/types" "3.18.0"
+    "@aws-sdk/url-parser" "3.18.0"
+    "@aws-sdk/util-base64-browser" "3.18.0"
+    "@aws-sdk/util-base64-node" "3.18.0"
+    "@aws-sdk/util-body-length-browser" "3.18.0"
+    "@aws-sdk/util-body-length-node" "3.18.0"
+    "@aws-sdk/util-user-agent-browser" "3.18.0"
+    "@aws-sdk/util-user-agent-node" "3.19.0"
+    "@aws-sdk/util-utf8-browser" "3.18.0"
+    "@aws-sdk/util-utf8-node" "3.18.0"
+    tslib "^2.0.0"
+
 "@aws-sdk/client-iot@^3.19.0":
   version "3.19.0"
   resolved "https://registry.yarnpkg.com/@aws-sdk/client-iot/-/client-iot-3.19.0.tgz#296ed949568ab3fdfab01dea733afb443b4fa27d"
@@ -969,7 +1006,7 @@
   resolved "https://registry.yarnpkg.com/@aws-sdk/service-error-classification/-/service-error-classification-3.19.0.tgz#0382d138ca3c9e75b352769a39ff9a02600c466a"
   integrity sha512-01lXj5QnJamSx/Sg6Q5ymgk1MJLOOIUsCMctasWZWURqDLqEsGp2F4SSguMSkNAYnA2wB8nc+U66m3UCPxPm1A==
 
-"@aws-sdk/shared-ini-file-loader@3.18.0":
+"@aws-sdk/shared-ini-file-loader@3.18.0", "@aws-sdk/shared-ini-file-loader@^1.110.0":
   version "3.18.0"
   resolved "https://registry.yarnpkg.com/@aws-sdk/shared-ini-file-loader/-/shared-ini-file-loader-3.18.0.tgz#9cc4cd96753862a1c0aaefa903353e4bc17dda6a"
   integrity sha512-YpBCZWRvJhnPHbdFLzRvLIfx7Zxre8/5YsWrrNNBWRJ90z/6czzPdOn9jab/AVfLPpC/VSSubf4v4b8Cjeb4eA==
