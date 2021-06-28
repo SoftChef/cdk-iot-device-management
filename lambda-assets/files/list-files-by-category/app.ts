@@ -1,8 +1,6 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, QueryCommand } from '@aws-sdk/lib-dynamodb';
-import { Request, Response } from '../../utils';
-
-const { FILE_TABLE_NAME } = process.env;
+import { Request, Response } from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
@@ -11,9 +9,17 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({})
     );
-    const { Items: files, LastEvaluatedKey } = await ddbDocClient.send(
+    let parameters: { [key: string]: any } = {};
+    if (request.has('nextToken')) {
+      parameters.ExclusiveStartKey = {
+        Key: JSON.parse(
+          Buffer.from(request.get('nextToken'), 'base64').toString('utf8')
+        ),
+      }
+    };
+    const { Items: files, LastEvaluatedKey: lastEvaluatedKey } = await ddbDocClient.send(
       new QueryCommand({
-        TableName: `${FILE_TABLE_NAME}`,
+        TableName: process.env.FILE_TABLE_NAME,
         IndexName: 'query-by-category-id',
         KeyConditionExpression: '#categoryId = :categoryId',
         ExpressionAttributeNames: {
@@ -22,12 +28,18 @@ export async function handler(event: { [key: string]: any }) {
         ExpressionAttributeValues: {
           ':categoryId': request.parameter('categoryId'),
         },
-        ExclusiveStartKey: request.get('nextToken', undefined),
+        ...parameters,
       })
     );
+    let nextToken = null;
+    if (lastEvaluatedKey) {
+      nextToken = Buffer.from(
+        JSON.stringify(lastEvaluatedKey)
+      ).toString('base64')
+    }
     return response.json({
       files,
-      nextToken: LastEvaluatedKey,
+      nextToken,
     });
   } catch (error) {
     return response.error(error);

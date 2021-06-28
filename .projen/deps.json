@@ -115,11 +115,15 @@
       "type": "bundled"
     },
     {
+      "name": "@aws-sdk/util-dynamodb",
+      "type": "bundled"
+    },
+    {
       "name": "@softchef/cdk-restapi",
       "type": "bundled"
     },
     {
-      "name": "@types/lodash",
+      "name": "@softchef/lambda-events",
       "type": "bundled"
     },
     {
@@ -141,10 +145,6 @@
     },
     {
       "name": "joi",
-      "type": "bundled"
-    },
-    {
-      "name": "lodash",
       "type": "bundled"
     },
     {

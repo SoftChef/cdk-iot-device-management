@@ -1,8 +1,6 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, ScanCommand } from '@aws-sdk/lib-dynamodb';
-import { Request, Response } from '../../utils';
-
-const { FILE_TABLE_NAME } = process.env;
+import { Request, Response } from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
@@ -14,15 +12,23 @@ export async function handler(event: { [key: string]: any }) {
     let parameters: { [key: string]: any } = {};
     if (request.has('nextToken')) {
       parameters.ExclusiveStartKey = {
-        Key: request.get('nextToken'),
+        Key: JSON.parse(
+          Buffer.from(request.get('nextToken'), 'base64').toString('utf8')
+        ),
       }
     };
-    const { Items: files, LastEvaluatedKey: nextToken } = await ddbDocClient.send(
+    const { Items: files, LastEvaluatedKey: lastEvaluatedKey } = await ddbDocClient.send(
       new ScanCommand({
-        TableName: `${FILE_TABLE_NAME}`,
+        TableName: process.env.FILE_TABLE_NAME,
         ...parameters,
       })
     );
+    let nextToken = null;
+    if (lastEvaluatedKey) {
+      nextToken = Buffer.from(
+        JSON.stringify(lastEvaluatedKey)
+      ).toString('base64')
+    }
     return response.json({
       files,
       nextToken,

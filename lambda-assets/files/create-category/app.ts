@@ -1,9 +1,7 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
-import { Request, Response } from '../../utils';
+import { DynamoDBDocumentClient, GetCommand, PutCommand } from '@aws-sdk/lib-dynamodb';
+import { Request, Response } from '@softchef/lambda-events';
 import *  as crypto from 'crypto';
-
-const { CATEGORY_TABLE_NAME } = process.env;
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
@@ -33,16 +31,27 @@ export async function handler(event: { [key: string]: any }) {
     } else {
       itemParameters.categoryId = md5.update(name).digest('hex');
     };
+    const { Item: category } = await ddbDocClient.send(
+      new GetCommand({
+        TableName: process.env.CATEGORY_TABLE_NAME,
+        Key: {
+          categoryId: itemParameters.categoryId,
+        },
+      })
+    );
+    if (category) {
+      return response.error('Category already exists.', 400);
+    };
     await ddbDocClient.send(
-        new PutCommand({
-          TableName: `${CATEGORY_TABLE_NAME}`,
-          Item: {
-            ...itemParameters,
-            name,
-            description: request.input('description'),
-            createdAt: currentTime,
-            updatedAt: currentTime,
-          },
+      new PutCommand({
+        TableName: process.env.CATEGORY_TABLE_NAME,
+        Item: {
+          ...itemParameters,
+          name,
+          description: request.input('description'),
+          createdAt: currentTime,
+          updatedAt: currentTime,
+        },
       })
     );
     return response.json({

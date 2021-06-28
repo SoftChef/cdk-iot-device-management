@@ -75,13 +75,18 @@
     "@aws-sdk/client-dynamodb": "^3.19.0",
     "@aws-sdk/client-iot": "^3.19.0",
     "@aws-sdk/lib-dynamodb": "^3.19.0",
+<<<<<<< HEAD
     "@softchef/cdk-restapi": "^0.0.26",
+=======
+    "@aws-sdk/util-dynamodb": "^3.19.0",
+    "@softchef/cdk-restapi": "^0.0.24",
+    "@softchef/lambda-events": "^1.0.0",
+>>>>>>> 0369678ff6ca8a6e240b88e99f1300f42b4fb858
     "@types/node": "15.12.2",
     "@types/semver": "^7.3.6",
     "@types/uuid": "^8.3.0",
     "aws-sdk": "^2.935.0",
     "joi": "^17.4.0",
-    "lodash": "^4.17.21",
     "semver": "^7.3.5",
     "uuid": "^8.3.2"
   },
@@ -90,14 +95,14 @@
     "@aws-sdk/client-dynamodb",
     "@aws-sdk/client-iot",
     "@aws-sdk/lib-dynamodb",
+    "@aws-sdk/util-dynamodb",
     "@softchef/cdk-restapi",
-    "@types/lodash",
+    "@softchef/lambda-events",
     "@types/node",
     "@types/semver",
     "@types/uuid",
     "aws-sdk",
     "joi",
-    "lodash",
     "semver",
     "uuid"
   ],

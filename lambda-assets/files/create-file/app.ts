@@ -1,8 +1,6 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
-import { Request, Response } from '../../utils';
-
-const { FILE_TABLE_NAME } = process.env;
+import { DynamoDBDocumentClient, GetCommand, PutCommand } from '@aws-sdk/lib-dynamodb';
+import { Request, Response } from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
@@ -17,23 +15,34 @@ export async function handler(event: { [key: string]: any }) {
         .concat(joi.string().when('checksumType', { is: 'sha1', then: joi.string().length(40).required()})),
         version: joi.string().required(),
         categoryId: joi.string().required(),
-        //checkMD5Length: joi.string().when('checksumType', { is: 'md5', then: joi.string().length(32).required})
       };
     });
     if (validated.error) {
       return response.error(validated.details, 422);
     }
+    const categoryId = request.input('categoryId')
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({})
     );
+    const { Item: category } = await ddbDocClient.send(
+      new GetCommand({
+        TableName: process.env.CATEGORY_TABLE_NAME,
+        Key: {
+          categoryId,
+        },
+      })
+    );
+    if (!category) {
+      return response.error('Not found.', 404);
+    };
     const currentTime = Date.now();
     await ddbDocClient.send(
       new PutCommand({
-        TableName: `${FILE_TABLE_NAME}`,
+        TableName: process.env.FILE_TABLE_NAME,
         Item: {
           fileId: request.input('checksum'),
           version: request.input('version'),
-          categoryId: request.input('categoryId'),
+          categoryId,
           location: request.input('location'),
           description: request.input('description'),
           createdAt: currentTime,
