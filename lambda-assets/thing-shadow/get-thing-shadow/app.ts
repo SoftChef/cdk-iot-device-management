@@ -20,9 +20,7 @@ export async function handler(event: { [key: string]: any }) {
     });
     console.log(payloadString)
 
-    return response.json({
-      payloadString
-    });
+    return response.json(JSON.parse(payloadString));
   } catch (error) {
     return response.error(error);
   }

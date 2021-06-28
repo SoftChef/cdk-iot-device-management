@@ -72,13 +72,9 @@ test('Get thing shadow success', async () => {
     },
   });
   console.log(response);
-  //const body = JSON.parse(response.body);
-  /*var step, payload;
-  for (step = 0; step < body.payloadString.length; step++) {
-    if (body.payloadString[step] != "\\") payload += body.payloadString[step]
-  }*/
+  const body = JSON.parse(response.body);
   console.log(response.body);
-  //expect(body.payloadString).toEqual(expected.thingShadow);
+  expect(body).toEqual(expected.thingShadow);
   expect(response.statusCode).toEqual(200);
   iotDataPlaneClientMock.restore();
 });
