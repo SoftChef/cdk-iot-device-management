@@ -6,7 +6,7 @@ export async function handler(event: { [key: string]: any }) {
   const response = new Response();
   try {
     const iotClient = new IoTClient({});
-    const thing = await iotClient.send(
+    await iotClient.send(
       new DeleteThingCommand({
         thingName: request.parameter('thingName'),
       }),
