@@ -1,5 +1,5 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBDocumentClient, GetCommand, PutCommand } from '@aws-sdk/lib-dynamodb';
 import { Request, Response } from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
@@ -20,9 +20,21 @@ export async function handler(event: { [key: string]: any }) {
     if (validated.error) {
       return response.error(validated.details, 422);
     }
+    const categoryId = request.input('categoryId')
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({})
     );
+    const { Item: category } = await ddbDocClient.send(
+      new GetCommand({
+        TableName: process.env.CATEGORY_TABLE_NAME,
+        Key: {
+          categoryId,
+        },
+      })
+    );
+    if (!category) {
+      return response.error('Not found.', 404);
+    };
     const currentTime = Date.now();
     await ddbDocClient.send(
       new PutCommand({
@@ -30,7 +42,7 @@ export async function handler(event: { [key: string]: any }) {
         Item: {
           fileId: request.input('checksum'),
           version: request.input('version'),
-          categoryId: request.input('categoryId'),
+          categoryId,
           location: request.input('location'),
           description: request.input('description'),
           createdAt: currentTime,

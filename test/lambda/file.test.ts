@@ -1,3 +1,4 @@
+import * as crypto from 'crypto';
 import {
   DynamoDBDocumentClient,
   ScanCommand,
@@ -94,7 +95,14 @@ beforeEach(() => {
 });
 
 test('Create category success', async () => {
+  const md5 = crypto.createHash('md5');
   const documentClientMock = mockClient(DynamoDBDocumentClient);
+  documentClientMock.on(GetCommand, {
+    TableName: CATEGORY_TABLE_NAME,
+    Key: {
+      categoryId: md5.update(expected.newCategory.name).digest('hex'),
+    },
+  }).resolves({});
   documentClientMock.on(PutCommand, {
     TableName: CATEGORY_TABLE_NAME,
     ...expectedCategory,
@@ -125,6 +133,27 @@ test('Create category with invalid inputs expect failure', async () => {
       message: expect.any(String),
     },
   ]);
+  documentClientMock.restore();
+});
+
+test('Create category already exists', async () => {
+  const md5 = crypto.createHash('md5');
+  const documentClientMock = mockClient(DynamoDBDocumentClient);
+  documentClientMock.on(GetCommand, {
+    TableName: CATEGORY_TABLE_NAME,
+    Key: {
+      categoryId: md5.update(expected.newCategory.name).digest('hex'),
+    },
+  }).resolves(expected.category);
+  const response = await createCategory.handler({
+    body: {
+      name: expected.newCategory.name,
+      description: expected.newCategory.description,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(response.statusCode).toEqual(400);
+  expect(body.error).toEqual('Category already exists.');
   documentClientMock.restore();
 });
 
@@ -275,6 +304,12 @@ test('Delete category success', async () => {
 test('Create file API success', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
   const currentTime = Date.now();
+  documentClientMock.on(GetCommand, {
+    TableName: CATEGORY_TABLE_NAME,
+    Key: {
+      categoryId: expected.newFiles.categoryId,
+    },
+  }).resolves(expected.category);
   documentClientMock.on(PutCommand, {
     TableName: FILE_TABLE_NAME,
     Item: {
