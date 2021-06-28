@@ -1,5 +1,5 @@
 import { IoTClient, CreateThingCommand } from '@aws-sdk/client-iot';
-import { Request, Response } from '../../utils';
+import { Request, Response } from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
