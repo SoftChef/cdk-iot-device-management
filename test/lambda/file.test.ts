@@ -152,9 +152,7 @@ test('Get category with invalid jobId expect failure', async () => {
     Key: {
       categoryId: expectedInvalidCategoryExecution.categoryId,
     },
-  }).resolves({
-    Item: {},
-  });
+  }).resolves({});
   const response = await getCategory.handler({
     pathParameters: {
       categoryId: expectedInvalidCategoryExecution.categoryId,
@@ -207,6 +205,12 @@ test('Class 2: List categories success', async () => {
 
 test('Update category success', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
+  documentClientMock.on(GetCommand, {
+    TableName: CATEGORY_TABLE_NAME,
+    Key: {
+      categoryId: expected.category.Item.categoryId,
+    },
+  }).resolves(expected.category);
   documentClientMock.on(UpdateCommand, {
     TableName: CATEGORY_TABLE_NAME,
     Key: {
@@ -224,6 +228,28 @@ test('Update category success', async () => {
   const body = JSON.parse(response.body);
   expect(response.statusCode).toEqual(200);
   expect(body.updated).toEqual(true);
+  documentClientMock.restore();
+});
+
+test('Update with does not exist category', async () => {
+  const documentClientMock = mockClient(DynamoDBDocumentClient);
+  documentClientMock.on(GetCommand, {
+    TableName: CATEGORY_TABLE_NAME,
+    Key: {
+      categoryId: expectedInvalidCategoryExecution.categoryId,
+    },
+  }).resolves({});
+  const response = await updateCategory.handler({
+    pathParameters: {
+      categoryId: expectedInvalidCategoryExecution.categoryId,
+    },
+    body: {
+      description: expected.category.Item.description,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(response.statusCode).toEqual(404);
+  expect(body.error).toEqual('Not found.');
   documentClientMock.restore();
 });
 
@@ -354,9 +380,7 @@ test('Get file with invalid inputs expect failure', async () => {
       fileId: expectedInvalidFileExecution.fileId,
       version: expectedInvalidFileExecution.version,
     },
-  }).resolves({
-    Item: {},
-  });
+  }).resolves({});
   const response = await getFile.handler({
     pathParameters: {
       fileId: expectedInvalidFileExecution.fileId,

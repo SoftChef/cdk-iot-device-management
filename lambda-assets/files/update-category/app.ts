@@ -25,7 +25,7 @@ export async function handler(event: { [key: string]: any }) {
         },
       })
     );
-    if (category) {
+    if (!category) {
       return response.error('Not found.', 404);
     };
     await ddbDocClient.send(

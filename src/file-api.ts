@@ -74,6 +74,11 @@ export class FileApi extends cdk.Construct {
           lambdaFunction: this.createDeleteCategoryFunction(),
         },
         {
+          path: '/categories/{categoryId}/files',
+          httpMethod: HttpMethod.GET,
+          lambdaFunction: this.createListFilesByCategoryFunction(),
+        },
+        {
           path: '/files',
           httpMethod: HttpMethod.POST,
           lambdaFunction: this.createCreateFileFunction(),
@@ -82,11 +87,6 @@ export class FileApi extends cdk.Construct {
           path: '/files',
           httpMethod: HttpMethod.GET,
           lambdaFunction: this.createListFilesFunction(),
-        },
-        {
-          path: '/categories/{categoryId}/files',
-          httpMethod: HttpMethod.GET,
-          lambdaFunction: this.createListFilesByCategoryFunction(),
         },
         {
           path: '/files/{fileId}',
