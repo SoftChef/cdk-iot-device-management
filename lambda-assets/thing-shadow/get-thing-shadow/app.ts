@@ -5,8 +5,6 @@ export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
   const response = new Response();
   try {
-    console.log(request),
-    console.log(request.parameter('thingName'));
     const client = new IoTDataPlaneClient({});
     const thingShadow = await client.send(
       new GetThingShadowCommand({
@@ -18,7 +16,6 @@ export async function handler(event: { [key: string]: any }) {
     payload.forEach(num => {
       payloadString += String.fromCharCode(num);
     });
-    console.log(payloadString)
 
     return response.json(JSON.parse(payloadString));
   } catch (error) {
