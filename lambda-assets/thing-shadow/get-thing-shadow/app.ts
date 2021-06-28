@@ -18,7 +18,7 @@ export async function handler(event: { [key: string]: any }) {
       payloadString += String.fromCharCode(num);
     });
 
-    return response.json(JSON.parse(payloadString));
+    return response.json({payloadString});
   } catch (error) {
     return response.error(error);
   }
