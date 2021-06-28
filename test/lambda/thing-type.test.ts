@@ -18,12 +18,9 @@ import * as getThingType from '../../lambda-assets/thing-types/get-thing-type/ap
 import * as listThingTypes from '../../lambda-assets/thing-types/list-thing-types/app';
 import * as undeprecateThingType from '../../lambda-assets/thing-types/undeprecate-thing-type/app';
 
-// const iotClientMock = mockClient(IoTClient);
-
 const expectedThingType = {
   thingTypeArn: 'arn:aws:iot:ap-northeast-1:012345678901:thing/85f6509f-023c-48fb-8252-981653ffd561',
   thingTypeId: '85f6509f-023c-48fb-8252-981653ffd561',
-  //thingName: 'TestThing',
   thingTypeName: 'TestThingType',
 };
 
@@ -48,9 +45,6 @@ const expected = {
     Code: 'ResourceNotFoundException',
     message: `ResourceNotFoundException: Job ${expectedInvalidThingType.thingTypeName} cannot be found.`,
   },
-  /*deleteThingType: {
-    thingTypeName: 'NewThingType',
-  },*/
 };
 
 test('Create thing type success', async () => {

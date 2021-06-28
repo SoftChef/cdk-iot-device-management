@@ -6,7 +6,7 @@ export async function handler(event: { [key: string]: any }) {
   const response = new Response();
   try {
     const iotClient = new IoTClient({});
-    const thingType = await iotClient.send(
+    await iotClient.send(
       new DeprecateThingTypeCommand({
         thingTypeName: request.parameter('thingTypeName'),
         undoDeprecate: true,
@@ -14,7 +14,6 @@ export async function handler(event: { [key: string]: any }) {
     );
     return response.json({
       undeprecated: true,
-      thingType,
     });
   } catch (error) {
     if (error.Code === 'ResourceNotFoundException') {

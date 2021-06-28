@@ -6,14 +6,13 @@ export async function handler(event: { [key: string]: any }) {
   const response = new Response();
   try {
     const iotClient = new IoTClient({});
-    const thingType = await iotClient.send(
+    await iotClient.send(
       new DeleteThingTypeCommand({
         thingTypeName: request.parameter('thingTypeName'),
       }),
     );
     return response.json({
       deleted: true,
-      thingType,
     });
   } catch (error) {
     if (error.Code === 'ResourceNotFoundException') {
