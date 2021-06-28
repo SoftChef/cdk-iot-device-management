@@ -21,7 +21,6 @@ export async function handler(event: { [key: string]: any }) {
     );
     return response.json({
       created: true,
-      thing,
     });
   } catch (error) {
     return response.error(error);

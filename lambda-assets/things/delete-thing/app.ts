@@ -13,7 +13,6 @@ export async function handler(event: { [key: string]: any }) {
     );
     return response.json({
       deleted: true,
-      thing,
     });
   } catch (error) {
     if (error.Code === 'ResourceNotFoundException') {
@@ -21,5 +20,5 @@ export async function handler(event: { [key: string]: any }) {
     } else {
       return response.error(error);
     }
-  }
+  };
 }
