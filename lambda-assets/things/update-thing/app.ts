@@ -17,13 +17,17 @@ export async function handler(event: { [key: string]: any }) {
       return response.error(validated.details, 422);
     }
     const iotClient = new IoTClient({});
-    const thing = await iotClient.send(
+    let parameters: { [key: string]: any } = {};
+    const attributes = ['thingTypeName', 'attributePayload','expectedVersion','removeThingType']
+    attributes.map(attribute => {
+      if (request.has(attribute)) {
+        parameters[attribute] = request.input(attribute)
+      }
+    })
+    await iotClient.send(
       new UpdateThingCommand({
         thingName: request.parameter('thingName'),
-        thingTypeName: request.input('thingTypeName'),
-        attributePayload: request.input('attributePayload'),
-        expectedVersion: request.input('expectedVersion'),
-        removeThingType: request.input('removeThingType'),
+        ...parameters,
       }),
     );
     return response.json({
