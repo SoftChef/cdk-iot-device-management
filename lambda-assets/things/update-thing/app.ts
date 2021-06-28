@@ -28,7 +28,6 @@ export async function handler(event: { [key: string]: any }) {
     );
     return response.json({
       updated: true,
-      thing,
     });
   } catch (error) {
     if (error.Code === 'ResourceNotFoundException') {
