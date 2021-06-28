@@ -2354,7 +2354,7 @@ aws-sdk-mock@^5.2.1:
     sinon "^11.1.1"
     traverse "^0.6.6"
 
-aws-sdk@^2.928.0, aws-sdk@^2.934.0:
+aws-sdk@^2.928.0, aws-sdk@^2.935.0:
   version "2.935.0"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.935.0.tgz#f122667a4b004d6cf5761e754d42f507b1fc36f7"
   integrity sha512-OeoqkZ0fXPC1xjumoFQmPccASXmGBBNBsI3l9vs/NCQk3WyBfiYh07H6RO5owtCmp0a8hAjKSZAHjnRe2JlmEA==
@@ -5208,7 +5208,7 @@ jsii-diff@^1.30.0:
     typescript "~3.9.9"
     yargs "^16.2.0"
 
-jsii-docgen@^1.8.105:
+jsii-docgen@^1.8.107:
   version "1.8.108"
   resolved "https://registry.yarnpkg.com/jsii-docgen/-/jsii-docgen-1.8.108.tgz#34c69e739d9b250bf57ffa54fba2741db53a18c9"
   integrity sha512-Er2yBaeFmtcrzlEdkpCVn84PO7o82BJy4K4fCCxsdUxMbVR3cUB9F03PL4HURq2c4k4esCvsZMRVJgKCcx4LDQ==
