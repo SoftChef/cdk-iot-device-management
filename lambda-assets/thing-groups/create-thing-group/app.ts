@@ -11,16 +11,17 @@ export async function handler(event: { [key: string]: any }) {
       };
     });
     if (validated.error) {
-      return response.error(validated.details, 422);
+      return response.error(validated, 422);
     }
     const iotClient = new IoTClient({});
-    await iotClient.send(
+    const thingGroup = await iotClient.send(
       new CreateThingGroupCommand({
         thingGroupName: request.input('thingGroupName'),
       }),
     );
     return response.json({
       created: true,
+      thingGroup,
     });
   } catch (error) {
     return response.error(error);
