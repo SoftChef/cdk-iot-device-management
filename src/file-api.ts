@@ -84,7 +84,7 @@ export class FileApi extends cdk.Construct {
           lambdaFunction: this.createListFilesFunction(),
         },
         {
-          path: '/files/{categoryId}',
+          path: '/categories/{categoryId}/files',
           httpMethod: HttpMethod.GET,
           lambdaFunction: this.createListFilesByCategoryFunction(),
         },

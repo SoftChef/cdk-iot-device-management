@@ -15,7 +15,6 @@ export async function handler(event: { [key: string]: any }) {
         .concat(joi.string().when('checksumType', { is: 'sha1', then: joi.string().length(40).required()})),
         version: joi.string().required(),
         categoryId: joi.string().required(),
-        //checkMD5Length: joi.string().when('checksumType', { is: 'md5', then: joi.string().length(32).required})
       };
     });
     if (validated.error) {

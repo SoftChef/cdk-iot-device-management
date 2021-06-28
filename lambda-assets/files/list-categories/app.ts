@@ -66,7 +66,6 @@ export async function handler(event: { [key: string]: any }) {
       });
     };
   } catch (error) {
-    console.log(error)
     return response.error(error);
   }
 }

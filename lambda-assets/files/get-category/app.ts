@@ -10,7 +10,7 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({})
     );
-    const category = await ddbDocClient.send(
+    const { Item: category } = await ddbDocClient.send(
       new GetCommand({
         TableName: process.env.CATEGORY_TABLE_NAME,
         Key: {
@@ -18,11 +18,11 @@ export async function handler(event: { [key: string]: any }) {
         },
       })
     );
-    if (isEmpty(category.Item)) {
+    if (!category) {
       return response.error('Not found.', 404);
     };
     return response.json({
-      category: category.Item,
+      category,
     });
   } catch (error) {
     return response.error(error);

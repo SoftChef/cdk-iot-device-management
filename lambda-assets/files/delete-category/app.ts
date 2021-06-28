@@ -9,7 +9,6 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({})
     );
-    console.log(process.env.CATEGORY_TABLE_NAME)
     await ddbDocClient.send(
       new DeleteCommand({
         TableName: process.env.CATEGORY_TABLE_NAME,
