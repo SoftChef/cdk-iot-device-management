@@ -177,6 +177,7 @@ test('Deprecate thing type with invalid thingTypeName expect failure', async () 
     },
   });
   expect(response.statusCode).toEqual(404);
+  iotClientMock.restore();
 });
 
 test('Undeprecate thing type success', async () => {
@@ -206,6 +207,7 @@ test('Undeprecate thing type with invalid thingTypeName expect failure', async (
     },
   });
   expect(response.statusCode).toEqual(404);
+  iotClientMock.restore();
 });
 
 test('Delete thing type success', async () => {
@@ -235,4 +237,5 @@ test('Delete thing type with invalid thingTypeName expect failure', async () => 
     },
   });
   expect(response.statusCode).toEqual(404);
+  iotClientMock.restore();
 });
