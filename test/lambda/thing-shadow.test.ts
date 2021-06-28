@@ -1,7 +1,7 @@
 import {
   GetThingShadowCommand,
   IoTDataPlaneClient,
-  //   UpdateThingCommand,
+UpdateThingShadowCommand
   //GetThingShadowCommand,
   //ListNamedShadowsForThingCommand,
   //   DeleteThingShadowCommand,
@@ -11,7 +11,7 @@ import {
   //   AwsError,
 } from 'aws-sdk-client-mock';
 // import * as deleteThing from '../../lambda-assets/things/delete-thing/app';
-// import * as updateThing from '../../lambda-assets/things/update-thing/app';
+] import * as updateThing from '../../lambda-assets/things/update-thing/app';
 //import * as listThingShadow from '../../lambda-assets/thing-shadow/list-thing-shadow/app';
 import * as getThingShadow from '../../lambda-assets/thing-shadow/get-thing-shadow/app';
 
@@ -78,12 +78,12 @@ test('Get thing shadow success', async () => {
   expect(response.statusCode).toEqual(200);
   iotDataPlaneClientMock.restore();
 });
-/*
-test('List thing success', async () => {
+
+/*test('List thing success', async () => {
   const iotDataPlaneClientMock = mockClient(IoTDataPlaneClient);
   iotDataPlaneClientMock.on(ListNamedShadowsForThingCommand, {
   }).resolves({
-    //things: expected.listThing.things,
+    thingName: 
   });
   const response = await listThingShadow.handler({});
   console.log(response);
@@ -93,7 +93,7 @@ test('List thing success', async () => {
   expect(response.statusCode).toEqual(200);
   iotDataPlaneClientMock.restore();
 });
-
+/*
 test('List things with nextToken success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(ListThingsCommand, {
@@ -114,24 +114,24 @@ test('List things with nextToken success', async () => {
   expect(response.statusCode).toEqual(200);
   iotClientMock.restore();
 });
-
+*/
 
 test('Update thing success', async () => {
-  const iotClientMock = mockClient(IoTClient);
-  iotClientMock.on(UpdateThingCommand, {
-    thingName: expected.thing.thingName,
+  const iotDataPlaneClientMock = mockClient(IoTDataPlaneClient);
+  iotDataPlaneClientMock.on(UpdateThingShadowCommand, {
+    thingName: expected.thingName,
   }).resolves({});
   const response = await updateThing.handler({
     body: {
-      thingName: expected.thing.thingName,
+      thingName: expected.thingName,
     },
   });
   const body = JSON.parse(response.body);
   expect(response.statusCode).toEqual(200);
   expect(body.updated).toEqual(true);
-  iotClientMock.restore;
+  iotDataPlaneClientMock.restore();
 });
-
+/*
 test('Update thing with invalid input expect failure', async() => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(UpdateThingCommand, {

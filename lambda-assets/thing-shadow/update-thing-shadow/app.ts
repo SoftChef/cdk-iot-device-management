@@ -6,18 +6,14 @@ export async function handler(event: { [key: string]: any }) {
   const response = new Response();
   try {
     const client = new IoTDataPlaneClient({});
-    const shadow = await client.send(
+    await client.send(
       new UpdateThingShadowCommand({
         thingName: request.parameter('thingName'),
         payload: request.input('thingName')
       }),
     );
-    let payloadString: string = '';
-    //payload.forEach(num => {
-    //  payloadString += String.fromCharCode(num);
-    //});
     return response.json({
-      shadow,
+      updated: true,
     });
   } catch (error) {
     return response.error(error);
