@@ -73,6 +73,7 @@ exports.FileApi = class FileApi extends cdk.Construct {
 - PUT /categories/{categoryId} - Update category by ID
 - DELETE /categories/{categoryId} - Delete category by ID
 
+- GET /files - Get root files list
 - GET /files/{categoryId} - Get files by category ID
 - GET /files/{fileId} - Get file by ID
 - POST /files - Create new file
@@ -94,6 +95,7 @@ exports.FileApi = class FileApi extends cdk.Construct {
 {
   location: string, // File URI location
   checksum: string, // MD5/CRC32/SHA1 file checksum
+  checksumType: string // MD5/CRC32/SHA1
   version: string, // Semantic version format
   categoryId: string, // Follow the category ID
   description: string
