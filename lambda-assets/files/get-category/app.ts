@@ -1,6 +1,6 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, GetCommand } from '@aws-sdk/lib-dynamodb';
-import { Request, Response } from '../../utils';
+import { Request, Response } from '@softchef/lambda-events';
 import { isEmpty } from 'lodash';
 
 export async function handler(event: { [key: string]: any }) {
