@@ -1,5 +1,5 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, ScanCommand } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBDocumentClient, QueryCommand } from '@aws-sdk/lib-dynamodb';
 import { Request, Response } from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
@@ -18,8 +18,16 @@ export async function handler(event: { [key: string]: any }) {
       }
     };
     const { Items: files, LastEvaluatedKey: lastEvaluatedKey } = await ddbDocClient.send(
-      new ScanCommand({
+      new QueryCommand({
         TableName: process.env.FILE_TABLE_NAME,
+        IndexName: 'query-by-category-id',
+        KeyConditionExpression: '#categoryId = :categoryId',
+        ExpressionAttributeNames: {
+          '#categoryId': 'categoryId',
+        },
+        ExpressionAttributeValues: {
+          ':categoryId': request.parameter('categoryId'),
+        },
         ...parameters,
       })
     );
