@@ -1047,6 +1047,13 @@
     "@aws-sdk/is-array-buffer" "3.18.0"
     tslib "^2.0.0"
 
+"@aws-sdk/util-dynamodb@^3.19.0":
+  version "3.19.0"
+  resolved "https://registry.yarnpkg.com/@aws-sdk/util-dynamodb/-/util-dynamodb-3.19.0.tgz#3f08d4e4cef02402e7bf88fd765976511429db36"
+  integrity sha512-ROM57j0a6odsUEabstiSIDJHkYyiRvZihLXnjyD8XH+j7F0oPxHsFWJROvGL8Oqm/x0rADyFyEL+nQOyDZkDCQ==
+  dependencies:
+    tslib "^2.0.0"
+
 "@aws-sdk/util-hex-encoding@3.18.0":
   version "3.18.0"
   resolved "https://registry.yarnpkg.com/@aws-sdk/util-hex-encoding/-/util-hex-encoding-3.18.0.tgz#b20ad7db4394c664e681b3744e216e405b2cdf13"
