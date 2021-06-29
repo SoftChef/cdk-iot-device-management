@@ -1,36 +1,41 @@
 import {
   IoTClient,
   CreateThingCommand,
-  UpdateThingCommand,
   DescribeThingCommand,
   ListThingsCommand,
+  UpdateThingCommand,
   DeleteThingCommand,
 } from '@aws-sdk/client-iot';
 import {
   IoTDataPlaneClient,
   GetThingShadowCommand,
-  //UpdateThingShadowCommand
-  //GetThingShadowCommand,
-  //ListNamedShadowsForThingCommand,
-  //   DeleteThingShadowCommand,
+  ListNamedShadowsForThingCommand,
+  UpdateThingShadowCommand,
+  DeleteThingShadowCommand,
 } from '@aws-sdk/client-iot-data-plane';
 import {
   mockClient,
   AwsError,
-} from 'aws-sdk-client-mock'; import * as createThing from '../../lambda-assets/things/create-thing/app';
-import * as deleteThing from '../../lambda-assets/things/delete-thing/app';
+} from 'aws-sdk-client-mock';
+import * as createThing from '../../lambda-assets/things/create-thing/app';
 import * as getThing from '../../lambda-assets/things/get-thing/app';
+import * as getThingShadow from '../../lambda-assets/things/get-thing-shadow/app';
 import * as listThings from '../../lambda-assets/things/list-things/app';
 import * as updateThing from '../../lambda-assets/things/update-thing/app';
+import * as UpdateThingShadow from '../../lambda-assets/things/update-thing-shadow/app';
+import * as deleteThing from '../../lambda-assets/things/delete-thing/app';
+import * as deleteThingShadow from '../../lambda-assets/things/delete-thing-shadow/app';
+//import * as updateThing from '../../lambda-assets/things/update-thing/app';
+//import * as listThingShadow from '../../lambda-assets/thing-shadow/list-thing-shadow/app';
 
-const expectedThing = {
+const expectedThingResponse = {
   thingArn: 'arn:aws:iot:ap-northeast-1:012345678901:thing/85f6509f-023c-48fb-8252-981653ffd561',
   thingId: '85f6509f-023c-48fb-8252-981653ffd561',
-  thingName: 'Test',
-  thingTypeName: 'test',
+  thingName: 'thingName',
+  thingTypeName: 'thingTypeName',
 };
 
-const expectedThingShadowRequest = {
+const expectedThingShadowPayload = {
   metadata: {
     desired: {
       welcome: {
@@ -66,31 +71,28 @@ const expectedThingShadowResponse = {
     "thingArn": "arn:aws:iot:us-east-1:520095059637:thing/Test", "thingId": "09a5d7bf-d44c-4e18-ac29-5dc26e07df67", "thingName": "Test", "version": 10
   },
 }*/
+
 const expectedInvalidThing = {
   thingName: 'NotExistsThing',
-  attributePayload: {
-    attributes: {
-      payload: 'payload',
-    },
-  },
-  expectedVersion: 1,
-  removeThingType: true,
-};
-
-const expectedInvalidThingShadow = {
-  thingName: 'NotExistsThingShadow',
+  thingShadowName: 'NotExistsThingShadow',
 };
 
 const expected = {
-  thing: expectedThing,
-  thingShadow: expectedThingShadowRequest,
+  thingResponse: expectedThingResponse,
+  //expectedThingShadowRequest: expectedThingShadowRequest,
+  thingName: expectedThingResponse.thingName,
+  shadowName: "shadowName",
+  payload: new Uint8Array(
+    Buffer.from(
+      JSON.stringify(expectedThingShadowPayload),
+    ),
+  ),
   newThing: {
-    thingName: 'NewTestThing',
+    thingName: expectedThingResponse.thingName,
   },
-  thingShadowName: 'Test',
   listThing: {
     things: [
-      expectedThing,
+      expectedThingResponse,
     ],
     nextToken: '12345',
   },
@@ -101,7 +103,7 @@ const expected = {
     nextToken: '12345',
   },
   updateThing: {
-    thingTypeName: 'thingTypeName',
+    thingTypeName: expectedThingResponse.thingTypeName,
     attributePayload: {
       attributes: {
         payload: 'payload',
@@ -109,21 +111,43 @@ const expected = {
     },
     expectedVersion: 1,
     removeThingType: true,
+    payload: new Uint8Array(
+      Buffer.from(
+        JSON.stringify(expectedThingShadowPayload),
+      ),
+    ),
   },
-  UpdateInvalidInput: {
+  updateInvalidInput: {
+    thingName: expectedInvalidThing.thingName,
+    thingTypeName: '',
+    attributePayload: {
+      attributes: {
+        payload: '',
+      },
+    },
+    expectedVersion: '',
+    removeThingType: '',
+    payload: "",
+  },
+  invalidThingName: {
+    thingName: expectedInvalidThing.thingName,
     thingTypeName: 1,
     attributePayload: '',
     expectedVersion: '',
     removeThingType: 'true',
+    payload: new Uint8Array(
+      Buffer.from(
+        JSON.stringify(""),
+      ),
+    ),
   },
-  invalidThing: expectedInvalidThing,
   invalidThingError: <AwsError>{
     Code: 'ResourceNotFoundException',
     message: `ResourceNotFoundException: Thing ${expectedInvalidThing.thingName} cannot be found.`,
   },
   invalidThingShadowError: <AwsError>{
     Code: 'ResourceNotFoundException',
-    message: `ResourceNotFoundException: No shadow exists with name ${expectedInvalidThingShadow.thingName}`,
+    message: `ResourceNotFoundException: No shadow exists with name ${expectedInvalidThing.thingShadowName}`,
   },
 };
 
@@ -166,51 +190,69 @@ test('Create thing with invalid input expect failure', async () => {
 test('Get thing success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(DescribeThingCommand, {
-    thingName: expected.thing.thingName,
+    thingName: expected.thingName,
   }).resolves({
-    thingArn: expected.thing.thingArn,
-    thingId: expected.thing.thingId,
-    thingName: expected.thing.thingName,
-    thingTypeName: 'test',
-  });
-  iotClientMock.restore();
-  const iotDataPlaneClientMock = mockClient(IoTDataPlaneClient);
-  iotDataPlaneClientMock.on(GetThingShadowCommand, {
-    thingName: expected.thing.thingName,
-  }).resolves({
-    payload: new Uint8Array(
-      Buffer.from(
-        JSON.stringify(expected.thingShadow),
-      ),
-    ),
+    thingArn: expected.thingResponse.thingArn,
+    thingId: expected.thingResponse.thingId,
+    thingName: expected.thingResponse.thingName,
+    thingTypeName: expected.thingResponse.thingTypeName,
   });
   const response = await getThing.handler({
     pathParameters: {
-      thingName: expected.thing.thingName,
+      thingName: expected.thingName,
     },
   });
-  console.log(response);
+  const body = JSON.parse(response.body);
+  expect(body.thing).toEqual(expected.thingResponse);
+  expect(response.statusCode).toEqual(200);
+  iotClientMock.restore();
+});
+
+test('Get thing shadow success', async () => {
+  const iotDataPlaneClientMock = mockClient(IoTDataPlaneClient);
+  iotDataPlaneClientMock.on(GetThingShadowCommand, {
+    thingName: expected.thingName,
+  }).resolves({
+    payload: expected.payload,
+  });
+  const response = await getThingShadow.handler({
+    pathParameters: {
+      thingName: expected.thingName,
+    },
+  });
   const body = JSON.parse(response.body);
   const payload = JSON.parse(body.payloadString)
-  expect(body.thing).toEqual(expected.thing);
-  expect(payload).toEqual(expected.thingShadow);
+  expect(payload).toEqual(expectedThingShadowPayload);
   expect(response.statusCode).toEqual(200);
   iotDataPlaneClientMock.restore();
-  iotClientMock.restore();
 });
 
 test('Get thing with invalid thingName expect failure', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(DescribeThingCommand, {
-    thingName: expected.invalidThing.thingName,
+    thingName: expected.invalidThingName.thingName,
   }).rejects(expected.invalidThingError);
   const response = await getThing.handler({
     pathParameters: {
-      thingName: expected.invalidThing.thingName,
+      thingName: expected.invalidThingName.thingName,
     },
   });
   expect(response.statusCode).toEqual(404);
   iotClientMock.restore();
+});
+
+test('Get thing shadow with invalid thingName expect failure', async () => {
+  const iotDataPlaneClientMock = mockClient(IoTDataPlaneClient);
+  iotDataPlaneClientMock.on(GetThingShadowCommand, {
+    thingName: expected.invalidThingName.thingName,
+  }).rejects(expected.invalidThingShadowError)
+  const response = await getThingShadow.handler({
+    pathParameters: {
+      thingName: expected.invalidThingName.thingName,
+    },
+  });
+  expect(response.statusCode).toEqual(404);
+  iotDataPlaneClientMock.restore();
 });
 
 test('List things success', async () => {
@@ -251,7 +293,7 @@ test('List things with nextToken success', async () => {
 test('Update thing success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(UpdateThingCommand, {
-    thingName: expected.thing.thingName,
+    thingName: expected.thingName,
     thingTypeName: expected.updateThing.thingTypeName,
     attributePayload: expected.updateThing.attributePayload,
     expectedVersion: expected.updateThing.expectedVersion,
@@ -259,7 +301,7 @@ test('Update thing success', async () => {
   }).resolves({});
   const response = await updateThing.handler({
     pathParameters: {
-      thingName: expected.thing.thingName,
+      thingName: expected.thingName,
     },
     body: {
       thingTypeName: expected.updateThing.thingTypeName,
@@ -274,45 +316,97 @@ test('Update thing success', async () => {
   iotClientMock.restore();
 });
 
+test('Update thing shadow success', async () => {
+  const iotDataPlaneClientMock = mockClient(IoTDataPlaneClient);
+  iotDataPlaneClientMock.on(UpdateThingShadowCommand, {
+    thingName: expected.thingName,
+    payload: expected.updateThing.payload
+  }).resolves({});
+  const response = await UpdateThingShadow .handler({
+    pathParameters: {
+      thingName: expected.thingName,
+    },
+    body: {
+      payload: expected.updateThing.payload,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(response.statusCode).toEqual(200);
+  expect(body.updated).toEqual(true);
+  iotDataPlaneClientMock.restore();
+});
+
 test('Update thing with invalid input expect failure', async () => {
   const iotClientMock = mockClient(IoTClient);
   const response = await updateThing.handler({
     pathParameters: {
-      thingName: '',
+      thingName: expected.updateInvalidInput.thingName,
     },
     body: {
-      thingTypeName: expected.UpdateInvalidInput.thingTypeName,
-      attributePayload: expected.UpdateInvalidInput.attributePayload,
-      expectedVersion: expected.UpdateInvalidInput.expectedVersion,
-      removeThingType: expected.UpdateInvalidInput.removeThingType,
+      thingTypeName: expected.updateInvalidInput.thingTypeName,
+      attributePayload: expected.updateInvalidInput.attributePayload,
+      expectedVersion: expected.updateInvalidInput.expectedVersion,
+      removeThingType: expected.updateInvalidInput.removeThingType,
     },
   });
   expect(response.statusCode).toEqual(422);
   iotClientMock.restore();
 });
 
+test('Update thing shadow with invalid input expect failure', async () => {
+  const iotDataPlaneClientMock = mockClient(IoTDataPlaneClient);
+  const response = await UpdateThingShadow.handler({
+    pathParameters: {
+      thingName: expected.updateInvalidInput.thingName,
+    },
+    body: {
+      payload: expected.updateInvalidInput.payload,
+    },
+  });
+  expect(response.statusCode).toEqual(422);
+  iotDataPlaneClientMock.restore();
+});
+
 test('Update thing with invalid thingName expect failure', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(UpdateThingCommand, {
-    thingName: expected.invalidThing.thingName,
+    thingName: expected.invalidThingName.thingName,
   }).rejects(expected.invalidThingError);
   const response = await updateThing.handler({
     pathParameters: {
-      thingName: expected.invalidThing.thingName,
+      thingName: expected.invalidThingName.thingName,
     },
   });
   expect(response.statusCode).toEqual(404);
   iotClientMock.restore();
 });
 
+test('Update thing shadow with invalid thingName expect failure', async () => {
+  const iotDataPlaneClientMock = mockClient(IoTDataPlaneClient);
+  iotDataPlaneClientMock.on(UpdateThingShadowCommand, {
+    thingName: expected.invalidThingName.thingName,
+    payload: expected.invalidThingName.payload,
+  }).rejects(expected.invalidThingShadowError)
+  const response = await UpdateThingShadow.handler({
+    pathParameters: {
+      thingName: expected.invalidThingName.thingName,
+    },
+    body: {
+      payload: expected.invalidThingName.payload,
+    }
+  });
+  expect(response.statusCode).toEqual(404);
+  iotDataPlaneClientMock.restore();
+});
+
 test('Delete thing success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(DeleteThingCommand, {
-    thingName: expected.thing.thingName,
+    thingName: expected.thingName,
   }).resolves({});
   const response = await deleteThing.handler({
     pathParameters: {
-      thingName: expected.thing.thingName,
+      thingName: expected.thingName,
     },
   });
   const body = JSON.parse(response.body);
@@ -321,16 +415,47 @@ test('Delete thing success', async () => {
   iotClientMock.restore();
 });
 
+test('Delete thing shadow success', async () => {
+  const iotDataPlaneClientMock = mockClient(IoTDataPlaneClient);
+  iotDataPlaneClientMock.on(DeleteThingShadowCommand, {
+    thingName: expected.thingName,
+    shadowName: expected.shadowName
+  }).resolves({});
+  const response = await deleteThingShadow.handler({
+    pathParameters: {
+      thingName: expected.thingName,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(response.statusCode).toEqual(200);
+  expect(body.deleted).toEqual(true);
+  iotDataPlaneClientMock.restore();
+});
+
 test('Delete thing with invalid thingName expect failure', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(DeleteThingCommand, {
-    thingName: expected.invalidThing.thingName,
+    thingName: expected.invalidThingName.thingName,
   }).rejects(expected.invalidThingError);
   const response = await deleteThing.handler({
     pathParameters: {
-      thingName: expected.invalidThing.thingName,
+      thingName: expected.invalidThingName.thingName,
     },
   });
   expect(response.statusCode).toEqual(404);
   iotClientMock.restore();
+});
+
+test('Delete thing shadow with invalid thingName expect failure', async () => {
+  const iotDataPlaneClientMock = mockClient(IoTDataPlaneClient);
+  iotDataPlaneClientMock.on(DeleteThingShadowCommand, {
+    thingName: expected.invalidThingName.thingName,
+  }).rejects(expected.invalidThingShadowError);
+  const response = await deleteThingShadow.handler({
+    pathParameters: {
+      thingName: expected.invalidThingName.thingName,
+    },
+  });
+  expect(response.statusCode).toEqual(404);
+  iotDataPlaneClientMock.restore();
 });
