@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@aws-cdk/assert@^1.110.0":
+"@aws-cdk/assert@^1.110.1":
   version "1.110.1"
   resolved "https://registry.yarnpkg.com/@aws-cdk/assert/-/assert-1.110.1.tgz#1f03c0f008e9e41bb2a6eb62599dc2245a06695c"
   integrity sha512-GdLgThJrOZ4VsvnuJu+uYtbbx884m0jFavy4NgWc7KSE+Vn4X51VtO4Ju02el/pMSgS7MLgbGQXLYuFAlt3ITA==
@@ -21,7 +21,7 @@
     "@aws-cdk/cx-api" "1.110.1"
     constructs "^3.3.69"
 
-"@aws-cdk/aws-apigateway@1.110.1", "@aws-cdk/aws-apigateway@^1.108.1", "@aws-cdk/aws-apigateway@^1.110.0":
+"@aws-cdk/aws-apigateway@1.110.1", "@aws-cdk/aws-apigateway@^1.108.1", "@aws-cdk/aws-apigateway@^1.110.1":
   version "1.110.1"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-apigateway/-/aws-apigateway-1.110.1.tgz#36a7a6c26651d59942c30a2e0ba2ca65a4af3ad1"
   integrity sha512-KQQdNIFPD2/hHeGSu6bbbhxW6Dt+GhLWX42TWVQpktBfA36hptYxf7QhX+gjhlthKhjbJSvEMYLG4ZDn9/nVqg==
@@ -202,7 +202,7 @@
     "@aws-cdk/core" "1.110.1"
     constructs "^3.3.69"
 
-"@aws-cdk/aws-cognito@1.110.1", "@aws-cdk/aws-cognito@^1.108.1", "@aws-cdk/aws-cognito@^1.110.0":
+"@aws-cdk/aws-cognito@1.110.1", "@aws-cdk/aws-cognito@^1.108.1", "@aws-cdk/aws-cognito@^1.110.1":
   version "1.110.1"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-cognito/-/aws-cognito-1.110.1.tgz#8feb7aec536b319da0383fa2b011ddbba8287689"
   integrity sha512-J7MzpzwN1tUDCTpsHP03qXfUM+MbNuJ/IYz/wWg3fP2RdXKfcGDKVdSl27gEnsCaiC6cmQLzStRWW6ki2x87ow==
@@ -215,7 +215,7 @@
     constructs "^3.3.69"
     punycode "^2.1.1"
 
-"@aws-cdk/aws-dynamodb@^1.110.0":
+"@aws-cdk/aws-dynamodb@^1.110.1":
   version "1.110.1"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-dynamodb/-/aws-dynamodb-1.110.1.tgz#ad8ad6b69a3a044557bddcc01d844f5ab8d4b4b3"
   integrity sha512-DJ26oXT8Ib7N/ylWyWeZF6QHdqvjMyzcz3dcHZacEQZGqj0aBOVXQtmcZAb+qDBNsg81eKJE4E/3Qsy1YT2qJA==
@@ -342,7 +342,7 @@
     "@aws-cdk/region-info" "1.110.1"
     constructs "^3.3.69"
 
-"@aws-cdk/aws-events-targets@^1.110.0":
+"@aws-cdk/aws-events-targets@^1.110.1":
   version "1.110.1"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-events-targets/-/aws-events-targets-1.110.1.tgz#f407dd67bbb8d74c5ef00e6272cbe18ba5b7147c"
   integrity sha512-71sYjOJv3bSaYdoTikLfyugwL9r/UOk5LXwt8kVTIj+5Eko5bRWShx6gTjjb/Y4u6Ln4sW51RGMUgYnINJcFxA==
@@ -367,7 +367,7 @@
     "@aws-cdk/custom-resources" "1.110.1"
     constructs "^3.3.69"
 
-"@aws-cdk/aws-events@1.110.1", "@aws-cdk/aws-events@^1.110.0":
+"@aws-cdk/aws-events@1.110.1", "@aws-cdk/aws-events@^1.110.1":
   version "1.110.1"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-events/-/aws-events-1.110.1.tgz#0286bc4720fd73fa7ca6fdfec6519c9b4ab38ed8"
   integrity sha512-e8jqWZUUqOowvUtbWB4NO+zsiVQBEMbqMobnYFhKFtVXnM5y0jz1ulzvkqhm/w6uEHoCIDwKM4/PPQv8YtwXyA==
@@ -386,7 +386,7 @@
     "@aws-cdk/custom-resources" "1.110.1"
     constructs "^3.3.69"
 
-"@aws-cdk/aws-iam@1.110.1", "@aws-cdk/aws-iam@^1.110.0":
+"@aws-cdk/aws-iam@1.110.1", "@aws-cdk/aws-iam@^1.110.1":
   version "1.110.1"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-iam/-/aws-iam-1.110.1.tgz#3916fb431194afaeef551acd4bb7386e40149670"
   integrity sha512-qwhVd1ZUeIIMAUqfZjSB5OfVxe0vr9b+eUW/znuL5QjkSMeVORJW5/OEbI2id1OdnncTczyqo9GSJSIX1ISkcg==
@@ -425,7 +425,7 @@
     "@aws-cdk/cx-api" "1.110.1"
     constructs "^3.3.69"
 
-"@aws-cdk/aws-lambda-nodejs@^1.108.1", "@aws-cdk/aws-lambda-nodejs@^1.110.0":
+"@aws-cdk/aws-lambda-nodejs@^1.108.1", "@aws-cdk/aws-lambda-nodejs@^1.110.1":
   version "1.110.1"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-lambda-nodejs/-/aws-lambda-nodejs-1.110.1.tgz#4e3e66d1b1d0dfd4181fbbc61bde64b0f9c8891a"
   integrity sha512-huJEAQ7a53gZFzkfefW/Am7UHVbncPJSZEzShW2FaHo5N2Oys+sr2fs6M91MiuuzmkEsknbJ9wmC96tcI2MQLg==
@@ -434,7 +434,7 @@
     "@aws-cdk/core" "1.110.1"
     constructs "^3.3.69"
 
-"@aws-cdk/aws-lambda@1.110.1", "@aws-cdk/aws-lambda@^1.108.1", "@aws-cdk/aws-lambda@^1.110.0":
+"@aws-cdk/aws-lambda@1.110.1", "@aws-cdk/aws-lambda@^1.108.1", "@aws-cdk/aws-lambda@^1.110.1":
   version "1.110.1"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-lambda/-/aws-lambda-1.110.1.tgz#84c5685d17e5c38f8578f2d57e052b8d7ef7728e"
   integrity sha512-y4B8MX6jmAUhpjUTqmHk3pOvB+iH7o0lTcps3qVY6rWzASp3slvVuUxa5vOQvjdZmcK41uyOI1tYlq+gxFDOyA==
@@ -657,7 +657,7 @@
     string-width "^4.2.2"
     table "^6.7.1"
 
-"@aws-cdk/core@1.110.1", "@aws-cdk/core@^1.108.1", "@aws-cdk/core@^1.110.0":
+"@aws-cdk/core@1.110.1", "@aws-cdk/core@^1.108.1", "@aws-cdk/core@^1.110.1":
   version "1.110.1"
   resolved "https://registry.yarnpkg.com/@aws-cdk/core/-/core-1.110.1.tgz#7fd6408f3e6c2eee7a7bd3a5b8fc48e407a3804c"
   integrity sha512-E4+DorhqQ3j0qlz6GZ+v95cXvdsQiuyCjO0yYH5Qk/9X2vaXcJoCrbHYh4+Lx6pbBnAVvFMJXtoNFGoA0m9HpA==
@@ -2156,30 +2156,30 @@
     "@aws-cdk/aws-lambda-nodejs" "^1.108.1"
     "@aws-cdk/core" "^1.108.1"
 
-"@softchef/cdk-restapi@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@softchef/cdk-restapi/-/cdk-restapi-0.1.2.tgz#621cffff870071ed1adc9360e70df04abfd6af38"
-  integrity sha512-xIcnL2CVH/+0d64cS5wzsWCqIWYzcGHmTetmgPMqHxHhIq7GeHcJGBQ4rBcmQBzoCzzM4w9dfqML6f1Jf8kJRw==
+"@softchef/cdk-restapi@^0.1.3":
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@softchef/cdk-restapi/-/cdk-restapi-0.1.3.tgz#adc236b7b2f8af4c2bf379ff72b2192edea67065"
+  integrity sha512-JjfJ2/JQWIMmYrQ9B8+ooaNETeN5C7eDok2mag4dHh7S+1QIbDV4ecR7cs3LxBph5dUZBwTU+btSgUYXrLsF2g==
   dependencies:
-    "@aws-cdk/aws-apigateway" "^1.110.0"
-    "@aws-cdk/aws-cognito" "^1.110.0"
-    "@aws-cdk/aws-lambda" "^1.110.0"
-    "@aws-cdk/aws-lambda-nodejs" "^1.110.0"
-    "@aws-cdk/core" "^1.110.0"
+    "@aws-cdk/aws-apigateway" "^1.110.1"
+    "@aws-cdk/aws-cognito" "^1.110.1"
+    "@aws-cdk/aws-lambda" "^1.110.1"
+    "@aws-cdk/aws-lambda-nodejs" "^1.110.1"
+    "@aws-cdk/core" "^1.110.1"
 
-"@softchef/cdk-schedule-function@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@softchef/cdk-schedule-function/-/cdk-schedule-function-0.0.5.tgz#cdca982042043897b98aa2e51cf3b8cd8f1b61f1"
-  integrity sha512-wSXX+76xDS1KCSWSl8vLccX/ATuRZOwc+SKm5K8qRotRen8P6VU80rWwYqG4PdevpYuUwYf7TGf1GnTl6nio/A==
+"@softchef/cdk-schedule-function@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@softchef/cdk-schedule-function/-/cdk-schedule-function-0.0.7.tgz#949aa175a403499a3efc986d4577a7a07d79f8b0"
+  integrity sha512-GwZENwLr4F+EPrckypd30xjE1KnoMl+w8FTiE7CZtl11gUTL6A8dzwgX1KvW39lxT2+MH1fpNVnZOeMblMt2mg==
   dependencies:
-    "@aws-cdk/aws-apigateway" "^1.110.0"
-    "@aws-cdk/aws-dynamodb" "^1.110.0"
-    "@aws-cdk/aws-events" "^1.110.0"
-    "@aws-cdk/aws-events-targets" "^1.110.0"
-    "@aws-cdk/aws-iam" "^1.110.0"
-    "@aws-cdk/aws-lambda" "^1.110.0"
-    "@aws-cdk/aws-lambda-nodejs" "^1.110.0"
-    "@aws-cdk/core" "^1.110.0"
+    "@aws-cdk/aws-apigateway" "^1.110.1"
+    "@aws-cdk/aws-dynamodb" "^1.110.1"
+    "@aws-cdk/aws-events" "^1.110.1"
+    "@aws-cdk/aws-events-targets" "^1.110.1"
+    "@aws-cdk/aws-iam" "^1.110.1"
+    "@aws-cdk/aws-lambda" "^1.110.1"
+    "@aws-cdk/aws-lambda-nodejs" "^1.110.1"
+    "@aws-cdk/core" "^1.110.1"
     "@aws-sdk/client-dynamodb" "^3.18.0"
     "@aws-sdk/client-eventbridge" "^3.18.0"
     "@aws-sdk/client-lambda" "^3.19.0"
