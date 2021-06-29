@@ -9,7 +9,7 @@ export async function handler(event: { [key: string]: any }) {
       return {
         expectedVersion: joi.number().allow(null),
         statusDetails: joi.object().allow(null),
-        focus: joi.boolean().allow(null),
+        force: joi.boolean().allow(null),
       };
     });
     if (validated.error) {
@@ -21,12 +21,12 @@ export async function handler(event: { [key: string]: any }) {
         jobId: request.parameter('jobId'),
         thingName: request.parameter('thingName'),
         expectedVersion: request.input('expectedVersion', 1),
-        statusDetails: request.input('statusDetail', {}),
+        statusDetails: request.input('statusDetail', {}), 
         force: request.input('force', false)
       }),
     );
     return response.json({
-      deleted: true,
+      canceled: true,
     });
   } catch (error) {
     if (error.Code === 'ResourceNotFoundException') {
