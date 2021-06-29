@@ -2203,10 +2203,10 @@
     joi "^17.4.0"
     semver "^7.3.5"
 
-"@softchef/lambda-events@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@softchef/lambda-events/-/lambda-events-1.0.0.tgz#9aaf1d13f0bd1fdad67ead553fdfb7aa34ecb62a"
-  integrity sha512-t/SR8kvKHw3gyATe061fzrX3JZjYFWJsW0ctu/yKcCewzr89qJmGqwN3W4OI+D1nhok8GURh7ynwTHEZD7pWxw==
+"@softchef/lambda-events@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@softchef/lambda-events/-/lambda-events-1.0.2.tgz#36cee85ba7d9c729f02d605bd15b8926b34a1f79"
+  integrity sha512-yWqOkLaz9qhXaQhUJYwXn8shhBaa3MpOGM0kWtvc9kZR2XFZcYQJsTGNjDQpQHC8kuk0uXl5EIAgHYcv1MPHoA==
   dependencies:
     "@aws-sdk/client-cognito-identity-provider" "^3.18.0"
     "@types/node" "15.12.2"
