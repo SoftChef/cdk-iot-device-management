@@ -19,7 +19,6 @@ const project = new AwsCdkConstructLibrary({
     '@aws-cdk/aws-lambda',
     '@aws-cdk/aws-lambda-nodejs',
     '@aws-cdk/aws-dynamodb',
-    '@aws-sdk/shared-ini-file-loader',
   ],
   bundledDeps: [
     'joi',
