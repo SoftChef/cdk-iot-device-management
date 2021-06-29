@@ -1,5 +1,5 @@
 import { IoTClient, AddThingToThingGroupCommand } from '@aws-sdk/client-iot';
-import { Request, Response } from '../../utils';
+import { Request, Response } from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
@@ -16,6 +16,10 @@ export async function handler(event: { [key: string]: any }) {
       added: true,
     });
   } catch (error) {
-    return response.error(error);
+    if (error.Code === 'ResourceNotFoundException') {
+      return response.error(error, 404);
+    } else {
+      return response.error(error);
+    }
   }
 }
