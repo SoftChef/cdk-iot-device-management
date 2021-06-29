@@ -1,4 +1,4 @@
-import { IoTDataPlaneClient, UpdateThingShadowCommand } from "@aws-sdk/client-iot-data-plane";
+import { IoTDataPlaneClient, UpdateThingShadowCommand } from '@aws-sdk/client-iot-data-plane';
 import { Request, Response } from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
@@ -7,7 +7,12 @@ export async function handler(event: { [key: string]: any }) {
   try {
     const validated = request.validate(joi => {
       return {
-        payload: joi.object().required(),
+        payload: joi.object().keys({
+          state: joi.object().keys({
+            desired: joi.object().required(),
+            reported: joi.object().required(),
+          }),
+        }),
       };
     });
     if (validated.error) {
@@ -18,7 +23,11 @@ export async function handler(event: { [key: string]: any }) {
       new UpdateThingShadowCommand({
         thingName: request.parameter('thingName'),
         shadowName: request.parameter('shadowName'),
-        payload: request.input('payload'),
+        payload: new Uint8Array(
+          Buffer.from(
+            JSON.stringify(request.input('payload')),
+          ),
+        ),
       }),
     );
     return response.json({

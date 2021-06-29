@@ -1,4 +1,4 @@
-import { IoTDataPlaneClient, DeleteThingShadowCommand } from "@aws-sdk/client-iot-data-plane";
+import { IoTDataPlaneClient, DeleteThingShadowCommand } from '@aws-sdk/client-iot-data-plane';
 import { Request, Response } from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {

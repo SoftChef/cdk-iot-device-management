@@ -35,20 +35,8 @@ const expectedThingResponse = {
 };
 
 const expectedThingShadowPayload = {
-  metadata: {
-    desired: {
-      welcome: {
-        timestamp: Date.now(),
-      },
-    },
-    reported: {
-      welcome: {
-        timestamp: Date.now(),
-      },
-    },
-  },
   state: {
-    desire: {
+    desired: {
       welcome: 'aws-iot',
     },
     reported: {
@@ -95,6 +83,9 @@ const expected = {
     },
     expectedVersion: 1,
     removeThingType: true,
+  },
+  updateThingShadow: {
+    thingTypeName: expectedThingResponse.thingTypeName,
     payload: new Uint8Array(
       Buffer.from(
         JSON.stringify(expectedThingShadowPayload),
@@ -208,7 +199,7 @@ test('Get thing shadow success', async () => {
     },
   });
   const body = JSON.parse(response.body);
-  const payload = JSON.parse(body.payloadString);
+  const payload = JSON.parse(body.payload);
   expect(payload).toEqual(expectedThingShadowPayload);
   expect(response.statusCode).toEqual(200);
   iotDataPlaneClientMock.restore();
@@ -349,14 +340,14 @@ test('Update thing shadow success', async () => {
   const iotDataPlaneClientMock = mockClient(IoTDataPlaneClient);
   iotDataPlaneClientMock.on(UpdateThingShadowCommand, {
     thingName: expected.thingName,
-    payload: expected.updateThing.payload,
+    payload: expected.updateThingShadow.payload,
   }).resolves({});
   const response = await UpdateThingShadow .handler({
     pathParameters: {
       thingName: expected.thingName,
     },
     body: {
-      payload: expected.updateThing.payload,
+      payload: expectedThingShadowPayload,
     },
   });
   const body = JSON.parse(response.body);
@@ -415,7 +406,7 @@ test('Update thing shadow with invalid thingName expect failure', async () => {
   iotDataPlaneClientMock.on(UpdateThingShadowCommand, {
     thingName: expected.invalidThing.thingName,
     shadowName: expected.invalidThing.shadowName,
-    payload: expected.invalidThing.payload,
+    payload: expected.payload,
   }).rejects(expected.invalidThingShadowError);
   const response = await UpdateThingShadow.handler({
     pathParameters: {
@@ -423,7 +414,7 @@ test('Update thing shadow with invalid thingName expect failure', async () => {
       shadowName: expected.invalidThing.shadowName,
     },
     body: {
-      payload: expected.invalidThing.payload,
+      payload: expectedThingShadowPayload,
     },
   });
   expect(response.statusCode).toEqual(404);

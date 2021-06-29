@@ -1,4 +1,4 @@
-import { IoTDataPlaneClient, GetThingShadowCommand } from "@aws-sdk/client-iot-data-plane";
+import { IoTDataPlaneClient, GetThingShadowCommand } from '@aws-sdk/client-iot-data-plane';
 import { Request, Response } from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
@@ -12,12 +12,8 @@ export async function handler(event: { [key: string]: any }) {
         shadowName: request.parameter('shadowName'),
       }),
     );
-    let payloadString: string = '';
-    payload.forEach(num => {
-      payloadString += String.fromCharCode(num);
-    });
     return response.json({
-      payloadString
+      payload: String.fromCharCode(...payload)
     });
   } catch (error) {
     if (error.Code === 'ResourceNotFoundException') {

@@ -1,4 +1,4 @@
-import { IoTDataPlaneClient, ListNamedShadowsForThingCommand } from "@aws-sdk/client-iot-data-plane";
+import { IoTDataPlaneClient, ListNamedShadowsForThingCommand } from '@aws-sdk/client-iot-data-plane';
 import { Request, Response } from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
@@ -17,7 +17,7 @@ export async function handler(event: { [key: string]: any }) {
       })
     )
     return response.json({
-      thingShadows
+      thingShadows,
     });
   } catch (error) {
     return response.error(error);
