@@ -9,7 +9,6 @@ export async function handler(event: { [key: string]: any }) {
     if (request.has('nextToken')) {
       parameters.nextToken = request.get('nextToken');
     };
-    console.log(request.parameter("thingName"));
     const ioTDataPlaneClient = new IoTDataPlaneClient({});
     const thingShadows = await ioTDataPlaneClient.send(
       new ListNamedShadowsForThingCommand({
@@ -17,7 +16,9 @@ export async function handler(event: { [key: string]: any }) {
         ...parameters,
       })
     )
-    return response.json({thingShadows});
+    return response.json({
+      thingShadows
+    });
   } catch (error) {
     return response.error(error);
   }

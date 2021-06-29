@@ -48,6 +48,26 @@ export class ThingApi extends cdk.Construct {
           httpMethod: HttpMethod.DELETE,
           lambdaFunction: this.createDeleteThingFunction(),
         },
+        {
+          path: '/things/{thingName}/shadows',
+          httpMethod: HttpMethod.GET,
+          lambdaFunction: this.createListThingShadowsFunction(),
+        },
+        {
+          path: '/things/{thingName}/shadows/{shadowName}',
+          httpMethod: HttpMethod.GET,
+          lambdaFunction: this.createGetThingShadowFunction(),
+        },
+        {
+          path: '/things/{thingName}/shadows/{shadowName}',
+          httpMethod: HttpMethod.PUT,
+          lambdaFunction: this.createUpdateThingShadowFunction(),
+        },
+        {
+          path: '/things/{thingName}/shadows/{shadowName}',
+          httpMethod: HttpMethod.DELETE,
+          lambdaFunction: this.createDeleteThingShadowFunction(),
+        },
       ],
     });
     this.restApiId = restApi.restApiId;
@@ -146,5 +166,81 @@ export class ThingApi extends cdk.Construct {
       }),
     );
     return deleteThingFunction;
+  }
+
+  private createListThingShadowsFunction(): lambda.NodejsFunction {
+    const listThingShadowsFunction = new lambda.NodejsFunction(this, 'ListThingShadowsFunction', {
+      entry: `${LAMBDA_ASSETS_PATH}/list-thing-shadows/app.ts`,
+    });
+    listThingShadowsFunction.role?.attachInlinePolicy(
+      new iam.Policy(this, 'iot-list-thing-shadows-policy', {
+        statements: [
+          new iam.PolicyStatement({
+            actions: [
+              'iot:ListNamedShadowsForThing',
+            ],
+            resources: ['*'],
+          }),
+        ],
+      }),
+    );
+    return listThingShadowsFunction;
+  }
+
+  private createGetThingShadowFunction(): lambda.NodejsFunction {
+    const getThingShadowFunction = new lambda.NodejsFunction(this, 'GetThingShadowFunction', {
+      entry: `${LAMBDA_ASSETS_PATH}/get-thing-shadow/app.ts`,
+    });
+    getThingShadowFunction.role?.attachInlinePolicy(
+      new iam.Policy(this, 'iot-get-thing-shadow-policy', {
+        statements: [
+          new iam.PolicyStatement({
+            actions: [
+              'iot:GetThingShadow',
+            ],
+            resources: ['*'],
+          }),
+        ],
+      }),
+    );
+    return getThingShadowFunction;
+  }
+
+  private createUpdateThingShadowFunction(): lambda.NodejsFunction {
+    const updateThingShadowFunction = new lambda.NodejsFunction(this, 'UpdateThingShadowFunction', {
+      entry: `${LAMBDA_ASSETS_PATH}/update-thing-shadow/app.ts`,
+    });
+    updateThingShadowFunction.role?.attachInlinePolicy(
+      new iam.Policy(this, 'iot-update-thing-shadow-policy', {
+        statements: [
+          new iam.PolicyStatement({
+            actions: [
+              'iot:UpdateThingShadow',
+            ],
+            resources: ['*'],
+          }),
+        ],
+      }),
+    );
+    return updateThingShadowFunction;
+  }
+
+  private createDeleteThingShadowFunction(): lambda.NodejsFunction {
+    const deleteThingShadowFunction = new lambda.NodejsFunction(this, 'DeleteThingShadowFunction', {
+      entry: `${LAMBDA_ASSETS_PATH}/delete-thing-shadow/app.ts`,
+    });
+    deleteThingShadowFunction.role?.attachInlinePolicy(
+      new iam.Policy(this, 'iot-delete-thing-shadow-policy', {
+        statements: [
+          new iam.PolicyStatement({
+            actions: [
+              'iot:DeleteThingShadow',
+            ],
+            resources: ['*'],
+          }),
+        ],
+      }),
+    );
+    return deleteThingShadowFunction;
   }
 }

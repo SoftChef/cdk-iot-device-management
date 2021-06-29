@@ -6,12 +6,12 @@ export async function handler(event: { [key: string]: any }) {
   const response = new Response();
   try {
     const client = new IoTDataPlaneClient({});
-    const thingShadow = await client.send(
+    const { payload = [] } = await client.send(
       new GetThingShadowCommand({
         thingName: request.parameter('thingName'),
+        shadowName: request.parameter('shadowName'),
       }),
     );
-    const { payload = [] } = thingShadow;
     let payloadString: string = '';
     payload.forEach(num => {
       payloadString += String.fromCharCode(num);

@@ -17,6 +17,7 @@ export async function handler(event: { [key: string]: any }) {
     await ioTDataPlaneClient.send(
       new UpdateThingShadowCommand({
         thingName: request.parameter('thingName'),
+        shadowName: request.parameter('shadowName'),
         payload: request.input('payload'),
       }),
     );

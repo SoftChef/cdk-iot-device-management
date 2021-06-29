@@ -9,6 +9,7 @@ export async function handler(event: { [key: string]: any }) {
     await ioTDataPlaneClient.send(
       new DeleteThingShadowCommand({
         thingName: request.parameter('thingName'),
+        shadowName: request.parameter('shadowName'),
       }),
     );
     return response.json({
