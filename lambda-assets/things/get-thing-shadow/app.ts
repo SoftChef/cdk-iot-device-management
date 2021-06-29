@@ -16,7 +16,9 @@ export async function handler(event: { [key: string]: any }) {
     payload.forEach(num => {
       payloadString += String.fromCharCode(num);
     });
-    return response.json({payloadString});
+    return response.json({
+      payloadString
+    });
   } catch (error) {
     if (error.Code === 'ResourceNotFoundException') {
       return response.error(error, 404);
