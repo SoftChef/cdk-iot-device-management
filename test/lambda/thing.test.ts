@@ -56,20 +56,6 @@ const expectedThingShadowPayload = {
     },
   },
 };
-/*
-const expectedThingShadowResponse = {
-  thing: {
-    $metadata: {
-      httpStatusCode: 200,
-      requestId: "45512e4a-1844-4fe7-950a-6e3dc6ed383b",
-      attempts: 1,
-      totalRetryDelay: 0
-    },
-    "attributes": {},
-    "defaultClientId": "Test",
-    "thingArn": "arn:aws:iot:us-east-1:520095059637:thing/Test", "thingId": "09a5d7bf-d44c-4e18-ac29-5dc26e07df67", "thingName": "Test", "version": 10
-  },
-}*/
 
 const expectedInvalidThing = {
   thingName: 'NotExistsThing',
@@ -78,7 +64,6 @@ const expectedInvalidThing = {
 
 const expected = {
   thingResponse: expectedThingResponse,
-  //expectedThingShadowRequest: expectedThingShadowRequest,
   thingName: expectedThingResponse.thingName,
   shadowName: 'shadowName',
   payload: new Uint8Array(
@@ -242,7 +227,7 @@ test('Get thing with invalid thingName expect failure', async () => {
   expect(response.statusCode).toEqual(404);
   iotClientMock.restore();
 });
-// ====================================================================
+
 test('Get thing shadow with invalid thingName expect failure', async () => {
   const iotDataPlaneClientMock = mockClient(IoTDataPlaneClient);
   iotDataPlaneClientMock.on(GetThingShadowCommand, {
