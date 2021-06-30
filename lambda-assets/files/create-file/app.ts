@@ -9,10 +9,10 @@ export async function handler(event: { [key: string]: any }) {
     const validated = request.validate(joi => {
       return {
         location: joi.string().uri().required(),
-        checksumType: joi.string().allow('md5', 'crc32', 'sha1'), 
-        checksum: joi.string().when('checksumType', { is: 'md5', then: joi.string().length(32).required()})
-        .concat(joi.string().when('checksumType', { is: 'crc32', then: joi.string().length(8).required()}))
-        .concat(joi.string().when('checksumType', { is: 'sha1', then: joi.string().length(40).required()})),
+        checksumType: joi.string().allow('md5', 'crc32', 'sha1'),
+        checksum: joi.string().when('checksumType', { is: 'md5', then: joi.string().length(32).required() })
+          .concat(joi.string().when('checksumType', { is: 'crc32', then: joi.string().length(8).required() }))
+          .concat(joi.string().when('checksumType', { is: 'sha1', then: joi.string().length(40).required() })),
         version: joi.string().required(),
         categoryId: joi.string().required(),
       };
@@ -20,9 +20,9 @@ export async function handler(event: { [key: string]: any }) {
     if (validated.error) {
       return response.error(validated.details, 422);
     }
-    const categoryId = request.input('categoryId')
+    const categoryId = request.input('categoryId');
     const ddbDocClient = DynamoDBDocumentClient.from(
-      new DynamoDBClient({})
+      new DynamoDBClient({}),
     );
     const { Item: category } = await ddbDocClient.send(
       new GetCommand({
@@ -30,7 +30,7 @@ export async function handler(event: { [key: string]: any }) {
         Key: {
           categoryId,
         },
-      })
+      }),
     );
     if (!category) {
       return response.error('Category does not exist.', 422);
@@ -48,7 +48,7 @@ export async function handler(event: { [key: string]: any }) {
           createdAt: currentTime,
           updatedAt: currentTime,
         },
-      })
+      }),
     );
     return response.json({
       created: true,

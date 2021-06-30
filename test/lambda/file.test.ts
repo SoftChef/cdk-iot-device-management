@@ -174,7 +174,7 @@ test('Get category success', async () => {
   documentClientMock.restore();
 });
 
-test('Get category with invalid jobId expect failure', async () => {
+test('Get category with does not exist category', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
   documentClientMock.on(GetCommand, {
     TableName: CATEGORY_TABLE_NAME,
@@ -187,7 +187,9 @@ test('Get category with invalid jobId expect failure', async () => {
       categoryId: expectedInvalidCategoryExecution.categoryId,
     },
   });
+  const body = JSON.parse(response.body);
   expect(response.statusCode).toEqual(404);
+  expect(body.error).toEqual('Category does not exist.');
   documentClientMock.restore();
 });
 

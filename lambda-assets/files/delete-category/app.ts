@@ -7,7 +7,7 @@ export async function handler(event: { [key: string]: any }) {
   const response = new Response();
   try {
     const ddbDocClient = DynamoDBDocumentClient.from(
-      new DynamoDBClient({})
+      new DynamoDBClient({}),
     );
     await ddbDocClient.send(
       new DeleteCommand({
@@ -15,7 +15,7 @@ export async function handler(event: { [key: string]: any }) {
         Key: {
           categoryId: request.parameter('categoryId'),
         },
-      })
+      }),
     );
     return response.json({
       deleted: true,
