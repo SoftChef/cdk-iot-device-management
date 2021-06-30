@@ -5,7 +5,7 @@
 
 import { CreateJobTemplateCommand, IoTClient } from '@aws-sdk/client-iot';
 import { v4 as uuidv4 } from 'uuid';
-import { Request, Response } from '../../utils';
+import { Request, Response } from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
