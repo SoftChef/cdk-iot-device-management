@@ -10,7 +10,7 @@ import {
   CreateJobTemplateCommand,
   DeleteJobCommand,
   DeleteJobTemplateCommand,
-  // DeleteJobExecutionCommand,
+  DeleteJobExecutionCommand,
   DescribeJobCommand,
   DescribeJobExecutionCommand,
   DescribeJobTemplateCommand,
@@ -28,7 +28,7 @@ import {
 import * as cancelJobExecution from '../../lambda-assets/jobs/cancel-job-execution/app';
 import * as createJobTemplate from '../../lambda-assets/jobs/create-job-template/app';
 import * as createJob from '../../lambda-assets/jobs/create-job/app';
-// import * as deleteJobExecution from '../../lambda-assets/jobs/delete-job-execution/app';
+import * as deleteJobExecution from '../../lambda-assets/jobs/delete-job-execution/app';
 import * as deleteJobTemplate from '../../lambda-assets/jobs/delete-job-template/app';
 import * as deleteJob from '../../lambda-assets/jobs/delete-job/app';
 import * as getJobExecution from '../../lambda-assets/jobs/get-job-execution/app';
@@ -108,6 +108,10 @@ const expected = {
     jobId: expectedJob.jobId,
     force: true,
   },
+  forceCancelJob: {
+    jobId: expectedJob.jobId,
+    force: true,
+  },
   job: expectedJob,
   listJobs: {
     jobs: [
@@ -119,10 +123,6 @@ const expected = {
   invalidJobError: <AwsError>{
     Code: 'ResourceNotFoundException',
     message: `ResourceNotFoundException: Job ${expectedInvalidJob.jobId} cannot be found.`,
-  },
-  forceCancelJobExecution: {
-    jobId: expectedJob.jobId,
-    force: true,
   },
   jobExecution: expectedJobExecution,
   invalidJobExecution: expectedInvalidJobExecution,
@@ -601,7 +601,7 @@ test('Cancel job execution success', async () => {
     thingName: expected.jobExecution.thingName,
     expectedVersion: expected.jobExecution.executionNumber,
     statusDetails: expected.jobExecution.statusDetails.detailsMap,
-    force: expected.forceCancelJobExecution.force,
+    force: expected.forceCancelJob.force,
   }).resolves({});
   const response = await cancelJobExecution.handler({
     pathParameters: {
@@ -611,7 +611,7 @@ test('Cancel job execution success', async () => {
     body: {
       expectedVersion: expected.jobExecution.executionNumber,
       statusDetails: expected.jobExecution.statusDetails.detailsMap,
-      force: expected.forceCancelJobExecution.force,
+      force: expected.forceCancelJob.force,
     },
   });
   const body = JSON.parse(response.body);
@@ -661,6 +661,77 @@ test('Cancel job execution with invalid thingName expect failure', async () => {
 });
 
 test('Delete job execution success', async () => {
-  // const response = await deleteJobExecution.handler({});
-  // const body = JSON.parse(response.body);
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(DeleteJobExecutionCommand, {
+    jobId: expected.jobExecution.jobId,
+    thingName: expected.jobExecution.thingName,
+    executionNumber: expected.jobExecution.executionNumber,
+    force: expected.forceDeleteJob.force,
+  }).resolves({});
+  const response = await deleteJobExecution.handler({
+    pathParameters: {
+      jobId: expected.jobExecution.jobId,
+      thingName: expected.jobExecution.thingName,
+    },
+    body: {
+      executionNumber: expected.jobExecution.executionNumber,
+      force: expected.forceDeleteJob.force,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(response.statusCode).toEqual(200);
+  expect(body.deleted).toEqual(true);
+  iotClientMock.restore();
+});
+
+test('Delete job execution with invalid jobId expect failure', async () => {
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(DeleteJobExecutionCommand, {
+    jobId: expected.invalidJobExecution.jobId,
+    thingName: expected.invalidJobExecution.thingName,
+    executionNumber: expected.jobExecution.executionNumber,
+    force: expected.forceDeleteJob.force,
+  }).rejects(expected.invalidJobExecutionError);
+  const response = await deleteJobExecution.handler({
+    pathParameters: {
+      jobId: expected.invalidJobExecution.jobId,
+      thingName: expected.invalidJobExecution.thingName,
+    },
+    body: {
+      executionNumber: expected.jobExecution.executionNumber,
+      force: expected.forceDeleteJob.force,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(response.statusCode).toEqual(404);
+  expect(body.error).toEqual(
+    Object.assign(new Error(), expected.invalidJobExecutionError).toString(),
+  );
+  iotClientMock.restore();
+});
+
+test('Delete job execution with invalid thingName expect failure', async () => {
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(DeleteJobExecutionCommand, {
+    jobId: expected.invalidThingForJobExecution.jobId,
+    thingName: expected.invalidThingForJobExecution.thingName,
+    executionNumber: expected.jobExecution.executionNumber,
+    force: expected.forceDeleteJob.force,
+  }).rejects(expected.invalidJobExecutionError);
+  const response = await deleteJobExecution.handler({
+    pathParameters: {
+      jobId: expected.invalidThingForJobExecution.jobId,
+      thingName: expected.invalidThingForJobExecution.thingName,
+    },
+    body: {
+      executionNumber: expected.jobExecution.executionNumber,
+      force: expected.forceDeleteJob.force,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(response.statusCode).toEqual(404);
+  expect(body.error).toEqual(
+    Object.assign(new Error(), expected.invalidJobExecutionError).toString(),
+  );
+  iotClientMock.restore();
 });
