@@ -2167,10 +2167,10 @@
     "@aws-cdk/aws-lambda-nodejs" "^1.110.1"
     "@aws-cdk/core" "^1.110.1"
 
-"@softchef/cdk-schedule-function@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@softchef/cdk-schedule-function/-/cdk-schedule-function-0.0.7.tgz#949aa175a403499a3efc986d4577a7a07d79f8b0"
-  integrity sha512-GwZENwLr4F+EPrckypd30xjE1KnoMl+w8FTiE7CZtl11gUTL6A8dzwgX1KvW39lxT2+MH1fpNVnZOeMblMt2mg==
+"@softchef/cdk-schedule-function@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@softchef/cdk-schedule-function/-/cdk-schedule-function-0.0.8.tgz#211724fbcbdccf08bcf76f714b835620d11de153"
+  integrity sha512-YeIEolpIvWndnideApXlJNyT2fBWc6kNMwXBly8hisMztBEMor7v5UMsmC53ue5A4M3tR+4KpOzV0XsRYRvV3g==
   dependencies:
     "@aws-cdk/aws-apigateway" "^1.110.1"
     "@aws-cdk/aws-dynamodb" "^1.110.1"

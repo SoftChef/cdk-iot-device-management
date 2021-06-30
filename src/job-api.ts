@@ -4,8 +4,8 @@ import * as iam from '@aws-cdk/aws-iam';
 import * as lambda from '@aws-cdk/aws-lambda-nodejs';
 import * as cdk from '@aws-cdk/core';
 import { RestApi, HttpMethod } from '@softchef/cdk-restapi';
-import { ScheduleFunction } from '@softchef/cdk-schedule-function';
-console.log(ScheduleFunction);
+// import { ScheduleFunction } from '@softchef/cdk-schedule-function';
+
 const LAMBDA_ASSETS_PATH = path.resolve(__dirname, '../lambda-assets/jobs');
 
 export interface JobApiProps {
@@ -86,14 +86,29 @@ export class JobApi extends cdk.Construct {
       props?.scheduleFunction?.createScheduleFunction.addEnvironment('FIXED_TARGET_TYPE', targetType);
       this._restApi.addResources([
         {
-          path: '/jobs/schedules',
+          path: '/schedules',
           httpMethod: HttpMethod.GET,
           lambdaFunction: props?.scheduleFunction.listSchedulesFunction,
         },
         {
-          path: '/jobs/schedules',
+          path: '/schedules',
           httpMethod: HttpMethod.POST,
           lambdaFunction: props?.scheduleFunction.createScheduleFunction,
+        },
+        {
+          path: '/schedules/{scheduleId}',
+          httpMethod: HttpMethod.GET,
+          lambdaFunction: props?.scheduleFunction.fetchScheduleFunction,
+        },
+        {
+          path: '/schedules/{scheduleId}',
+          httpMethod: HttpMethod.PUT,
+          lambdaFunction: props?.scheduleFunction.updateScheduleFunction,
+        },
+        {
+          path: '/schedules/{scheduleId}',
+          httpMethod: HttpMethod.DELETE,
+          lambdaFunction: props?.scheduleFunction.deleteScheduleFunction,
         },
       ]);
     }
