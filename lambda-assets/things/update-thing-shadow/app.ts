@@ -9,8 +9,8 @@ export async function handler(event: { [key: string]: any }) {
       return {
         payload: joi.object().keys({
           state: joi.object().keys({
-            desired: joi.object().required(),
-            reported: joi.object().required(),
+            desired: joi.object().allow(null),
+            reported: joi.object().allow(null),
           }),
         }),
       };
