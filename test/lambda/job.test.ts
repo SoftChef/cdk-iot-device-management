@@ -14,9 +14,9 @@ import {
   DeleteJobTemplateCommand,
   DeleteJobExecutionCommand,
   DescribeJobCommand,
+  GetJobDocumentCommand,
   DescribeJobExecutionCommand,
   DescribeJobTemplateCommand,
-  //GetJobDocumentCommand,
   ListJobsCommand,
   ListJobTemplatesCommand,
   ListJobExecutionsForJobCommand,
@@ -33,6 +33,7 @@ import * as createJob from '../../lambda-assets/jobs/create-job/app';
 import * as deleteJobExecution from '../../lambda-assets/jobs/delete-job-execution/app';
 import * as deleteJobTemplate from '../../lambda-assets/jobs/delete-job-template/app';
 import * as deleteJob from '../../lambda-assets/jobs/delete-job/app';
+import * as getJobDocument from '../../lambda-assets/jobs/get-job-document/app';
 import * as getJobExecution from '../../lambda-assets/jobs/get-job-execution/app';
 import * as getJobTemplate from '../../lambda-assets/jobs/get-job-template/app';
 import * as getJob from '../../lambda-assets/jobs/get-job/app';
@@ -41,7 +42,6 @@ import * as ListJobExecutionsForThing from '../../lambda-assets/jobs/list-job-ex
 import * as listJobTemplates from '../../lambda-assets/jobs/list-job-templates/app';
 import * as listJobs from '../../lambda-assets/jobs/list-jobs/app';
 import * as updateJob from '../../lambda-assets/jobs/update-job/app';
-// import * as updateJobTargets from '../../lambda-assets/jobs/update-job-targets/app';
 
 const expectedJob = {
   jobArn: 'arn:aws:iot:ap-northeast-1:012345678901:job/85f6509f-023c-48fb-8252-981653ffd561',
@@ -109,6 +109,7 @@ const expected = {
     }),
     description: expectedJob.description,
   },
+  document: 'Test',
   forceDeleteJob: {
     jobId: expectedJob.jobId,
     force: true,
@@ -269,6 +270,42 @@ test('Get job with invalid jobId expect failure', async () => {
     jobId: expected.invalidJob.jobId,
   }).rejects(expected.invalidJobError);
   const response = await getJob.handler({
+    pathParameters: {
+      jobId: expected.invalidJob.jobId,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(response.statusCode).toEqual(404);
+  expect(body.error).toEqual(
+    Object.assign(new Error(), expected.invalidJobError).toString(),
+  );
+  iotClientMock.restore();
+});
+
+test('Get document success', async () => {
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(GetJobDocumentCommand, {
+    jobId: expected.job.jobId,
+  }).resolves({
+    document: 'Test',
+  });
+  const response = await getJobDocument.handler({
+    pathParameters: {
+      jobId: expected.job.jobId,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(body.document).toEqual(expected.document);
+  expect(response.statusCode).toEqual(200);
+  iotClientMock.restore();
+});
+
+test('Get job with invalid jobId expect failure', async () => {
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(GetJobDocumentCommand, {
+    jobId: expected.invalidJob.jobId,
+  }).rejects(expected.invalidJobError);
+  const response = await getJobDocument.handler({
     pathParameters: {
       jobId: expected.invalidJob.jobId,
     },
