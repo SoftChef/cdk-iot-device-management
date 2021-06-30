@@ -7,7 +7,7 @@ export async function handler(event: { [key: string]: any }) {
   const response = new Response();
   try {
     const ddbDocClient = DynamoDBDocumentClient.from(
-      new DynamoDBClient({})
+      new DynamoDBClient({}),
     );
     const { Item: category } = await ddbDocClient.send(
       new GetCommand({
@@ -15,10 +15,10 @@ export async function handler(event: { [key: string]: any }) {
         Key: {
           categoryId: request.parameter('categoryId'),
         },
-      })
+      }),
     );
     if (!category) {
-      return response.error('Not found.', 404);
+      return response.error('Category does not exist.', 404);
     };
     return response.json({
       category,
