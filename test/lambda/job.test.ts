@@ -6,7 +6,7 @@
 import {
   IoTClient,
   // AssociateTargetsWithJobCommand,
-  //CancelJobCommand,
+  CancelJobCommand,
   CancelJobExecutionCommand,
   CreateJobCommand,
   CreateJobTemplateCommand,
@@ -27,6 +27,7 @@ import {
   mockClient,
   AwsError,
 } from 'aws-sdk-client-mock';
+import * as cancelJob from '../../lambda-assets/jobs/cancel-job/app';
 import * as cancelJobExecution from '../../lambda-assets/jobs/cancel-job-execution/app';
 import * as createJobTemplate from '../../lambda-assets/jobs/create-job-template/app';
 import * as createJob from '../../lambda-assets/jobs/create-job/app';
@@ -190,6 +191,40 @@ const expected = {
   },
 };
 
+test('Cancel job success', async () => {
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(CancelJobCommand, {
+    jobId: expected.job.jobId,
+  }).resolves({});
+  const response = await cancelJob.handler({
+    pathParameters: {
+      jobId: expected.job.jobId,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(body.canceled).toEqual(true);
+  expect(response.statusCode).toEqual(200);
+  iotClientMock.restore();
+});
+
+test('Cancel job with invalid jobId expect failure', async () => {
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(CancelJobCommand, {
+    jobId: expected.invalidJob.jobId,
+  }).rejects(expected.invalidJobError);
+  const response = await cancelJob.handler({
+    pathParameters: {
+      jobId: expected.invalidJob.jobId,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(response.statusCode).toEqual(404);
+  expect(body.error).toEqual(
+    Object.assign(new Error(), expected.invalidJobError).toString(),
+  );
+  iotClientMock.restore();
+});
+
 test('Create job success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(CreateJobCommand, {
@@ -282,7 +317,7 @@ test('Get job with invalid jobId expect failure', async () => {
   iotClientMock.restore();
 });
 
-test('Get document success', async () => {
+test('Get job document success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(GetJobDocumentCommand, {
     jobId: expected.job.jobId,
@@ -300,7 +335,7 @@ test('Get document success', async () => {
   iotClientMock.restore();
 });
 
-test('Get job with invalid jobId expect failure', async () => {
+test('Get job document with invalid jobId expect failure', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(GetJobDocumentCommand, {
     jobId: expected.invalidJob.jobId,
