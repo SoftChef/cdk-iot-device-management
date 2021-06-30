@@ -15,7 +15,7 @@ export async function handler(event: { [key: string]: any }) {
       return response.error(validated.details, 422);
     };
     const ddbDocClient = DynamoDBDocumentClient.from(
-      new DynamoDBClient({})
+      new DynamoDBClient({}),
     );
     const { Item: category } = await ddbDocClient.send(
       new GetCommand({
@@ -23,7 +23,7 @@ export async function handler(event: { [key: string]: any }) {
         Key: {
           categoryId: request.parameter('categoryId'),
         },
-      })
+      }),
     );
     if (!category) {
       return response.error('Not found.', 404);
@@ -34,14 +34,14 @@ export async function handler(event: { [key: string]: any }) {
         Key: {
           categoryId: request.parameter('categoryId'),
         },
-        UpdateExpression: "set #description = :description",
+        UpdateExpression: 'set #description = :description',
         ExpressionAttributeNames: {
-          '#description': 'description'
+          '#description': 'description',
         },
         ExpressionAttributeValues: {
-          ":description": request.input('description', ''),
+          ':description': request.input('description', ''),
         },
-      })
+      }),
     );
     return response.json({
       updated: true,

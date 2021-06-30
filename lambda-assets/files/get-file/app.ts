@@ -7,7 +7,7 @@ export async function handler(event: { [key: string]: any }) {
   const response = new Response();
   try {
     const ddbDocClient = DynamoDBDocumentClient.from(
-      new DynamoDBClient({})
+      new DynamoDBClient({}),
     );
     const { Item: file } = await ddbDocClient.send(
       new GetCommand({
@@ -22,7 +22,7 @@ export async function handler(event: { [key: string]: any }) {
       return response.error('Not found.', 404);
     };
     return response.json({
-      file
+      file,
     });
   } catch (error) {
     return response.error(error);

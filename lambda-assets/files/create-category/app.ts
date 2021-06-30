@@ -1,7 +1,7 @@
+import * as crypto from 'crypto';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, GetCommand, PutCommand } from '@aws-sdk/lib-dynamodb';
 import { Request, Response } from '@softchef/lambda-events';
-import *  as crypto from 'crypto';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
@@ -21,7 +21,7 @@ export async function handler(event: { [key: string]: any }) {
     const name = request.input('name', null);
     const parentId = request.input('parentId');
     const ddbDocClient = DynamoDBDocumentClient.from(
-      new DynamoDBClient({})
+      new DynamoDBClient({}),
     );
     const md5 = crypto.createHash('md5');
     let itemParameters: { [key: string]: any } = {};
@@ -37,7 +37,7 @@ export async function handler(event: { [key: string]: any }) {
         Key: {
           categoryId: itemParameters.categoryId,
         },
-      })
+      }),
     );
     if (category) {
       return response.error('Category already exists.', 422);
@@ -52,7 +52,7 @@ export async function handler(event: { [key: string]: any }) {
           createdAt: currentTime,
           updatedAt: currentTime,
         },
-      })
+      }),
     );
     return response.json({
       created: true,
