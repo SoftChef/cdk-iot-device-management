@@ -21,8 +21,8 @@ export async function handler(event: { [key: string]: any }) {
         jobId: request.parameter('jobId'),
         thingName: request.parameter('thingName'),
         expectedVersion: request.input('expectedVersion', 1),
-        statusDetails: request.input('statusDetail', {}), 
-        force: request.input('force', false)
+        statusDetails: request.input('statusDetail', {}),
+        force: request.input('force', false),
       }),
     );
     return response.json({
