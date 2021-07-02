@@ -1,18 +1,19 @@
-import { IoTClient, DeleteThingTypeCommand } from '@aws-sdk/client-iot';
+import { IoTDataPlaneClient, GetThingShadowCommand } from '@aws-sdk/client-iot-data-plane';
 import { Request, Response } from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
   const response = new Response();
   try {
-    const iotClient = new IoTClient({});
-    await iotClient.send(
-      new DeleteThingTypeCommand({
-        thingTypeName: request.parameter('thingTypeName'),
+    const client = new IoTDataPlaneClient({});
+    const { payload = [] } = await client.send(
+      new GetThingShadowCommand({
+        thingName: request.parameter('thingName'),
+        shadowName: request.parameter('shadowName'),
       }),
     );
     return response.json({
-      deleted: true,
+      payload: String.fromCharCode(...payload)
     });
   } catch (error) {
     if (error.Code === 'ResourceNotFoundException') {

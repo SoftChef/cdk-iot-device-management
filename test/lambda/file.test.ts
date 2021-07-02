@@ -152,7 +152,7 @@ test('Create category already exists', async () => {
     },
   });
   const body = JSON.parse(response.body);
-  expect(response.statusCode).toEqual(400);
+  expect(response.statusCode).toEqual(422);
   expect(body.error).toEqual('Category already exists.');
   documentClientMock.restore();
 });
@@ -174,7 +174,7 @@ test('Get category success', async () => {
   documentClientMock.restore();
 });
 
-test('Get category with invalid jobId expect failure', async () => {
+test('Get category with does not exist category', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
   documentClientMock.on(GetCommand, {
     TableName: CATEGORY_TABLE_NAME,
@@ -187,7 +187,9 @@ test('Get category with invalid jobId expect failure', async () => {
       categoryId: expectedInvalidCategoryExecution.categoryId,
     },
   });
+  const body = JSON.parse(response.body);
   expect(response.statusCode).toEqual(404);
+  expect(body.error).toEqual('Category does not exist.');
   documentClientMock.restore();
 });
 
@@ -335,6 +337,30 @@ test('Create file API success', async () => {
   const body = JSON.parse(response.body);
   expect(response.statusCode).toEqual(200);
   expect(body.created).toEqual(true);
+  documentClientMock.restore();
+});
+
+test('Create file with does not exist category', async () => {
+  const documentClientMock = mockClient(DynamoDBDocumentClient);
+  documentClientMock.on(GetCommand, {
+    TableName: CATEGORY_TABLE_NAME,
+    Key: {
+      categoryId: expected.newFiles.categoryId,
+    },
+  }).resolves({});
+  const response = await createFile.handler({
+    body: {
+      location: expected.newFiles.location,
+      checksum: expected.newFiles.checksum,
+      checksumType: expected.newFiles.checksumType,
+      version: expected.newFiles.version,
+      categoryId: expected.newFiles.categoryId,
+      describe: expected.newFiles.description,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(response.statusCode).toEqual(422);
+  expect(body.error).toEqual('Category does not exist.');
   documentClientMock.restore();
 });
 

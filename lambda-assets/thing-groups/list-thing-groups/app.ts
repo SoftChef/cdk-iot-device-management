@@ -1,5 +1,5 @@
 import { IoTClient, ListThingGroupsCommand } from '@aws-sdk/client-iot';
-import { Request, Response } from '../../utils';
+import { Request, Response } from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
@@ -11,9 +11,7 @@ export async function handler(event: { [key: string]: any }) {
         nextToken: request.get('nextToken', undefined),
       }),
     );
-    return response.json({
-      thingGroups,
-    });
+    return response.json(thingGroups);
   } catch (error) {
     return response.error(error);
   }

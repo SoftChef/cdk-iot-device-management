@@ -1,14 +1,15 @@
-import { IoTClient, DeleteThingTypeCommand } from '@aws-sdk/client-iot';
+import { IoTDataPlaneClient, DeleteThingShadowCommand } from '@aws-sdk/client-iot-data-plane';
 import { Request, Response } from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
   const response = new Response();
   try {
-    const iotClient = new IoTClient({});
-    await iotClient.send(
-      new DeleteThingTypeCommand({
-        thingTypeName: request.parameter('thingTypeName'),
+    const ioTDataPlaneClient = new IoTDataPlaneClient({});
+    await ioTDataPlaneClient.send(
+      new DeleteThingShadowCommand({
+        thingName: request.parameter('thingName'),
+        shadowName: request.parameter('shadowName'),
       }),
     );
     return response.json({

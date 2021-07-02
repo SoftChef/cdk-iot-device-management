@@ -1,4 +1,4 @@
-import { IoTClient, ListThingsCommand } from '@aws-sdk/client-iot';
+import { IoTDataPlaneClient, ListNamedShadowsForThingCommand } from '@aws-sdk/client-iot-data-plane';
 import { Request, Response } from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
@@ -9,15 +9,16 @@ export async function handler(event: { [key: string]: any }) {
     if (request.has('nextToken')) {
       parameters.nextToken = request.get('nextToken');
     };
-    if (request.has('attributeName')) {
-      parameters.attributeName = request.get('attributeName');
-      parameters.attributeValue = request.get('attributeValue');
-    };
-    const iotClient = new IoTClient({});
-    const things = await iotClient.send(
-      new ListThingsCommand(parameters),
-    );
-    return response.json(things);
+    const ioTDataPlaneClient = new IoTDataPlaneClient({});
+    const thingShadows = await ioTDataPlaneClient.send(
+      new ListNamedShadowsForThingCommand({
+        thingName: request.parameter('thingName'),
+        ...parameters,
+      })
+    )
+    return response.json({
+      thingShadows,
+    });
   } catch (error) {
     return response.error(error);
   }
