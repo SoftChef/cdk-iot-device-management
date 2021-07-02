@@ -37,7 +37,7 @@
 - API Path
   - `POST /files`
 - Local Path
-  - [lambda-assets/files/create-files/app.ts](lambda-assets/files/create-files/app.ts)
+  - [lambda-assets/files/create-category/app.ts](lambda-assets/files/create-files/app.ts)
 
 | Method | Param | Type                | Required / Optional | Description |
 | - | ------------- | -------------       | ----------------- | ------------- |
@@ -61,40 +61,30 @@
 - API Call Example
 
 ```Create category Example
-// Make a HTTP POST request
-
-POST https://exaple.com/test/{tableName:category}/
-
 // body
 
 {
-    name: newCategoryName,
-    parentId: 
-    description: newCategorydescription,
-}
-
-// If create success
-
-{
-  created: true
+    name: "newCategoryName",
+    parentId: "parentId",
+    description: "newCategorydescription",
 }
 ```
 
-#### GET /categories - Get root category list
+### GET /categories - Get root category list
 
-#### GET /categories/{categoryId} - Get category by ID, if category is root will return children category list
+### GET /categories/{categoryId} - Get category by ID, if category is root will return children category list
 
-#### POST /categories - Create new category
+### POST /categories - Create new category
 
-#### PUT /categories/{categoryId} - Update category by ID
+### PUT /categories/{categoryId} - Update category by ID
 
-#### DELETE /categories/{categoryId} - Delete category by ID
+### DELETE /categories/{categoryId} - Delete category by ID
 
-#### GET /files - Get root files list
+### GET /files - Get root files list
 
-#### GET /files/{categoryId} - Get files by category ID
+### GET /files/{categoryId} - Get files by category ID
 
-#### GET /files/{fileId} - Get file by ID
+### GET /files/{fileId} - Get file by ID
 
 ### Create new file
 
@@ -123,21 +113,19 @@ POST https://exaple.com/test/{tableName:category}/
 | 422 | Validate Error | Missing require field / Variable type incorrect |
 
 ```Create file Example
-// request body
-
 {
-  location: expected.newFiles.location,
-  checksum: expected.newFiles.checksum,
-  checksumType: expected.newFiles.checksumType,
-  version: expected.newFiles.version,
-  categoryId: expected.newFiles.categoryId,
-  describe: expected.newFiles.description,
+  location: "https://example.com/Android-9.0.apk",
+  checksum: "fc5e038d38a57032085441e7fe7010b0":,
+  checksumType: "md5",
+  version: "1.0",
+  categoryId: "Android",
+  describe: "Android 9.0 ISO file",
 }
 ```
 
-#### PUT /files/{fileId} - Update file by ID
+### PUT /files/{fileId} - Update file by ID
 
-#### DELETE /files/{fileId} - Delete file by ID
+### DELETE /files/{fileId} - Delete file by ID
 
 
 
