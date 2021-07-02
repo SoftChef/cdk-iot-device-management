@@ -128,6 +128,11 @@ const expected = {
     ],
     nextToken: '12345',
   },
+  executionSummariesTime: {
+    queuedAt: new Date(2021, 6, 17, 3, 24, 0),
+    startedAt: new Date(2021, 6, 18, 3, 24, 0),
+    lastUpdatedAt: new Date(2021, 6, 16, 3, 24, 0),
+  },
   listJobExecutionForJob: {
     executionSummaries: [{
       thingArn: expectedJobExecution.thingArn,
@@ -902,9 +907,9 @@ test('List job executions for job success', async () => {
       thingArn: expectedJobExecution.thingArn,
       jobExecutionSummary: {
         status: expected.jobExecution.status,
-        queuedAt: new Date(2021, 6, 17, 3, 24, 0),
-        startedAt: new Date(2021, 6, 18, 3, 24, 0),
-        lastUpdatedAt: new Date(2021, 6, 16, 3, 24, 0),
+        queuedAt: expected.executionSummariesTime.queuedAt,
+        startedAt: expected.executionSummariesTime.startedAt,
+        lastUpdatedAt: expected.executionSummariesTime.lastUpdatedAt,
         executionNumber: 1,
       },
     }],
@@ -934,9 +939,9 @@ test('List job Executions For job with nextToken success', async () => {
       thingArn: expectedJobExecution.thingArn,
       jobExecutionSummary: {
         status: expected.jobExecution.status,
-        queuedAt: new Date(2021, 6, 17, 3, 24, 0),
-        startedAt: new Date(2021, 6, 18, 3, 24, 0),
-        lastUpdatedAt: new Date(2021, 6, 16, 3, 24, 0),
+        queuedAt: expected.executionSummariesTime.queuedAt,
+        startedAt: expected.executionSummariesTime.startedAt,
+        lastUpdatedAt: expected.executionSummariesTime.lastUpdatedAt,
         executionNumber: 1,
       },
     }],
@@ -967,9 +972,9 @@ test('List job executions for thing success', async () => {
       jobId: expectedJobExecution.jobId,
       jobExecutionSummary: {
         status: expected.jobExecution.status,
-        queuedAt: new Date(2021, 6, 17, 3, 24, 0),
-        startedAt: new Date(2021, 6, 18, 3, 24, 0),
-        lastUpdatedAt: new Date(2021, 6, 16, 3, 24, 0),
+        queuedAt: expected.executionSummariesTime.queuedAt,
+        startedAt: expected.executionSummariesTime.startedAt,
+        lastUpdatedAt: expected.executionSummariesTime.lastUpdatedAt,
         executionNumber: 1,
       },
     }],
@@ -999,9 +1004,9 @@ test('List job executions for thing with nextToken success', async () => {
       jobId: expected.jobExecution.jobId,
       jobExecutionSummary: {
         status: expected.jobExecution.status,
-        queuedAt: new Date(2021, 6, 17, 3, 24, 0),
-        startedAt: new Date(2021, 6, 18, 3, 24, 0),
-        lastUpdatedAt: new Date(2021, 6, 16, 3, 24, 0),
+        queuedAt: expected.executionSummariesTime.queuedAt,
+        startedAt: expected.executionSummariesTime.startedAt,
+        lastUpdatedAt: expected.executionSummariesTime.lastUpdatedAt,
         executionNumber: 1,
       },
     }],
