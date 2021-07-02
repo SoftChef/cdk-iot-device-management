@@ -75,7 +75,6 @@ const expectedJobExecution = {
   versionNumber: 2,
 };
 
-
 const expectedInvalidJobExecution = {
   jobId: 'not-exists-job-id',
   thingName: 'TestThing',
@@ -97,7 +96,6 @@ const expectedJobTemplate = {
   jobExecutionsRolloutConfig: {},
   timeoutConfig: {},
 };
-
 
 const expectedInvalidJobTemplate = {
   jobTemplateId: 'not-exists-job-template-id',

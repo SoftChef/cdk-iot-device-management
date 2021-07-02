@@ -8,7 +8,7 @@ export async function handler(event: { [key: string]: any }) {
     const validated = request.validate(joi => {
       return {
         executionNumber: joi.number().required(),
-        force: joi.boolean().allow(null)
+        force: joi.boolean().allow(null),
       };
     });
     if (validated.error) {
