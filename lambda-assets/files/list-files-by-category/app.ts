@@ -7,15 +7,15 @@ export async function handler(event: { [key: string]: any }) {
   const response = new Response();
   try {
     const ddbDocClient = DynamoDBDocumentClient.from(
-      new DynamoDBClient({})
+      new DynamoDBClient({}),
     );
     let parameters: { [key: string]: any } = {};
     if (request.has('nextToken')) {
       parameters.ExclusiveStartKey = {
         Key: JSON.parse(
-          Buffer.from(request.get('nextToken'), 'base64').toString('utf8')
+          Buffer.from(request.get('nextToken'), 'base64').toString('utf8'),
         ),
-      }
+      };
     };
     const { Items: files, LastEvaluatedKey: lastEvaluatedKey } = await ddbDocClient.send(
       new QueryCommand({
@@ -29,13 +29,13 @@ export async function handler(event: { [key: string]: any }) {
           ':categoryId': request.parameter('categoryId'),
         },
         ...parameters,
-      })
+      }),
     );
     let nextToken = null;
     if (lastEvaluatedKey) {
       nextToken = Buffer.from(
-        JSON.stringify(lastEvaluatedKey)
-      ).toString('base64')
+        JSON.stringify(lastEvaluatedKey),
+      ).toString('base64');
     }
     return response.json({
       files,

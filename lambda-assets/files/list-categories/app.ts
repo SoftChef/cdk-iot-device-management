@@ -7,16 +7,16 @@ export async function handler(event: { [key: string]: any }) {
   const response = new Response();
   try {
     const ddbDocClient = DynamoDBDocumentClient.from(
-      new DynamoDBClient({})
+      new DynamoDBClient({}),
     );
     const parentId = request.get('parentId', undefined);
     let parameters: { [key: string]: any } = {};
     if (request.has('nextToken')) {
-        parameters.ExclusiveStartKey = {
-          Key: JSON.parse(
-            Buffer.from(request.get('nextToken'), 'base64').toString('utf8')
-          ),
-      }
+      parameters.ExclusiveStartKey = {
+        Key: JSON.parse(
+          Buffer.from(request.get('nextToken'), 'base64').toString('utf8'),
+        ),
+      };
     };
     if (request.has('parentId')) {
       parameters.IndexName = 'query-by-parent-id';
@@ -31,14 +31,14 @@ export async function handler(event: { [key: string]: any }) {
         new QueryCommand({
           TableName: process.env.CATEGORY_TABLE_NAME,
           ...parameters,
-        })
+        }),
       );
       let nextToken = null;
       if (lastEvaluatedKey) {
         nextToken = Buffer.from(
-          JSON.stringify(lastEvaluatedKey)
-        ).toString('base64')
-      }
+          JSON.stringify(lastEvaluatedKey),
+        ).toString('base64');
+      };
       return response.json({
         categories,
         nextToken,
@@ -52,14 +52,14 @@ export async function handler(event: { [key: string]: any }) {
         new ScanCommand({
           TableName: process.env.CATEGORY_TABLE_NAME,
           ...parameters,
-        })
+        }),
       );
-      let nextToken = null
+      let nextToken = null;
       if (lastEvaluatedKey) {
         nextToken = Buffer.from(
-          JSON.stringify(lastEvaluatedKey)
-        ).toString('base64')
-      }
+          JSON.stringify(lastEvaluatedKey),
+        ).toString('base64');
+      };
       return response.json({
         categories,
         nextToken,
