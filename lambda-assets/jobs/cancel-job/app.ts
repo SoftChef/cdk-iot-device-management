@@ -9,6 +9,8 @@ export async function handler(event: { [key: string]: any }) {
     await iotClient.send(
       new CancelJobCommand({
         jobId: request.parameter('jobId'),
+        comment: request.input('comment'),
+        force: request.input('force'),
       }),
     );
     return response.json({

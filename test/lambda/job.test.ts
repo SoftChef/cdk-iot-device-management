@@ -117,6 +117,7 @@ const expected = {
   },
   cancelJob: {
     jobId: expectedJob.jobId,
+    comment: 'comment',
     force: true,
     expectedVersion: 1,
   },
@@ -131,7 +132,7 @@ const expected = {
     executionSummaries: [{
       thingArn: expectedJobExecution.thingArn,
       jobExecutionSummary: {
-        status: 'IN_PROGRESS',
+        status: 'SUCCESS',
         queuedAt: new Date(2021, 6, 17, 3, 24, 0).toISOString(),
         startedAt: new Date(2021, 6, 18, 3, 24, 0).toISOString(),
         lastUpdatedAt: new Date(2021, 6, 16, 3, 24, 0).toISOString(),
@@ -144,7 +145,7 @@ const expected = {
     executionSummaries: [{
       jobId: expectedJobExecution.jobId,
       jobExecutionSummary: {
-        status: 'IN_PROGRESS',
+        status: 'SUCCESS',
         queuedAt: new Date(2021, 6, 17, 3, 24, 0).toISOString(),
         startedAt: new Date(2021, 6, 18, 3, 24, 0).toISOString(),
         lastUpdatedAt: new Date(2021, 6, 16, 3, 24, 0).toISOString(),
@@ -240,10 +241,16 @@ test('Cancel job success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(CancelJobCommand, {
     jobId: expected.job.jobId,
+    comment: expected.cancelJob.comment,
+    force: expected.cancelJob.force,
   }).resolves({});
   const response = await cancelJob.handler({
     pathParameters: {
       jobId: expected.job.jobId,
+    },
+    body: {
+      comment: expected.cancelJob.comment,
+      force: expected.cancelJob.force,
     },
   });
   const body = JSON.parse(response.body);
@@ -889,11 +896,12 @@ test('List job executions for job success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(ListJobExecutionsForJobCommand, {
     jobId: expected.jobExecution.jobId,
+    status: expected.jobExecution.status,
   }).resolves({
     executionSummaries: [{
       thingArn: expectedJobExecution.thingArn,
       jobExecutionSummary: {
-        status: 'IN_PROGRESS',
+        status: expected.jobExecution.status,
         queuedAt: new Date(2021, 6, 17, 3, 24, 0),
         startedAt: new Date(2021, 6, 18, 3, 24, 0),
         lastUpdatedAt: new Date(2021, 6, 16, 3, 24, 0),
@@ -905,6 +913,7 @@ test('List job executions for job success', async () => {
   const response = await ListJobExecutionsForJob.handler({
     queryStringParameters: {
       jobId: expected.jobExecution.jobId,
+      status: expected.jobExecution.status,
     },
   });
   const body = JSON.parse(response.body);
@@ -918,12 +927,13 @@ test('List job Executions For job with nextToken success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(ListJobExecutionsForJobCommand, {
     jobId: expected.jobExecution.jobId,
+    status: expected.jobExecution.status,
     nextToken: expected.listJobExecutionForJob.nextToken,
   }).resolves({
     executionSummaries: [{
       thingArn: expectedJobExecution.thingArn,
       jobExecutionSummary: {
-        status: 'IN_PROGRESS',
+        status: expected.jobExecution.status,
         queuedAt: new Date(2021, 6, 17, 3, 24, 0),
         startedAt: new Date(2021, 6, 18, 3, 24, 0),
         lastUpdatedAt: new Date(2021, 6, 16, 3, 24, 0),
@@ -935,6 +945,7 @@ test('List job Executions For job with nextToken success', async () => {
   const response = await ListJobExecutionsForJob.handler({
     queryStringParameters: {
       jobId: expected.jobExecution.jobId,
+      status: expected.jobExecution.status,
       nextToken: expected.listJobExecutionForJob.nextToken,
     },
   });
@@ -949,12 +960,13 @@ test('List job executions for thing success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(ListJobExecutionsForThingCommand, {
     thingName: expected.jobExecution.thingName,
+    status: expected.jobExecution.status,
     nextToken: expected.listJobExecutionForThing.nextToken,
   }).resolves({
     executionSummaries: [{
       jobId: expectedJobExecution.jobId,
       jobExecutionSummary: {
-        status: 'IN_PROGRESS',
+        status: expected.jobExecution.status,
         queuedAt: new Date(2021, 6, 17, 3, 24, 0),
         startedAt: new Date(2021, 6, 18, 3, 24, 0),
         lastUpdatedAt: new Date(2021, 6, 16, 3, 24, 0),
@@ -966,6 +978,7 @@ test('List job executions for thing success', async () => {
   const response = await ListJobExecutionsForThing.handler({
     queryStringParameters: {
       thingName: expected.jobExecution.thingName,
+      status: expected.jobExecution.status,
       nextToken: expected.listJobExecutionForThing.nextToken,
     },
   });
@@ -985,7 +998,7 @@ test('List job executions for thing with nextToken success', async () => {
     executionSummaries: [{
       jobId: expected.jobExecution.jobId,
       jobExecutionSummary: {
-        status: 'IN_PROGRESS',
+        status: expected.jobExecution.status,
         queuedAt: new Date(2021, 6, 17, 3, 24, 0),
         startedAt: new Date(2021, 6, 18, 3, 24, 0),
         lastUpdatedAt: new Date(2021, 6, 16, 3, 24, 0),
@@ -997,6 +1010,7 @@ test('List job executions for thing with nextToken success', async () => {
   const response = await ListJobExecutionsForThing.handler({
     queryStringParameters: {
       thingName: expected.jobExecution.thingName,
+      status: expected.jobExecution.status,
       nextToken: expected.listJobExecutionForThing.nextToken,
     },
   });

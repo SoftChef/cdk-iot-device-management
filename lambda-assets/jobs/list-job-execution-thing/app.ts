@@ -13,6 +13,7 @@ export async function handler(event: { [key: string]: any }) {
     const jobsExecutionThing = await iotClient.send(
       new ListJobExecutionsForThingCommand({
         thingName: request.get('thingName'),
+        status: request.get('status'),
         ...parameters,
       }),
     );
