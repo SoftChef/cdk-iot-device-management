@@ -4,6 +4,7 @@ import {
   ScanCommand,
   QueryCommand,
   PutCommand,
+  BatchWriteCommand,
   GetCommand,
   UpdateCommand,
   DeleteCommand,
@@ -43,11 +44,14 @@ const expectedInvalidCategoryExecution = {
 
 const expectedFiles = {
   Item: {
-    fileId: '0CBC6611F5540BD0809A388DC95A615B', //checksum
-    checksumType: 'md5',
+    fileId: '550e8400-e29b-41d4-a716-446655440000',
+    categoryId: expectedCategory.Item.categoryId,
     version: 'Test',
-    categoryId: 'Test',
     location: 'https://example.com/Test',
+    checksum: '0CBC6611F5540BD0809A388DC95A615B',
+    checksumType: 'md5',
+    locale: 'zh-TW',
+    summary: 'Test',
     description: 'Test',
     createAt: Date.now(),
     updatedAt: Date.now(),
@@ -77,12 +81,14 @@ const expected = {
     },
   },
   newFiles: {
-    location: 'https://example.com/Test',
-    checksum: '0CBC6611F5540BD0809A388DC95A615B', //fileId
-    checksumType: 'md5',
-    version: 'Test',
-    categoryId: '48cc48e0d55bfd83114031498f21d640',
-    description: 'Test',
+    fileId: expectedFiles.Item.fileId,
+    location: expectedFiles.Item.location,
+    checksum: expectedFiles.Item.checksum, //fileId
+    checksumType: expectedFiles.Item.checksumType,
+    version: expectedFiles.Item.version,
+    locale: expectedFiles.Item.locale,
+    categoryId: expectedFiles.Item.categoryId,
+    description: expectedFiles.Item.description,
   },
   files: expectedFiles,
 };
@@ -305,34 +311,58 @@ test('Delete category success', async () => {
 
 test('Create file API success', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
-  const currentTime = Date.now();
-  documentClientMock.on(GetCommand, {
-    TableName: CATEGORY_TABLE_NAME,
-    Key: {
-      categoryId: expected.newFiles.categoryId,
-    },
-  }).resolves(expected.category);
-  documentClientMock.on(PutCommand, {
-    TableName: FILE_TABLE_NAME,
-    Item: {
-      fileId: expected.newFiles.checksum,
-      version: expected.newFiles.version,
-      categoryId: expected.newFiles.categoryId,
-      location: expected.newFiles.location,
-      description: expected.newFiles.description,
-      createdAt: currentTime,
-      updatedAt: currentTime,
+  documentClientMock.on(BatchWriteCommand, {
+    RequestItems: {
+      fileTable: [{
+        PutRequest: {
+          Item: {
+            fileId: expected.newFiles.fileId,
+            location: expected.newFiles.location,
+            checksum: expected.newFiles.checksum,
+            checksumType: expected.newFiles.checksumType,
+            version: expected.newFiles.version,
+            categoryId: expected.newFiles.categoryId,
+            describe: expected.newFiles.description,
+          },
+        },
+      },
+      {
+        PutRequest: {
+          Item: {
+            fileId: expected.newFiles.fileId,
+            location: expected.newFiles.location,
+            checksum: '0CBC6611F5540BD0809A388DC95A615A',
+            checksumType: expected.newFiles.checksumType,
+            version: '1.1',
+            locale: 'zh-CN',
+            categoryId: expected.newFiles.categoryId,
+            describe: expected.newFiles.description,
+          },
+        },
+      }],
     },
   }).resolves({});
   const response = await createFile.handler({
-    body: {
+    body: [{
+      fileId: expected.newFiles.fileId,
       location: expected.newFiles.location,
       checksum: expected.newFiles.checksum,
       checksumType: expected.newFiles.checksumType,
       version: expected.newFiles.version,
+      locale: expected.newFiles.locale,
       categoryId: expected.newFiles.categoryId,
       describe: expected.newFiles.description,
     },
+    {
+      fileId: expected.newFiles.fileId,
+      location: expected.newFiles.location,
+      checksum: '0CBC6611F5540BD0809A388DC95A615A',
+      checksumType: expected.newFiles.checksumType,
+      version: '1.1',
+      locale: 'zh-CN',
+      categoryId: expected.newFiles.categoryId,
+      describe: expected.newFiles.description,
+    }],
   });
   const body = JSON.parse(response.body);
   expect(response.statusCode).toEqual(200);

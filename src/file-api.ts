@@ -46,23 +46,39 @@ export class FileApi extends cdk.Construct {
         name: 'fileId',
         type: dynamodb.AttributeType.STRING,
       },
-      sortKey: {
-        name: 'version',
-        type: dynamodb.AttributeType.STRING,
-      },
       readCapacity: 1,
       writeCapacity: 1,
     });
     this.fileTable.addGlobalSecondaryIndex({
-      indexName: 'query-by-category-id',
+      indexName: 'query-by-category-id-and-locale',
       partitionKey: {
         name: 'categoryId',
+        type: dynamodb.AttributeType.STRING,
+      },
+      sortKey: {
+        name: 'locale',
         type: dynamodb.AttributeType.STRING,
       },
       projectionType: dynamodb.ProjectionType.ALL,
       readCapacity: 1,
       writeCapacity: 1,
     });
+    this.fileTable.addGlobalSecondaryIndex({
+      indexName: 'get-file-by-checksum-and-version',
+      partitionKey: {
+        name: 'checksum',
+        type: dynamodb.AttributeType.STRING,
+      },
+      sortKey: {
+        name: 'version',
+        type: dynamodb.AttributeType.STRING,
+      },
+      projectionType: dynamodb.ProjectionType.ALL,
+      readCapacity: 1,
+      writeCapacity: 1,
+    });
+
+
     const restApi = new RestApi(this, 'FileRestApi', {
       enableCors: true,
       authorizationType: props?.authorizationType ?? apigateway.AuthorizationType.NONE,

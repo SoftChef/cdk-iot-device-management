@@ -8,8 +8,9 @@ export async function handler(event: { [key: string]: any }) {
   try {
     const validated = request.validate(joi => {
       return {
+        fileId: request.parameter('fileId'),
         checksumType: joi.string().allow('md5', 'crc32', 'sha1'),
-        fileId: joi.string().when('checksumType', { is: 'md5', then: joi.string().length(32).required() })
+        checksum: joi.string().when('checksumType', { is: 'md5', then: joi.string().length(32).required() })
           .concat(joi.string().when('checksumType', { is: 'crc32', then: joi.string().length(8).required() }))
           .concat(joi.string().when('checksumType', { is: 'sha1', then: joi.string().length(40).required() })),
         version: joi.string(),
