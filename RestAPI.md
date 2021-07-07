@@ -343,8 +343,6 @@ Create new thing group
 
 //TODO
 
-> [lambda-assets/files/create-thing-groups/app.ts](lambda-assets/thing-groups/create-thing-group/app.ts)
-
 **Body**
 
 | Name | Schema |  Description |
@@ -359,17 +357,13 @@ Create new thing group
 | 200 | |
 | 422 | Missing require field / Variable Group incorrect|
 
-
-
+---
 ### *GET* /thing-groups/{thingGroupName} 
 Get thing group by name
 
 **Description**
 
 //TODO
-
-> [lambda-assets/files/get-thing-groups/app.ts](lambda-assets/thing-groups/get-thing-group/app.ts)
-
 
 **Path Parameter**
 | Name | Description |
@@ -389,15 +383,13 @@ Get thing group by name
 | 200 | |
 | 404 | ResourceNotFoundException |
 
-
+---
 ### *GET* /thing-groups 
 Get thing group list
 
 **Description**
 
 //TODO
-
-> [lambda-assets/files/list-thing-groups/app.ts](lambda-assets/thing-groups/list-thing-group/app.ts)
 
 **Query String Parameter**
 
@@ -417,14 +409,13 @@ Get thing group list
 | -------- | ------- | 
 | 200 | 
 
+---
 ### PUT /thing-groups/{thingGroupName} 
 Update thing group by name
 
 **Description**
 
 //TODO
-
-> [lambda-assets/files/update-thing-groups/app.ts](lambda-assets/thing-groups/update-thing-group/app.ts)
 
 **Path Parameter**
 
@@ -447,7 +438,7 @@ Update thing group by name
 | 422 | Missing require field / Variable Group incorrect|
 | 404 | ResourceNotFoundException |
 
-
+---
 ### DELETE /thing-groups/{thingGroupName} 
 Delete thing group by name
 
@@ -455,7 +446,6 @@ Delete thing group by name
 
 //TODO
 
-> [lambda-assets/files/delete-thing-group/app.ts](lambda-assets/thing-groups/delete-thing-group/app.ts)
 
 **Path Parameter**
 
@@ -470,14 +460,13 @@ Delete thing group by name
 | 200 | |
 | 404 | ResourceNotFoundException |
 
+---
 ### PUT /thing-groups/{thingGroupName}/things/{thingName}
 Add thing to thing group by name
 
 **Description**
 
 //TODO
-
-> [lambda-assets/files/add-thing-to-group/app.ts](lambda-assets/thing-groups/add-thing-to-group/app.ts)
 
 **Path Parameter**
 
@@ -492,15 +481,13 @@ Add thing to thing group by name
 | -------- | ------- | 
 | 200 | 
 | 404 | ResourceNotFoundException |
-
+---
 ### *DELETE* /thing-groups/{thingGroupName}/things/{thingName}
 - Remove thing to thing group by name
 
 **Description**
 
 //TODO
-
-> [lambda-assets/files/remove-thing-from-thing-group/app.ts](lambda-assets/thing-groups/remove-thing-from-thing-group/app.ts)
 
 **Path Parameter**
 
@@ -514,13 +501,12 @@ Add thing to thing group by name
 | -------- | ------- | 
 | 200 | 
 | 404 | ResourceNotFoundException |
-
+---
 ### *POST* /dynamic-thing-groups
 **Description**
 
 //TODO
 
-> [lambda-assets/files/create-dynamic-thing-groups/app.ts](lambda-assets/thing-Groups/create-thing-group/app.ts)
 
 **Body**
 
@@ -536,15 +522,13 @@ Add thing to thing group by name
 | -------- | ------- | 
 | 200 | |
 | 422 | Missing require field / Variable Group incorrect|
-
+---
 ### *PUT* /dynamic-thing-groups/{thingGroupName}
 Update dynamic thing group by name
 
 **Description**
 
 //TODO
-
-> [lambda-assets/files/update-dynamic-thing-groups/app.ts](lambda-assets/update-dynamic-thing-groups/create-thing-group/app.ts)
 
 **Path Parameter**
 | Name | Description |
@@ -563,15 +547,13 @@ Update dynamic thing group by name
 | -------- | ------- | 
 | 200 | |
 | 422 | Missing require field / Variable Group incorrect|
-
+---
 ### *DELETE* /dynamic-thing-groups/{thingGroupName} 
 Delete dynamic thing group by name // BillingGroup not join
 
 **Description**
 
 //TODO
-
-> [lambda-assets/files/delete-dynamic-thing-groups/app.ts](lambda-assets/thing-Groups/delete-dynamic-thing-groups/app.ts)
 
 **Body**
 
@@ -590,11 +572,8 @@ Delete dynamic thing group by name // BillingGroup not join
 
 ### *POST* /thing-types 
 
-**Description**
+**Description*
 //TODO
-
-> [lambda-assets/files/create-thing-types/app.ts](lambda-assets/thing-types/create-thing-type/app.ts)
-
 
 **Body**
 
@@ -608,14 +587,12 @@ Delete dynamic thing group by name // BillingGroup not join
 | -------- | ------- | 
 | 200 | Create success|
 | 422 | Missing require field / Variable type incorrect|
-
+---
 ### *GET* /thing-types/{thingTypeName} 
 Get thing type by name
 
 **Description**
 //TODO
-
-> [lambda-assets/files/get-thing-types/app.ts](lambda-assets/thing-types/get-thing-type/app.ts)
 
 **Path Parameter**
 
@@ -637,11 +614,12 @@ Get thing type by name
 | -------- | ------- | 
 | 200 | Create success|
 | 404 | ResourceNotFoundException |
-
+---
 ### *GET* /thing-types
 List thing type
 
-> [lambda-assets/files/list-thing-types/app.ts](lambda-assets/thing-types/list-thing-types/app.ts)
+**Description**
+//TODO
 
 **Query String Parameter**
 
@@ -661,11 +639,12 @@ List thing type
 | HTTP Status Code |  Description |
 | -------- | ------- | 
 | 200 ||
-
+---
 ### PUT /thing-types/{thingTypeName}/deprecate 
 Deprecated thing type by name
 
-> [lambda-assets/files/deprecate-thing-type/app.ts](lambda-assets/thing-types/deprecate-thing-type/app.ts)
+**Description**
+//TODO
 
 **Path Parameter**
 
@@ -685,11 +664,12 @@ Deprecated thing type by name
 | -------- | ------- | 
 | 200 | |
 | 404 | ResourceNotFoundException |
-
+---
 ### PUT /thing-types/{thingTypeName}/undeprecate 
 Undeprecate thing type by name
 
-> [lambda-assets/files/undeprecate-thing-type/app.ts](lambda-assets/thing-types/undeprecate-thing-type/app.ts)
+**Description**
+//TODO
 
 **Path Parameter**
 
@@ -708,11 +688,13 @@ Undeprecate thing type by name
 | HTTP Status Code |  Description |
 | -------- | ------- | 
 | 200 | |
-| 404 | ResourceNotFoundException |
+| 404 | ResourceNotFoundException 
+---
 ### DELETE /thing-types/{thingTypeName}
 Delete thing type
 
-> [lambda-assets/files/delete-thing-type/app.ts](lambda-assets/thing-types/delete-thing-type/app.ts)
+**Description**
+//TODO
 
 **Path Parameter**
 
