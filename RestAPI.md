@@ -97,7 +97,7 @@ Get root category list
 
 **Response Object if success**
 
-| Name | Schema |  description |0
+| Name | Schema |  description |
 | -------- | --- | -- |
 | categoryId* | String |  | |
 | parentId* | String |
@@ -227,7 +227,7 @@ Get root files list
 | 200 | Create success|
 | 404 | ResourceNotFoundException |
 
-### GET /files/
+### GET /files
 Get root files list
 
 **Description**
@@ -256,7 +256,7 @@ Get root files list
 **Response Status**
 
 | HTTP Status Code |  Description |
-| -------- | ------- | 
+| -------- | ------- |
 | 200 ||
 
 ### GET /files/{categoryId}
@@ -311,8 +311,10 @@ Update file by ID
 **Body**
 
 | Name | Schema |  Description |
-| -------- | ------- |  ---- |  
-| description*	| String | 
+| -------- | ------- |  ---- |
+| checksumType* | String |
+| checksum* |  String |
+| description* | String |
 
 **Response Status**
 
