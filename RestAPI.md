@@ -57,7 +57,7 @@ Create File's category.
 
 ---
 ### *GET* /categories/{categoryId} 
-Get category by ID, if category is root will return children category list
+Get category by ID, if category is root will return children category 
 
 **Description**
 
@@ -461,8 +461,28 @@ Delete thing group by name
 | 404 | ResourceNotFoundException |
 
 ---
-### PUT /thing-groups/{thingGroupName}/things/{thingName}
+### PUT 
 Add thing to thing group by name
+
+**Description**
+
+//TODO
+
+**Path Parameter**
+
+| Name  | Description |
+| -------- |   ---- | 
+| thingGroupName* | String   | 
+| thingName* | String |
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | 
+| 404 | ResourceNotFoundException |
+---
+### Get /thing-groups/{thingGroupName}/things
 
 **Description**
 
@@ -571,7 +591,6 @@ Delete dynamic thing group by name // BillingGroup not join
 ## Thing Type API
 
 ### *POST* /thing-types 
-
 **Description*
 //TODO
 
@@ -714,9 +733,126 @@ Delete thing type
 | -------- | ------- | 
 | 200 | |
 | 404 | ResourceNotFoundException |
-
+---
 ## Thing API
 
+### *POST* /things 
+Create thing
+
+**Description**
+//TODO
+
+**body**
+| Name | Schema |  Description |
+| -------- |   ---- | --- |
+| thingName* | String   ||
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | |
+| 422 | Missing require field / Variable Group incorrect|
+---
+### *GET* /things/{thingName}
+Get thing 
+
+**Description**
+//TODO
+
+**Path Paremeter**
+| Name |    Description |
+| -------- |   --- |
+| thingName* | String   | 
+
+**Response Object if success**
+| Name | Group |  Description |
+| -------- | --- | -- |
+| thingTypeName* | String |
+| thingArn* | String |  | |
+| thingId* | String |
+| thingName* | String | |
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | |
+| 404 | ResourceNotFoundException |
+---
+### *GET* /things 
+Get thing list
+
+**Description**
+//TODO
+
+**Path Paremeter**
+| Name |    Description |
+| -------- |   --- |
+| thingName* | String   | 
+
+**Response Object if success**
+| Name | Group |  Description |
+| -------- | --- | -- |
+| thingTypeName* | String |
+| thingArn* | String |  | |
+| thingId* | String |
+| thingName* | String | |
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | |
+---
+### *PUT* /things/{thingName}
+Update thing by name
+
+**Description**
+//TODO
+
+**Path Paremeter**
+| Name |    Description |
+| -------- |   --- |
+| thingName* | String   | 
+
+**body**
+| Name | Group |  Description |
+| -------- | --- | -- |
+| thingTypeName* | String |
+| attributePayload* | String |  | |
+| expectedVersion* | String |
+| removeThingType* | String | |
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | |
+| 422 | Missing require field / Variable Group incorrect|
+| 404 | ResourceNotFoundException |
+---
+### DELETE /things/{thingName} 
+Delete thing by name
+
+**Description**
+//TODO
+
+**Path Paremeter**
+| Name |    Description |
+| -------- |   --- |
+| thingName* | String   | 
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | |
+| 404 | ResourceNotFoundException |
+---
+TODO: thingshadow
+
+
+GET /search
+???
 
 
 
