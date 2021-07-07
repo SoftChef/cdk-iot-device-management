@@ -348,7 +348,159 @@ Delete files by ID
 
 ## Job API
 
-###
+## Thing Group API
+
+
+
+## Thing Type API
+
+### *POST* /thing-types 
+
+**Description**
+//TODO
+
+> [lambda-assets/files/create-thing-types/app.ts](lambda-assets/thing-types/create-thing-type/app.ts)
+
+
+**Body**
+
+| Name | Schema |  Description |
+| -------- | ------- |  ---- |
+| thingTypeName* | String   | |
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | Create success|
+| 422 | Missing require field / Variable type incorrect|
+
+### *GET* /thing-types/{thingTypeName} 
+Get thing type by name
+
+**Description**
+//TODO
+
+> [lambda-assets/files/get-thing-types/app.ts](lambda-assets/thing-types/get-thing-type/app.ts)
+
+**Path Parameter**
+
+| Name | Type | Description |
+| -------- |   ---- | -- |
+| thingTypeName* | String   | |
+
+**Response Object if success**
+
+| Name | Schema |  Description |
+| -------- | ------- |  ---- |
+| thingTypeArn* | String   | |
+| thingTypeId* | String   |	|
+| thingTypeName* | String ||
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | Create success|
+| 404 | ResourceNotFoundException |
+
+### *GET* /thing-types
+List thing type
+
+> [lambda-assets/files/list-thing-types/app.ts](lambda-assets/thing-types/list-thing-types/app.ts)
+
+**Query String Parameter**
+
+| Name | Type | Description |
+| -------- |   ---- | -- |
+| thingTypeName* | String   | |
+| Name |  Description |
+
+**Response Object if success**
+
+| Name | Type |  description |
+| -------- | --- | -- |
+| thingTypeName* | String |  | |
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 ||
+
+### PUT /thing-types/{thingTypeName}/deprecate 
+Deprecated thing type by name
+
+> [lambda-assets/files/deprecate-thing-type/app.ts](lambda-assets/thing-types/deprecate-thing-type/app.ts)
+
+**Path Parameter**
+
+| Name |  Description |
+| -------- |   ---- |
+| thingTypeName* | String   |
+
+**Response Object if success**
+
+| Name | Type |  description |
+| -------- | --- | -- |
+| thingTypeName* | String |  | |
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | |
+| 404 | ResourceNotFoundException |
+
+### PUT /thing-types/{thingTypeName}/undeprecate 
+Undeprecate thing type by name
+
+> [lambda-assets/files/undeprecate-thing-type/app.ts](lambda-assets/thing-types/undeprecate-thing-type/app.ts)
+
+**Path Parameter**
+
+| Name |  Description |
+| -------- |   ---- |
+| thingTypeName* | String   |
+
+**Response Object if success**
+
+| Name | Type |  description |
+| -------- | --- | -- |
+| thingTypeName* | String |  | |
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | |
+| 404 | ResourceNotFoundException |
+### DELETE /thing-types/{thingTypeName}
+Delete thing type
+
+> [lambda-assets/files/delete-thing-type/app.ts](lambda-assets/thing-types/delete-thing-type/app.ts)
+
+**Path Parameter**
+
+| Name |  Description |
+| -------- |   ---- |
+| thingTypeName* | String   |
+
+**Response Object if success**
+
+| Name | Type |  description |
+| -------- | --- | -- |
+| thingTypeName* | String |  | |
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | |
+| 404 | ResourceNotFoundException |
+
+## Thing API
+
 
 
 
