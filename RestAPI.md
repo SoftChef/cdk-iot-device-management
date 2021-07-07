@@ -38,20 +38,17 @@ Create new category
 
 **Description**
 
-Create File's category. 
+Create File's category.
 
-> [lambda-assets/files/create-category/app.ts](lambda-assets/files/create-files/app.ts)
+> [lambda-assets/files/create-category/app.ts](lambda-assets/files/create-category/app.ts)
 
 **Body**
 
 | Name | Schema |  Description |
 | -------- | ------- |  ---- |
-| location* | String \| URI     | File's path |
-| checksum | String   | An encrypt md5 / crc32 / sha1 value|
-checksumType | String |  Choose encrypt method for checksum
-version | String |  File's version |
-categoryId | String |  File's category (From category table) |
-description	| String |  File's category (From category table)
+| categoryId* | String   |   |
+| parentId* | String   | |
+| description	| String | |
 
 **Response Status**
 
@@ -60,62 +57,296 @@ description	| String |  File's category (From category table)
 | 200 |Create success |
 | 422 | Missing require field / Variable type incorrect |
 
-## GET /categories - Get root category list
+### *GET* /categories/{categoryId} 
+Get category by ID, if category is root will return children category list
 
-## GET /categories/{categoryId} - Get category by ID, if category is root will return children category list
+**Description**
 
-### POST /categories - Create new category
+// TODO
 
-### PUT /categories/{categoryId} - Update category by ID
+> [lambda-assets/files/get-category/app.ts](lambda-assets/files/get-category/app.ts)
 
-### DELETE /categories/{categoryId} - Delete category by ID
+**Path Parameter**
 
-### GET /files - Get root files list
+|  Name | Description |
+| -------- | -------- | 
+| categoryId* |      | 
 
-### GET /files/{categoryId} - Get files by category ID
+**Response Status**
 
-### GET /files/{fileId} - Get file by ID
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | |
+| 404 | ResourceNotFoundException |
 
-### Create new file
+### *GET* /categories
 
-- API Path
-  - `POST /files`
-- Local Path
-  - [lambda-assets/files/create-files/app.ts](lambda-assets/files/create-files/app.ts)
+Get root category list
 
-| Method | Param | Type                | Required / Optional | Description |
-| - | ------------- | -------------       | ----------------- | ------------- |
-|pathParemeter||||||
-| queryStringParemeter |   |  |  |
-| body |
-||location| URI | required|File's path|
-||checksum|string|Required|An encrypt md5 / crc32 / sha1 value|
-||checksumType| string \|<br> md5 / crc32 / sha1 |Required|Choose encrypt method for checksum|
-||version|string|Required|File's version|
-||categoryId|string|Required|File's category (From category table)|
-||description|string|Required|File's description|
+**Description**
 
-- Response Object
+// TODO
 
-| HTTP Status Code | Message | Description |
-| :-: | :-: | :-: |
-| 200 | `{created: true}` | Create success |
-| 422 | Validate Error | Missing require field / Variable type incorrect |
+> [lambda-assets/files/list-category/app.ts](lambda-assets/files/list-category/app.ts)
 
-```Create file Example
-{
-  location: "https://example.com/Android-9.0.apk",
-  checksum: "fc5e038d38a57032085441e7fe7010b0":,
-  checksumType: "md5",
-  version: "1.0",
-  categoryId: "Android",
-  describe: "Android 9.0 ISO file",
-}
-```
+**Query String Parameters**
+
+| Name | Schema |  Description |
+| -------- | --- | -- |
+| categoryId* | String |  
+
+**Response Object if success**
+
+| Name | Schema |  description |0
+| -------- | --- | -- |
+| categoryId* | String |  | |
+| parentId* | String |
+| name* | String | |
+| description | String |
+| createAt* | String|
+| updateAt* | String|
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | |
+
+
+### *PUT* /categories/{categoryId} 
+Update category by ID
+
+**Description**
+
+// TODO
+
+> [lambda-assets/files/update-category/app.ts](lambda-assets/files/update-category/app.ts)
+
+**Path Parameter**
+
+| Name | Schema |  Description |
+| -------- | ------- |  ---- |
+| categoryId* | String   |   |
+
+**Body**
+
+| Name | Schema |  Description |
+| -------- | ------- |  ---- |  
+| description*	| String | 
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | Update success|
+| 422 | Missing require field / Variable type incorrect|
+| 404 | ResourceNotFoundException |
+
+### *DELETE* /categories/{categoryId} 
+Delete category by ID
+
+**Description**
+
+// TODO
+
+> [lambda-assets/files/delete-category/app.ts](lambda-assets/files/delete-category/app.ts)
+
+**Path Parameter**
+
+| Name | Schema |  Description |
+| -------- | ------- |  ---- |
+| categoryId* | String   |   |
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | Delete success|
+| 404 | ResourceNotFoundException |
+
+### *POST* /files
+Create files
+
+**Description**
+
+// TODO
+
+> [lambda-assets/files/create-file/app.ts](lambda-assets/files/create-file/app.ts)
+
+**Body**
+
+| Name | Schema |  Description |
+| -------- | ------- |  ---- |
+| location* | String | File's path|
+| checksum* | String | An encrypt md5 / crc32 / sha1 value |
+| checksumType* | String | File's version |
+| locale* | String |
+| version* | String| File's version|
+| categoryId* | String | File's category (From category table)
+| description | String | |
+
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | Create success|
+| 422 | Missing require field / Variable type incorrect|
+| 404 | ResourceNotFoundException |
+
+### *GET* /files/{fileId} 
+Get root files list
+
+**Description**
+// TODO
+
+> [lambda-assets/files/get-file/app.ts](lambda-assets/files/get-file/app.ts)
+
+**Path Parameter**
+
+| Name |   Description |
+| -------- | ------- | 
+| fileId* | String   | 
+
+**Response Object if success**
+
+| Name | Schema |  Description |
+| -------- | ------- |  ---- |
+| location* | String   | File's path|
+| checksum* | String   |	An encrypt md5 / crc32 / sha1 value |
+| checksumType*	| String |File's version|
+| locale* | String |
+| version* | String| File's version|
+| categoryId* | String | File's category (From category table)
+| description | String | |
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | Create success|
+| 404 | ResourceNotFoundException |
+
+### GET /files/
+Get root files list
+
+**Description**
+// TODO
+
+> [lambda-assets/files/list-file/app.ts](lambda-assets/files/list-file/app.ts)
+
+**Query String Parameter**
+
+| Name |   Description |
+| -------- | ------- |
+| fileId* | String   |
+
+**Response Object if success**
+
+| Name | Schema |  Description |
+| -------- | ------- |  ---- |
+| location* | String   | File's path|
+| checksum* | String   |	An encrypt md5 / crc32 / sha1 value |
+| checksumType*	| String |File's version|
+| locale* | String |
+| version* | String| File's version|
+| categoryId* | String | File's category (From category table)
+| description | String | |
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 ||
+
+### GET /files/{categoryId}
+List file by categoryId
+
+**Description**
+// TODO
+
+> [lambda-assets/files/list-file-by-category/app.ts](lambda-assets/files/list-file-by-category/app.ts)
+
+**Query String Parameter**
+
+| Name |   Description |
+| -------- | ------- |
+| categoryId* | String |
+
+**Response Object if success**
+
+| Name | Schema |  Description |
+| -------- | ------- |  ---- |
+| location* | String   | File's path|
+| checksum* | String   |	An encrypt md5 / crc32 / sha1 value |
+| checksumType*	| String |File's version|
+| locale* | String |
+| version* | String| File's version|
+| categoryId* | String | File's category (From category table)
+| description | String | |
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | |
+| 200 | Create success|
+| 404 | ResourceNotFoundException |
 
 ### PUT /files/{fileId} - Update file by ID
 
-### DELETE /files/{fileId} - Delete file by ID
+Update file by ID
+
+**Description**
+
+// TODO
+
+> [lambda-assets/files/update-file/app.ts](lambda-assets/files/update-file/app.ts)
+
+**Path Parameter**
+
+| Name | Schema |  Description |
+| -------- | ------- |  ---- |
+| fileId* | String   |   |
+
+**Body**
+
+| Name | Schema |  Description |
+| -------- | ------- |  ---- |  
+| description*	| String | 
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | Update success|
+| 422 | Missing require field / Variable type incorrect|
+| 404 | ResourceNotFoundException |
+
+### *DELETE* /files/{categoryId} 
+Delete files by ID
+
+**Description**
+
+// TODO
+
+> [lambda-assets/files/delete-files/app.ts](lambda-assets/files/delete-files/app.ts)
+
+**Path Parameter**
+
+| Name | Schema |  Description |
+| -------- | ------- |  ---- |
+| fileId* | String   |   |
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | Delete success|
+| 404 | ResourceNotFoundException |
+
+## Job API
+
+###
 
 
 
