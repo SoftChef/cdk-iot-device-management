@@ -350,13 +350,12 @@ Delete files by ID
 
 ## Thing Group API
 
-
-
 ## Thing Type API
 
 ### *POST* /thing-types 
 
 **Description**
+
 //TODO
 
 > [lambda-assets/files/create-thing-types/app.ts](lambda-assets/thing-types/create-thing-type/app.ts)
@@ -413,8 +412,7 @@ List thing type
 
 | Name | Type | Description |
 | -------- |   ---- | -- |
-| thingTypeName* | String   | |
-| Name |  Description |
+| thingTypeName* | String   | 
 
 **Response Object if success**
 
