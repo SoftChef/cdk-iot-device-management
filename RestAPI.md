@@ -40,8 +40,6 @@ Create new category
 
 Create File's category.
 
-> [lambda-assets/files/create-category/app.ts](lambda-assets/files/create-category/app.ts)
-
 **Body**
 
 | Name | Schema |  Description |
@@ -57,14 +55,13 @@ Create File's category.
 | 200 |Create success |
 | 422 | Missing require field / Variable type incorrect |
 
+---
 ### *GET* /categories/{categoryId} 
 Get category by ID, if category is root will return children category list
 
 **Description**
 
 // TODO
-
-> [lambda-assets/files/get-category/app.ts](lambda-assets/files/get-category/app.ts)
 
 **Path Parameter**
 
@@ -78,6 +75,7 @@ Get category by ID, if category is root will return children category list
 | -------- | ------- | 
 | 200 | |
 | 404 | ResourceNotFoundException |
+---
 
 ### *GET* /categories
 
@@ -86,8 +84,6 @@ Get root category list
 **Description**
 
 // TODO
-
-> [lambda-assets/files/list-category/app.ts](lambda-assets/files/list-category/app.ts)
 
 **Query String Parameters**
 
@@ -112,7 +108,7 @@ Get root category list
 | -------- | ------- | 
 | 200 | |
 
-
+---
 ### *PUT* /categories/{categoryId} 
 Update category by ID
 
@@ -141,15 +137,13 @@ Update category by ID
 | 200 | Update success|
 | 422 | Missing require field / Variable type incorrect|
 | 404 | ResourceNotFoundException |
-
+---
 ### *DELETE* /categories/{categoryId} 
 Delete category by ID
 
 **Description**
 
 // TODO
-
-> [lambda-assets/files/delete-category/app.ts](lambda-assets/files/delete-category/app.ts)
 
 **Path Parameter**
 
@@ -163,15 +157,13 @@ Delete category by ID
 | -------- | ------- | 
 | 200 | Delete success|
 | 404 | ResourceNotFoundException |
-
+---
 ### *POST* /files
 Create files
 
 **Description**
 
 // TODO
-
-> [lambda-assets/files/create-file/app.ts](lambda-assets/files/create-file/app.ts)
 
 **Body**
 
@@ -193,14 +185,12 @@ Create files
 | 200 | Create success|
 | 422 | Missing require field / Variable type incorrect|
 | 404 | ResourceNotFoundException |
-
+---
 ### *GET* /files/{fileId} 
 Get root files list
 
 **Description**
 // TODO
-
-> [lambda-assets/files/get-file/app.ts](lambda-assets/files/get-file/app.ts)
 
 **Path Parameter**
 
@@ -226,14 +216,12 @@ Get root files list
 | -------- | ------- | 
 | 200 | Create success|
 | 404 | ResourceNotFoundException |
-
+---
 ### GET /files
 Get root files list
 
 **Description**
 // TODO
-
-> [lambda-assets/files/list-file/app.ts](lambda-assets/files/list-file/app.ts)
 
 **Query String Parameter**
 
@@ -258,14 +246,12 @@ Get root files list
 | HTTP Status Code |  Description |
 | -------- | ------- |
 | 200 ||
-
+---
 ### GET /files/{categoryId}
 List file by categoryId
 
 **Description**
 // TODO
-
-> [lambda-assets/files/list-file-by-category/app.ts](lambda-assets/files/list-file-by-category/app.ts)
 
 **Query String Parameter**
 
@@ -288,9 +274,11 @@ List file by categoryId
 **Response Status**
 
 | HTTP Status Code |  Description |
-| -------- | ------- | |
+| -------- | ------- | 
 | 200 | Create success|
 | 404 | ResourceNotFoundException |
+
+---
 
 ### PUT /files/{fileId} - Update file by ID
 
@@ -299,8 +287,6 @@ Update file by ID
 **Description**
 
 // TODO
-
-> [lambda-assets/files/update-file/app.ts](lambda-assets/files/update-file/app.ts)
 
 **Path Parameter**
 
@@ -324,14 +310,13 @@ Update file by ID
 | 422 | Missing require field / Variable type incorrect|
 | 404 | ResourceNotFoundException |
 
+---
 ### *DELETE* /files/{categoryId} 
 Delete files by ID
 
 **Description**
 
 // TODO
-
-> [lambda-assets/files/delete-files/app.ts](lambda-assets/files/delete-files/app.ts)
 
 **Path Parameter**
 
@@ -346,6 +331,7 @@ Delete files by ID
 | 200 | Delete success|
 | 404 | ResourceNotFoundException |
 
+---
 ## Job API
 
 ## Thing Group API
