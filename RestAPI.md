@@ -357,7 +357,7 @@ Create new thing group
 
 //TODO
 
-> [lambda-assets/files/create-thing-groups/app.ts](lambda-assets/thing-Groups/create-thing-group/app.ts)
+> [lambda-assets/files/create-thing-groups/app.ts](lambda-assets/thing-groups/create-thing-group/app.ts)
 
 **Body**
 
@@ -495,9 +495,9 @@ Add thing to thing group by name
 
 **Path Parameter**
 
-| Name | Group | Description |
-| -------- |   ---- | -- |
-| thingGroupName* | String   | |
+| Name  | Description |
+| -------- |   ---- | 
+| thingGroupName* | String   | 
 | thingName* | String |
 
 **Response Status**
@@ -518,8 +518,9 @@ Add thing to thing group by name
 
 **Path Parameter**
 
-| -------- |   ---- |
-| thingGroupName* | String   |
+| Name | Group | Description |
+| -------- |   ---- | -- |
+| thingGroupName* | String   | 
 
 **Response Status**
 
@@ -560,9 +561,9 @@ Update dynamic thing group by name
 > [lambda-assets/files/update-dynamic-thing-groups/app.ts](lambda-assets/update-dynamic-thing-groups/create-thing-group/app.ts)
 
 **Path Parameter**
-
+| Name | Description |
 | -------- |   ---- |
-| thingGroupName* | String   |
+| thingGroupName* |    |
 
 **Body**
 
