@@ -30,49 +30,39 @@
   
 ## API Overview
 
-### Files
+## Files API
 
-### Create new category
+### *POST* /categories
 
-- API Path
-  - `POST /files`
-- Local Path
-  - [lambda-assets/files/create-category/app.ts](lambda-assets/files/create-files/app.ts)
+Create new category
 
-| Method | Param | Type                | Required / Optional | Description |
-| - | ------------- | -------------       | ----------------- | ------------- |
-|pathParemeter||||||
-| queryStringParemeter |   |  |  |
-| body |
-||location| URI | required|File's path|
-||checksum|string|Required|An encrypt md5 / crc32 / sha1 value|
-||checksumType|string \|<br> md5 / crc32 / sha1 |Required|Choose encrypt method for checksum|
-||version|string|Required|File's version|
-||categoryId|string|Required|File's category (From category table)|
-||description|string|Required|File's description|
+**Description**
 
-- Response Object
+Create File's category. 
 
-| HTTP Status Code | Message | Description |
-| :-: | :-: | :-: |
-| 200 | `{created: true}` | Create success |
-| 422 | Validate Error | Missing require field / Variable type incorrect |
+> [lambda-assets/files/create-category/app.ts](lambda-assets/files/create-files/app.ts)
 
-- API Call Example
+**Body**
 
-```Create category Example
-// body
+| Name | Schema |  Description |
+| -------- | ------- |  ---- |
+| location* | String \| URI     | File's path |
+| checksum | String   | An encrypt md5 / crc32 / sha1 value|
+checksumType | String |  Choose encrypt method for checksum
+version | String |  File's version |
+categoryId | String |  File's category (From category table) |
+description	| String |  File's category (From category table)
 
-{
-    name: "newCategoryName",
-    parentId: "parentId",
-    description: "newCategorydescription",
-}
-```
+**Response Status**
 
-### GET /categories - Get root category list
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 |Create success |
+| 422 | Missing require field / Variable type incorrect |
 
-### GET /categories/{categoryId} - Get category by ID, if category is root will return children category list
+## GET /categories - Get root category list
+
+## GET /categories/{categoryId} - Get category by ID, if category is root will return children category list
 
 ### POST /categories - Create new category
 
