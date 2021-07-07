@@ -350,12 +350,268 @@ Delete files by ID
 
 ## Thing Group API
 
+### POST /thing-groups 
+Create new thing group
+
+**Description**
+
+//TODO
+
+> [lambda-assets/files/create-thing-groups/app.ts](lambda-assets/thing-Groups/create-thing-group/app.ts)
+
+**Body**
+
+| Name | Schema |  Description |
+| -------- | ------- |  ---- |
+| thingGroupName* | String   | File's path|
+
+**Response Object if success**
+
+| Name | Group |  description |
+| -------- | --- | -- |
+| thingGroupName* | String |  | |
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | |
+| 422 | Missing require field / Variable Group incorrect|
+
+
+
+### *GET* /thing-groups/{thingGroupName} 
+Get thing group by name
+
+**Description**
+
+//TODO
+
+> [lambda-assets/files/get-thing-groups/app.ts](lambda-assets/thing-groups/get-thing-group/app.ts)
+
+
+**Path Parameter**
+
+| -------- |   ---- |
+| thingGroupName* | String   |
+
+**Response Object if success**
+
+| Name | Group |  description |
+| -------- | --- | -- |
+| thingGroupName* | String |  | |
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | |
+| 404 | ResourceNotFoundException |
+
+
+### *GET* /thing-groups 
+Get thing group list
+
+**Description**
+
+//TODO
+
+> [lambda-assets/files/list-thing-groups/app.ts](lambda-assets/thing-groups/list-thing-group/app.ts)
+
+**Query String Parameter**
+
+| Name | Group | Description |
+| -------- |   ---- | -- |
+| thingGroups* | String   | |
+
+**Response Object if success**
+
+| Name | Group |  description |
+| -------- | --- | -- |
+| thingGroups* | String |  | |
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | 
+
+### PUT /thing-groups/{thingGroupName} 
+Update thing group by name
+
+**Description**
+
+//TODO
+
+> [lambda-assets/files/update-thing-groups/app.ts](lambda-assets/thing-groups/update-thing-group/app.ts)
+
+**Query String Parameter**
+
+| Name | Group | Description |
+| -------- |   ---- | -- |
+| th=ngGroupName* | String   | |
+
+**Response Object if success**
+
+| Name | Group |  description |
+| -------- | --- | -- |
+| thingGroupsName* | String |  | |
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | |
+| 422 | Missing require field / Variable Group incorrect|
+| 404 | ResourceNotFoundException |
+
+
+### DELETE /thing-groups/{thingGroupName} 
+Delete thing group by name
+
+**Description**
+
+//TODO
+
+> [lambda-assets/files/delete-thing-groups/app.ts](lambda-assets/thing-groups/delete-thing-group/app.ts)
+
+**Query String Parameter**
+
+| Name | Group | Description |
+| -------- |   ---- | -- |
+| th=ngGroupName* | String   | |
+
+**Response Object if success**
+
+| Name | Group |  description |
+| -------- | --- | -- |
+| thingGroupsName* | String |  | |
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | |
+| 404 | ResourceNotFoundException |
+
+### PUT /thing-groups/{thingGroupName}/things/{thingName}
+Add thing to thing group by name
+
+**Description**
+
+//TODO
+
+> [lambda-assets/files/add-thing-to-group/app.ts](lambda-assets/thing-groups/add-thing-to-group/app.ts)
+
+| Name | Group | Description |
+| -------- |   ---- | -- |
+| thingGroupName* | String   | |
+| thingName* | String |
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | 
+| 404 | ResourceNotFoundException |
+
+### *DELETE* /thing-groups/{thingGroupName}/things/{thingName}
+- Remove thing to thing group by name
+
+**Description**
+
+//TODO
+
+> [lambda-assets/files/remove-thing-from-thing-group/app.ts](lambda-assets/thing-groups/remove-thing-from-thing-group/app.ts)
+
+**Path Parameter**
+
+| -------- |   ---- |
+| thingGroupName* | String   |
+
+**body**
+
+| Name | Group | Description |
+| -------- |   ---- | -- |
+| thingGroupName* | String   | 
+
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | 
+| 404 | ResourceNotFoundException |
+
+### *POST* /dynamic-thing-groups
+**Description**
+
+//TODO
+
+> [lambda-assets/files/create-thing-groups/app.ts](lambda-assets/thing-Groups/create-thing-group/app.ts)
+
+**Body**
+
+| Name | Schema |  Description |
+| -------- | ------- |  ---- |
+| thingGroupName* | String   | File's path|
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | |
+| 422 | Missing require field / Variable Group incorrect|
+
+### *PUT* /dynamic-thing-groups/{thingGroupName}
+Update dynamic thing group by name
+
+**Description**
+
+//TODO
+
+> [lambda-assets/files/create-thing-groups/app.ts](lambda-assets/thing-Groups/create-thing-group/app.ts)
+
+**Body**
+
+| Name | Schema |  Description |
+| -------- | ------- |  ---- |
+| description* | String   | File's path|
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | |
+| 422 | Missing require field / Variable Group incorrect|
+
+### *DELETE* /dynamic-thing-groups/{thingGroupName} 
+Delete dynamic thing group by name // BillingGroup not join
+
+**Description**
+
+//TODO
+
+> [lambda-assets/files/delete-dynamic-thing-groups/app.ts](lambda-assets/thing-Groups/delete-dynamic-thing-groups/app.ts)
+
+**Body**
+
+| Name | Schema |  Description |
+| -------- | ------- |  ---- |
+| thingGroupName* | String   | File's path|
+
+**Response Status**
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | |
+| 404 | ResourceNotFoundException |
+
 ## Thing Type API
 
 ### *POST* /thing-types 
 
 **Description**
-
 //TODO
 
 > [lambda-assets/files/create-thing-types/app.ts](lambda-assets/thing-types/create-thing-type/app.ts)
@@ -412,7 +668,8 @@ List thing type
 
 | Name | Type | Description |
 | -------- |   ---- | -- |
-| thingTypeName* | String   | 
+| thingTypeName* | String   | |
+| Name |  Description |
 
 **Response Object if success**
 
