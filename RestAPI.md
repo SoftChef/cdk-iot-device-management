@@ -365,11 +365,6 @@ Create new thing group
 | -------- | ------- |  ---- |
 | thingGroupName* | String   | File's path|
 
-**Response Object if success**
-
-| Name | Group |  description |
-| -------- | --- | -- |
-| thingGroupName* | String |  | |
 
 **Response Status**
 
@@ -391,7 +386,7 @@ Get thing group by name
 
 
 **Path Parameter**
-
+| Name | Description |
 | -------- |   ---- |
 | thingGroupName* | String   |
 
@@ -445,17 +440,18 @@ Update thing group by name
 
 > [lambda-assets/files/update-thing-groups/app.ts](lambda-assets/thing-groups/update-thing-group/app.ts)
 
-**Query String Parameter**
+**Path Parameter**
 
 | Name | Group | Description |
 | -------- |   ---- | -- |
-| th=ngGroupName* | String   | |
+| thingGroupName* | String   | |
 
-**Response Object if success**
+**Body**
 
-| Name | Group |  description |
-| -------- | --- | -- |
-| thingGroupsName* | String |  | |
+| Name | Group | Description |
+| -------- |   ---- | -- |
+| thingGroupDescription* | String   | |
+
 
 **Response Status**
 
@@ -473,19 +469,13 @@ Delete thing group by name
 
 //TODO
 
-> [lambda-assets/files/delete-thing-groups/app.ts](lambda-assets/thing-groups/delete-thing-group/app.ts)
+> [lambda-assets/files/delete-thing-group/app.ts](lambda-assets/thing-groups/delete-thing-group/app.ts)
 
-**Query String Parameter**
+**Path Parameter**
 
 | Name | Group | Description |
 | -------- |   ---- | -- |
-| th=ngGroupName* | String   | |
-
-**Response Object if success**
-
-| Name | Group |  description |
-| -------- | --- | -- |
-| thingGroupsName* | String |  | |
+| thingGroupName* | String   | |
 
 **Response Status**
 
@@ -502,6 +492,8 @@ Add thing to thing group by name
 //TODO
 
 > [lambda-assets/files/add-thing-to-group/app.ts](lambda-assets/thing-groups/add-thing-to-group/app.ts)
+
+**Path Parameter**
 
 | Name | Group | Description |
 | -------- |   ---- | -- |
@@ -529,13 +521,6 @@ Add thing to thing group by name
 | -------- |   ---- |
 | thingGroupName* | String   |
 
-**body**
-
-| Name | Group | Description |
-| -------- |   ---- | -- |
-| thingGroupName* | String   | 
-
-
 **Response Status**
 
 | HTTP Status Code |  Description |
@@ -548,13 +533,15 @@ Add thing to thing group by name
 
 //TODO
 
-> [lambda-assets/files/create-thing-groups/app.ts](lambda-assets/thing-Groups/create-thing-group/app.ts)
+> [lambda-assets/files/create-dynamic-thing-groups/app.ts](lambda-assets/thing-Groups/create-thing-group/app.ts)
 
 **Body**
 
 | Name | Schema |  Description |
 | -------- | ------- |  ---- |
-| thingGroupName* | String   | File's path|
+| thingGroupName* | String   | |
+| queryString* | String   | |
+
 
 **Response Status**
 
@@ -570,13 +557,18 @@ Update dynamic thing group by name
 
 //TODO
 
-> [lambda-assets/files/create-thing-groups/app.ts](lambda-assets/thing-Groups/create-thing-group/app.ts)
+> [lambda-assets/files/update-dynamic-thing-groups/app.ts](lambda-assets/update-dynamic-thing-groups/create-thing-group/app.ts)
+
+**Path Parameter**
+
+| -------- |   ---- |
+| thingGroupName* | String   |
 
 **Body**
 
 | Name | Schema |  Description |
 | -------- | ------- |  ---- |
-| description* | String   | File's path|
+| thingGroupDescription* | String   | |
 
 **Response Status**
 
