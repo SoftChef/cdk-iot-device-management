@@ -7,6 +7,7 @@ export async function handler(event: { [key: string]: any }) {
   try {
     const validated = request.validate(joi => {
       return {
+        jobId: joi.string().required(),
         targets: joi.array().items(joi.string()).required(),
       };
     });
