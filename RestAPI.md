@@ -334,6 +334,246 @@ Delete files by ID
 ---
 ## Job API
 
+### *POST* /jobs 
+Create new job
+
+**Description**
+//TODO
+
+**body**
+| Name | Schema |  Description |
+| -------- |   ---- | --- |
+| targets* | String[]  ||
+| targetSelection* | "SNAPSHOT" \| "CONTINUOUS"  | |
+| document*	| String ||
+| description* | String 
+
+**Response Object if success**
+| Name | Group |  Description |
+| -------- | --- | -- |
+| jobArn* | String |
+| jobId* | String |  | |
+| description* | String |
+
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | |
+| 422 | Missing require field / Variable Group incorrect|
+---
+### *GET* /jobs/{jobId} - Get job by ID
+
+**Description**
+//TODO
+
+**Path Parameter**
+| Name | Description |
+| -------- |   ---- |
+| jobId* | String   | 
+
+**Response Object if success**
+| Name | Group |  Description |
+| -------- | --- | -- |
+| jobArn* | String | |
+| jobId* | String |  |
+| targets* | String[]  ||
+| targetSelection* | "SNAPSHOT" \| "CONTINUOUS"  | |
+| description* | String |
+| status | String | |
+
+**Response Status**
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | 
+| 404 | ResourceNotFoundException |
+---
+### *GET* /jobs 
+Get job list
+
+**Description**
+//TODO
+
+**Response Object if success**
+| Name | Group |  Description |
+| -------- | --- | -- |
+| jobArn* | String | |
+| jobId* | String |  |
+| targets* | String[]  ||
+| targetSelection* | "SNAPSHOT" \| "CONTINUOUS"  | |
+| description* | String |
+| status | String |
+
+**Response Status**
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | |
+---
+### *GET* /jobs/{jobId}/things/{thingName} - Get job's thing status by job ID and thing name
+
+**Description**
+//TODO
+
+**Response Object if success**
+| Name | Group |  Description |
+| -------- | --- | -- |
+| jobArn* | String | |
+| jobId* | String |  |
+| targets* | String[]  ||
+| targetSelection* | "SNAPSHOT" \| "CONTINUOUS"  | |
+| description* | String |
+| status | String |
+
+**Response Status**
+| HTTP Status Code |  Description |
+| -------- | ------- |
+| 200 | 
+---
+### *PUT* /jobs/{jobId}
+Update job by ID
+
+**Description**
+//TODO
+
+**Path Parameter**
+| Name | Description |
+| -------- |   ---- |
+| jobId* | String   |
+
+**body**
+| Name | Schema |  Description |
+| -------- |   ---- | --- |
+| description* | String |
+
+**Response Object if success**
+| Name | Group |  Description |
+| -------- | --- | -- |
+| jobId* | String |  |
+| description* | String |
+
+**Response Status**
+| HTTP Status Code |  Description |
+| -------- | ------- |
+| 200 | 
+| 422 | Missing require field / Variable Group incorrect|
+| 404 | ResourceNotFoundException |
+---
+### *DELETE* /jobs/{jobId} - Delete job by ID
+
+**Description**
+//TODO
+
+**Path Parameter**
+| Name | Description |
+| -------- |   ---- |
+| jobId* | String   |
+
+**body**
+| Name | Schema |  Description |
+| -------- |   ---- | --- |
+| force | Boolean  ||
+
+**Response Status**
+| HTTP Status Code |  Description |
+| -------- | ------- |
+| 200 | 
+| 404 | ResourceNotFoundException |
+---
+### *DELETE* /jobs/{jobId}/things/{thingName} - Delete job's thing by job ID and thing name
+???
+<!--
+**Description**
+//TODO
+
+**Path Parameter**
+| Name | Description |
+| -------- |   ---- |
+| jobId* | String   |
+
+**body**
+| Name | Schema |  Description |
+| -------- |   ---- | --- |
+| force | Boolean  ||
+
+**Response Status**
+| HTTP Status Code |  Description |
+| -------- | ------- |
+| 200 | 
+| 404 | ResourceNotFoundException |
+-->
+---
+
+### *POST* /job-templates - Create new job template
+
+**body**
+| Name | Schema |  Description |
+| -------- |   ---- | --- |
+| document* | ||
+| description* |  | |
+
+**Response Object if success**
+| Name | Group |  Description |
+| -------- | --- | -- |
+| jobTemplateArn* | String | |
+| jobTemplateId* | String |  |
+
+| HTTP Status Code |  Description |
+| -------- | ------- |
+| 200 | 
+| 422 | Missing require field / Variable Group incorrect|
+---
+### *GET* /job-templates/{jobTemplateId} - Get job template by ID
+
+**Description**
+//TODO
+
+**Path Parameter**
+| Name | Description |
+| -------- |   ---- |
+| jobTemplateId* | String   |
+
+**Response Object if success**
+| Name | Group |  Description |
+| -------- | --- | -- |
+| jobTemplateId* | String | |
+
+**Response Status**
+| HTTP Status Code |  Description |
+| -------- | ------- |
+| 200 | 
+| 404 | ResourceNotFoundException |
+---
+### *GET* /job-templates 
+Get job template list
+
+**Description**
+//TODO
+
+**Response Object if success**
+| Name | Group |  Description |
+| -------- | --- | -- |
+| jobTemplateId* | String | |
+
+**Response Status**
+| HTTP Status Code |  Description |
+| -------- | ------- |
+| 200 | 
+---
+### *DELETE* /job-templates/{jobTemplateId} - Delete job template by ID
+
+**Description**
+//TODO
+
+**Path Parameter**
+| Name | Description |
+| -------- |   ---- |
+| jobTemplateId* | String   |
+
+**Response Status**
+| HTTP Status Code |  Description |
+| -------- | ------- |
+| 200 | 
+| 404 | ResourceNotFoundException |
+
+
 ## Thing Group API
 
 ### POST /thing-groups 
@@ -461,7 +701,7 @@ Delete thing group by name
 | 404 | ResourceNotFoundException |
 
 ---
-### PUT 
+### *PUT* /thing-groups/{thingGroupName}/things/{thingName} 
 Add thing to thing group by name
 
 **Description**
@@ -482,7 +722,8 @@ Add thing to thing group by name
 | 200 | 
 | 404 | ResourceNotFoundException |
 ---
-### Get /thing-groups/{thingGroupName}/things
+### *GET* /thing-groups/{thingGroupName}/things
+List thing in thing group
 
 **Description**
 
@@ -500,7 +741,7 @@ Add thing to thing group by name
 | HTTP Status Code |  Description |
 | -------- | ------- | 
 | 200 | 
-| 404 | ResourceNotFoundException |
+| 404 | ResourceNotFoundException |-->
 ---
 ### *DELETE* /thing-groups/{thingGroupName}/things/{thingName}
 - Remove thing to thing group by name
@@ -645,7 +886,6 @@ List thing type
 | Name | Type | Description |
 | -------- |   ---- | -- |
 | thingTypeName* | String   | |
-| Name |  Description |
 
 **Response Object if success**
 
@@ -848,7 +1088,87 @@ Delete thing by name
 | 200 | |
 | 404 | ResourceNotFoundException |
 ---
-TODO: thingshadow
+### *GET* /things/{thingName}/shadows/{shadowName}
+
+**Description**
+//TODO
+
+**Path Parameter**
+| Name | Description |
+| -------- |   ---- |
+| thingName* | String   |
+| shadowName* | String ||
+
+**Response Object if success**
+| Name | Group |  Description |
+| -------- | --- | -- |
+| payload* | Uint8Array | |
+
+**Response Status**
+| HTTP Status Code |  Description |
+| -------- | ------- |
+| 200 | 
+| 404 | ResourceNotFoundException |
+---
+### *GET* /things/{thingName}/shadows
+
+**Description**
+//TODO
+
+**Path Parameter**
+| Name | Description |
+| -------- |   ---- |
+| thingName* | String   |
+
+**Response Object if success**
+| Name | Group |  Description |
+| -------- | --- | -- |
+| result* | String[] | |
+
+**Response Status**
+| HTTP Status Code |  Description |
+| -------- | ------- |
+| 200 | 
+| 404 | ResourceNotFoundException |
+---
+### *PUT* /things/{thingName}/shadows/{shadowName
+
+**Description**
+//TODO
+
+**Path Parameter**
+| Name | Description |
+| -------- |   ---- |
+| thingName* | String   |
+
+**body**
+| Name | Schema |  Description |
+| -------- |   ---- | --- |
+| payload* | Uint8Array | |
+
+**Response Status**
+| HTTP Status Code |  Description |
+| -------- | ------- |
+| 200 | 
+| 422 | Missing require field / Variable Group incorrect|
+| 404 | ResourceNotFoundException |
+---
+### *DELETE* /things/{thingName}/shadows/{shadowName}
+
+**Description**
+//TODO
+
+**Path Parameter**
+| Name | Description |
+| -------- |   ---- |
+| thingName* | String   |
+| shadowName* | String ||
+
+**Response Status**
+| HTTP Status Code |  Description |
+| -------- | ------- |
+| 200 | 
+| 404 | ResourceNotFoundException |
 
 
 GET /search
