@@ -44,7 +44,7 @@ Create File's category.
 
 | Name | Schema |  Description |
 | -------- | ------- |  ---- |
-| categoryId* | String   |   |
+| categoryId* | String| Category's ID|
 | parentId* | String   | |
 | description	| String | |
 
@@ -338,76 +338,79 @@ Delete files by ID
 Create new job
 
 **Description**
-//TODO
+Create new job on platform
 
 **body**
 | Name | Schema |  Description |
 | -------- |   ---- | --- |
-| targets* | String[]  ||
-| targetSelection* | "SNAPSHOT" \| "CONTINUOUS"  | |
-| document*	| String ||
-| description* | String 
+| targets* | String[]  | A list of thing's arn |
+| targetSelection* | "SNAPSHOT" \| "CONTINUOUS"  | Job status |
+| document*	| String | Job's document |
+| description* | String | Job's description
 
 **Response Object if success**
 | Name | Group |  Description |
 | -------- | --- | -- |
-| jobArn* | String |
-| jobId* | String |  | |
-| description* | String |
+| jobArn* | String | Job's arn |
+| jobId* | String | Job's ID | |
+| description* | String | Job's description |
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | |
+| 200 | Create job success|
 | 422 | Missing require field / Variable Group incorrect|
 ---
-### *GET* /jobs/{jobId} - Get job by ID
+### *GET* /jobs/{jobId} 
+Get job by ID
 
 **Description**
-//TODO
+Get exist job for platform
 
 **Path Parameter**
 | Name | Description |
 | -------- |   ---- |
-| jobId* | String   | 
+| jobId* | Job's ID | 
 
 **Response Object if success**
 | Name | Group |  Description |
 | -------- | --- | -- |
-| jobArn* | String | |
-| jobId* | String |  |
-| targets* | String[]  ||
-| targetSelection* | "SNAPSHOT" \| "CONTINUOUS"  | |
-| description* | String |
-| status | String | |
+| jobArn* | String | Job's arn |
+| jobId* | String | Job's ID |
+| targets* | String[]  | A list of thing's ID |
+| targetSelection* | "SNAPSHOT" \| "CONTINUOUS"  | Job's status |
+| description* | String | Job's description |
+| status | String | Job's status |
 
 **Response Status**
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | 
+| 200 | Get job success
 | 404 | ResourceNotFoundException |
 ---
 ### *GET* /jobs 
 Get job list
 
 **Description**
-//TODO
+List jobs on platform
 
 **Response Object if success**
 | Name | Group |  Description |
 | -------- | --- | -- |
-| jobArn* | String | |
-| jobId* | String |  |
-| targets* | String[]  ||
-| targetSelection* | "SNAPSHOT" \| "CONTINUOUS"  | |
-| description* | String |
-| status | String |
+| jobArn* | String | Job's arn |
+| jobId* | String | Job's ID |
+| targets* | String[] | List of thing's arn |
+| targetSelection* | "SNAPSHOT" \| "CONTINUOUS"  | Job status|
+| description* | String | Job’s description
+| status | String | Job’s status
 
 **Response Status**
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | |
+| 200 | List jobs success|
 ---
-### *GET* /jobs/{jobId}/things/{thingName} - Get job's thing status by job ID and thing name
+### *GET* /jobs/{jobId}/things/{thingName} 
+?
+Get job's thing status by job ID and thing name
 
 **Description**
 //TODO
@@ -415,12 +418,12 @@ Get job list
 **Response Object if success**
 | Name | Group |  Description |
 | -------- | --- | -- |
-| jobArn* | String | |
-| jobId* | String |  |
-| targets* | String[]  ||
-| targetSelection* | "SNAPSHOT" \| "CONTINUOUS"  | |
-| description* | String |
-| status | String |
+| jobArn* | String | Job's arn |
+| jobId* | String | Job's ID |
+| targets* | String[]  | A list of thing arn |
+| targetSelection* | "SNAPSHOT" \| "CONTINUOUS"  | Job status |
+| description* | String | Job's description
+| status | String | Job's status
 
 **Response Status**
 | HTTP Status Code |  Description |
@@ -431,28 +434,28 @@ Get job list
 Update job by ID
 
 **Description**
-//TODO
+Update Job's information
 
 **Path Parameter**
 | Name | Description |
 | -------- |   ---- |
-| jobId* | String   |
+| jobId* | Job's ID   |
 
 **body**
 | Name | Schema |  Description |
 | -------- |   ---- | --- |
-| description* | String |
+| description* | String | Job's description
 
 **Response Object if success**
 | Name | Group |  Description |
 | -------- | --- | -- |
-| jobId* | String |  |
-| description* | String |
+| jobId* | String | Job's Id |
+| description* | String | Job's description
 
 **Response Status**
 | HTTP Status Code |  Description |
 | -------- | ------- |
-| 200 | 
+| 200 | Update job success
 | 422 | Missing require field / Variable Group incorrect|
 | 404 | ResourceNotFoundException |
 ---
@@ -464,63 +467,64 @@ Update job by ID
 **Path Parameter**
 | Name | Description |
 | -------- |   ---- |
-| jobId* | String   |
+| jobId* | Job's ID   |
 
 **body**
 | Name | Schema |  Description |
 | -------- |   ---- | --- |
-| force | Boolean  ||
+| force | Boolean  | Force delete |
 
 **Response Status**
 | HTTP Status Code |  Description |
 | -------- | ------- |
-| 200 | 
+| 200 | Delete success
 | 404 | ResourceNotFoundException |
 ---
-### *DELETE* /jobs/{jobId}/things/{thingName} - Delete job's thing by job ID and thing name
-???
-<!--
+### *DELETE* /jobs/{jobId}/things/{thingName} 
+Delete job's thing by job ID and thing name
+
 **Description**
 //TODO
 
 **Path Parameter**
 | Name | Description |
 | -------- |   ---- |
-| jobId* | String   |
+| jobId* | Job's ID   |
 
 **body**
 | Name | Schema |  Description |
 | -------- |   ---- | --- |
-| force | Boolean  ||
+| force | Boolean  | Force delete |
 
 **Response Status**
 | HTTP Status Code |  Description |
 | -------- | ------- |
-| 200 | 
+| 200 | Delete success |
 | 404 | ResourceNotFoundException |
--->
 ---
 
-### *POST* /job-templates - Create new job template
+### *POST* /job-templates
+Create new job template
 
 **body**
 | Name | Schema |  Description |
 | -------- |   ---- | --- |
-| document* | ||
-| description* |  | |
+| document* | String | job templates' document|
+| description* | String | job templates' description |
 
 **Response Object if success**
 | Name | Group |  Description |
 | -------- | --- | -- |
-| jobTemplateArn* | String | |
-| jobTemplateId* | String |  |
+| jobTemplateArn* | String | Job templates' arn |
+| jobTemplateId* | String | Job templates’ ID |
 
 | HTTP Status Code |  Description |
 | -------- | ------- |
-| 200 | 
+| 200 | Create job template success
 | 422 | Missing require field / Variable Group incorrect|
 ---
-### *GET* /job-templates/{jobTemplateId} - Get job template by ID
+### *GET* /job-templates/{jobTemplateId} 
+\Get job template by ID
 
 **Description**
 //TODO
@@ -528,21 +532,21 @@ Update job by ID
 **Path Parameter**
 | Name | Description |
 | -------- |   ---- |
-| jobTemplateId* | String   |
+| jobTemplateId* | Job Template's ID   |
 
 **Response Object if success**
 | Name | Group |  Description |
 | -------- | --- | -- |
-| jobTemplateId* | String | |
+| jobTemplateId* | String | Job Template's ID|
 
 **Response Status**
 | HTTP Status Code |  Description |
 | -------- | ------- |
-| 200 | 
+| 200 | Get Job templates success |
 | 404 | ResourceNotFoundException |
 ---
 ### *GET* /job-templates 
-Get job template list
+List job template 
 
 **Description**
 //TODO
@@ -980,89 +984,90 @@ Delete thing type
 Create thing
 
 **Description**
-//TODO
+Add new thing into platform.
 
 **body**
 | Name | Schema |  Description |
 | -------- |   ---- | --- |
-| thingName* | String   ||
+| thingName* | String   | Thing's name|
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | |
+| 200 | Create thing success|
 | 422 | Missing require field / Variable Group incorrect|
 ---
 ### *GET* /things/{thingName}
 Get thing 
 
 **Description**
-//TODO
+Get thing's information.
 
-**Path Paremeter**
+**Path Parameter**
 | Name |    Description |
 | -------- |   --- |
-| thingName* | String   | 
+| thingName* | String   | Thing's name | 
 
 **Response Object if success**
 | Name | Group |  Description |
 | -------- | --- | -- |
-| thingTypeName* | String |
-| thingArn* | String |  | |
-| thingId* | String |
-| thingName* | String | |
+| thingName* | String | Thing's name |
+| thingTypeName* | String | Thing's thing type|
+| thingArn* | String | Thing's Arn |
+| thingId* | String | Thing's ID |
+
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | |
+| 200 | Get thing's information success |
 | 404 | ResourceNotFoundException |
 ---
 ### *GET* /things 
-Get thing list
+List things
 
 **Description**
-//TODO
+List all of the thing.
 
-**Path Paremeter**
+**Path Parameter**
 | Name |    Description |
 | -------- |   --- |
-| thingName* | String   | 
+| thingName* | String   | Thing's name | 
 
 **Response Object if success**
 | Name | Group |  Description |
 | -------- | --- | -- |
-| thingTypeName* | String |
-| thingArn* | String |  | |
-| thingId* | String |
-| thingName* | String | |
+| thingName* | String | Thing's name |
+| thingTypeName* | String | Thing's thing type|
+| thingArn* | String | Thing's Arn |
+| thingId* | String | Thing's ID |
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | |
+| 200 | List things success|
 ---
 ### *PUT* /things/{thingName}
 Update thing by name
 
 **Description**
-//TODO
+Update thing's information.
 
-**Path Paremeter**
+**Path Parameter**
 | Name |    Description |
 | -------- |   --- |
-| thingName* | String   | 
+| thingName* | Thing's name | 
 
 **body**
 | Name | Group |  Description |
 | -------- | --- | -- |
-| thingTypeName* | String |
-| attributePayload* | String |  | |
-| expectedVersion* | String |
-| removeThingType* | String | |
+| thingTypeName* | String | Thing's thing type name
+| attributePayload* | String | Thing's attribute payload  |
+| expectedVersion* | String | Thing's expected version |
+| removeThingType* | Boolean | Remove thing type |
 
 **Response Status**
 
@@ -1076,98 +1081,102 @@ Update thing by name
 Delete thing by name
 
 **Description**
-//TODO
+Delete thing from platform
 
 **Path Paremeter**
 | Name |    Description |
 | -------- |   --- |
-| thingName* | String   | 
+| thingName* | Thing's name | 
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | |
+| 200 | Delete Success|
 | 404 | ResourceNotFoundException |
 ---
 ### *GET* /things/{thingName}/shadows/{shadowName}
+Get thing shadow
 
 **Description**
-//TODO
+Get thing's thing shadow payload from platform
 
 **Path Parameter**
 | Name | Description |
 | -------- |   ---- |
-| thingName* | String   |
-| shadowName* | String ||
+| thingName* | String   | Thing's name
+| shadowName* | String | Thing shadow's name
 
 **Response Object if success**
 | Name | Group |  Description |
 | -------- | --- | -- |
-| payload* | Uint8Array | |
+| payload* | Uint8Array | Thing's thing shadow |
 
 **Response Status**
 | HTTP Status Code |  Description |
 | -------- | ------- |
-| 200 | 
+| 200 | Get thing shadow success |
 | 404 | ResourceNotFoundException |
 ---
 ### *GET* /things/{thingName}/shadows
+List thing shadow
 
 **Description**
-//TODO
+List all thing shadow on platform.
 
 **Path Parameter**
 | Name | Description |
 | -------- |   ---- |
-| thingName* | String   |
+| thingName* | String | Thing's name |
 
 **Response Object if success**
 | Name | Group |  Description |
 | -------- | --- | -- |
-| result* | String[] | |
+| result* | String[] | List all thing shadow |
 
 **Response Status**
 | HTTP Status Code |  Description |
 | -------- | ------- |
-| 200 | 
+| 200 | List thing shadow success
 | 404 | ResourceNotFoundException |
 ---
 ### *PUT* /things/{thingName}/shadows/{shadowName
+Update thing shadow
 
 **Description**
-//TODO
+Update thing shadow's payload to platform
 
 **Path Parameter**
 | Name | Description |
 | -------- |   ---- |
-| thingName* | String   |
+| thingName* | Thing's name   |
 
 **body**
 | Name | Schema |  Description |
 | -------- |   ---- | --- |
-| payload* | Uint8Array | |
+| payload* | Uint8Array | Thing shadow's payload|
 
 **Response Status**
 | HTTP Status Code |  Description |
 | -------- | ------- |
-| 200 | 
+| 200 | Update Success |
 | 422 | Missing require field / Variable Group incorrect|
 | 404 | ResourceNotFoundException |
 ---
 ### *DELETE* /things/{thingName}/shadows/{shadowName}
+Delete thing shadow
 
 **Description**
-//TODO
+Delete thing shadow from platform
 
 **Path Parameter**
 | Name | Description |
 | -------- |   ---- |
-| thingName* | String   |
-| shadowName* | String ||
+| thingName* | Thing's name |
+| shadowName* | Thing shadow's name |
 
 **Response Status**
 | HTTP Status Code |  Description |
 | -------- | ------- |
-| 200 | 
+| 200 | Delete success |
 | 404 | ResourceNotFoundException |
 
 
