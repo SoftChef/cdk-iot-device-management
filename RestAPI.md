@@ -32,58 +32,59 @@
 
 ## Files API
 
+Files API contain files and category two DB table, every file have it's own category.
+
 ### *POST* /categories
 
 Create new category
 
 **Description**
 
-Create File's category.
+Create new file's category on platform.
 
 **Body**
 
 | Name | Schema |  Description |
 | -------- | ------- |  ---- |
 | categoryId* | String| Category's ID|
-| parentId* | String   | |
-| description	| String | |
+| parentId* | String   | Sub category's ID |
+| description	| String | Category's description |
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 |Create success |
+| 200 |Create success | 
 | 422 | Missing require field / Variable type incorrect |
 
 ---
 ### *GET* /categories/{categoryId} 
-Get category by ID, if category is root will return children category 
-
-**Description**
-
-// TODO
+Get category by ID, if category is root will return children category. 
 
 **Path Parameter**
 
 |  Name | Description |
 | -------- | -------- | 
-| categoryId* |      | 
+| categoryId* | Category's ID | 
+
+**Response Object if success**
+
+| Name | Schema |  description |
+| -------- | --- | -- |
+| categoryId* | String 
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | |
-| 404 | ResourceNotFoundException |
+| 200 | Get Category Success |
+| 404 | Cannot found category |
 ---
 
 ### *GET* /categories
 
 Get root category list
 
-**Description**
-
-// TODO
 
 **Query String Parameters**
 
@@ -106,7 +107,7 @@ Get root category list
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | |
+| 200 | List category success |
 
 ---
 ### *PUT* /categories/{categoryId} 
@@ -114,56 +115,54 @@ Update category by ID
 
 **Description**
 
-// TODO
-
-> [lambda-assets/files/update-category/app.ts](lambda-assets/files/update-category/app.ts)
+Update category information by category ID
 
 **Path Parameter**
 
 | Name | Schema |  Description |
 | -------- | ------- |  ---- |
-| categoryId* | String   |   |
+| categoryId* | String   | Category's ID |
 
 **Body**
 
 | Name | Schema |  Description |
 | -------- | ------- |  ---- |  
-| description*	| String | 
+| description*	| String | Category's description |
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | Update success|
-| 422 | Missing require field / Variable type incorrect|
-| 404 | ResourceNotFoundException |
+| 200 | Update success |
+| 422 | Missing require field / Variable type incorrect |
+| 404 | Cannot found category ID |
 ---
 ### *DELETE* /categories/{categoryId} 
 Delete category by ID
 
 **Description**
 
-// TODO
+Delete category by category ID
 
 **Path Parameter**
 
 | Name | Schema |  Description |
 | -------- | ------- |  ---- |
-| categoryId* | String   |   |
+| categoryId* | String | Category's ID  |
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
 | 200 | Delete success|
-| 404 | ResourceNotFoundException |
+| 404 | Cannot found category ID |
 ---
 ### *POST* /files
 Create files
 
 **Description**
 
-// TODO
+Create file's information when user upload file
 
 **Body**
 
@@ -172,31 +171,32 @@ Create files
 | location* | String | File's path|
 | checksum* | String | An encrypt md5 / crc32 / sha1 value |
 | checksumType* | String | File's version |
-| locale* | String |
+| locale* | String | File's locale |
 | version* | String| File's version|
 | categoryId* | String | File's category (From category table)
-| description | String | |
+| description | String | File's description |
 
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | Create success|
+| 200 | Create file success|
 | 422 | Missing require field / Variable type incorrect|
-| 404 | ResourceNotFoundException |
+| 404 | Category ID not found |
 ---
 ### *GET* /files/{fileId} 
-Get root files list
+Get file by file ID
 
-**Description**
-// TODO
+**Description
+
+Get file's information by file ID
 
 **Path Parameter**
 
 | Name |   Description |
 | -------- | ------- | 
-| fileId* | String   | 
+| fileId* | File's ID   | 
 
 **Response Object if success**
 
@@ -205,29 +205,26 @@ Get root files list
 | location* | String   | File's path|
 | checksum* | String   |	An encrypt md5 / crc32 / sha1 value |
 | checksumType*	| String |File's version|
-| locale* | String |
-| version* | String| File's version|
-| categoryId* | String | File's category (From category table)
-| description | String | |
+| locale* | String | File's locale |
+| version* | String| File's version |
+| categoryId* | String | File's category (From category table) |
+| description | String | File's description |
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | Create success|
-| 404 | ResourceNotFoundException |
+| 200 | Create success |
+| 404 | Cannot find file |
 ---
 ### GET /files
 Get root files list
 
-**Description**
-// TODO
-
 **Query String Parameter**
 
-| Name |   Description |
+| Name | Schema |  Description |
 | -------- | ------- |
-| fileId* | String   |
+| fileId* | String | File's ID   |
 
 **Response Object if success**
 
@@ -236,28 +233,25 @@ Get root files list
 | location* | String   | File's path|
 | checksum* | String   |	An encrypt md5 / crc32 / sha1 value |
 | checksumType*	| String |File's version|
-| locale* | String |
+| locale* | String | File's locale |
 | version* | String| File's version|
 | categoryId* | String | File's category (From category table)
-| description | String | |
+| description | String | File's description |
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- |
-| 200 ||
+| 200 | List file success|
 ---
 ### GET /files/{categoryId}
-List file by categoryId
-
-**Description**
-// TODO
+List files by categoryId
 
 **Query String Parameter**
 
-| Name |   Description |
+| Name | Schema | Description |
 | -------- | ------- |
-| categoryId* | String |
+| categoryId* | String | Category's ID |
 
 **Response Object if success**
 
@@ -266,33 +260,33 @@ List file by categoryId
 | location* | String   | File's path|
 | checksum* | String   |	An encrypt md5 / crc32 / sha1 value |
 | checksumType*	| String |File's version|
-| locale* | String |
+| locale* | String |File's locale |
 | version* | String| File's version|
 | categoryId* | String | File's category (From category table)
-| description | String | |
+| description | String | File's description |
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
 | 200 | Create success|
-| 404 | ResourceNotFoundException |
+| 404 | Category ID not found |
 
 ---
 
 ### PUT /files/{fileId} - Update file by ID
 
-Update file by ID
+Update file by file ID
 
 **Description**
 
-// TODO
+Update file's information by file ID
 
 **Path Parameter**
 
-| Name | Schema |  Description |
-| -------- | ------- |  ---- |
-| fileId* | String   |   |
+| Name |   Description |
+| -------- | ------- |
+| fileId* | File's ID   |
 
 **Body**
 
@@ -308,28 +302,24 @@ Update file by ID
 | -------- | ------- | 
 | 200 | Update success|
 | 422 | Missing require field / Variable type incorrect|
-| 404 | ResourceNotFoundException |
+| 404 | File not found |
 
 ---
 ### *DELETE* /files/{categoryId} 
-Delete files by ID
-
-**Description**
-
-// TODO
+Delete file by ID
 
 **Path Parameter**
 
-| Name | Schema |  Description |
-| -------- | ------- |  ---- |
-| fileId* | String   |   |
+| Name |   Description |
+| -------- | ------- |
+| fileId* | File's ID   |
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
 | 200 | Delete success|
-| 404 | ResourceNotFoundException |
+| 404 | File not found |
 
 ---
 ## Job API
@@ -343,7 +333,7 @@ Create new job on platform
 **body**
 | Name | Schema |  Description |
 | -------- |   ---- | --- |
-| targets* | String[]  | A list of thing's arn |
+| targets* | String[]  | A list of thing's |
 | targetSelection* | "SNAPSHOT" \| "CONTINUOUS"  | Job status |
 | document*	| String | Job's document |
 | description* | String | Job's description
@@ -351,7 +341,7 @@ Create new job on platform
 **Response Object if success**
 | Name | Group |  Description |
 | -------- | --- | -- |
-| jobArn* | String | Job's arn |
+| jobArn* | String | Job's ARN|
 | jobId* | String | Job's ID | |
 | description* | String | Job's description |
 
@@ -374,7 +364,7 @@ Get exist job for platform
 **Response Object if success**
 | Name | Group |  Description |
 | -------- | --- | -- |
-| jobArn* | String | Job's arn |
+| jobArn* | String | Job's ARN |
 | jobId* | String | Job's ID |
 | targets* | String[]  | A list of thing's ID |
 | targetSelection* | "SNAPSHOT" \| "CONTINUOUS"  | Job's status |
@@ -396,9 +386,9 @@ List jobs on platform
 **Response Object if success**
 | Name | Group |  Description |
 | -------- | --- | -- |
-| jobArn* | String | Job's arn |
+| jobArn* | String | Job's ARN |
 | jobId* | String | Job's ID |
-| targets* | String[] | List of thing's arn |
+| targets* | String[] | List of thing's ARN |
 | targetSelection* | "SNAPSHOT" \| "CONTINUOUS"  | Job status|
 | description* | String | Job’s description
 | status | String | Job’s status
@@ -418,9 +408,9 @@ Get job's thing status by job ID and thing name
 **Response Object if success**
 | Name | Group |  Description |
 | -------- | --- | -- |
-| jobArn* | String | Job's arn |
+| jobArn* | String | Job's ARN |
 | jobId* | String | Job's ID |
-| targets* | String[]  | A list of thing arn |
+| targets* | String[]  | A list of thing ARN |
 | targetSelection* | "SNAPSHOT" \| "CONTINUOUS"  | Job status |
 | description* | String | Job's description
 | status | String | Job's status
@@ -449,8 +439,8 @@ Update Job's information
 **Response Object if success**
 | Name | Group |  Description |
 | -------- | --- | -- |
-| jobId* | String | Job's Id |
-| description* | String | Job's description
+| jobId* | String | Job's ID |
+| description* | String | Job's description |
 
 **Response Status**
 | HTTP Status Code |  Description |
@@ -509,13 +499,13 @@ Create new job template
 **body**
 | Name | Schema |  Description |
 | -------- |   ---- | --- |
-| document* | String | job templates' document|
-| description* | String | job templates' description |
+| document* | String | Job templates' document|
+| description* | String | Job templates' description |
 
 **Response Object if success**
 | Name | Group |  Description |
 | -------- | --- | -- |
-| jobTemplateArn* | String | Job templates' arn |
+| jobTemplateArn* | String | Job templates' ARN |
 | jobTemplateId* | String | Job templates’ ID |
 
 | HTTP Status Code |  Description |
@@ -837,7 +827,7 @@ Delete dynamic thing group by name // BillingGroup not join
 
 ### *POST* /thing-types 
 **Description*
-//TODO
+
 
 **Body**
 
@@ -989,13 +979,13 @@ Add new thing into platform.
 **body**
 | Name | Schema |  Description |
 | -------- |   ---- | --- |
-| thingName* | String   | Thing's name|
+| thingName* | String  | Thing's name|
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | Create thing success|
+| 200 | Create thing success |
 | 422 | Missing require field / Variable Group incorrect|
 ---
 ### *GET* /things/{thingName}
@@ -1007,23 +997,32 @@ Get thing's information.
 **Path Parameter**
 | Name |    Description |
 | -------- |   --- |
-| thingName* | String   | Thing's name | 
+| thingName* | Thing's name | 
 
 **Response Object if success**
-| Name | Group |  Description |
+
+| Name | Description |
 | -------- | --- | -- |
 | thingName* | String | Thing's name |
 | thingTypeName* | String | Thing's thing type|
-| thingArn* | String | Thing's Arn |
+| thingArn* | String | Thing's ARN |
 | thingId* | String | Thing's ID |
 
+``` Get thing response 
+{
+    "thingName": "MyLightBulb",
+    "thingTypeName": "LightBulb",
+    "thingArn": "arn:aws:iot:us-east-1:123456789012:thing/MyLightBulb",
+    "thingId": "12345678abcdefgh12345678ijklmnop12345678"
+}
+```
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
 | 200 | Get thing's information success |
-| 404 | ResourceNotFoundException |
+| 404 | Cannot found thing on platform  |
 ---
 ### *GET* /things 
 List things
@@ -1032,16 +1031,16 @@ List things
 List all of the thing.
 
 **Path Parameter**
-| Name |    Description |
+| Name | Description |
 | -------- |   --- |
 | thingName* | String   | Thing's name | 
 
 **Response Object if success**
-| Name | Group |  Description |
+| Name | Schema |  Description |
 | -------- | --- | -- |
 | thingName* | String | Thing's name |
 | thingTypeName* | String | Thing's thing type|
-| thingArn* | String | Thing's Arn |
+| thingArn* | String | Thing's ARN |
 | thingId* | String | Thing's ID |
 
 **Response Status**
@@ -1064,18 +1063,18 @@ Update thing's information.
 **body**
 | Name | Group |  Description |
 | -------- | --- | -- |
-| thingTypeName* | String | Thing's thing type name
-| attributePayload* | String | Thing's attribute payload  |
-| expectedVersion* | String | Thing's expected version |
-| removeThingType* | Boolean | Remove thing type |
+| thingTypeName | String | Thing's thing type name
+| attributePayload | String | Thing's attribute payload |
+| expectedVersion | String | Thing's expected version |
+| removeThingType | Boolean | Remove thing type |
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | |
+| 200 | Update success |
 | 422 | Missing require field / Variable Group incorrect|
-| 404 | ResourceNotFoundException |
+| 404 | Cannot found thing on platform |
 ---
 ### DELETE /things/{thingName} 
 Delete thing by name
@@ -1090,8 +1089,8 @@ Delete thing from platform
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | Delete Success|
-| 404 | ResourceNotFoundException |
+| 200 | Delete Success |
+| 404 | Cannot found thing on platform |
 ---
 ### *GET* /things/{thingName}/shadows/{shadowName}
 Get thing shadow
@@ -1102,19 +1101,19 @@ Get thing's thing shadow payload from platform
 **Path Parameter**
 | Name | Description |
 | -------- |   ---- |
-| thingName* | String   | Thing's name
-| shadowName* | String | Thing shadow's name
+| thingName* | Thing's name
+| shadowName* | Thing shadow's name
 
 **Response Object if success**
 | Name | Group |  Description |
 | -------- | --- | -- |
-| payload* | Uint8Array | Thing's thing shadow |
+| payload* | string | Thing's thing shadow |
 
 **Response Status**
 | HTTP Status Code |  Description |
 | -------- | ------- |
 | 200 | Get thing shadow success |
-| 404 | ResourceNotFoundException |
+| 404 | Cannot found thing / thing shadow on platform |
 ---
 ### *GET* /things/{thingName}/shadows
 List thing shadow
@@ -1136,7 +1135,7 @@ List all thing shadow on platform.
 | HTTP Status Code |  Description |
 | -------- | ------- |
 | 200 | List thing shadow success
-| 404 | ResourceNotFoundException |
+| 404 | Cannot found thing on platform |
 ---
 ### *PUT* /things/{thingName}/shadows/{shadowName
 Update thing shadow
@@ -1147,7 +1146,7 @@ Update thing shadow's payload to platform
 **Path Parameter**
 | Name | Description |
 | -------- |   ---- |
-| thingName* | Thing's name   |
+| thingName* | Thing's name  |
 
 **body**
 | Name | Schema |  Description |
@@ -1159,7 +1158,7 @@ Update thing shadow's payload to platform
 | -------- | ------- |
 | 200 | Update Success |
 | 422 | Missing require field / Variable Group incorrect|
-| 404 | ResourceNotFoundException |
+| 404 | Cannot found thing on platform |
 ---
 ### *DELETE* /things/{thingName}/shadows/{shadowName}
 Delete thing shadow
@@ -1177,8 +1176,8 @@ Delete thing shadow from platform
 | HTTP Status Code |  Description |
 | -------- | ------- |
 | 200 | Delete success |
-| 404 | ResourceNotFoundException |
-
+| 404 | Cannot found thing on platform |
+---
 
 GET /search
 ???
