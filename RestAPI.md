@@ -320,7 +320,6 @@ Delete file by ID
 | -------- | ------- | 
 | 200 | Delete success|
 | 404 | File not found |
-
 ---
 ## Job API
 
@@ -339,7 +338,7 @@ Create new job on platform
 | description* | String | Job's description
 
 **Response Object if success**
-| Name | Group |  Description |
+| Name | Schema |  Description |
 | -------- | --- | -- |
 | jobArn* | String | Job's ARN|
 | jobId* | String | Job's ID | |
@@ -362,7 +361,7 @@ Get exist job for platform
 | jobId* | Job's ID | 
 
 **Response Object if success**
-| Name | Group |  Description |
+| Name | Schema |  Description |
 | -------- | --- | -- |
 | jobArn* | String | Job's ARN |
 | jobId* | String | Job's ID |
@@ -375,7 +374,7 @@ Get exist job for platform
 | HTTP Status Code |  Description |
 | -------- | ------- | 
 | 200 | Get job success
-| 404 | ResourceNotFoundException |
+| 404 | Job ID not found |
 ---
 ### *GET* /jobs 
 Get job list
@@ -384,7 +383,7 @@ Get job list
 List jobs on platform
 
 **Response Object if success**
-| Name | Group |  Description |
+| Name | Schema |  Description |
 | -------- | --- | -- |
 | jobArn* | String | Job's ARN |
 | jobId* | String | Job's ID |
@@ -396,14 +395,12 @@ List jobs on platform
 **Response Status**
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | List jobs success|
+| 200 | List jobs success |
 ---
-### *GET* /jobs/{jobId}/things/{thingName} 
+<!--### *GET* /jobs/{jobId}/things/{thingName} 
 ?
 Get job's thing status by job ID and thing name
 
-**Description**
-//TODO
 
 **Response Object if success**
 | Name | Group |  Description |
@@ -419,12 +416,12 @@ Get job's thing status by job ID and thing name
 | HTTP Status Code |  Description |
 | -------- | ------- |
 | 200 | 
----
+----->
 ### *PUT* /jobs/{jobId}
 Update job by ID
 
 **Description**
-Update Job's information
+Update Job's information by Job ID
 
 **Path Parameter**
 | Name | Description |
@@ -437,7 +434,7 @@ Update Job's information
 | description* | String | Job's description
 
 **Response Object if success**
-| Name | Group |  Description |
+| Name | Schema |  Description |
 | -------- | --- | -- |
 | jobId* | String | Job's ID |
 | description* | String | Job's description |
@@ -447,12 +444,14 @@ Update Job's information
 | -------- | ------- |
 | 200 | Update job success
 | 422 | Missing require field / Variable Group incorrect|
-| 404 | ResourceNotFoundException |
+| 404 | Job ID not found |
 ---
-### *DELETE* /jobs/{jobId} - Delete job by ID
+### *DELETE* /jobs/{jobId} 
+
+Delete job by ID
 
 **Description**
-//TODO
+Delete job by job ID 
 
 **Path Parameter**
 | Name | Description |
@@ -467,14 +466,12 @@ Update Job's information
 **Response Status**
 | HTTP Status Code |  Description |
 | -------- | ------- |
-| 200 | Delete success
-| 404 | ResourceNotFoundException |
+| 200 | Delete success |
+| 404 | Job Id not found |
 ---
+<!--
 ### *DELETE* /jobs/{jobId}/things/{thingName} 
 Delete job's thing by job ID and thing name
-
-**Description**
-//TODO
 
 **Path Parameter**
 | Name | Description |
@@ -491,7 +488,7 @@ Delete job's thing by job ID and thing name
 | -------- | ------- |
 | 200 | Delete success |
 | 404 | ResourceNotFoundException |
----
+----->
 
 ### *POST* /job-templates
 Create new job template
@@ -503,7 +500,7 @@ Create new job template
 | description* | String | Job templates' description |
 
 **Response Object if success**
-| Name | Group |  Description |
+| Name | Schema |  Description |
 | -------- | --- | -- |
 | jobTemplateArn* | String | Job templates' ARN |
 | jobTemplateId* | String | Job templates’ ID |
@@ -514,10 +511,7 @@ Create new job template
 | 422 | Missing require field / Variable Group incorrect|
 ---
 ### *GET* /job-templates/{jobTemplateId} 
-\Get job template by ID
-
-**Description**
-//TODO
+Get job template by Job Template ID
 
 **Path Parameter**
 | Name | Description |
@@ -525,46 +519,49 @@ Create new job template
 | jobTemplateId* | Job Template's ID   |
 
 **Response Object if success**
-| Name | Group |  Description |
+| Name | Schema |  Description |
 | -------- | --- | -- |
-| jobTemplateId* | String | Job Template's ID|
+| jobTemplateArn* | String | Job templates' ARN |
+| jobTemplateId* | String | Job templates’ ID |
+| document | String | Job templates' document |
+| descripion | String | Job templates' document |
+| presignedUrlConfig | Object | Configuration for pre-signed file location URLs |
+| jobExecutionsRolloutConfig | Object | Create an exponential rate of rollout for a job.|
+| timeoutConfig | Object | Timeout configuration |
 
 **Response Status**
 | HTTP Status Code |  Description |
 | -------- | ------- |
 | 200 | Get Job templates success |
-| 404 | ResourceNotFoundException |
+| 404 | Job template ID not found |
 ---
 ### *GET* /job-templates 
-List job template 
-
-**Description**
-//TODO
+List job templates
 
 **Response Object if success**
-| Name | Group |  Description |
+| Name | Schema |  Description |
 | -------- | --- | -- |
-| jobTemplateId* | String | |
+| jobTemplateArn* | String | Job templates' ARN |
+| jobTemplateId* | String | Job templates’ ID |
+| descripion | String | Job templates' document |
 
 **Response Status**
 | HTTP Status Code |  Description |
 | -------- | ------- |
-| 200 | 
+| 200 | List job templates success |
 ---
-### *DELETE* /job-templates/{jobTemplateId} - Delete job template by ID
-
-**Description**
-//TODO
+### *DELETE* /job-templates/{jobTemplateId} 
+Delete job template by job template ID
 
 **Path Parameter**
 | Name | Description |
 | -------- |   ---- |
-| jobTemplateId* | String   |
+| jobTemplateId* | String |
 
 **Response Status**
 | HTTP Status Code |  Description |
 | -------- | ------- |
-| 200 | 
+| 200 | Delete job template success |
 | 404 | ResourceNotFoundException |
 
 
@@ -574,254 +571,204 @@ List job template
 Create new thing group
 
 **Description**
-
-//TODO
+Add new thing group to platform
 
 **Body**
 
 | Name | Schema |  Description |
 | -------- | ------- |  ---- |
-| thingGroupName* | String   | File's path|
+| thingGroupName* | String   | Thing group's name |
 
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | |
+| 200 | Create thing group success |
 | 422 | Missing require field / Variable Group incorrect|
 
 ---
 ### *GET* /thing-groups/{thingGroupName} 
-Get thing group by name
-
-**Description**
-
-//TODO
+Get thing group by thing group name
 
 **Path Parameter**
 | Name | Description |
 | -------- |   ---- |
-| thingGroupName* | String   |
+| thingGroupName* | Thing group's name   |
 
 **Response Object if success**
 
-| Name | Group |  description |
+| Name | Schema |  description |
 | -------- | --- | -- |
-| thingGroupName* | String |  | |
+| thingGroupName* | String | Thing group's name | 
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | |
-| 404 | ResourceNotFoundException |
+| 200 | Get thing group success |
+| 404 | Thing group name not found |
 
 ---
 ### *GET* /thing-groups 
-Get thing group list
+List thing group list
 
 **Description**
 
-//TODO
-
-**Query String Parameter**
-
-| Name | Group | Description |
-| -------- |   ---- | -- |
-| thingGroups* | String   | |
+List exist thing group list
 
 **Response Object if success**
 
-| Name | Group |  description |
+| Name | Schema |  description |
 | -------- | --- | -- |
-| thingGroups* | String |  | |
+| thingGroups* | Array | A list of Thing group |
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | 
+| 200 | List thing group success |
 
 ---
 ### PUT /thing-groups/{thingGroupName} 
-Update thing group by name
+Update thing group by thing group name
 
 **Description**
 
-//TODO
+Update thing group by thing group name
 
 **Path Parameter**
 
-| Name | Group | Description |
-| -------- |   ---- | -- |
-| thingGroupName* | String   | |
+| Name |Description |
+| -------- |   ---- 
+| thingGroupName*  | Thing group's name | 
 
 **Body**
 
 | Name | Group | Description |
 | -------- |   ---- | -- |
-| thingGroupDescription* | String   | |
+| thingGroupDescription* | String   |Thing group's description |
 
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | |
+| 200 | Update success |
 | 422 | Missing require field / Variable Group incorrect|
-| 404 | ResourceNotFoundException |
-
----
-### DELETE /thing-groups/{thingGroupName} 
-Delete thing group by name
-
-**Description**
-
-//TODO
-
-
-**Path Parameter**
-
-| Name | Group | Description |
-| -------- |   ---- | -- |
-| thingGroupName* | String   | |
-
-**Response Status**
-
-| HTTP Status Code |  Description |
-| -------- | ------- | 
-| 200 | |
-| 404 | ResourceNotFoundException |
-
+| 404 | Thing group not found |
 ---
 ### *PUT* /thing-groups/{thingGroupName}/things/{thingName} 
-Add thing to thing group by name
-
-**Description**
-
-//TODO
+Add thing to thing group
 
 **Path Parameter**
 
 | Name  | Description |
 | -------- |   ---- | 
-| thingGroupName* | String   | 
-| thingName* | String |
+| thingGroupName* | String | Thing group's name |
+| thingName* | String | Thing's name |
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | 
+| 200 | Add thing to thing group success |
 | 404 | ResourceNotFoundException |
 ---
 ### *GET* /thing-groups/{thingGroupName}/things
-List thing in thing group
+List things form thing group success
 
 **Description**
 
-//TODO
+List all of things from target thing group
 
-**Path Parameter**
+**Query String Parameter**
 
 | Name  | Description |
 | -------- |   ---- | 
-| thingGroupName* | String   | 
-| thingName* | String |
+| thingGroupName* | String | Thing group's name |
+
+**Response Object if success**
+
+| Name | Schema |  description |
+| -------- | --- | -- |
+| things* | Array | A list of things |
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | 
-| 404 | ResourceNotFoundException |-->
+| 200 | List things form thing group success | 
+| 404 | ResourceNotFoundException |
 ---
 ### *DELETE* /thing-groups/{thingGroupName}/things/{thingName}
-- Remove thing to thing group by name
-
-**Description**
-
-//TODO
+Remove thing from thing group
 
 **Path Parameter**
 
-| Name | Group | Description |
+| Name | Schema | Description |
 | -------- |   ---- | -- |
-| thingGroupName* | String   | 
+| thingGroupName* | String | Thing group's name |
+| thingName | String | Thing's name |
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | 
-| 404 | ResourceNotFoundException |
+| 200 | Delete thing from thing group success |
+| 404 | Thing or thing group not found |
 ---
 ### *POST* /dynamic-thing-groups
-**Description**
-
-//TODO
-
+Create Dynamic thing groups
 
 **Body**
 
 | Name | Schema |  Description |
 | -------- | ------- |  ---- |
-| thingGroupName* | String   | |
-| queryString* | String   | |
+| thingGroupName* | String | The dynamic thing group name to create |
+| queryString* | String  | The dynamic thing group search query string |
 
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | |
+| 200 | Create dynamic thing group success|
 | 422 | Missing require field / Variable Group incorrect|
 ---
 ### *PUT* /dynamic-thing-groups/{thingGroupName}
-Update dynamic thing group by name
-
-**Description**
-
-//TODO
-
-**Path Parameter**
-| Name | Description |
-| -------- |   ---- |
-| thingGroupName* |    |
+Update dynamic thing group by name //no test
 
 **Body**
 
 | Name | Schema |  Description |
 | -------- | ------- |  ---- |
-| thingGroupDescription* | String   | |
+| thingGroupName* | String | Dynamic thing group's name  |
+| queryString* | String  | The dynamic thing group search query string |
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | |
+| 200 | Update Dynamic thing group's name success |
 | 422 | Missing require field / Variable Group incorrect|
+| 404 | Dynamic thing group not found |
 ---
 ### *DELETE* /dynamic-thing-groups/{thingGroupName} 
 Delete dynamic thing group by name // BillingGroup not join
 
-**Description**
-
-//TODO
-
 **Body**
 
 | Name | Schema |  Description |
 | -------- | ------- |  ---- |
-| thingGroupName* | String   | File's path|
+| thingGroupName* | String   | Dynamic thing group's name |
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | |
-| 404 | ResourceNotFoundException |
+| 200 | Delete dynamic thing group success |
+| 404 | Dynamic thing group not found |
 
 ## Thing Type API
 
