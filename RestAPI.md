@@ -421,6 +421,21 @@ Get exist job form platform
 | description | String | Job's description |
 | status | "CANCELED" \| "COMPLETED" \| "DELETION_IN_PROGRESS" \| "IN_PROGRESS" | Job's status |
 
+```Get files response
+body: {
+  job: [
+    jobArn: 'arn:aws:iot:ap-northeast-1:012345678901:job/85f6509f-023c-48fb-8252-981653ffd561',
+    jobId: '85f6509f-023c-48fb-8252-981653ffd561',
+    targets: [
+      'arn:aws:iot:ap-northeast-1:012345678901:thing/WorkerA',
+    ],
+    targetSelection: 'SNAPSHOT',
+    description: 'Test Job',
+    status: 'IN_PROGRESS'
+  ]
+}
+```
+
 **Response Status**
 | HTTP Status Code |  Description |
 | -------- | ------- | 
@@ -445,19 +460,20 @@ List exist jobs on platform
 | description | String | Job’s description |
 | status | String | Job’s status |
 | nextToken | String | Token for next data |
+
 ```List files response
 body: {
-  jobs: [
+  JobSummary: [{
     jobArn: 'arn:aws:iot:ap-northeast-1:012345678901:job/85f6509f-023c-48fb-8252-981653ffd561',
     jobId: '85f6509f-023c-48fb-8252-981653ffd561',
     targets: [
-      'arn:aws:iot:ap-northeast-1:012345678901:thing/WorkerA',
+      'arn:aws:iot:ap-northeast-1:012345678901:thing/WorkerA'
     ],
     targetSelection: 'SNAPSHOT',
     description: 'Test Job',
-    status: 'IN_PROGRESS',`
-  ]
-  nextToken: "12345",
+    status: 'IN_PROGRESS'
+  }],
+  nextToken: "12345"
 }
 ```
 
@@ -587,7 +603,19 @@ Get job template by Job Template ID
 | presignedUrlConfig | Object | Configuration for pre-signed file location URLs |
 | jobExecutionsRolloutConfig | Object | Create an exponential rate of rollout for a job.|
 | timeoutConfig | Object | Timeout configuration |
-
+``` Get Job template response
+body: {
+  job: {
+    jobTemplateArn: 'arn:aws:iot:ap-northeast-1:012345678901:job/85f6509f-023c-48fb-8252-981653ffd562',
+    jobTemplateId: '85f6509f-023c-48fb-8252-981653ffd562',
+    document: '{ "operation":"Work" }'
+    description: 'Test Job Template',
+    presignedUrlConfig: {},
+    jobExecutionsRolloutConfig: {},
+    timeoutConfig: {},
+  }
+}
+```
 **Response Status**
 | HTTP Status Code |  Description |
 | -------- | ------- |
@@ -613,7 +641,7 @@ List job templates
 
 ```List job template response
 body: {
-  jobs: [
+  JobSummary: [{
     jobTemplateArn: 'arn:aws:iot:ap-northeast-1:012345678901:job/85f6509f-023c-48fb-8252-981653ffd562',
     jobTemplateId: '85f6509f-023c-48fb-8252-981653ffd562',
     document: '{ "operation":"Work" }'
@@ -621,7 +649,7 @@ body: {
     presignedUrlConfig: {},
     jobExecutionsRolloutConfig: {},
     timeoutConfig: {},
-  ]
+  }]
   nextToken: "12345",
 }
 ```
