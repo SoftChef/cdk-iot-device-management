@@ -8,8 +8,7 @@ export async function handler(event: { [key: string]: any }) {
   try {
     const validated = request.validate(joi => {
       return {
-        fileId: joi.string(),
-        version: joi.string(),
+        description: joi.string(),
       };
     });
     if (validated.error) {
