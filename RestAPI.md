@@ -72,7 +72,7 @@ Get category by category ID, if category is root will return children category.
 | Name | Schema | Description |
 | -------- | --- | -- |
 | categoryId* | String | Category's ID | 
-| parentId* | String | Sub category's ID |
+| parentId* | String | Parent category's ID |
 | name* | String | Category's name |
 | description | String | Category's description |
 | createAt* | String | Create time |
@@ -90,23 +90,38 @@ Get category by category ID, if category is root will return children category.
 
 Get root category list
 
-
 **Query String Parameters**
 
 | Name | Schema |  Description |
 | -------- | --- | -- |
-| categoryId* | String | Category's ID 
+| parentId* | String | Parent category's ID |
+| nextToken | String | Token for next data |
 
 **Response Object if success**
 
 | Name | Schema | Description |
 | -------- | --- | -- |
 | categoryId* | String | Category's ID | 
-| parentId* | String | Sub category's ID |
+| parentId* | String | Parent category's ID |
 | name* | String | Category's name |
 | description | String | Category's description |
-| createAt* | String | Create time |
-| updateAt* | String | Last update time |
+| createdAt* | String | Created time |
+| updatedAt* | String | Last updated time |
+| nextToken | String | Token for next data |
+
+```List category response
+body: {
+  categories: [
+    categoryId: "categoryId",
+    parentId: "parentId",
+    description: "description",
+    createdAt: "createdAt",
+    updatedAt: "updatedAt",
+  ]
+  nextToken: "nextToken",
+}
+```
+
 
 **Response Status**
 
@@ -120,7 +135,7 @@ Update category by ID
 
 **Description**
 
-Update category information by category ID
+Update category description by category ID
 
 **Path Parameter**
 
@@ -143,11 +158,7 @@ Update category information by category ID
 | 404 | Category ID not found |
 ---
 ### *DELETE* /categories/{categoryId} 
-Delete category by ID
-
-**Description**
-
-Delete category by category ID
+Delete category by categoty ID
 
 **Path Parameter**
 
@@ -167,18 +178,18 @@ Create files
 
 **Description**
 
-Create file's information when user upload file
+Create file's information
 
 **Body**
 
-| Name | Schema |  Description |
+| Name | Schema | Description |
 | -------- | ------- |  ---- |
 | location* | URI | File's path|
 | checksum* | String | An encrypt md5 / crc32 / sha1 value |
 | checksumType* | 'md5' \| 'crc32' \| 'sha1' | File's checksum type|
 | locale* | String | File's locale |
-| version* | String| File's version|
-| categoryId* | String | File's category (From category table)
+| version* | String | File's version|
+| categoryId* | String | From category |
 | description | String | File's description |
 
 
@@ -186,8 +197,8 @@ Create file's information when user upload file
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | Create file success|
-| 422 | Missing require field / Variable type incorrect|
+| 200 | Create file success |
+| 422 | Missing require field / Variable type incorrect / File exists |
 | 404 | Category ID not found |
 ---
 ### *GET* /files/{fileId} 
@@ -212,8 +223,10 @@ Get file's information by file ID
 | checksumType*	| String |File's version|
 | locale* | String | File's locale |
 | version* | String| File's version |
-| categoryId* | String | File's category (From category table) |
-| description | String | File's description |
+| categoryId* | String | From category |
+| description* | String | File's description |
+| createdAt* | String | Created time |
+| updatedAt* | String | Last updated time |
 
 **Response Status**
 
@@ -223,34 +236,53 @@ Get file's information by file ID
 | 404 | File ID not found |
 ---
 ### GET /files
-Get root files list
+List files 
 
 **Query String Parameter**
 
 | Name | Schema |  Description |
 | -------- | ------- | --|
-| fileId* | String | File's ID   |
+| nextToken* | String | Token for next data |
 
 **Response Object if success**
 
 | Name | Schema |  Description |
 | -------- | ------- |  ---- |
-| location* | URI | File's path|
-| checksum* | String | An encrypt md5 / crc32 / sha1 value |
-| checksumType* | 'md5' \| 'crc32' \| 'sha1' | File's checksum type|
+| location* | String   | File's path |
+| checksum* | String   |	An encrypt md5 / crc32 / sha1 value |
+| checksumType*	| String |File's version|
 | locale* | String | File's locale |
-| version* | String| File's version|
-| categoryId* | String | File's category (From category table)
-| description | String | File's description |
+| version* | String| File's version |
+| categoryId* | String | From category |
+| description* | String | File's description |
+| createdAt* | String | Created time |
+| updatedAt* | String | Last updated time |
+| nextToken | String | Token for next data |
 
+```List files response
+body: {
+  files: [
+    location: "location",
+    checksum: "checksum",
+    checksumType: "checksumType",
+    locale: "locale",
+    version: "version",
+    categoryId: "categoryId",
+    description: "description",
+    createdAt: "createdAt",
+    updatedAt: "updatedAt",
+  ]
+  nextToken: "nextToken",
+}
+```
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- |
-| 200 | List file success|
+| 200 | List file success |
 ---
 ### GET /files/{categoryId}
-List files by categoryId
+List files by category ID
 
 **Query String Parameter**
 
@@ -267,22 +299,36 @@ List files by categoryId
 | checksumType*	| String |File's version|
 | locale* | String |File's locale |
 | version* | String| File's version|
-| categoryId* | String | File's category (From category table)
+| categoryId* | String | From category |
 | description | String | File's description |
-
+| nextToken | String | Token for next data |
+```List files by category response
+body: {
+  files: [
+    location: "location",
+    checksum: "checksum",
+    checksumType: "checksumType",
+    locale: "locale",
+    version: "version",
+    categoryId: "categoryId",
+    description: "description",
+    createdAt: "createdAt",
+    updatedAt: "updatedAt",
+  ]
+  nextToken: "nextToken",
+}
+```
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
 | 200 | Create success|
 | 404 | Category ID not found |
-
 ---
 
 ### PUT /files/{fileId} - Update file by ID
 
 Update file by file ID
-
 **Description**
 
 Update file's information by file ID
@@ -291,14 +337,12 @@ Update file's information by file ID
 
 | Name |   Description |
 | -------- | ------- |
-| fileId* | File's ID   |
+| fileId* | File's ID |
 
 **Body**
 
 | Name | Schema |  Description |
 | -------- | ------- |  ---- |
-| checksumType* | String |
-| checksum* |  String |
 | description* | String |
 
 **Response Status**
@@ -310,14 +354,15 @@ Update file's information by file ID
 | 404 | File not found |
 
 ---
-### *DELETE* /files/{categoryId} 
+### *DELETE* /files/{fileId} 
 Delete file by ID
 
 **Path Parameter**
 
-| Name |   Description |
+| Name | Description |
 | -------- | ------- |
-| fileId* | File's ID   |
+| fileId* | File's ID |
+| des |
 
 **Response Status**
 
@@ -340,19 +385,19 @@ Create new job on platform
 | targets* | String[]  | A list of thing's |
 | targetSelection* | 'SNAPSHOT' \| 'CONTINUOUS'  | Job status |
 | document*	| String | Job's document |
-| description* | String | Job's description
+| description | String | Job's description
 
 **Response Object if success**
 | Name | Schema |  Description |
 | -------- | --- | -- |
-| jobArn* | String | Job's ARN|
-| jobId* | String | Job's ID | |
-| description* | String | Job's description |
+| jobArn | String | Job's ARN |
+| jobId | String | Job's ID | |
+| description | String | Job's description |
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
 | 200 | Create job success|
-| 422 | Missing require field / Variable Group incorrect|
+| 422 | Missing require field / Variable Group incorrect | 
 ---
 ### *GET* /jobs/{jobId} 
 Get job by ID
@@ -382,9 +427,11 @@ Get exist job form platform
 | 404 | Job ID not found |
 ---
 ### *GET* /jobs 
+
 List Jobs
 
 **Description**
+
 List exist jobs on platform
 
 **Response Object if success**
@@ -395,8 +442,23 @@ List exist jobs on platform
 | targets | String[] | List of thing's ARN |
 | targetSelection | "SNAPSHOT" \| "CONTINUOUS"  | Job status |
 | description | String | Job’s description |
-| status | String | Job’s status
-
+| status | String | Job’s status |
+| nextToken | String | Token for next data |
+```List files response
+body: {
+  jobs: [
+  jobArn: 'arn:aws:iot:ap-northeast-1:012345678901:job/85f6509f-023c-48fb-8252-981653ffd561',
+  jobId: '85f6509f-023c-48fb-8252-981653ffd561',
+  targets: [
+    'arn:aws:iot:ap-northeast-1:012345678901:thing/WorkerA',
+  ],
+  targetSelection: 'SNAPSHOT',
+  description: 'Test Job',
+  status: 'IN_PROGRESS',
+  ]
+  nextToken: "12345",
+}
+```
 **Response Status**
 | HTTP Status Code |  Description |
 | -------- | ------- | 
@@ -507,6 +569,7 @@ Create new job template
 | jobTemplateArn* | String | Job templates' ARN |
 | jobTemplateId* | String | Job templates’ ID |
 
+
 | HTTP Status Code |  Description |
 | -------- | ------- |
 | 200 | Create job template success
@@ -546,7 +609,26 @@ List job templates
 | jobTemplateArn* | String | Job templates' ARN |
 | jobTemplateId* | String | Job templates’ ID |
 | description | String | Job templates' description |
-
+| presignedUrlConfig | Object | Configuration for pre-signed file location URLs |
+| jobExecutionsRolloutConfig | Object | Create an exponential rate of rollout for a job.|
+| timeoutConfig | Object | Timeout configuration |
+| nextToken | String | Token for next data |
+```List job template response
+body: {
+  jobs: [
+    jobTemplateArn: 'arn:aws:iot:ap-northeast-1:012345678901:job/85f6509f-023c-48fb-8252-981653ffd562',
+    jobTemplateId: '85f6509f-023c-48fb-8252-981653ffd562',
+    document: JSON.stringify({
+      operation: 'Work',
+    }),
+    description: 'Test Job Template',
+    presignedUrlConfig: {},
+    jobExecutionsRolloutConfig: {},
+    timeoutConfig: {},
+  ]
+  nextToken: "12345",
+}
+```
 **Response Status**
 | HTTP Status Code |  Description |
 | -------- | ------- |
@@ -623,8 +705,19 @@ List exist thing group list
 
 | Name | Schema |  description |
 | -------- | --- | -- |
-| thingGroups* | Array | A list of thing group |
-
+| thingGroups | Array | A list of thing group |
+| thingGroups [groupName] | String | Thing group's name | 
+| thingGroups [groupArn] | String | Thing group's ARN | 
+| nextToken | String | Token for next data |
+```List thing group response
+body: {
+  thingGroups: [
+    groupName: "groupName"
+    groupArn: "groupArn"
+  ]
+  nextToken: "12345",
+}
+```
 **Response Status**
 
 | HTTP Status Code |  Description |
@@ -678,7 +771,7 @@ Add thing to thing group
 | 404 | Thing group not found |
 ---
 ### *GET* /thing-groups/{thingGroupName}/things
-List things form thing group success
+List things by thing group name success
 
 **Description**
 
@@ -695,6 +788,14 @@ List all of things from target thing group
 | Name | Schema |  description |
 | -------- | --- | -- |
 | things* | Array | A list of things |
+| nextToken | String | Token for next data |
+
+```List things by thing group name response
+body: {
+  things: [],
+  nextToken: "12345",
+}
+```
 
 **Response Status**
 
@@ -830,10 +931,20 @@ List exist thing type on platform
 
 | Name | Schema |  Description |
 | -------- | ------- |  ---- |
-| thingTypeArn* | String   | Thing type's ARN |
-| thingTypeId* | String   |	Thing type's ID |
-| thingTypeName* | String | Thing type's Name |
-
+| thingTypes* | String   | A list of thing type's|
+| thingTypes[thingTypeArn]* | String   | Thing type's ARN |
+| thingTypeId* | String   |	Thing type's ID | ?
+| thingTypes[thingTypeName]* | String | Thing type's Name | 
+```
+body: {
+  thingTypes: [
+      thingTypeArn: 'arn:aws:iot:ap-northeast-1:012345678901:thing/85f6509f-023c-48fb-8252-981653ffd561',
+      thingTypeId: '85f6509f-023c-48fb-8252-981653ffd561',
+      thingTypeName: 'TestThingType',
+  ],
+  nextToken: "12345",
+}
+```
 **Response Status**
 
 | HTTP Status Code |  Description |
@@ -929,11 +1040,15 @@ Get thing's information.
 | thingId* | String | Thing's ID |
 
 ``` Get thing response 
-{
-    "thingName": "MyLightBulb",
-    "thingTypeName": "LightBulb",
-    "thingArn": "arn:aws:iot:us-east-1:123456789012:thing/MyLightBulb",
-    "thingId": "12345678abcdefgh12345678ijklmnop12345678"
+{  
+  body: {
+    thing: {
+      "thingName": "MyLightBulb",
+      "thingTypeName": "LightBulb",
+      "thingArn": "arn:aws:iot:us-east-1:123456789012:thing/MyLightBulb",
+      "thingId": "12345678abcdefgh12345678ijklmnop12345678"
+    }
+  }
 }
 ```
 
@@ -958,11 +1073,24 @@ List all of the thing.
 **Response Object if success**
 | Name | Schema |  Description |
 | -------- | --- | -- |
-| thingName* | String | Thing's name |
-| thingTypeName* | String | Thing's thing type|
-| thingArn* | String | Thing's ARN |
-| thingId* | String | Thing's ID |
-
+| things{ThingAttribute} | Array | A list of thing |
+| things{ThingAttribute[thingName]} | String | Thing's name |
+| things{ThingAttribute[thingTypeName]} | String | Thing's thing type |
+| things{ThingAttribute[thingTypeArn]} | String | Thing's ARN |
+| nextToken | String | Token for next data |
+| thingId* | String | Thing's ID |?
+``` List thing response 
+{  
+  things: 
+    ThingAttritute[
+      "thingName": "MyLightBulb",
+      "thingTypeName": "LightBulb",
+      "thingArn": "arn:aws:iot:us-east-1:123456789012:thing/MyLightBulb",
+      "thingId": "12345678abcdefgh12345678ijklmnop12345678"
+    ],
+  nexttoken: '12345', 
+}
+```
 **Response Status**
 
 | HTTP Status Code |  Description |
@@ -1050,6 +1178,14 @@ List all thing shadow on platform.
 | Name | Group |  Description |
 | -------- | --- | -- |
 | result* | String[] | List all thing shadow |
+``` List thing response 
+{  
+  thingShadows: [
+    result: [],
+  ] 
+  nexttoken: '12345', 
+}
+```
 
 **Response Status**
 | HTTP Status Code |  Description |
