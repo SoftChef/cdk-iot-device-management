@@ -32,7 +32,7 @@
 
 ## Files API
 
-Files API contain files and category two DB table, every file have it's own category.
+Files API contains files and category two DB table. Every file has its own category.
 
 ### *POST* /categories
 
@@ -40,13 +40,13 @@ Create new category
 
 **Description**
 
-Create new file's category on platform.
+Create file's category on platform.
 
 **Body**
 
 | Name | Schema |  Description |
 | -------- | ------- |  ---- |
-| categoryId* | String| Category's ID|
+| categoryId* | String| Category's ID |
 | parentId* | String   | Sub category's ID |
 | description	| String | Category's description |
 
@@ -54,12 +54,12 @@ Create new file's category on platform.
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 |Create success | 
+| 200 | Create success | 
 | 422 | Missing require field / Variable type incorrect |
 
 ---
 ### *GET* /categories/{categoryId} 
-Get category by ID, if category is root will return children category. 
+Get category by category ID, if category is root will return children category. 
 
 **Path Parameter**
 
@@ -69,16 +69,21 @@ Get category by ID, if category is root will return children category.
 
 **Response Object if success**
 
-| Name | Schema |  description |
+| Name | Schema | Description |
 | -------- | --- | -- |
-| categoryId* | String 
+| categoryId* | String | Category's ID | 
+| parentId* | String | Sub category's ID |
+| name* | String | Category's name |
+| description | String | Category's description |
+| createAt* | String | Create time |
+| updateAt* | String | Last update time |
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
 | 200 | Get Category Success |
-| 404 | Cannot found category |
+| 404 | Category ID not found |
 ---
 
 ### *GET* /categories
@@ -90,18 +95,18 @@ Get root category list
 
 | Name | Schema |  Description |
 | -------- | --- | -- |
-| categoryId* | String |  
+| categoryId* | String | Category's ID 
 
 **Response Object if success**
 
-| Name | Schema |  description |
+| Name | Schema | Description |
 | -------- | --- | -- |
-| categoryId* | String |  | |
-| parentId* | String |
-| name* | String | |
-| description | String |
-| createAt* | String|
-| updateAt* | String|
+| categoryId* | String | Category's ID | 
+| parentId* | String | Sub category's ID |
+| name* | String | Category's name |
+| description | String | Category's description |
+| createAt* | String | Create time |
+| updateAt* | String | Last update time |
 
 **Response Status**
 
@@ -127,7 +132,7 @@ Update category information by category ID
 
 | Name | Schema |  Description |
 | -------- | ------- |  ---- |  
-| description*	| String | Category's description |
+| Description*	| String | Category's description |
 
 **Response Status**
 
@@ -135,7 +140,7 @@ Update category information by category ID
 | -------- | ------- | 
 | 200 | Update success |
 | 422 | Missing require field / Variable type incorrect |
-| 404 | Cannot found category ID |
+| 404 | Category ID not found |
 ---
 ### *DELETE* /categories/{categoryId} 
 Delete category by ID
@@ -155,7 +160,7 @@ Delete category by category ID
 | HTTP Status Code |  Description |
 | -------- | ------- | 
 | 200 | Delete success|
-| 404 | Cannot found category ID |
+| 404 | Category ID not found |
 ---
 ### *POST* /files
 Create files
@@ -168,9 +173,9 @@ Create file's information when user upload file
 
 | Name | Schema |  Description |
 | -------- | ------- |  ---- |
-| location* | String | File's path|
+| location* | URI | File's path|
 | checksum* | String | An encrypt md5 / crc32 / sha1 value |
-| checksumType* | String | File's version |
+| checksumType* | 'md5' \| 'crc32' \| 'sha1' | File's checksum type|
 | locale* | String | File's locale |
 | version* | String| File's version|
 | categoryId* | String | File's category (From category table)
@@ -215,7 +220,7 @@ Get file's information by file ID
 | HTTP Status Code |  Description |
 | -------- | ------- | 
 | 200 | Create success |
-| 404 | Cannot find file |
+| 404 | File ID not found |
 ---
 ### GET /files
 Get root files list
@@ -223,16 +228,16 @@ Get root files list
 **Query String Parameter**
 
 | Name | Schema |  Description |
-| -------- | ------- |
+| -------- | ------- | --|
 | fileId* | String | File's ID   |
 
 **Response Object if success**
 
 | Name | Schema |  Description |
 | -------- | ------- |  ---- |
-| location* | String   | File's path|
-| checksum* | String   |	An encrypt md5 / crc32 / sha1 value |
-| checksumType*	| String |File's version|
+| location* | URI | File's path|
+| checksum* | String | An encrypt md5 / crc32 / sha1 value |
+| checksumType* | 'md5' \| 'crc32' \| 'sha1' | File's checksum type|
 | locale* | String | File's locale |
 | version* | String| File's version|
 | categoryId* | String | File's category (From category table)
@@ -250,7 +255,7 @@ List files by categoryId
 **Query String Parameter**
 
 | Name | Schema | Description |
-| -------- | ------- |
+| -------- | ------- | --- |
 | categoryId* | String | Category's ID |
 
 **Response Object if success**
@@ -319,7 +324,7 @@ Delete file by ID
 | HTTP Status Code |  Description |
 | -------- | ------- | 
 | 200 | Delete success|
-| 404 | File not found |
+| 404 | File ID not found |
 ---
 ## Job API
 
@@ -333,7 +338,7 @@ Create new job on platform
 | Name | Schema |  Description |
 | -------- |   ---- | --- |
 | targets* | String[]  | A list of thing's |
-| targetSelection* | "SNAPSHOT" \| "CONTINUOUS"  | Job status |
+| targetSelection* | 'SNAPSHOT' \| 'CONTINUOUS'  | Job status |
 | document*	| String | Job's document |
 | description* | String | Job's description
 
@@ -353,7 +358,7 @@ Create new job on platform
 Get job by ID
 
 **Description**
-Get exist job for platform
+Get exist job form platform
 
 **Path Parameter**
 | Name | Description |
@@ -363,12 +368,12 @@ Get exist job for platform
 **Response Object if success**
 | Name | Schema |  Description |
 | -------- | --- | -- |
-| jobArn* | String | Job's ARN |
-| jobId* | String | Job's ID |
-| targets* | String[]  | A list of thing's ID |
-| targetSelection* | "SNAPSHOT" \| "CONTINUOUS"  | Job's status |
-| description* | String | Job's description |
-| status | String | Job's status |
+| jobArn | String | Job's ARN |
+| jobId | String | Job's ID |
+| targets | String[]  | A list of thing's ID |
+| targetSelection | "SNAPSHOT" \| "CONTINUOUS"  | Job's status |
+| description | String | Job's description |
+| status | "CANCELED" \| "COMPLETED" \| "DELETION_IN_PROGRESS" \| "IN_PROGRESS" | Job's status |
 
 **Response Status**
 | HTTP Status Code |  Description |
@@ -377,19 +382,19 @@ Get exist job for platform
 | 404 | Job ID not found |
 ---
 ### *GET* /jobs 
-Get job list
+List Jobs
 
 **Description**
-List jobs on platform
+List exist jobs on platform
 
 **Response Object if success**
 | Name | Schema |  Description |
 | -------- | --- | -- |
-| jobArn* | String | Job's ARN |
-| jobId* | String | Job's ID |
-| targets* | String[] | List of thing's ARN |
-| targetSelection* | "SNAPSHOT" \| "CONTINUOUS"  | Job status|
-| description* | String | Job’s description
+| jobArn | String | Job's ARN |
+| jobId | String | Job's ID |
+| targets | String[] | List of thing's ARN |
+| targetSelection | "SNAPSHOT" \| "CONTINUOUS"  | Job status |
+| description | String | Job’s description |
 | status | String | Job’s status
 
 **Response Status**
@@ -421,12 +426,12 @@ Get job's thing status by job ID and thing name
 Update job by ID
 
 **Description**
-Update Job's information by Job ID
+Update job's information by job ID
 
 **Path Parameter**
 | Name | Description |
 | -------- |   ---- |
-| jobId* | Job's ID   |
+| jobId* | Job's ID |
 
 **body**
 | Name | Schema |  Description |
@@ -436,8 +441,8 @@ Update Job's information by Job ID
 **Response Object if success**
 | Name | Schema |  Description |
 | -------- | --- | -- |
-| jobId* | String | Job's ID |
-| description* | String | Job's description |
+| jobId | String | Job's ID |
+| description | String | Job's description |
 
 **Response Status**
 | HTTP Status Code |  Description |
@@ -448,10 +453,7 @@ Update Job's information by Job ID
 ---
 ### *DELETE* /jobs/{jobId} 
 
-Delete job by ID
-
-**Description**
-Delete job by job ID 
+Delete job by job ID
 
 **Path Parameter**
 | Name | Description |
@@ -461,7 +463,7 @@ Delete job by job ID
 **body**
 | Name | Schema |  Description |
 | -------- |   ---- | --- |
-| force | Boolean  | Force delete |
+| force* | Boolean  | Force delete |
 
 **Response Status**
 | HTTP Status Code |  Description |
@@ -521,10 +523,10 @@ Get job template by Job Template ID
 **Response Object if success**
 | Name | Schema |  Description |
 | -------- | --- | -- |
-| jobTemplateArn* | String | Job templates' ARN |
-| jobTemplateId* | String | Job templates’ ID |
+| jobTemplateArn | String | Job templates' ARN |
+| jobTemplateId | String | Job templates’ ID |
 | document | String | Job templates' document |
-| descripion | String | Job templates' document |
+| description | String | Job templates' description |
 | presignedUrlConfig | Object | Configuration for pre-signed file location URLs |
 | jobExecutionsRolloutConfig | Object | Create an exponential rate of rollout for a job.|
 | timeoutConfig | Object | Timeout configuration |
@@ -543,7 +545,7 @@ List job templates
 | -------- | --- | -- |
 | jobTemplateArn* | String | Job templates' ARN |
 | jobTemplateId* | String | Job templates’ ID |
-| descripion | String | Job templates' document |
+| description | String | Job templates' description |
 
 **Response Status**
 | HTTP Status Code |  Description |
@@ -621,7 +623,7 @@ List exist thing group list
 
 | Name | Schema |  description |
 | -------- | --- | -- |
-| thingGroups* | Array | A list of Thing group |
+| thingGroups* | Array | A list of thing group |
 
 **Response Status**
 
@@ -673,7 +675,7 @@ Add thing to thing group
 | HTTP Status Code |  Description |
 | -------- | ------- | 
 | 200 | Add thing to thing group success |
-| 404 | ResourceNotFoundException |
+| 404 | Thing group not found |
 ---
 ### *GET* /thing-groups/{thingGroupName}/things
 List things form thing group success
@@ -699,7 +701,7 @@ List all of things from target thing group
 | HTTP Status Code |  Description |
 | -------- | ------- | 
 | 200 | List things form thing group success | 
-| 404 | ResourceNotFoundException |
+| 404 | Thing group not found |
 ---
 ### *DELETE* /thing-groups/{thingGroupName}/things/{thingName}
 Remove thing from thing group
@@ -773,147 +775,118 @@ Delete dynamic thing group by name // BillingGroup not join
 ## Thing Type API
 
 ### *POST* /thing-types 
-**Description*
-
+Create thing type
 
 **Body**
 
 | Name | Schema |  Description |
 | -------- | ------- |  ---- |
-| thingTypeName* | String   | |
+| thingTypeName* | String | Thing type's name |
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | Create success|
+| 200 | Create thing type success |
 | 422 | Missing require field / Variable type incorrect|
 ---
 ### *GET* /thing-types/{thingTypeName} 
-Get thing type by name
-
-**Description**
-//TODO
+Get thing type by thing type name
 
 **Path Parameter**
 
 | Name | Type | Description |
 | -------- |   ---- | -- |
-| thingTypeName* | String   | |
+| thingTypeName* | String   | Thing type's name |
 
 **Response Object if success**
 
 | Name | Schema |  Description |
 | -------- | ------- |  ---- |
-| thingTypeArn* | String   | |
-| thingTypeId* | String   |	|
-| thingTypeName* | String ||
+| thingTypeArn* | String   | Thing type's ARN |
+| thingTypeId* | String   |	Thing type's ID |
+| thingTypeName* | String | Thing type's Name |
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | Create success|
-| 404 | ResourceNotFoundException |
+| 200 | Get thing type success |
+| 404 | Thing type not found |
 ---
 ### *GET* /thing-types
 List thing type
 
 **Description**
-//TODO
+List exist thing type on platform
 
 **Query String Parameter**
 
 | Name | Type | Description |
 | -------- |   ---- | -- |
-| thingTypeName* | String   | |
+| thingTypeName* | String | Thing type's name |
 
 **Response Object if success**
 
-| Name | Type |  description |
-| -------- | --- | -- |
-| thingTypeName* | String |  | |
+| Name | Schema |  Description |
+| -------- | ------- |  ---- |
+| thingTypeArn* | String   | Thing type's ARN |
+| thingTypeId* | String   |	Thing type's ID |
+| thingTypeName* | String | Thing type's Name |
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 ||
+| 200 | List thing type success |
 ---
 ### PUT /thing-types/{thingTypeName}/deprecate 
-Deprecated thing type by name
-
-**Description**
-//TODO
+Deprecated thing by thing type name
 
 **Path Parameter**
 
 | Name |  Description |
 | -------- |   ---- |
-| thingTypeName* | String   |
-
-**Response Object if success**
-
-| Name | Type |  description |
-| -------- | --- | -- |
-| thingTypeName* | String |  | |
+| thingTypeName* | String | Thing type's name |
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | |
-| 404 | ResourceNotFoundException |
----
+| 200 | Deprecated thing type success |
+| 404 | Thing type not found |
+
 ### PUT /thing-types/{thingTypeName}/undeprecate 
-Undeprecate thing type by name
-
-**Description**
-//TODO
+Undeprecate thing type by thing type name
 
 **Path Parameter**
 
 | Name |  Description |
 | -------- |   ---- |
-| thingTypeName* | String   |
-
-**Response Object if success**
-
-| Name | Type |  description |
-| -------- | --- | -- |
-| thingTypeName* | String |  | |
+| thingTypeName* | String | Thing type's name |
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | |
-| 404 | ResourceNotFoundException 
+| 200 | Undeprecate thing type by thing type name|
+| 404 | Thing type not found |
 ---
 ### DELETE /thing-types/{thingTypeName}
-Delete thing type
-
-**Description**
-//TODO
+Delete thing type by thing type name
 
 **Path Parameter**
 
 | Name |  Description |
 | -------- |   ---- |
-| thingTypeName* | String   |
-
-**Response Object if success**
-
-| Name | Type |  description |
-| -------- | --- | -- |
-| thingTypeName* | String |  | |
+| thingTypeName* | String | Thing type's name |
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
-| 200 | |
-| 404 | ResourceNotFoundException |
+| 200 | Delete thing type success |
+| 404 | Thing type not found |
 ---
 ## Thing API
 
@@ -948,7 +921,7 @@ Get thing's information.
 
 **Response Object if success**
 
-| Name | Description |
+| Name | Schema |Description | 
 | -------- | --- | -- |
 | thingName* | String | Thing's name |
 | thingTypeName* | String | Thing's thing type|
@@ -969,7 +942,7 @@ Get thing's information.
 | HTTP Status Code |  Description |
 | -------- | ------- | 
 | 200 | Get thing's information success |
-| 404 | Cannot found thing on platform  |
+| 404 | Thing not found  |
 ---
 ### *GET* /things 
 List things
@@ -1021,7 +994,7 @@ Update thing's information.
 | -------- | ------- | 
 | 200 | Update success |
 | 422 | Missing require field / Variable Group incorrect|
-| 404 | Cannot found thing on platform |
+| 404 | Thing not found |
 ---
 ### DELETE /things/{thingName} 
 Delete thing by name
@@ -1125,7 +1098,7 @@ Delete thing shadow from platform
 | 200 | Delete success |
 | 404 | Cannot found thing on platform |
 ---
-
+## Special Varible Type
 GET /search
 ???
 
