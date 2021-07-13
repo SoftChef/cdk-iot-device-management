@@ -32,7 +32,7 @@
 
 ## Files API
 
-Files API contains files and category two DB table. Every file has its own category.
+Files API contains files and category, every file has its own category.
 
 ### *POST* /categories
 
@@ -47,7 +47,7 @@ Create file's category on platform.
 | Name | Schema |  Description |
 | -------- | ------- |  ---- |
 | categoryId* | String| Category's ID |
-| parentId* | String   | Sub category's ID |
+| parentId | String | Parent category's ID  |
 | description	| String | Category's description |
 
 **Response Status**
@@ -72,11 +72,11 @@ Get category by category ID, if category is root will return children category.
 | Name | Schema | Description |
 | -------- | --- | -- |
 | categoryId* | String | Category's ID | 
-| parentId* | String | Parent category's ID |
+| parentId | String | Parent category's ID |
 | name* | String | Category's name |
 | description | String | Category's description |
-| createAt* | String | Create time |
-| updateAt* | String | Last update time |
+| createdAt* | String | Create time |
+| updatedAt* | String | Last update time |
 
 **Response Status**
 
@@ -94,7 +94,7 @@ Get root category list
 
 | Name | Schema |  Description |
 | -------- | --- | -- |
-| parentId* | String | Parent category's ID |
+| parentId | String | Parent category's ID |
 | nextToken | String | Token for next data |
 
 **Response Object if success**
@@ -102,14 +102,14 @@ Get root category list
 | Name | Schema | Description |
 | -------- | --- | -- |
 | categoryId* | String | Category's ID | 
-| parentId* | String | Parent category's ID |
+| parentId | String | Parent category's ID |
 | name* | String | Category's name |
 | description | String | Category's description |
 | createdAt* | String | Created time |
 | updatedAt* | String | Last updated time |
 | nextToken | String | Token for next data |
 
-```List category response
+```nist category response
 body: {
   categories: [
     categoryId: "categoryId",
@@ -147,7 +147,7 @@ Update category description by category ID
 
 | Name | Schema |  Description |
 | -------- | ------- |  ---- |  
-| Description*	| String | Category's description |
+| description* | String | Category's description |
 
 **Response Status**
 
@@ -242,7 +242,7 @@ List files
 
 | Name | Schema |  Description |
 | -------- | ------- | --|
-| nextToken* | String | Token for next data |
+| nextToken | String | Token for next data |
 
 **Response Object if success**
 
@@ -281,14 +281,14 @@ body: {
 | -------- | ------- |
 | 200 | List file success |
 ---
-### GET /files/{categoryId}
+### GET /categories/{categoryId}/files
 List files by category ID
 
-**Query String Parameter**
+**Path Parameter**
 
-| Name | Schema | Description |
-| -------- | ------- | --- |
-| categoryId* | String | Category's ID |
+| Name  | Description |
+| -------- | ------- | 
+| categoryId* | Category's ID |
 
 **Response Object if success**
 
@@ -301,6 +301,8 @@ List files by category ID
 | version* | String| File's version|
 | categoryId* | String | From category |
 | description | String | File's description |
+| createdAt* | String | Created time |
+| updatedAt* | String | Last updated time |
 | nextToken | String | Token for next data |
 ```List files by category response
 body: {
@@ -315,7 +317,7 @@ body: {
     createdAt: "createdAt",
     updatedAt: "updatedAt",
   ]
-  nextToken: "nextToken",
+  nextToken: "12345",
 }
 ```
 **Response Status**
@@ -326,9 +328,9 @@ body: {
 | 404 | Category ID not found |
 ---
 
-### PUT /files/{fileId} - Update file by ID
-
+### PUT /files/{fileId}
 Update file by file ID
+
 **Description**
 
 Update file's information by file ID
@@ -343,7 +345,7 @@ Update file's information by file ID
 
 | Name | Schema |  Description |
 | -------- | ------- |  ---- |
-| description* | String |
+| description* | String | File's description |
 
 **Response Status**
 
@@ -362,7 +364,6 @@ Delete file by ID
 | Name | Description |
 | -------- | ------- |
 | fileId* | File's ID |
-| des |
 
 **Response Status**
 
@@ -400,7 +401,7 @@ Create new job on platform
 | 422 | Missing require field / Variable Group incorrect | 
 ---
 ### *GET* /jobs/{jobId} 
-Get job by ID
+Get job by job ID
 
 **Description**
 Get exist job form platform
@@ -447,18 +448,19 @@ List exist jobs on platform
 ```List files response
 body: {
   jobs: [
-  jobArn: 'arn:aws:iot:ap-northeast-1:012345678901:job/85f6509f-023c-48fb-8252-981653ffd561',
-  jobId: '85f6509f-023c-48fb-8252-981653ffd561',
-  targets: [
-    'arn:aws:iot:ap-northeast-1:012345678901:thing/WorkerA',
-  ],
-  targetSelection: 'SNAPSHOT',
-  description: 'Test Job',
-  status: 'IN_PROGRESS',
+    jobArn: 'arn:aws:iot:ap-northeast-1:012345678901:job/85f6509f-023c-48fb-8252-981653ffd561',
+    jobId: '85f6509f-023c-48fb-8252-981653ffd561',
+    targets: [
+      'arn:aws:iot:ap-northeast-1:012345678901:thing/WorkerA',
+    ],
+    targetSelection: 'SNAPSHOT',
+    description: 'Test Job',
+    status: 'IN_PROGRESS',`
   ]
   nextToken: "12345",
 }
 ```
+
 **Response Status**
 | HTTP Status Code |  Description |
 | -------- | ------- | 
@@ -484,7 +486,9 @@ Get job's thing status by job ID and thing name
 | -------- | ------- |
 | 200 | 
 ----->
+
 ### *PUT* /jobs/{jobId}
+
 Update job by ID
 
 **Description**
@@ -498,21 +502,16 @@ Update job's information by job ID
 **body**
 | Name | Schema |  Description |
 | -------- |   ---- | --- |
-| description* | String | Job's description
-
-**Response Object if success**
-| Name | Schema |  Description |
-| -------- | --- | -- |
-| jobId | String | Job's ID |
-| description | String | Job's description |
+| description | String | Job's description
 
 **Response Status**
 | HTTP Status Code |  Description |
 | -------- | ------- |
 | 200 | Update job success
-| 422 | Missing require field / Variable Group incorrect|
+| 422 | Missing require field / Variable Group incorrect |
 | 404 | Job ID not found |
 ---
+
 ### *DELETE* /jobs/{jobId} 
 
 Delete job by job ID
@@ -525,13 +524,13 @@ Delete job by job ID
 **body**
 | Name | Schema |  Description |
 | -------- |   ---- | --- |
-| force* | Boolean  | Force delete |
+| force | Boolean  | Force delete |
 
 **Response Status**
 | HTTP Status Code |  Description |
 | -------- | ------- |
 | 200 | Delete success |
-| 404 | Job Id not found |
+| 404 | Job ID not found |
 ---
 <!--
 ### *DELETE* /jobs/{jobId}/things/{thingName} 
@@ -563,19 +562,14 @@ Create new job template
 | document* | String | Job templates' document|
 | description* | String | Job templates' description |
 
-**Response Object if success**
-| Name | Schema |  Description |
-| -------- | --- | -- |
-| jobTemplateArn* | String | Job templates' ARN |
-| jobTemplateId* | String | Job templates’ ID |
-
-
-| HTTP Status Code |  Description |
+| HTTP Status Code | Description |
 | -------- | ------- |
 | 200 | Create job template success
 | 422 | Missing require field / Variable Group incorrect|
 ---
+
 ### *GET* /job-templates/{jobTemplateId} 
+
 Get job template by Job Template ID
 
 **Path Parameter**
@@ -600,7 +594,9 @@ Get job template by Job Template ID
 | 200 | Get Job templates success |
 | 404 | Job template ID not found |
 ---
+
 ### *GET* /job-templates 
+
 List job templates
 
 **Response Object if success**
@@ -608,19 +604,19 @@ List job templates
 | -------- | --- | -- |
 | jobTemplateArn* | String | Job templates' ARN |
 | jobTemplateId* | String | Job templates’ ID |
+| document | String | Job templates' document |
 | description | String | Job templates' description |
 | presignedUrlConfig | Object | Configuration for pre-signed file location URLs |
 | jobExecutionsRolloutConfig | Object | Create an exponential rate of rollout for a job.|
 | timeoutConfig | Object | Timeout configuration |
 | nextToken | String | Token for next data |
+
 ```List job template response
 body: {
   jobs: [
     jobTemplateArn: 'arn:aws:iot:ap-northeast-1:012345678901:job/85f6509f-023c-48fb-8252-981653ffd562',
     jobTemplateId: '85f6509f-023c-48fb-8252-981653ffd562',
-    document: JSON.stringify({
-      operation: 'Work',
-    }),
+    document: '{ "operation":"Work" }'
     description: 'Test Job Template',
     presignedUrlConfig: {},
     jobExecutionsRolloutConfig: {},
@@ -646,12 +642,13 @@ Delete job template by job template ID
 | HTTP Status Code |  Description |
 | -------- | ------- |
 | 200 | Delete job template success |
-| 404 | ResourceNotFoundException |
+| 404 | Job template ID not found |
 
 
 ## Thing Group API
 
-### POST /thing-groups 
+### POST /thing-groups
+
 Create new thing group
 
 **Description**
@@ -670,21 +667,26 @@ Add new thing group to platform
 | -------- | ------- | 
 | 200 | Create thing group success |
 | 422 | Missing require field / Variable Group incorrect|
-
 ---
-### *GET* /thing-groups/{thingGroupName} 
+
+### *GET* /thing-groups/{thingGroupName}
+
 Get thing group by thing group name
 
 **Path Parameter**
 | Name | Description |
 | -------- |   ---- |
-| thingGroupName* | Thing group's name   |
+| thingGroupName* | Thing group's name |
+
 
 **Response Object if success**
 
 | Name | Schema |  description |
 | -------- | --- | -- |
-| thingGroupName* | String | Thing group's name | 
+| thingGroupName | String | Thing group's name | 
+| thingGroupArn | String | Thing group's ARN |
+| thingGroupId | String | Thing group's ID |
+| version | number | Thing group's version |
 
 **Response Status**
 
@@ -694,6 +696,7 @@ Get thing group by thing group name
 | 404 | Thing group name not found |
 
 ---
+
 ### *GET* /thing-groups 
 List thing group list
 
@@ -701,31 +704,39 @@ List thing group list
 
 List exist thing group list
 
+**Query String Parameter**
+| Name | Group | Description |
+| -------- |   ---- | -- |
+| nextToken | String | Token for next data |
+
 **Response Object if success**
 
 | Name | Schema |  description |
 | -------- | --- | -- |
 | thingGroups | Array | A list of thing group |
-| thingGroups [groupName] | String | Thing group's name | 
-| thingGroups [groupArn] | String | Thing group's ARN | 
+| groupName | String | Thing group's name | 
+| groupArn | String | Thing group's ARN | 
 | nextToken | String | Token for next data |
+
 ```List thing group response
 body: {
   thingGroups: [
-    groupName: "groupName"
+    groupName: "groupName",
     groupArn: "groupArn"
-  ]
-  nextToken: "12345",
+  ],
+  nextToken: "12345"
 }
 ```
+
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
 | 200 | List thing group success |
-
 ---
+
 ### PUT /thing-groups/{thingGroupName} 
+
 Update thing group by thing group name
 
 **Description**
@@ -742,7 +753,7 @@ Update thing group by thing group name
 
 | Name | Group | Description |
 | -------- |   ---- | -- |
-| thingGroupDescription* | String   |Thing group's description |
+| thingGroupDescription  | String   |Thing group's description |
 
 
 **Response Status**
@@ -775,13 +786,19 @@ List things by thing group name success
 
 **Description**
 
-List all of things from target thing group
+List all of things from target thing 
+
+**Path Parameter**
+| Name | Description |
+| -------- |   ---- |
+| thingGroupName* | Thing group's name |
+
 
 **Query String Parameter**
 
 | Name  | Description |
 | -------- |   ---- | 
-| thingGroupName* | String | Thing group's name |
+| nextToken | String | Token for next data |
 
 **Response Object if success**
 
@@ -812,7 +829,7 @@ Remove thing from thing group
 | Name | Schema | Description |
 | -------- |   ---- | -- |
 | thingGroupName* | String | Thing group's name |
-| thingName | String | Thing's name |
+| thingName* | String | Thing's name |
 
 **Response Status**
 
@@ -848,6 +865,7 @@ Update dynamic thing group by name //no test
 | -------- | ------- |  ---- |
 | thingGroupName* | String | Dynamic thing group's name  |
 | queryString* | String  | The dynamic thing group search query string |
+| description | String | Dynamic thing group's description |
 
 **Response Status**
 
@@ -857,8 +875,10 @@ Update dynamic thing group by name //no test
 | 422 | Missing require field / Variable Group incorrect|
 | 404 | Dynamic thing group not found |
 ---
+
 ### *DELETE* /dynamic-thing-groups/{thingGroupName} 
-Delete dynamic thing group by name // BillingGroup not join
+
+Delete dynamic thing group by name
 
 **Body**
 
@@ -904,9 +924,19 @@ Get thing type by thing type name
 
 | Name | Schema |  Description |
 | -------- | ------- |  ---- |
-| thingTypeArn* | String   | Thing type's ARN |
-| thingTypeId* | String   |	Thing type's ID |
-| thingTypeName* | String | Thing type's Name |
+| thingTypeArn | String   | Thing type's ARN |
+| thingTypeId | String   |	Thing type's ID |
+| thingTypeName | String | Thing type's Name |
+
+```List things by thing group name response
+body: {
+  thingType: [
+    thingTypeArn: 'arn:aws:iot:ap-northeast-1:012345678901:thing/85f6509f-023c-48fb-8252-981653ffd561',
+    thingTypeId: '85f6509f-023c-48fb-8252-981653ffd561',
+    thingTypeName: 'TestThingType'
+  ]
+}
+```
 
 **Response Status**
 
@@ -925,21 +955,20 @@ List exist thing type on platform
 
 | Name | Type | Description |
 | -------- |   ---- | -- |
-| thingTypeName* | String | Thing type's name |
+| nextToken | String | Token for next data |
 
 **Response Object if success**
 
 | Name | Schema |  Description |
 | -------- | ------- |  ---- |
-| thingTypes* | String   | A list of thing type's|
-| thingTypes[thingTypeArn]* | String   | Thing type's ARN |
-| thingTypeId* | String   |	Thing type's ID | ?
-| thingTypes[thingTypeName]* | String | Thing type's Name | 
+| thingTypes | String   | A list of thing type's|
+| thingTypeArn | String   | Thing type's ARN |
+| thingTypeName | String | Thing type's name | 
+| nextToken | String | Token for next data |
 ```
 body: {
   thingTypes: [
       thingTypeArn: 'arn:aws:iot:ap-northeast-1:012345678901:thing/85f6509f-023c-48fb-8252-981653ffd561',
-      thingTypeId: '85f6509f-023c-48fb-8252-981653ffd561',
       thingTypeName: 'TestThingType',
   ],
   nextToken: "12345",
@@ -1034,20 +1063,20 @@ Get thing's information.
 
 | Name | Schema |Description | 
 | -------- | --- | -- |
-| thingName* | String | Thing's name |
-| thingTypeName* | String | Thing's thing type|
-| thingArn* | String | Thing's ARN |
-| thingId* | String | Thing's ID |
+| thingName | String | Thing's name |
+| thingTypeName | String | Thing's thing type|
+| thingArn | String | Thing's ARN |
+| thingId | String | Thing's ID |
 
 ``` Get thing response 
 {  
   body: {
-    thing: {
+    thing: [ 
       "thingName": "MyLightBulb",
       "thingTypeName": "LightBulb",
       "thingArn": "arn:aws:iot:us-east-1:123456789012:thing/MyLightBulb",
       "thingId": "12345678abcdefgh12345678ijklmnop12345678"
-    }
+    ]
   }
 }
 ```
@@ -1073,21 +1102,19 @@ List all of the thing.
 **Response Object if success**
 | Name | Schema |  Description |
 | -------- | --- | -- |
-| things{ThingAttribute} | Array | A list of thing |
-| things{ThingAttribute[thingName]} | String | Thing's name |
-| things{ThingAttribute[thingTypeName]} | String | Thing's thing type |
-| things{ThingAttribute[thingTypeArn]} | String | Thing's ARN |
+| things | Array | A list of thing |
+| thingName | String | Thing's name |
+| thingTypeName | String | Thing's thing type |
+| thingTypeArn | String | Thing's ARN |
 | nextToken | String | Token for next data |
-| thingId* | String | Thing's ID |?
 ``` List thing response 
 {  
-  things: 
-    ThingAttritute[
-      "thingName": "MyLightBulb",
-      "thingTypeName": "LightBulb",
-      "thingArn": "arn:aws:iot:us-east-1:123456789012:thing/MyLightBulb",
-      "thingId": "12345678abcdefgh12345678ijklmnop12345678"
-    ],
+  things: [{
+    "thingName": "MyLightBulb",
+    "thingTypeName": "LightBulb",
+    "thingArn": "arn:aws:iot:us-east-1:123456789012:thing/MyLightBulb",
+    "thingId": "12345678abcdefgh12345678ijklmnop12345678"
+  }],
   nexttoken: '12345', 
 }
 ```
@@ -1112,8 +1139,8 @@ Update thing's information.
 | Name | Group |  Description |
 | -------- | --- | -- |
 | thingTypeName | String | Thing's thing type name
-| attributePayload | String | Thing's attribute payload |
-| expectedVersion | String | Thing's expected version |
+| attributePayload | Object | Thing's attribute payload |
+| expectedVersion | Number | Thing's expected version |
 | removeThingType | Boolean | Remove thing type |
 
 **Response Status**
@@ -1150,7 +1177,7 @@ Get thing's thing shadow payload from platform
 | Name | Description |
 | -------- |   ---- |
 | thingName* | Thing's name
-| shadowName* | Thing shadow's name
+| shadowName | Thing shadow's name
 
 **Response Object if success**
 | Name | Group |  Description |
@@ -1174,6 +1201,11 @@ List all thing shadow on platform.
 | -------- |   ---- |
 | thingName* | String | Thing's name |
 
+**Query String Parameter**
+| Name | Group | Description |
+| -------- |   ---- | -- |
+| nextToken | String | Token for next data |
+
 **Response Object if success**
 | Name | Group |  Description |
 | -------- | --- | -- |
@@ -1191,9 +1223,11 @@ List all thing shadow on platform.
 | HTTP Status Code |  Description |
 | -------- | ------- |
 | 200 | List thing shadow success
-| 404 | Cannot found thing on platform |
+| 404 | Thing is not found |
 ---
-### *PUT* /things/{thingName}/shadows/{shadowName
+
+### *PUT* /things/{thingName}/shadows/{shadowName}
+
 Update thing shadow
 
 **Description**
@@ -1207,14 +1241,26 @@ Update thing shadow's payload to platform
 **body**
 | Name | Schema |  Description |
 | -------- |   ---- | --- |
-| payload* | Uint8Array | Thing shadow's payload|
-
-**Response Status**
+| payload | Object | Thing shadow's payload |
+| state | Object | Thing shadow's state |
+| desired | Object | Thing shadow's payload |
+| reported | Object | Thing shadow's payload |
+``` Update thing shadow request
+state: {
+  desired: {
+    welcome: 'aws-iot'
+  }
+  reported: {
+    welcome: 'aws-iot'
+  }
+}
+```
+**Status**
 | HTTP Status Code |  Description |
 | -------- | ------- |
 | 200 | Update Success |
 | 422 | Missing require field / Variable Group incorrect|
-| 404 | Cannot found thing on platform |
+| 404 | Thing is not found |
 ---
 ### *DELETE* /things/{thingName}/shadows/{shadowName}
 Delete thing shadow
@@ -1232,9 +1278,8 @@ Delete thing shadow from platform
 | HTTP Status Code |  Description |
 | -------- | ------- |
 | 200 | Delete success |
-| 404 | Cannot found thing on platform |
+| 404 | Thing is not found |
 ---
-## Special Varible Type
 GET /search
 ???
 
