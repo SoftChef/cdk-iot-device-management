@@ -49,6 +49,21 @@ export class JobApi extends cdk.Construct {
           lambdaFunction: this.createDeleteJobFunction(),
         },
         {
+          path: '/jobs/{jobId}/cancel',
+          httpMethod: HttpMethod.PUT,
+          lambdaFunction: this.createCancelJobFunction(),
+        },
+        {
+          path: '/jobs/job',
+          httpMethod: HttpMethod.GET,
+          lambdaFunction: this.createListJobExecutionForJobFunction(),
+        },
+        {
+          path: '/jobs/job',
+          httpMethod: HttpMethod.GET,
+          lambdaFunction: this.createListJobExecutionForThingFunction(),
+        },
+        {
           path: '/jobs/{jobId}/things/{thingName}',
           httpMethod: HttpMethod.GET,
           lambdaFunction: this.createGetJobExecutionFunction(),
@@ -59,6 +74,11 @@ export class JobApi extends cdk.Construct {
           lambdaFunction: this.createDeleteJobExecutionFunction(),
         },
         {
+          path: '/jobs/{jobId}/things/{thingName}/cancel',
+          httpMethod: HttpMethod.PUT,
+          lambdaFunction: this.createCancelJobExecutionFunction(),
+        },
+        {
           path: '/job-templates',
           httpMethod: HttpMethod.POST,
           lambdaFunction: this.createCreateJobTemplateFunction(),
@@ -67,6 +87,11 @@ export class JobApi extends cdk.Construct {
           path: '/job-templates',
           httpMethod: HttpMethod.GET,
           lambdaFunction: this.createListJobTemplatesFunction(),
+        },
+        {
+          path: '/job-templates/{jobId}',
+          httpMethod: HttpMethod.GET,
+          lambdaFunction: this.createGetJobTemplatesFunction(),
         },
         {
           path: '/job-templates/{jobId}',
@@ -173,6 +198,63 @@ export class JobApi extends cdk.Construct {
     return deleteJobFunction;
   }
 
+  private createCancelJobFunction(): lambda.NodejsFunction {
+    const cancelJobFunction = new lambda.NodejsFunction(this, 'CancelJobFunction', {
+      entry: `${LAMBDA_ASSETS_PATH}/cancel-job/app.ts`,
+    });
+    cancelJobFunction.role?.attachInlinePolicy(
+      new iam.Policy(this, 'iot-cancel-job-policy', {
+        statements: [
+          new iam.PolicyStatement({
+            actions: [
+              'iot:CancelJob',
+            ],
+            resources: ['*'],
+          }),
+        ],
+      }),
+    );
+    return cancelJobFunction;
+  }
+
+  private createListJobExecutionForJobFunction(): lambda.NodejsFunction {
+    const listJobExecutionForJob = new lambda.NodejsFunction(this, 'listJobExecutionForJob', {
+      entry: `${LAMBDA_ASSETS_PATH}/list-job-execution-job/app.ts`,
+    });
+    listJobExecutionForJob.role?.attachInlinePolicy(
+      new iam.Policy(this, 'list-job-execution-for-job', {
+        statements: [
+          new iam.PolicyStatement({
+            actions: [
+              'iot:ListJobExecutionForJob',
+            ],
+            resources: ['*'],
+          }),
+        ],
+      }),
+    );
+    return listJobExecutionForJob;
+  }
+
+  private createListJobExecutionForThingFunction(): lambda.NodejsFunction {
+    const listJobExecutionForThing = new lambda.NodejsFunction(this, 'listJobExecutionForThing', {
+      entry: `${LAMBDA_ASSETS_PATH}/list-job-execution-thing/app.ts`,
+    });
+    listJobExecutionForThing.role?.attachInlinePolicy(
+      new iam.Policy(this, 'list-job-execution-for-thing', {
+        statements: [
+          new iam.PolicyStatement({
+            actions: [
+              'iot:ListJobExecutionForThing',
+            ],
+            resources: ['*'],
+          }),
+        ],
+      }),
+    );
+    return listJobExecutionForThing;
+  }
+
   private createGetJobExecutionFunction(): lambda.NodejsFunction {
     const getJobExecutionFunction = new lambda.NodejsFunction(this, 'GetJobExecutionFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/get-job-execution/app.ts`,
@@ -211,6 +293,25 @@ export class JobApi extends cdk.Construct {
     return deleteJobExecutionFunction;
   }
 
+  private createCancelJobExecutionFunction(): lambda.NodejsFunction {
+    const cancelJobExecutionFunction = new lambda.NodejsFunction(this, 'CancelJobExecutionFunction', {
+      entry: `${LAMBDA_ASSETS_PATH}/cancel-job-execution/app.ts`,
+    });
+    cancelJobExecutionFunction.role?.attachInlinePolicy(
+      new iam.Policy(this, 'iot-cancel-job-execution-policy', {
+        statements: [
+          new iam.PolicyStatement({
+            actions: [
+              'iot:CancelJobExecution',
+            ],
+            resources: ['*'],
+          }),
+        ],
+      }),
+    );
+    return cancelJobExecutionFunction;
+  }
+
   private createCreateJobTemplateFunction(): lambda.NodejsFunction {
     const createJobTemplateFunction = new lambda.NodejsFunction(this, 'CreateJobTemplateFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/create-job-template/app.ts`,
@@ -229,7 +330,6 @@ export class JobApi extends cdk.Construct {
     );
     return createJobTemplateFunction;
   }
-
   private createListJobTemplatesFunction(): lambda.NodejsFunction {
     const listJobTemplatesFunction = new lambda.NodejsFunction(this, 'ListJobTemplatesFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/list-job-templates/app.ts`,
@@ -247,6 +347,25 @@ export class JobApi extends cdk.Construct {
       }),
     );
     return listJobTemplatesFunction;
+  }
+
+  private createGetJobTemplatesFunction(): lambda.NodejsFunction {
+    const getJobTemplatesFunction = new lambda.NodejsFunction(this, 'GetJobTemplatesFunction', {
+      entry: `${LAMBDA_ASSETS_PATH}/get-job-templates/app.ts`,
+    });
+    getJobTemplatesFunction.role?.attachInlinePolicy(
+      new iam.Policy(this, 'iot-get-job-templates', {
+        statements: [
+          new iam.PolicyStatement({
+            actions: [
+              'iot:GetJobTemplates',
+            ],
+            resources: ['*'],
+          }),
+        ],
+      }),
+    );
+    return getJobTemplatesFunction;
   }
 
   private createDeleteJobTemplateFunction(): lambda.NodejsFunction {
