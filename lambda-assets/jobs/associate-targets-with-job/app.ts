@@ -7,7 +7,9 @@ export async function handler(event: { [key: string]: any }) {
   try {
     const validated = request.validate(joi => {
       return {
-        targets: joi.array().items(joi.string()).required(),
+        targets: joi.array().items(
+          joi.string(),
+        ).required(),
       };
     });
     if (validated.error) {
@@ -28,6 +30,6 @@ export async function handler(event: { [key: string]: any }) {
       return response.error(error, 404);
     } else {
       return response.error(error);
-    }
+    };
   }
 }
