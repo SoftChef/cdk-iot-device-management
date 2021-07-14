@@ -42,13 +42,16 @@ Create new category
 
 Create file's category on platform.
 
-**Body**
-
-| Name | Schema |  Description |
+| Name | Schema | Description |
 | -------- | ------- |  ---- |
-| categoryId* | String| Category's ID |
-| parentId | String | Parent category's ID  |
-| description	| String | Category's description |
+| location* | URI | File's path|
+| checksum* | String | An encrypt md5 / crc32 / sha1 value |
+| checksumType* | 'md5' \| 'crc32' \| 'sha1' | File's checksum type|
+| summary* | string (Allow empty string) | File's summary | 
+| locale* | String | File's locale |
+| version* | String | File's version|
+| categoryId* | String | From category |
+| description | String | File's description |
 
 **Response Status**
 

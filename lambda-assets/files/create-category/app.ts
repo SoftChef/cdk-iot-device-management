@@ -1,7 +1,7 @@
+import * as crypto from 'crypto';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, GetCommand, PutCommand } from '@aws-sdk/lib-dynamodb';
 import { Request, Response } from '@softchef/lambda-events';
-import *  as crypto from 'crypto';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
@@ -21,6 +21,7 @@ export async function handler(event: { [key: string]: any }) {
     const name = request.input('name', null);
     const parentId = request.input('parentId');
     const ddbDocClient = DynamoDBDocumentClient.from(
+      // eslint-disable-next-line comma-dangle
       new DynamoDBClient({})
     );
     const md5 = crypto.createHash('md5');

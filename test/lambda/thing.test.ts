@@ -198,6 +198,7 @@ test('Get thing shadow success', async () => {
       shadowName: expected.shadowName,
     },
   });
+  console.log(response);
   const body = JSON.parse(response.body);
   const payload = JSON.parse(body.payload);
   expect(payload).toEqual(expectedThingShadowPayload);
