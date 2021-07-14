@@ -2,7 +2,6 @@ import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, GetCommand, QueryCommand, BatchWriteCommand } from '@aws-sdk/lib-dynamodb';
 import { Request, Response } from '@softchef/lambda-events';
 import * as uuid from 'uuid';
-import * as lodash from 'lodash';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
@@ -30,7 +29,7 @@ export async function handler(event: { [key: string]: any }) {
       return response.error(validated.details, 422);
     }
     const files = request.input('files');
-    const firstFile = lodash.first(files);
+    const firstFile: { [key: string]: any } = files[0];
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({}),
     );
@@ -60,14 +59,14 @@ export async function handler(event: { [key: string]: any }) {
         },
       }),
     );
-    if (existsFiles.length !== 0) {
+    if (!existsFiles || existsFiles.length !== 0) {
       return response.error('File already exists.', 422);
     };
     const currentTime = Date.now();
     await ddbDocClient.send(
       new BatchWriteCommand({
         RequestItems: {
-          [process.env.FILE_TABLE_NAME]: files.map(file => {
+          [`${process.env.FILE_TABLE_NAME}`]: files.map((file: any) => {
             return {
               PutRequest: {
                 Item: {
