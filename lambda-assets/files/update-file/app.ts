@@ -1,5 +1,5 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, UpdateCommand } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBDocumentClient, QueryCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb';
 import { Request, Response } from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
@@ -8,19 +8,40 @@ export async function handler(event: { [key: string]: any }) {
   try {
     const validated = request.validate(joi => {
       return {
-        checksumType: joi.string().allow('md5', 'crc32', 'sha1'),
-        fileId: joi.string().when('checksumType', { is: 'md5', then: joi.string().length(32).required() })
-          .concat(joi.string().when('checksumType', { is: 'crc32', then: joi.string().length(8).required() }))
-          .concat(joi.string().when('checksumType', { is: 'sha1', then: joi.string().length(40).required() })),
-        version: joi.string(),
+        files: joi.array().items(
+          joi.object().keys({
+            fileId: joi.string().required(),
+            locale: joi.string().required(),
+            summary: joi.string().allow(null, ''),
+            description: joi.string().allow(null, ''),
+          }),
+        ),
       };
     });
     if (validated.error) {
       return response.error(validated.details, 422);
-    }
+    };
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({}),
     );
+    const { Items: existsFiles } = await ddbDocClient.send(
+      new QueryCommand({
+        TableName: process.env.FILE_TABLE_NAME,
+        IndexName: 'get-file-by-checksum-and-version',
+        KeyConditionExpression: '#checksum = :checksum and #version = :version',
+        ExpressionAttributeNames: {
+          '#checksum': 'checksum',
+          '#version': 'version',
+        },
+        ExpressionAttributeValues: {
+          ':checksum': request.parameter('checksum'),
+          ':version': request.parameter('version'),
+        },
+      }),
+    );
+    if (existsFiles.length === 0) {
+      return response.error('File not found.', 404);
+    };
     await ddbDocClient.send(
       new UpdateCommand({
         TableName: process.env.FILE_TABLE_NAME,
@@ -45,6 +66,6 @@ export async function handler(event: { [key: string]: any }) {
       return response.error(error, 404);
     } else {
       return response.error(error);
-    }
-  }
+    };
+  };
 }

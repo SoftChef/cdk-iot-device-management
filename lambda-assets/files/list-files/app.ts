@@ -28,12 +28,12 @@ export async function handler(event: { [key: string]: any }) {
       nextToken = Buffer.from(
         JSON.stringify(lastEvaluatedKey),
       ).toString('base64');
-    }
+    };
     return response.json({
       files,
       nextToken,
     });
   } catch (error) {
     return response.error(error);
-  }
+  };
 }
