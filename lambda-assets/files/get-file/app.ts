@@ -1,5 +1,5 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, GetCommand } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBDocumentClient, QueryCommand } from '@aws-sdk/lib-dynamodb';
 import { Request, Response } from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
@@ -9,22 +9,28 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({}),
     );
-    const { Item: file } = await ddbDocClient.send(
-      new GetCommand({
+    const { Items: existsFiles } = await ddbDocClient.send(
+      new QueryCommand({
         TableName: process.env.FILE_TABLE_NAME,
-        Key: {
-          fileId: request.parameter('fileId'),
-          version: request.parameter('version'),
+        IndexName: 'get-file-by-checksum-and-version',
+        KeyConditionExpression: '#checksum = :checksum and #version = :version',
+        ExpressionAttributeNames: {
+          '#checksum': 'checksum',
+          '#version': 'version',
+        },
+        ExpressionAttributeValues: {
+          ':checksum': request.parameter('checksum'),
+          ':version': request.parameter('version'),
         },
       }),
     );
-    if (!file) {
-      return response.error('Not found.', 404);
+    if (existsFiles.length === 0) {
+      return response.error('File not found.', 404);
     };
     return response.json({
-      file,
+      file: existsFiles,
     });
   } catch (error) {
     return response.error(error);
-  }
+  };
 }

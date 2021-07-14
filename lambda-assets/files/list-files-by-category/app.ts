@@ -20,13 +20,15 @@ export async function handler(event: { [key: string]: any }) {
     const { Items: files, LastEvaluatedKey: lastEvaluatedKey } = await ddbDocClient.send(
       new QueryCommand({
         TableName: process.env.FILE_TABLE_NAME,
-        IndexName: 'query-by-category-id',
-        KeyConditionExpression: '#categoryId = :categoryId',
+        IndexName: 'query-by-category-id-and-locale',
+        KeyConditionExpression: '#categoryId = :categoryId and #locale = :locale',
         ExpressionAttributeNames: {
           '#categoryId': 'categoryId',
+          '#locale': 'locale',
         },
         ExpressionAttributeValues: {
           ':categoryId': request.parameter('categoryId'),
+          ':locale': request.get('locale'),
         },
         ...parameters,
       }),
@@ -36,12 +38,12 @@ export async function handler(event: { [key: string]: any }) {
       nextToken = Buffer.from(
         JSON.stringify(lastEvaluatedKey),
       ).toString('base64');
-    }
+    };
     return response.json({
       files,
       nextToken,
     });
   } catch (error) {
     return response.error(error);
-  }
+  };
 }
