@@ -17,14 +17,14 @@
 ## Method of data transfer
 
 - pathParameter
-`https://example.com/test/{item: item}`
+`https://example.com/files/{fileId}
 - queryStringParemeter
-`https://example.com/test?item=item`
+`https://example.com/files?fileId=1`
 - body
 
 ``` Body example
 {
-  item: item
+  fileId: "fileId"
 }
 ```
   
