@@ -17,14 +17,14 @@
 ## Method of data transfer
 
 - pathParameter
-`https://exaple.com/test/{item:strawberry}`
+`https://example.com/test/{item: item}`
 - queryStringParemeter
-`https://exaple.com/test?item=strawberry`
+`https://example.com/test?item=item`
 - body
 
 ``` Body example
 {
-  item: strawberry
+  item: item
 }
 ```
   
@@ -42,16 +42,13 @@ Create new category
 
 Create file's category on platform.
 
-| Name | Schema | Description |
+**Body**
+
+| Name | Schema |  Description |
 | -------- | ------- |  ---- |
-| location* | URI | File's path|
-| checksum* | String | An encrypt md5 / crc32 / sha1 value |
-| checksumType* | 'md5' \| 'crc32' \| 'sha1' | File's checksum type|
-| summary* | string (Allow empty string) | File's summary | 
-| locale* | String | File's locale |
-| version* | String | File's version|
-| categoryId* | String | From category |
-| description | String | File's description |
+| name* | String | Category's ID |
+| parentId | String | Parent category's ID  |
+| description	| String | Category's description |
 
 **Response Status**
 
@@ -72,14 +69,26 @@ Get category by category ID, if category is root will return children category.
 
 **Response Object if success**
 
-| Name | Schema | Description |
+<!--| Name | Schema | Description |
 | -------- | --- | -- |
 | categoryId* | String | Category's ID | 
 | parentId | String | Parent category's ID |
 | name* | String | Category's name |
 | description | String | Category's description |
 | createdAt* | String | Create time |
-| updatedAt* | String | Last update time |
+| updatedAt* | String | Last update time |-->
+
+```Get category response
+{
+  categories: {
+    "categoryId": "{the category id}",
+    "parentId": "{parent category id}",
+    "description": "{category's description}",
+    "createdAt": "{created timestamp}",
+    "updatedAt": "{last updated timestamp}",
+  }
+}
+```
 
 **Response Status**
 
@@ -102,7 +111,7 @@ Get root category list
 
 **Response Object if success**
 
-| Name | Schema | Description |
+<!--| Name | Schema | Description |
 | -------- | --- | -- |
 | categoryId* | String | Category's ID | 
 | parentId | String | Parent category's ID |
@@ -110,21 +119,22 @@ Get root category list
 | description | String | Category's description |
 | createdAt* | String | Created time |
 | updatedAt* | String | Last updated time |
-| nextToken | String | Token for next data |
+| nextToken | String | Token for next data |-->
 
-```nist category response
-body: {
+```List category response
+{
   categories: [
-    categoryId: "categoryId",
-    parentId: "parentId",
-    description: "description",
-    createdAt: "createdAt",
-    updatedAt: "updatedAt",
+    {
+      "categoryId": "{the category id}",
+      "parentId": "{parent category id}",
+      "description": "{category's description}",
+      "createdAt": "{created timestamp}",
+      "updatedAt": "{last updated timestamp}",
+    }
   ]
-  nextToken: "nextToken",
+  "nextToken": "{Token for next data}",
 }
 ```
-
 
 **Response Status**
 
@@ -190,6 +200,7 @@ Create file's information
 | location* | URI | File's path|
 | checksum* | String | An encrypt md5 / crc32 / sha1 value |
 | checksumType* | 'md5' \| 'crc32' \| 'sha1' | File's checksum type|
+| summary* | string (Allow empty string) | File's summary | 
 | locale* | String | File's locale |
 | version* | String | File's version|
 | categoryId* | String | From category |
@@ -219,18 +230,33 @@ Get file's information by file ID
 
 **Response Object if success**
 
-| Name | Schema |  Description |
+<!--| Name | Schema |  Description |
 | -------- | ------- |  ---- |
 | location* | String   | File's path|
 | checksum* | String   |	An encrypt md5 / crc32 / sha1 value |
 | checksumType*	| String |File's version|
+| summary* | string (Allow empty string) | File's summary | 
 | locale* | String | File's locale |
 | version* | String| File's version |
 | categoryId* | String | From category |
 | description* | String | File's description |
 | createdAt* | String | Created time |
-| updatedAt* | String | Last updated time |
-
+| updatedAt* | String | Last updated time |-->
+``` List file by file ID response
+{
+  file: {
+    "location": "{file' path}", 
+    "checksum": "{an encrypt md5 / crc32 / sha1 value}", 
+    "checksumType" : "{file's checksum type}",
+    "locale": "{file's locale}", 
+    "version": "{file's version}",
+    "categoryId": "{file's category ID}", 
+    "description": "{file's description}",
+    "createdAt": "{created time}", 
+    "updatedAt": "{last updated time}"
+  }
+}
+```
 **Response Status**
 
 | HTTP Status Code |  Description |
@@ -249,35 +275,39 @@ List files
 
 **Response Object if success**
 
-| Name | Schema |  Description |
+<!--| Name | Schema |  Description |
 | -------- | ------- |  ---- |
 | location* | String   | File's path |
 | checksum* | String   |	An encrypt md5 / crc32 / sha1 value |
 | checksumType*	| String |File's version|
+| summary* | string (Allow empty string) | File's summary | 
 | locale* | String | File's locale |
 | version* | String| File's version |
 | categoryId* | String | From category |
 | description* | String | File's description |
 | createdAt* | String | Created time |
 | updatedAt* | String | Last updated time |
-| nextToken | String | Token for next data |
+| nextToken | String | Token for next data |-->
 
 ```List files response
-body: {
-  files: [
-    location: "location",
-    checksum: "checksum",
-    checksumType: "checksumType",
-    locale: "locale",
-    version: "version",
-    categoryId: "categoryId",
-    description: "description",
-    createdAt: "createdAt",
-    updatedAt: "updatedAt",
+{
+  "files": [
+    {
+      "location": "{file' path}", 
+      "checksum": "{an encrypt md5 / crc32 / sha1 value}", 
+      "checksumType" : "{file's checksum type}",
+      "locale": "{file's locale}", 
+      "version": "{file's version}",
+      "categoryId": "{file's category ID}", 
+      "description": "{file's description}",
+      "createdAt": "{created time}", 
+      "updatedAt": "{last updated time}"
+    }
   ]
-  nextToken: "nextToken",
+  "nextToken": "{Token for next data}",
 }
 ```
+
 **Response Status**
 
 | HTTP Status Code |  Description |
@@ -295,34 +325,39 @@ List files by category ID
 
 **Response Object if success**
 
-| Name | Schema |  Description |
+<!--| Name | Schema |  Description |
 | -------- | ------- |  ---- |
 | location* | String   | File's path|
 | checksum* | String   |	An encrypt md5 / crc32 / sha1 value |
-| checksumType*	| String |File's version|
+| checksumType*	| String |File's version |
+| summary* | string (Allow empty string) | File's summary | 
 | locale* | String |File's locale |
 | version* | String| File's version|
 | categoryId* | String | From category |
 | description | String | File's description |
 | createdAt* | String | Created time |
 | updatedAt* | String | Last updated time |
-| nextToken | String | Token for next data |
-```List files by category response
-body: {
-  files: [
-    location: "location",
-    checksum: "checksum",
-    checksumType: "checksumType",
-    locale: "locale",
-    version: "version",
-    categoryId: "categoryId",
-    description: "description",
-    createdAt: "createdAt",
-    updatedAt: "updatedAt",
+| nextToken | String | Token for next data | -->
+
+```List files response
+{
+  "files": [
+    {
+      "location": "{file's path}", 
+      "checksum": "{an encrypt md5 / crc32 / sha1 value}", 
+      "checksumType" : "{file's checksum type}",
+      "locale": "{file's locale}", 
+      "version": "{file's version}",
+      "categoryId": "{file's category ID}", 
+      "description": "{file's description}",
+      "createdAt": "{created time}", 
+      "updatedAt": "{last updated time}"
+    }
   ]
-  nextToken: "12345",
+  "nextToken": "{Token for next data}",
 }
 ```
+
 **Response Status**
 
 | HTTP Status Code |  Description |
@@ -418,24 +453,24 @@ Get exist job form platform
 | Name | Schema |  Description |
 | -------- | --- | -- |
 | jobArn | String | Job's ARN |
-| jobId | String | Job's ID |
+| jobId | String | Job's ARN |
 | targets | String[]  | A list of thing's ID |
 | targetSelection | "SNAPSHOT" \| "CONTINUOUS"  | Job's status |
 | description | String | Job's description |
 | status | "CANCELED" \| "COMPLETED" \| "DELETION_IN_PROGRESS" \| "IN_PROGRESS" | Job's status |
 
-```Get files response
-body: {
-  job: [
-    jobArn: 'arn:aws:iot:ap-northeast-1:012345678901:job/85f6509f-023c-48fb-8252-981653ffd561',
-    jobId: '85f6509f-023c-48fb-8252-981653ffd561',
-    targets: [
-      'arn:aws:iot:ap-northeast-1:012345678901:thing/WorkerA',
-    ],
-    targetSelection: 'SNAPSHOT',
-    description: 'Test Job',
-    status: 'IN_PROGRESS'
-  ]
+```Get jobs response
+{
+  "job": {
+      "jobArn": "{job's ARN}";
+      "jobId": "{job's ARN}",
+      "targets": [ // A list of thing's ID
+        "{thing's ID}",
+      ],
+      "targetSelection": "{job's status}", // "SNAPSHOT" | "CONTINUOUS"
+      "description": "{job's description}",
+      "status": "{job's status}" // “CANCELED” | “COMPLETED” | “DELETION_IN_PROGRESS” | “IN_PROGRESS”
+  }
 }
 ```
 
@@ -453,7 +488,7 @@ List Jobs
 
 List exist jobs on platform
 
-**Response Object if success**
+<!--**Response Object if success**
 | Name | Schema |  Description |
 | -------- | --- | -- |
 | jobArn | String | Job's ARN |
@@ -462,21 +497,21 @@ List exist jobs on platform
 | targetSelection | "SNAPSHOT" \| "CONTINUOUS"  | Job status |
 | description | String | Job’s description |
 | status | String | Job’s status |
-| nextToken | String | Token for next data |
+| nextToken | String | Token for next data |-->
 
 ```List files response
-body: {
-  JobSummary: [{
-    jobArn: 'arn:aws:iot:ap-northeast-1:012345678901:job/85f6509f-023c-48fb-8252-981653ffd561',
-    jobId: '85f6509f-023c-48fb-8252-981653ffd561',
-    targets: [
-      'arn:aws:iot:ap-northeast-1:012345678901:thing/WorkerA'
+{ 
+  "JobSummary": [{
+    "jobArn": "{job's ARN}";
+    "jobId": "{job's ARN}",
+    "targets": [ // A list of thing's ID
+      "{thing's ID}",
     ],
-    targetSelection: 'SNAPSHOT',
-    description: 'Test Job',
-    status: 'IN_PROGRESS'
+    "targetSelection": "{job's status}", // "SNAPSHOT" | "CONTINUOUS"
+    "description": "{job's description}",
+    "status": "{job's status}" // “CANCELED” | “COMPLETED” | “DELETION_IN_PROGRESS” | “IN_PROGRESS”
   }],
-  nextToken: "12345"
+  "nextToken": "{Token for next data}"
 }
 ```
 
@@ -597,7 +632,7 @@ Get job template by Job Template ID
 | jobTemplateId* | Job Template's ID   |
 
 **Response Object if success**
-| Name | Schema |  Description |
+<!--| Name | Schema |  Description |
 | -------- | --- | -- |
 | jobTemplateArn | String | Job templates' ARN |
 | jobTemplateId | String | Job templates’ ID |
@@ -605,17 +640,17 @@ Get job template by Job Template ID
 | description | String | Job templates' description |
 | presignedUrlConfig | Object | Configuration for pre-signed file location URLs |
 | jobExecutionsRolloutConfig | Object | Create an exponential rate of rollout for a job.|
-| timeoutConfig | Object | Timeout configuration |
+| timeoutConfig | Object | Timeout configuration | -->
 ``` Get Job template response
-body: {
-  job: {
-    jobTemplateArn: 'arn:aws:iot:ap-northeast-1:012345678901:job/85f6509f-023c-48fb-8252-981653ffd562',
-    jobTemplateId: '85f6509f-023c-48fb-8252-981653ffd562',
-    document: '{ "operation":"Work" }'
-    description: 'Test Job Template',
-    presignedUrlConfig: {},
-    jobExecutionsRolloutConfig: {},
-    timeoutConfig: {},
+{
+  "jobTemplate": {
+    "jobTeplateArn": "{job templates' ARN}",
+    "jobTemplateId": "{Job templates’ ID}"
+    "document": "{Job templates' document}"
+    "description": "Test Job Template",
+    "presignedUrlConfig": {"{Configuration for pre-signed file location URLs}"},
+    "jobExecutionsRolloutConfig": {"{Create an exponential rate of rollout for a job}"},
+    "timeoutConfig": {"{Timeout configuration}"},
   }
 }
 ```
@@ -630,7 +665,7 @@ body: {
 
 List job templates
 
-**Response Object if success**
+<!--**Response Object if success**
 | Name | Schema |  Description |
 | -------- | --- | -- |
 | jobTemplateArn* | String | Job templates' ARN |
@@ -640,20 +675,20 @@ List job templates
 | presignedUrlConfig | Object | Configuration for pre-signed file location URLs |
 | jobExecutionsRolloutConfig | Object | Create an exponential rate of rollout for a job.|
 | timeoutConfig | Object | Timeout configuration |
-| nextToken | String | Token for next data |
+| nextToken | String | Token for next data |-->
 
 ```List job template response
-body: {
-  JobSummary: [{
-    jobTemplateArn: 'arn:aws:iot:ap-northeast-1:012345678901:job/85f6509f-023c-48fb-8252-981653ffd562',
-    jobTemplateId: '85f6509f-023c-48fb-8252-981653ffd562',
-    document: '{ "operation":"Work" }'
-    description: 'Test Job Template',
-    presignedUrlConfig: {},
-    jobExecutionsRolloutConfig: {},
-    timeoutConfig: {},
+{
+  "JobTemplateSummary": [{
+    "jobTeplateArn": "{job templates' ARN}",
+    "jobTemplateId": "{Job templates’ ID}"
+    "document": "{Job templates' document}"
+    "description": "Test Job Template",
+    "presignedUrlConfig": {"{Configuration for pre-signed file location URLs}"},
+    "jobExecutionsRolloutConfig": {"{Create an exponential rate of rollout for a job}"},
+    "timeoutConfig": {"{Timeout configuration}"},
   }]
-  nextToken: "12345",
+  "nextToken": "{Token for next data}",
 }
 ```
 **Response Status**
@@ -710,14 +745,25 @@ Get thing group by thing group name
 | thingGroupName* | Thing group's name |
 
 
-**Response Object if success**
+<!--**Response Object if success**
 
 | Name | Schema |  description |
 | -------- | --- | -- |
 | thingGroupName | String | Thing group's name | 
 | thingGroupArn | String | Thing group's ARN |
 | thingGroupId | String | Thing group's ID |
-| version | number | Thing group's version |
+| version | number | Thing group's version |-->?
+
+``` Get thing group response
+{
+  "thingGroup": {
+    "thingGroupName": "{job templates' ARN}",
+    "thingGroupArn": "{Job templates’ ID}"
+    "thingGroupId": "{Thing group's ID}",
+    "version": "{Job templates' document}"
+  }
+}
+```
 
 **Response Status**
 
@@ -725,7 +771,6 @@ Get thing group by thing group name
 | -------- | ------- | 
 | 200 | Get thing group success |
 | 404 | Thing group name not found |
-
 ---
 
 ### *GET* /thing-groups 
@@ -742,20 +787,20 @@ List exist thing group list
 
 **Response Object if success**
 
-| Name | Schema |  description |
+<!--| Name | Schema |  description |
 | -------- | --- | -- |
 | thingGroups | Array | A list of thing group |
 | groupName | String | Thing group's name | 
 | groupArn | String | Thing group's ARN | 
-| nextToken | String | Token for next data |
+| nextToken | String | Token for next data |-->
 
 ```List thing group response
-body: {
-  thingGroups: [
-    groupName: "groupName",
-    groupArn: "groupArn"
-  ],
-  nextToken: "12345"
+{
+  "thingGroups": [{
+    "groupName": "{Thing group's name}",
+    "groupArn": "{Thing group's ARN}"
+  }],
+  "nextToken": "{Token for next data}"
 }
 ```
 
@@ -833,15 +878,15 @@ List all of things from target thing
 
 **Response Object if success**
 
-| Name | Schema |  description |
+<!--| Name | Schema |  description |
 | -------- | --- | -- |
 | things* | Array | A list of things |
-| nextToken | String | Token for next data |
+| nextToken | String | Token for next data |-->
 
 ```List things by thing group name response
-body: {
-  things: [],
-  nextToken: "12345",
+{
+  "things": [{"A list of things"}],
+  "nextToken": "Token for next data",
 }
 ```
 
@@ -953,19 +998,19 @@ Get thing type by thing type name
 
 **Response Object if success**
 
-| Name | Schema |  Description |
+<!--| Name | Schema |  Description |
 | -------- | ------- |  ---- |
 | thingTypeArn | String   | Thing type's ARN |
 | thingTypeId | String   |	Thing type's ID |
-| thingTypeName | String | Thing type's Name |
+| thingTypeName | String | Thing type's Name |-->
 
-```List things by thing group name response
-body: {
-  thingType: [
-    thingTypeArn: 'arn:aws:iot:ap-northeast-1:012345678901:thing/85f6509f-023c-48fb-8252-981653ffd561',
-    thingTypeId: '85f6509f-023c-48fb-8252-981653ffd561',
-    thingTypeName: 'TestThingType'
-  ]
+```Get things by thing group name response
+{
+  "thingType": {
+    "thingTypeArn": "{Thing type's ARN}"
+    "thingTypeId": "{Thing type's ID}"
+    "thingTypeName": "{Thing type's Name}"
+  }
 }
 ```
 
@@ -990,19 +1035,19 @@ List exist thing type on platform
 
 **Response Object if success**
 
-| Name | Schema |  Description |
+<!--| Name | Schema |  Description |
 | -------- | ------- |  ---- |
 | thingTypes | String   | A list of thing type's|
-| thingTypeArn | String   | Thing type's ARN |
+| thingTypeArn | String   | Thing type's name |
 | thingTypeName | String | Thing type's name | 
-| nextToken | String | Token for next data |
-```
-body: {
-  thingTypes: [
-      thingTypeArn: 'arn:aws:iot:ap-northeast-1:012345678901:thing/85f6509f-023c-48fb-8252-981653ffd561',
-      thingTypeName: 'TestThingType',
-  ],
-  nextToken: "12345",
+| nextToken | String | Token for next data |-->
+```List thing type by thing group name response
+{
+  "thingTypes": [{
+      "thingTypeArn": "{Thing type's ARN}"
+      "thingTypeName": "{Thing type's name}",
+  }],
+  "nextToken": "{Token for next data}",
 }
 ```
 **Response Status**
@@ -1092,22 +1137,20 @@ Get thing's information.
 
 **Response Object if success**
 
-| Name | Schema |Description | 
+<!--| Name | Schema |Description | 
 | -------- | --- | -- |
 | thingName | String | Thing's name |
 | thingTypeName | String | Thing's thing type|
 | thingArn | String | Thing's ARN |
-| thingId | String | Thing's ID |
+| thingId | String | Thing's ID |-->
 
 ``` Get thing response 
 {  
-  body: {
-    thing: [ 
-      "thingName": "MyLightBulb",
-      "thingTypeName": "LightBulb",
-      "thingArn": "arn:aws:iot:us-east-1:123456789012:thing/MyLightBulb",
-      "thingId": "12345678abcdefgh12345678ijklmnop12345678"
-    ]
+  "thing": {
+    "thingName": "{Thing's name}",
+    "thingTypeName": "{Thing's thing type}",
+    "thingArn": "{Thing's ARN}",
+    "thingId": "{Thing's ID}"
   }
 }
 ```
@@ -1131,22 +1174,22 @@ List all of the thing.
 | thingName* | String   | Thing's name | 
 
 **Response Object if success**
-| Name | Schema |  Description |
+<!--| Name | Schema |  Description |
 | -------- | --- | -- |
 | things | Array | A list of thing |
 | thingName | String | Thing's name |
 | thingTypeName | String | Thing's thing type |
 | thingTypeArn | String | Thing's ARN |
-| nextToken | String | Token for next data |
+| nextToken | String | Token for next data |-->
 ``` List thing response 
 {  
-  things: [{
-    "thingName": "MyLightBulb",
-    "thingTypeName": "LightBulb",
-    "thingArn": "arn:aws:iot:us-east-1:123456789012:thing/MyLightBulb",
-    "thingId": "12345678abcdefgh12345678ijklmnop12345678"
+  "things": [{
+    "thingName": "Thing's name",
+    "thingTypeName": "Thing's thing type",
+    "thingArn": "Thing's ARN",
+    "thingId": "Thing's ID"
   }],
-  nexttoken: '12345', 
+  "nextToken": "{Token for next data}",
 }
 ```
 **Response Status**
@@ -1211,9 +1254,16 @@ Get thing's thing shadow payload from platform
 | shadowName | Thing shadow's name
 
 **Response Object if success**
-| Name | Group |  Description |
+<!--| Name | Group |  Description |
 | -------- | --- | -- |
-| payload* | string | Thing's thing shadow |
+| payload* | string | Thing's thing shadow |-->
+``` List thing response 
+{  
+  "thingShadow": [
+    "payload": "{Thing's thing shadow}"
+  ] 
+}
+```
 
 **Response Status**
 | HTTP Status Code |  Description |
@@ -1238,18 +1288,17 @@ List all thing shadow on platform.
 | nextToken | String | Token for next data |
 
 **Response Object if success**
-| Name | Group |  Description |
+<!--| Name | Group |  Description |
 | -------- | --- | -- |
-| result* | String[] | List all thing shadow |
+| result* | String[] | List all thing shadow |-->
 ``` List thing response 
 {  
-  thingShadows: [
-    result: [],
+  "thingShadows": [
+    "result": [{"List all thing shadow"}],
   ] 
-  nexttoken: '12345', 
+  "nextToken": "{Token for next data}",
 }
 ```
-
 **Response Status**
 | HTTP Status Code |  Description |
 | -------- | ------- |
