@@ -45,7 +45,7 @@ const expectedFiles = {
   Item: {
     fileId: '550e8400-e29b-41d4-a716-446655440000',
     categoryId: expectedCategory.Item.categoryId,
-    version: 'Test',
+    version: '1.0',
     location: 'https://example.com/Test',
     checksum: '0CBC6611F5540BD0809A388DC95A615B',
     checksumType: 'md5',
@@ -322,13 +322,18 @@ test('Create file API success', async () => {
     },
   });
   documentClientMock.on(QueryCommand, {
-    TableName: 'fileTable',
-    KeyConditionExpression: 'checksum = :checksum and version = :version',
+    TableName: FILE_TABLE_NAME,
+    IndexName: 'get-file-by-checksum-and-version',
+    KeyConditionExpression: '#checksum = :checksum and #version = :version',
+    ExpressionAttributeNames: {
+      '#checksum': 'checksum',
+      '#version': 'version',
+    },
     ExpressionAttributeValues: {
       ':checksum': expected.newFiles.checksum,
       ':version': expected.newFiles.version,
     },
-  }).resolves({}); // 還沒補
+  }).resolves({});
   documentClientMock.on(BatchWriteCommand, {
     RequestItems: {
       fileTable: [{

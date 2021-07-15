@@ -44,12 +44,11 @@ export async function handler(event: { [key: string]: any }) {
     if (!category) {
       return response.error('Category does not exist.', 422);
     };
-    const { Items: existsFiles } = await ddbDocClient.send(
+    const existsFiles = await ddbDocClient.send(
       new QueryCommand({
         TableName: process.env.FILE_TABLE_NAME,
-        //IndexName: 'get-file-by-checksum-and-version',
-        KeyConditionExpression: '#checksum = :checksum',
-        FilterExpression: '#version = :version',
+        IndexName: 'get-file-by-checksum-and-version',
+        KeyConditionExpression: '#checksum = :checksum and #version = :version',
         ExpressionAttributeNames: {
           '#checksum': 'checksum',
           '#version': 'version',
@@ -60,7 +59,8 @@ export async function handler(event: { [key: string]: any }) {
         },
       }),
     );
-    if (!existsFiles || existsFiles.length !== 0) {
+    console.log(existsFiles);
+    if (existsFiles.Items && existsFiles.Items.length) {
       return response.error('File already exists.', 422);
     };
     const currentTime = Date.now();
