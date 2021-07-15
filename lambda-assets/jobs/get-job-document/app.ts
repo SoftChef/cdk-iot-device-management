@@ -1,4 +1,4 @@
-import { IoTClient, DescribeJobExecutionCommand } from '@aws-sdk/client-iot';
+import { IoTClient, GetJobDocumentCommand } from '@aws-sdk/client-iot';
 import { Request, Response } from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
@@ -6,18 +6,17 @@ export async function handler(event: { [key: string]: any }) {
   const response = new Response();
   try {
     const iotClient = new IoTClient({});
-    const jobExecution = await iotClient.send(
-      new DescribeJobExecutionCommand({
+    const document = await iotClient.send(
+      new GetJobDocumentCommand({
         jobId: request.parameter('jobId'),
-        thingName: request.parameter('thingName'),
       }),
     );
-    return response.json(jobExecution);
+    return response.json(document);
   } catch (error) {
     if (error.Code === 'ResourceNotFoundException') {
       return response.error(error, 404);
     } else {
       return response.error(error);
-    }
+    };
   }
 }
