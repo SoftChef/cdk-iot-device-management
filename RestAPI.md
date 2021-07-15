@@ -412,6 +412,26 @@ Delete file by ID
 ---
 ## Job API
 
+### *PUT* /jobs/{jobId}/associate
+Associates a group with a continuous job
+
+**Path Parameter**
+| Name | Description |
+| -------- |   ---- |
+| jobId* | Job's ID | 
+
+**body**
+| Name | Schema |  Description |
+| -------- |   ---- | --- |
+| targets* | String[]  | A list of thing's |
+
+**Response Status**
+| HTTP Status Code |  Description |
+| -------- | ------- | 
+| 200 | Get job success
+| 404 | Job ID not found |
+---
+
 ### *POST* /jobs 
 Create new job
 
@@ -427,12 +447,26 @@ Create new job on platform
 | description | String | Job's description
 
 **Response Object if success**
-| Name | Schema |  Description |
+<!--| Name | Schema |  Description |
 | -------- | --- | -- |
 | jobArn | String | Job's ARN |
 | jobId | String | Job's ID | |
-| description | String | Job's description |
-
+| description | String | Job's description-->
+```Create job response
+{
+  "created": "{create success or not success}"
+  "job": {
+      "jobArn": "{job's ARN}";
+      "jobId": "{job's ARN}",
+      "targets": [ // A list of thing's ID
+        "{thing's ID}",
+      ],
+      "targetSelection": "{job's status}", // "SNAPSHOT" | "CONTINUOUS"
+      "description": "{job's description}",
+      "status": "{job's status}" // “CANCELED” | “COMPLETED” | “DELETION_IN_PROGRESS” | “IN_PROGRESS”
+  }
+}
+```
 | HTTP Status Code |  Description |
 | -------- | ------- | 
 | 200 | Create job success|
@@ -450,14 +484,14 @@ Get exist job form platform
 | jobId* | Job's ID | 
 
 **Response Object if success**
-| Name | Schema |  Description |
+<!--| Name | Schema |  Description |
 | -------- | --- | -- |
 | jobArn | String | Job's ARN |
 | jobId | String | Job's ARN |
 | targets | String[]  | A list of thing's ID |
 | targetSelection | "SNAPSHOT" \| "CONTINUOUS"  | Job's status |
 | description | String | Job's description |
-| status | "CANCELED" \| "COMPLETED" \| "DELETION_IN_PROGRESS" \| "IN_PROGRESS" | Job's status |
+| status | "CANCELED" \| "COMPLETED" \| "DELETION_IN_PROGRESS" \| "IN_PROGRESS" | Job's status |-->
 
 ```Get jobs response
 {
@@ -488,8 +522,8 @@ List Jobs
 
 List exist jobs on platform
 
-<!--**Response Object if success**
-| Name | Schema |  Description |
+**Response object if success**
+<!--| Name | Schema |  Description |
 | -------- | --- | -- |
 | jobArn | String | Job's ARN |
 | jobId | String | Job's ID |
@@ -520,27 +554,6 @@ List exist jobs on platform
 | -------- | ------- | 
 | 200 | List jobs success |
 ---
-<!--### *GET* /jobs/{jobId}/things/{thingName} 
-?
-Get job's thing status by job ID and thing name
-
-
-**Response Object if success**
-| Name | Group |  Description |
-| -------- | --- | -- |
-| jobArn* | String | Job's ARN |
-| jobId* | String | Job's ID |
-| targets* | String[]  | A list of thing ARN |
-| targetSelection* | "SNAPSHOT" \| "CONTINUOUS"  | Job status |
-| description* | String | Job's description
-| status | String | Job's status
-
-**Response Status**
-| HTTP Status Code |  Description |
-| -------- | ------- |
-| 200 | 
------>
-
 ### *PUT* /jobs/{jobId}
 
 Update job by ID
@@ -586,9 +599,8 @@ Delete job by job ID
 | 200 | Delete success |
 | 404 | Job ID not found |
 ---
-<!--
-### *DELETE* /jobs/{jobId}/things/{thingName} 
-Delete job's thing by job ID and thing name
+### *PUT* /jobs/{jobId}/cancel
+Cancel job
 
 **Path Parameter**
 | Name | Description |
@@ -598,15 +610,213 @@ Delete job's thing by job ID and thing name
 **body**
 | Name | Schema |  Description |
 | -------- |   ---- | --- |
-| force | Boolean  | Force delete |
+| comment | String | Describe why the job was canceled|
+| force | Boolean  | Force cancel |
+
+**Response Status**
+| HTTP Status Code |  Description |
+| -------- | ------- |
+| 200 | Delete success |
+| 404 | Job ID not found |
+---
+### *GET* /jobs/{jobId}/document
+
+**Path Parameter**
+| Name | Description |
+| -------- |   ---- |
+| jobId* | Job's ID   |
+
+**Path Parameter**
+| Name | Schema |  Description |
+| -------- |   ---- | --- |
+| document | String | The job document content |
+
+**Response Object if success**
+``` Get douument response
+{
+  document: "{The job document content}"
+}
+```
+---
+### *GET* /jobs/{jobId}/things/{thingName} 
+Get job's execution
+
+**Description**
+
+Get job's thing status by job ID and thing name
+
+**Path Parameter**
+| Name | Description |
+| -------- |   ---- |
+| jobId* | Job's ID   |
+| thingName | Thing's Name
+
+**Response object if success**
+
+<!--| Name | Group |  Description |
+| -------- | --- | -- |
+| jobArn* | String | Job's ARN |
+| jobId* | String | Job's ID |
+| targets* | String[]  | A list of thing ARN |
+| targetSelection* | "SNAPSHOT" \| "CONTINUOUS"  | Job status |
+| description* | String | Job's description
+| status | String | Job's status-->
+
+```Get job execution response
+{  
+
+  "execution": {
+    "jobId": "{Job's ID}",
+    "status": "{Job execution status}" /* CANCELED | FAILED |
+  IN_PROGRESS | QUEUED | REJECTED | REMOVED | SUCCEEDED | TIMED_OUT */
+    "statusDetails": {
+      "detailsMap": {
+        "action": "{job excution's action}",
+        "progress": "{percentage of job execution}",
+      },
+    },
+    "thingArn": "{Thing's ARN}",
+    "queuedAt": "{The time when the job execution was queued}",
+    "startedAt": "{The time when the job execution was started}",
+    "lastUpdatedAt": "{The time when the job execution was last updated}",
+    "executionNumber": "{A string which identifies this particular job execution onthis particular device.}",
+    "versionNumber": "{The version of the job execution}",
+  }
+}
+
+
+
+  
+
+}
+```
+**Response Status**
+| HTTP Status Code |  Description |
+| -------- | ------- |
+| 200 | Get job's execution success |
+| 404 | Job ID or thing Name not found |
+---
+### *GET* /jobs/job
+List job execution for job
+
+**Query String Parameter**
+| Name | Schema | Description |
+| -------- |   ---- | -- |
+| jobId* | String   | Job's ID |
+| status* | String | Job's status |
+
+**Response object if success**
+
+```Get job execution response
+{
+    "executionSummaries": [{
+      "thingArn": "{thing's ARN}",
+      "jobExecutionSummary": {
+        "status": "{Job execution status}" /* CANCELED | FAILED |
+  IN_PROGRESS | QUEUED | REJECTED | REMOVED | SUCCEEDED | TIMED_OUT */
+        "queuedAt": "{The time when the job execution was queued}",
+        "startedAt": "{The time when the job execution was started}",
+        "lastUpdatedAt": "{The time when the job execution was last updated}",
+        "executionNumber": "{A string which identifies this particular job execution onthis particular device.}",
+      },
+    }
+  ],
+  "nextToken": "{Token for next data}"
+}
+```
+**Response Status**
+| HTTP Status Code |  Description |
+| -------- | ------- |
+| 200 | List job execution for job success |
+| 404 | Job ID not found |
+---
+### *GET* /jobs/thing
+
+List job execution for thing
+
+**Query String Parameter**
+| Name | Schema | Description |
+| -------- |   ---- | -- |
+| thingName* | String   | Job's ID |
+| status* | String | Job's status |
+
+**Response object if success**
+
+```Get job execution response
+{
+  "executionSummaries": [
+    {
+      "jobId": "{job's ID}",
+      "jobExecutionSummary": {
+        "status": "{Job execution status}" /* CANCELED | FAILED |
+  IN_PROGRESS | QUEUED | REJECTED | REMOVED | SUCCEEDED | TIMED_OUT */
+        "queuedAt": "{The time when the job execution was queued}",
+        "startedAt": "{The time when the job execution was started}",
+        "lastUpdatedAt": "{The time when the job execution was last updated}",
+        "executionNumber": "{A string which identifies this particular job execution onthis particular device.}",
+      },
+    }
+  ],
+  "nextToken": "{Token for next data}"
+}
+```
+
+**Response Status**
+| HTTP Status Code |  Description |
+| -------- | ------- |
+| 200 | List job execution for job success |
+| 404 | Job ID not found |
+---
+### *DELETE* /jobs/{jobId}/things/{thingName} 
+Delete job execution
+
+**Description**
+
+Delete job's thing by job ID and thing name
+
+**Path Parameter**
+| Name | Description |
+| -------- |   ---- |
+| jobId* | Job's ID   |
+| thingName* | Thing's Name
+
+**body**
+| Name | Schema |  Description |
+| -------- |   ---- | --- |
+| executionNumber | String | The ID of the job execution
+| force | Boolean  | Force delete | Force delete |
 
 **Response Status**
 | HTTP Status Code |  Description |
 | -------- | ------- |
 | 200 | Delete success |
 | 404 | ResourceNotFoundException |
------>
+---
+### *PUT* /jobs/{jobId}/things/{thingName}/cancel
+Cancel job execution
 
+**Path Parameter**
+| Name | Description |
+| -------- |   ---- |
+| jobId* | Job's ID   |
+| thingName* | Thing's Name
+
+**body**
+| Name | Schema |  Description |
+| -------- |   ---- | --- |
+| expectedVersion | Number | The expected current version of the job execution
+| statusDetails | Object | A collection of name/value pairs that describe the status of the job execution |
+| detailsMap | Object | The job execution status | 
+| action | String | job excution's action}",
+| progress | String | percentage of job execution
+| force | Boolean | Force cancel |
+
+**Response Status**
+| HTTP Status Code |  Description |
+| -------- | ------- |
+| 200 | Cancel success |
+| 404 | job ID or thing name not found |
+---
 ### *POST* /job-templates
 Create new job template
 
@@ -631,7 +841,7 @@ Get job template by Job Template ID
 | -------- |   ---- |
 | jobTemplateId* | Job Template's ID   |
 
-**Response Object if success**
+**Response object if success**
 <!--| Name | Schema |  Description |
 | -------- | --- | -- |
 | jobTemplateArn | String | Job templates' ARN |
@@ -665,8 +875,8 @@ Get job template by Job Template ID
 
 List job templates
 
-<!--**Response Object if success**
-| Name | Schema |  Description |
+**Response Object if success**
+<!--| Name | Schema |  Description |
 | -------- | --- | -- |
 | jobTemplateArn* | String | Job templates' ARN |
 | jobTemplateId* | String | Job templates’ ID |

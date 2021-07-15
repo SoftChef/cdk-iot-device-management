@@ -69,12 +69,12 @@ export class JobApi extends cdk.Construct {
           lambdaFunction: this.createGetJobExecutionFunction(),
         },
         {
-          path: '/jobs/job',
+          path: '/jobs/{jobId}',
           httpMethod: HttpMethod.GET,
           lambdaFunction: this.createListJobExecutionForJobFunction(),
         },
         {
-          path: '/jobs/thing',
+          path: '/jobs/{thingName}',
           httpMethod: HttpMethod.GET,
           lambdaFunction: this.createListJobExecutionForThingFunction(),
         },
