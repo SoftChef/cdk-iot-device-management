@@ -47,8 +47,9 @@ export async function handler(event: { [key: string]: any }) {
     const { Items: existsFiles } = await ddbDocClient.send(
       new QueryCommand({
         TableName: process.env.FILE_TABLE_NAME,
-        IndexName: 'get-file-by-checksum-and-version',
-        KeyConditionExpression: '#checksum = :checksum and #version = :version',
+        //IndexName: 'get-file-by-checksum-and-version',
+        KeyConditionExpression: '#checksum = :checksum',
+        FilterExpression: '#version = :version',
         ExpressionAttributeNames: {
           '#checksum': 'checksum',
           '#version': 'version',

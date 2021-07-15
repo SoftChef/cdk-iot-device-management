@@ -334,27 +334,26 @@ test('Create file API success', async () => {
       fileTable: [{
         PutRequest: {
           Item: {
-            fileId: expected.newFiles.fileId,
             location: expected.newFiles.location,
             checksum: expected.newFiles.checksum,
             checksumType: expected.newFiles.checksumType,
             version: expected.newFiles.version,
+            locale: '1.0',
             categoryId: expected.newFiles.categoryId,
-            describe: expected.newFiles.description,
+            description: expected.newFiles.description,
           },
         },
       },
       {
         PutRequest: {
           Item: {
-            fileId: expected.newFiles.fileId,
             location: expected.newFiles.location,
             checksum: '0CBC6611F5540BD0809A388DC95A615A',
             checksumType: expected.newFiles.checksumType,
             version: '1.1',
             locale: 'zh-CN',
             categoryId: expected.newFiles.categoryId,
-            describe: expected.newFiles.description,
+            description: expected.newFiles.description,
           },
         },
       }],
@@ -364,24 +363,22 @@ test('Create file API success', async () => {
     body: {
       files: [
         {
-          fileId: expected.newFiles.fileId,
           location: expected.newFiles.location,
           checksum: expected.newFiles.checksum,
           checksumType: expected.newFiles.checksumType,
-          version: expected.newFiles.version,
+          version: '1.0',
           locale: expected.newFiles.locale,
           categoryId: expected.newFiles.categoryId,
-          describe: expected.newFiles.description,
+          description: expected.newFiles.description,
         },
         {
-          fileId: expected.newFiles.fileId,
           location: expected.newFiles.location,
           checksum: '0CBC6611F5540BD0809A388DC95A615A',
           checksumType: expected.newFiles.checksumType,
           version: '1.1',
           locale: 'zh-CN',
           categoryId: expected.newFiles.categoryId,
-          describe: expected.newFiles.description,
+          description: expected.newFiles.description,
         },
       ],
     },
