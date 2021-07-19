@@ -59,7 +59,6 @@ export async function handler(event: { [key: string]: any }) {
         },
       }),
     );
-    console.log(existsFiles);
     if (existsFiles.Items && existsFiles.Items.length) {
       return response.error('File already exists.', 422);
     };
