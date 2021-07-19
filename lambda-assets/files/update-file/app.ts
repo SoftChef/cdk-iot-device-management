@@ -64,7 +64,7 @@ export async function handler(event: { [key: string]: any }) {
                 Item: Object.assign({}, existsFile, currentLocaleFile),
               },
             };
-          });
+          }),
         },
       }),
     );
