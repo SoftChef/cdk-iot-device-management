@@ -1,7 +1,6 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, QueryCommand, UpdateCommand, BatchWriteCommand } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBDocumentClient, QueryCommand, BatchWriteCommand } from '@aws-sdk/lib-dynamodb';
 import { Request, Response } from '@softchef/lambda-events';
-import * as lodash from 'lodash';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
@@ -30,10 +29,12 @@ export async function handler(event: { [key: string]: any }) {
       new DynamoDBClient({}),
     );
     const files = request.input('files');
-    const firstFile = lodash.first(files);
-    files.map(currentFile => {
+    const firstFile: { [key: string]: any } = files[0];
+    files.map((currentFile: any) => {
       if (currentFile.checksum !== firstFile.checksum) {
         return response.error('File\'s checksum is not same.', 400);
+      } else {
+        return true;
       };
     });
     const { Items: existsFiles } = await ddbDocClient.send(
@@ -58,7 +59,7 @@ export async function handler(event: { [key: string]: any }) {
       new BatchWriteCommand({
         RequestItems: {
           [`${process.env.FILE_TABLE_NAME}`]: existsFiles.map(existsFile => {
-            const currentLocaleFile = files.find(v => v.locale === existsFile.locale);
+            const currentLocaleFile = files.find((v: any) => v.locale === existsFile.locale);
             return {
               PutRequest: {
                 Item: Object.assign({}, existsFile, currentLocaleFile),
