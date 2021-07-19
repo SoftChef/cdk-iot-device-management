@@ -18,7 +18,7 @@ export async function handler(event: { [key: string]: any }) {
       }),
     );
     if (!category) {
-      return response.error('Not found.', 404);
+      return response.error('Category does not exist.', 404);
     };
     return response.json({
       category,
