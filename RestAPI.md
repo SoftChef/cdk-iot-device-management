@@ -200,9 +200,9 @@ Create file's information
 | location* | URI | File's path|
 | checksum* | String | An encrypt md5 / crc32 / sha1 value |
 | checksumType* | 'md5' \| 'crc32' \| 'sha1' | File's checksum type|
-| summary* | string (Allow empty string) | File's summary | 
-| locale* | String | File's locale |
 | version* | String | File's version|
+| locale* | String | File's locale |
+| summary* | string (Allow empty string) | File's summary|
 | categoryId* | String | From category |
 | description | String | File's description |
 
@@ -218,7 +218,7 @@ Create file's information
 ### *GET* /files/{fileId} 
 Get file by file ID
 
-**Description
+**Description**
 
 Get file's information by file ID
 
@@ -226,7 +226,8 @@ Get file's information by file ID
 
 | Name |   Description |
 | -------- | ------- | 
-| fileId* | File's ID   | 
+| checksum* | File's checksum | 
+| version* | File's version |
 
 **Response Object if success**
 
@@ -248,8 +249,9 @@ Get file's information by file ID
     "location": "{file' path}", 
     "checksum": "{an encrypt md5 / crc32 / sha1 value}", 
     "checksumType" : "{file's checksum type}",
-    "locale": "{file's locale}", 
     "version": "{file's version}",
+    "locale": "{file's locale}", 
+    "summary": "{file's summary}"
     "categoryId": "{file's category ID}", 
     "description": "{file's description}",
     "createdAt": "{created time}", 
@@ -262,7 +264,7 @@ Get file's information by file ID
 | HTTP Status Code |  Description |
 | -------- | ------- | 
 | 200 | Create success |
-| 404 | File ID not found |
+| 404 | File not found |
 ---
 ### GET /files
 List files 
@@ -296,12 +298,13 @@ List files
       "location": "{file' path}", 
       "checksum": "{an encrypt md5 / crc32 / sha1 value}", 
       "checksumType" : "{file's checksum type}",
-      "locale": "{file's locale}", 
       "version": "{file's version}",
+      "locale": "{file's locale}", 
+      "summary": "{file's summary}"
       "categoryId": "{file's category ID}", 
       "description": "{file's description}",
       "createdAt": "{created time}", 
-      "updatedAt": "{last updated time}"
+      "updatedAt": "{last updated time}"  
     }
   ]
   "nextToken": "{Token for next data}",
@@ -322,6 +325,8 @@ List files by category ID
 | Name  | Description |
 | -------- | ------- | 
 | categoryId* | Category's ID |
+| locale* | String | File's locale |
+| nextToken | String | Token for next data |
 
 **Response Object if success**
 
@@ -343,15 +348,16 @@ List files by category ID
 {
   "files": [
     {
-      "location": "{file's path}", 
+      "location": "{file' path}", 
       "checksum": "{an encrypt md5 / crc32 / sha1 value}", 
       "checksumType" : "{file's checksum type}",
-      "locale": "{file's locale}", 
       "version": "{file's version}",
+      "locale": "{file's locale}", 
+      "summary": "{file's summary}"
       "categoryId": "{file's category ID}", 
       "description": "{file's description}",
       "createdAt": "{created time}", 
-      "updatedAt": "{last updated time}"
+      "updatedAt": "{last updated time}"  
     }
   ]
   "nextToken": "{Token for next data}",
@@ -399,16 +405,17 @@ Delete file by ID
 
 **Path Parameter**
 
-| Name | Description |
-| -------- | ------- |
-| fileId* | File's ID |
+| Name |   Description |
+| -------- | ------- | 
+| checksum* | File's checksum | 
+| version* | File's version |
 
 **Response Status**
 
 | HTTP Status Code |  Description |
 | -------- | ------- | 
 | 200 | Delete success|
-| 404 | File ID not found |
+| 404 | File not found |
 ---
 ## Job API
 
@@ -1086,7 +1093,7 @@ List all of things from target thing
 | -------- |   ---- | 
 | nextToken | String | Token for next data |
 
-**Response Object if success**
+**Response object if success**
 
 <!--| Name | Schema |  description |
 | -------- | --- | -- |
@@ -1143,15 +1150,27 @@ Create Dynamic thing groups
 | 422 | Missing require field / Variable Group incorrect|
 ---
 ### *PUT* /dynamic-thing-groups/{thingGroupName}
-Update dynamic thing group by name //no test
+Update dynamic thing group by thing group name
 
 **Body**
 
 | Name | Schema |  Description |
 | -------- | ------- |  ---- |
-| thingGroupName* | String | Dynamic thing group's name  |
-| queryString* | String  | The dynamic thing group search query string |
-| description | String | Dynamic thing group's description |
+| thingGroupName* | String | Dynamic thing group's name |
+| description* | Thing group's description
+
+**Response object if success**
+
+<!--| Name | Schema |  description |
+| -------- | --- | -- |
+| things* | Array | A list of things |
+| nextToken | String | Token for next data |-->
+
+```List things by thing group name response
+{
+  version: "{The Dynamic thing group version}",
+}
+```
 
 **Response Status**
 

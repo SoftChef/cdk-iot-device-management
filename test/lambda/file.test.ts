@@ -335,11 +335,6 @@ test('Create file API success', async () => {
     },
   });
   documentClientMock.on(QueryCommand, {
-<<<<<<< HEAD
-    TableName: 'fileTable',
-    IndexName: 'get-file-by-checksum-and-version',
-    KeyConditionExpression: 'checksum = :checksum and version = :version',
-=======
     TableName: FILE_TABLE_NAME,
     IndexName: 'get-file-by-checksum-and-version',
     KeyConditionExpression: '#checksum = :checksum and #version = :version',
@@ -347,7 +342,6 @@ test('Create file API success', async () => {
       '#checksum': 'checksum',
       '#version': 'version',
     },
->>>>>>> 52ef7cd7125bea565bb8dab9eb117e5c9898a652
     ExpressionAttributeValues: {
       ':checksum': expected.newFiles.checksum,
       ':version': expected.newFiles.version,
@@ -421,8 +415,6 @@ test('Create file API success', async () => {
           summary: expected.newFiles.summary.zh_CN,
           categoryId: expected.newFiles.categoryId,
           description: expected.newFiles.description,
-<<<<<<< HEAD
-=======
         },
         {
           location: expected.newFiles.location,
@@ -433,7 +425,6 @@ test('Create file API success', async () => {
           summary: expected.newFiles.summary.en_US,
           categoryId: expected.newFiles.categoryId,
           description: expected.newFiles.description,
->>>>>>> 52ef7cd7125bea565bb8dab9eb117e5c9898a652
         },
       ],
     },
