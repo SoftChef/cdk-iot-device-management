@@ -769,30 +769,31 @@ test('Update file API', async () => {
       version: expected.files.Item.version,
     }],
   });
-  documentClientMock.on(UpdateCommand, {
-    TableName: FILE_TABLE_NAME,
-    Key: {
-      fileId: expected.files.Item.fileId.en_US,
-      version: expected.files.Item.version,
-    },
-    UpdateExpression: 'set #description = :description',
-    ExpressionAttributeNames: {
-      '#description': 'description',
-    },
-    ExpressionAttributeValues: {
-      ':description': expected.files.Item.description,
+  documentClientMock.on(BatchWriteCommand, {
+    RequestItems: {
+      fileTable: [{
+        PutRequest: {
+          Item: {
+            checksum: expected.newFiles.checksum,
+            checksumType: expected.newFiles.checksumType,
+            locale: expected.newFiles.locale.zh_TW,
+            summary: expected.newFiles.summary.zh_TW,
+            description: expected.newFiles.description,
+          },
+        },
+      }],
     },
   }).resolves({});
   const response = await updateFile.handler({
     pathParameters: {
-      fileId: expected.files.Item.fileId.en_US,
       version: expected.files.Item.version,
-      checksum: expected.files.Item.checksum,
     },
     body: {
       files: [
         {
           fileId: expected.files.Item.fileId.en_US,
+          checksum: expected.newFiles.checksum,
+          checksumType: expected.newFiles.checksumType,
           locale: expected.files.Item.locale.en_US,
           summary: expected.files.Item.summary.en_US,
           description: expected.files.Item.description,

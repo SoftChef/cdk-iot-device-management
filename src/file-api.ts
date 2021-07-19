@@ -125,17 +125,17 @@ export class FileApi extends cdk.Construct {
           lambdaFunction: this.createListFilesFunction(),
         },
         {
-          path: '/files/{fileId}/versions/{version}',
+          path: '/files/{checksum}/versions/{version}',
           httpMethod: HttpMethod.GET,
           lambdaFunction: this.createGetFileFunction(),
         },
         {
-          path: '/files/{fileId}/versions/{version}',
+          path: '/files/{checksum}/versions/{version}',
           httpMethod: HttpMethod.PUT,
           lambdaFunction: this.createUpdateFileFunction(),
         },
         {
-          path: '/files/{fileId}/versions/{version}',
+          path: '/files/{checksum}/versions/{version}',
           httpMethod: HttpMethod.DELETE,
           lambdaFunction: this.createDeleteFileFunction(),
         },
