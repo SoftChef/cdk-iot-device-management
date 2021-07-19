@@ -383,13 +383,18 @@ Update file's information by file ID
 
 | Name |   Description |
 | -------- | ------- |
-| fileId* | File's ID |
+| version* | File's version |
 
 **Body**
 
-| Name | Schema |  Description |
+| Name | Schema | Description |
 | -------- | ------- |  ---- |
-| description* | String | File's description |
+| fileId* | String | File's ID |
+| checksum* | String | An encrypt md5 / crc32 / sha1 value |
+| checksumType* | 'md5' \| 'crc32' \| 'sha1' | File's checksum type|
+| locale* | String | File's locale |
+| summary* | string (Allow empty string) | File's summary|
+| description | String | File's description |
 
 **Response Status**
 
