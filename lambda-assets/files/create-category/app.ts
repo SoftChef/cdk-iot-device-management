@@ -21,8 +21,7 @@ export async function handler(event: { [key: string]: any }) {
     const name = request.input('name', null);
     const parentId = request.input('parentId');
     const ddbDocClient = DynamoDBDocumentClient.from(
-      // eslint-disable-next-line comma-dangle
-      new DynamoDBClient({})
+      new DynamoDBClient({}),
     );
     const md5 = crypto.createHash('md5');
     let itemParameters: { [key: string]: any } = {};

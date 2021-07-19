@@ -1,260 +1,313 @@
-# API Reference
+# API Reference <a name="API Reference"></a>
 
-**Classes**
+## Constructs <a name="Constructs"></a>
 
-Name|Description
-----|-----------
-[FileApi](#softchef-cdk-iot-device-management-fileapi)|*No description*
-[JobApi](#softchef-cdk-iot-device-management-jobapi)|*No description*
-[ThingApi](#softchef-cdk-iot-device-management-thingapi)|*No description*
-[ThingGroupApi](#softchef-cdk-iot-device-management-thinggroupapi)|*No description*
-[ThingTypeApi](#softchef-cdk-iot-device-management-thingtypeapi)|*No description*
+### FileApi <a name="@softchef/cdk-iot-device-management.FileApi"></a>
 
+#### Initializer <a name="@softchef/cdk-iot-device-management.FileApi.Initializer"></a>
 
-**Structs**
+```typescript
+import { FileApi } from '@softchef/cdk-iot-device-management'
 
-Name|Description
-----|-----------
-[FileApiProps](#softchef-cdk-iot-device-management-fileapiprops)|*No description*
-[JobApiProps](#softchef-cdk-iot-device-management-jobapiprops)|*No description*
-[ThingApiProps](#softchef-cdk-iot-device-management-thingapiprops)|*No description*
-[ThingGroupApiProps](#softchef-cdk-iot-device-management-thinggroupapiprops)|*No description*
-[ThingTypeApiProps](#softchef-cdk-iot-device-management-thingtypeapiprops)|*No description*
-
-
-
-## class FileApi  <a id="softchef-cdk-iot-device-management-fileapi"></a>
-
-
-
-__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
-__Extends__: [Construct](#aws-cdk-core-construct)
-
-### Initializer
-
-
-
-
-```ts
 new FileApi(scope: Construct, id: string, props?: FileApiProps)
 ```
 
-* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
-* **id** (<code>string</code>)  *No description*
-* **props** (<code>[FileApiProps](#softchef-cdk-iot-device-management-fileapiprops)</code>)  *No description*
-  * **authorizationType** (<code>[AuthorizationType](#aws-cdk-aws-apigateway-authorizationtype)</code>)  *No description* __*Optional*__
-  * **authorizer** (<code>[IAuthorizer](#aws-cdk-aws-apigateway-iauthorizer)</code>)  *No description* __*Optional*__
+##### `scope`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileApi.scope"></a>
+
+- *Type:* [`@aws-cdk/core.Construct`](#@aws-cdk/core.Construct)
+
+---
+
+##### `id`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileApi.id"></a>
+
+- *Type:* `string`
+
+---
+
+##### `props`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApi.props"></a>
+
+- *Type:* [`@softchef/cdk-iot-device-management.FileApiProps`](#@softchef/cdk-iot-device-management.FileApiProps)
+
+---
 
 
 
-### Properties
+#### Properties <a name="Properties"></a>
+
+##### `restApiId`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileApi.restApiId"></a>
+
+- *Type:* `string`
+
+---
 
 
-Name | Type | Description 
------|------|-------------
-**restApiId** | <code>string</code> | <span></span>
+### JobApi <a name="@softchef/cdk-iot-device-management.JobApi"></a>
 
+#### Initializer <a name="@softchef/cdk-iot-device-management.JobApi.Initializer"></a>
 
+```typescript
+import { JobApi } from '@softchef/cdk-iot-device-management'
 
-## class JobApi  <a id="softchef-cdk-iot-device-management-jobapi"></a>
-
-
-
-__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
-__Extends__: [Construct](#aws-cdk-core-construct)
-
-### Initializer
-
-
-
-
-```ts
 new JobApi(scope: Construct, id: string, props?: JobApiProps)
 ```
 
-* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
-* **id** (<code>string</code>)  *No description*
-* **props** (<code>[JobApiProps](#softchef-cdk-iot-device-management-jobapiprops)</code>)  *No description*
-  * **authorizationType** (<code>[AuthorizationType](#aws-cdk-aws-apigateway-authorizationtype)</code>)  *No description* __*Optional*__
-  * **authorizer** (<code>[IAuthorizer](#aws-cdk-aws-apigateway-iauthorizer)</code>)  *No description* __*Optional*__
+##### `scope`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.JobApi.scope"></a>
+
+- *Type:* [`@aws-cdk/core.Construct`](#@aws-cdk/core.Construct)
+
+---
+
+##### `id`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.JobApi.id"></a>
+
+- *Type:* `string`
+
+---
+
+##### `props`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.JobApi.props"></a>
+
+- *Type:* [`@softchef/cdk-iot-device-management.JobApiProps`](#@softchef/cdk-iot-device-management.JobApiProps)
+
+---
 
 
 
-### Properties
+#### Properties <a name="Properties"></a>
+
+##### `restApiId`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.JobApi.restApiId"></a>
+
+- *Type:* `string`
+
+---
 
 
-Name | Type | Description 
------|------|-------------
-**restApiId** | <code>string</code> | <span></span>
+### ThingApi <a name="@softchef/cdk-iot-device-management.ThingApi"></a>
 
+#### Initializer <a name="@softchef/cdk-iot-device-management.ThingApi.Initializer"></a>
 
+```typescript
+import { ThingApi } from '@softchef/cdk-iot-device-management'
 
-## class ThingApi  <a id="softchef-cdk-iot-device-management-thingapi"></a>
-
-
-
-__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
-__Extends__: [Construct](#aws-cdk-core-construct)
-
-### Initializer
-
-
-
-
-```ts
 new ThingApi(scope: Construct, id: string, props?: ThingApiProps)
 ```
 
-* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
-* **id** (<code>string</code>)  *No description*
-* **props** (<code>[ThingApiProps](#softchef-cdk-iot-device-management-thingapiprops)</code>)  *No description*
-  * **authorizationType** (<code>[AuthorizationType](#aws-cdk-aws-apigateway-authorizationtype)</code>)  *No description* __*Optional*__
-  * **authorizer** (<code>[IAuthorizer](#aws-cdk-aws-apigateway-iauthorizer)</code>)  *No description* __*Optional*__
+##### `scope`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingApi.scope"></a>
+
+- *Type:* [`@aws-cdk/core.Construct`](#@aws-cdk/core.Construct)
+
+---
+
+##### `id`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingApi.id"></a>
+
+- *Type:* `string`
+
+---
+
+##### `props`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingApi.props"></a>
+
+- *Type:* [`@softchef/cdk-iot-device-management.ThingApiProps`](#@softchef/cdk-iot-device-management.ThingApiProps)
+
+---
 
 
 
-### Properties
+#### Properties <a name="Properties"></a>
+
+##### `restApiId`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingApi.restApiId"></a>
+
+- *Type:* `string`
+
+---
 
 
-Name | Type | Description 
------|------|-------------
-**restApiId** | <code>string</code> | <span></span>
+### ThingGroupApi <a name="@softchef/cdk-iot-device-management.ThingGroupApi"></a>
 
+#### Initializer <a name="@softchef/cdk-iot-device-management.ThingGroupApi.Initializer"></a>
 
+```typescript
+import { ThingGroupApi } from '@softchef/cdk-iot-device-management'
 
-## class ThingGroupApi  <a id="softchef-cdk-iot-device-management-thinggroupapi"></a>
-
-
-
-__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
-__Extends__: [Construct](#aws-cdk-core-construct)
-
-### Initializer
-
-
-
-
-```ts
 new ThingGroupApi(scope: Construct, id: string, props?: ThingGroupApiProps)
 ```
 
-* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
-* **id** (<code>string</code>)  *No description*
-* **props** (<code>[ThingGroupApiProps](#softchef-cdk-iot-device-management-thinggroupapiprops)</code>)  *No description*
-  * **authorizationType** (<code>[AuthorizationType](#aws-cdk-aws-apigateway-authorizationtype)</code>)  *No description* __*Optional*__
-  * **authorizer** (<code>[IAuthorizer](#aws-cdk-aws-apigateway-iauthorizer)</code>)  *No description* __*Optional*__
+##### `scope`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingGroupApi.scope"></a>
+
+- *Type:* [`@aws-cdk/core.Construct`](#@aws-cdk/core.Construct)
+
+---
+
+##### `id`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingGroupApi.id"></a>
+
+- *Type:* `string`
+
+---
+
+##### `props`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingGroupApi.props"></a>
+
+- *Type:* [`@softchef/cdk-iot-device-management.ThingGroupApiProps`](#@softchef/cdk-iot-device-management.ThingGroupApiProps)
+
+---
 
 
 
-### Properties
+#### Properties <a name="Properties"></a>
+
+##### `restApiId`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingGroupApi.restApiId"></a>
+
+- *Type:* `string`
+
+---
 
 
-Name | Type | Description 
------|------|-------------
-**restApiId** | <code>string</code> | <span></span>
+### ThingTypeApi <a name="@softchef/cdk-iot-device-management.ThingTypeApi"></a>
 
+#### Initializer <a name="@softchef/cdk-iot-device-management.ThingTypeApi.Initializer"></a>
 
+```typescript
+import { ThingTypeApi } from '@softchef/cdk-iot-device-management'
 
-## class ThingTypeApi  <a id="softchef-cdk-iot-device-management-thingtypeapi"></a>
-
-
-
-__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
-__Extends__: [Construct](#aws-cdk-core-construct)
-
-### Initializer
-
-
-
-
-```ts
 new ThingTypeApi(scope: Construct, id: string, props?: ThingTypeApiProps)
 ```
 
-* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
-* **id** (<code>string</code>)  *No description*
-* **props** (<code>[ThingTypeApiProps](#softchef-cdk-iot-device-management-thingtypeapiprops)</code>)  *No description*
-  * **authorizationType** (<code>[AuthorizationType](#aws-cdk-aws-apigateway-authorizationtype)</code>)  *No description* __*Optional*__
-  * **authorizer** (<code>[IAuthorizer](#aws-cdk-aws-apigateway-iauthorizer)</code>)  *No description* __*Optional*__
+##### `scope`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingTypeApi.scope"></a>
+
+- *Type:* [`@aws-cdk/core.Construct`](#@aws-cdk/core.Construct)
+
+---
+
+##### `id`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingTypeApi.id"></a>
+
+- *Type:* `string`
+
+---
+
+##### `props`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingTypeApi.props"></a>
+
+- *Type:* [`@softchef/cdk-iot-device-management.ThingTypeApiProps`](#@softchef/cdk-iot-device-management.ThingTypeApiProps)
+
+---
 
 
 
-### Properties
+#### Properties <a name="Properties"></a>
+
+##### `restApiId`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingTypeApi.restApiId"></a>
+
+- *Type:* `string`
+
+---
 
 
-Name | Type | Description 
------|------|-------------
-**restApiId** | <code>string</code> | <span></span>
+## Structs <a name="Structs"></a>
 
+### FileApiProps <a name="@softchef/cdk-iot-device-management.FileApiProps"></a>
 
+#### Initializer <a name="[object Object].Initializer"></a>
 
-## struct FileApiProps  <a id="softchef-cdk-iot-device-management-fileapiprops"></a>
+```typescript
+import { FileApiProps } from '@softchef/cdk-iot-device-management'
 
+const fileApiProps: FileApiProps = { ... }
+```
 
+##### `authorizationType`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.authorizationType"></a>
 
+- *Type:* [`@aws-cdk/aws-apigateway.AuthorizationType`](#@aws-cdk/aws-apigateway.AuthorizationType)
 
+---
 
+##### `authorizer`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.authorizer"></a>
 
-Name | Type | Description 
------|------|-------------
-**authorizationType**? | <code>[AuthorizationType](#aws-cdk-aws-apigateway-authorizationtype)</code> | __*Optional*__
-**authorizer**? | <code>[IAuthorizer](#aws-cdk-aws-apigateway-iauthorizer)</code> | __*Optional*__
+- *Type:* [`@aws-cdk/aws-apigateway.IAuthorizer`](#@aws-cdk/aws-apigateway.IAuthorizer)
 
+---
 
+### JobApiProps <a name="@softchef/cdk-iot-device-management.JobApiProps"></a>
 
-## struct JobApiProps  <a id="softchef-cdk-iot-device-management-jobapiprops"></a>
+#### Initializer <a name="[object Object].Initializer"></a>
 
+```typescript
+import { JobApiProps } from '@softchef/cdk-iot-device-management'
 
+const jobApiProps: JobApiProps = { ... }
+```
 
+##### `authorizationType`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.JobApiProps.authorizationType"></a>
 
+- *Type:* [`@aws-cdk/aws-apigateway.AuthorizationType`](#@aws-cdk/aws-apigateway.AuthorizationType)
 
+---
 
-Name | Type | Description 
------|------|-------------
-**authorizationType**? | <code>[AuthorizationType](#aws-cdk-aws-apigateway-authorizationtype)</code> | __*Optional*__
-**authorizer**? | <code>[IAuthorizer](#aws-cdk-aws-apigateway-iauthorizer)</code> | __*Optional*__
+##### `authorizer`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.JobApiProps.authorizer"></a>
 
+- *Type:* [`@aws-cdk/aws-apigateway.IAuthorizer`](#@aws-cdk/aws-apigateway.IAuthorizer)
 
+---
 
-## struct ThingApiProps  <a id="softchef-cdk-iot-device-management-thingapiprops"></a>
+### ThingApiProps <a name="@softchef/cdk-iot-device-management.ThingApiProps"></a>
 
+#### Initializer <a name="[object Object].Initializer"></a>
 
+```typescript
+import { ThingApiProps } from '@softchef/cdk-iot-device-management'
 
+const thingApiProps: ThingApiProps = { ... }
+```
 
+##### `authorizationType`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingApiProps.authorizationType"></a>
 
+- *Type:* [`@aws-cdk/aws-apigateway.AuthorizationType`](#@aws-cdk/aws-apigateway.AuthorizationType)
 
-Name | Type | Description 
------|------|-------------
-**authorizationType**? | <code>[AuthorizationType](#aws-cdk-aws-apigateway-authorizationtype)</code> | __*Optional*__
-**authorizer**? | <code>[IAuthorizer](#aws-cdk-aws-apigateway-iauthorizer)</code> | __*Optional*__
+---
 
+##### `authorizer`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingApiProps.authorizer"></a>
 
+- *Type:* [`@aws-cdk/aws-apigateway.IAuthorizer`](#@aws-cdk/aws-apigateway.IAuthorizer)
 
-## struct ThingGroupApiProps  <a id="softchef-cdk-iot-device-management-thinggroupapiprops"></a>
+---
 
+### ThingGroupApiProps <a name="@softchef/cdk-iot-device-management.ThingGroupApiProps"></a>
 
+#### Initializer <a name="[object Object].Initializer"></a>
 
+```typescript
+import { ThingGroupApiProps } from '@softchef/cdk-iot-device-management'
 
+const thingGroupApiProps: ThingGroupApiProps = { ... }
+```
 
+##### `authorizationType`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingGroupApiProps.authorizationType"></a>
 
-Name | Type | Description 
------|------|-------------
-**authorizationType**? | <code>[AuthorizationType](#aws-cdk-aws-apigateway-authorizationtype)</code> | __*Optional*__
-**authorizer**? | <code>[IAuthorizer](#aws-cdk-aws-apigateway-iauthorizer)</code> | __*Optional*__
+- *Type:* [`@aws-cdk/aws-apigateway.AuthorizationType`](#@aws-cdk/aws-apigateway.AuthorizationType)
 
+---
 
+##### `authorizer`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingGroupApiProps.authorizer"></a>
 
-## struct ThingTypeApiProps  <a id="softchef-cdk-iot-device-management-thingtypeapiprops"></a>
+- *Type:* [`@aws-cdk/aws-apigateway.IAuthorizer`](#@aws-cdk/aws-apigateway.IAuthorizer)
 
+---
 
+### ThingTypeApiProps <a name="@softchef/cdk-iot-device-management.ThingTypeApiProps"></a>
 
+#### Initializer <a name="[object Object].Initializer"></a>
 
+```typescript
+import { ThingTypeApiProps } from '@softchef/cdk-iot-device-management'
 
+const thingTypeApiProps: ThingTypeApiProps = { ... }
+```
 
-Name | Type | Description 
------|------|-------------
-**authorizationType**? | <code>[AuthorizationType](#aws-cdk-aws-apigateway-authorizationtype)</code> | __*Optional*__
-**authorizer**? | <code>[IAuthorizer](#aws-cdk-aws-apigateway-iauthorizer)</code> | __*Optional*__
+##### `authorizationType`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingTypeApiProps.authorizationType"></a>
+
+- *Type:* [`@aws-cdk/aws-apigateway.AuthorizationType`](#@aws-cdk/aws-apigateway.AuthorizationType)
+
+---
+
+##### `authorizer`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingTypeApiProps.authorizer"></a>
+
+- *Type:* [`@aws-cdk/aws-apigateway.IAuthorizer`](#@aws-cdk/aws-apigateway.IAuthorizer)
+
+---
 
 
 

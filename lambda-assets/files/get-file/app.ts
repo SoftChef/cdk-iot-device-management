@@ -24,7 +24,7 @@ export async function handler(event: { [key: string]: any }) {
         },
       }),
     );
-    if (existsFiles.length === 0) {
+    if (!existsFiles || existsFiles.length === 0) {
       return response.error('File not found.', 404);
     };
     return response.json({
