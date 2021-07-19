@@ -46,6 +46,7 @@ const expected = {
     thingGroupProperties: {
       thingGroupDescription: 'TestUpdateDynamicThingGroupDescription',
     },
+    version: 1,
   },
   createThingGroup: {
     thingGroupName: 'TestCreateThingGroupName',
@@ -382,6 +383,27 @@ test('Create dynamic thing group with invalid inputs expect failure', async () =
       message: expect.any(String),
     },
   ]);
+});
+
+test('Update dynamic thing group success', async () => {
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(UpdateDynamicThingGroupCommand, {
+    thingGroupName: expected.updateDynamicThingGroup.thingGroupName,
+    thingGroupProperties: {
+      thingGroupDescription: expected.updateDynamicThingGroup.thingGroupProperties.thingGroupDescription,
+    },
+  }).resolves({
+    version: expected.updateDynamicThingGroup.version,
+  });
+  const response = await updateDynamicThingGroup.handler({
+    pathParameters: {
+      thingGroupName: expected.updateDynamicThingGroup.thingGroupName,
+    },
+    body: {
+      description: expected.updateDynamicThingGroup.thingGroupProperties.thingGroupDescription,
+    },
+  });
+  expect(response.statusCode).toEqual(200);
 });
 
 test('Update dynamic thing group with invalid input expect failure', async () => {
