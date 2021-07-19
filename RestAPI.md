@@ -215,7 +215,7 @@ Create file's information
 | 422 | Missing require field / Variable type incorrect / File exists |
 | 404 | Category ID not found |
 ---
-### *GET* /files/{fileId} 
+### *GET* /files/{checksum}/versions/{version}
 Get file by file ID
 
 **Description**
@@ -229,7 +229,7 @@ Get file's information by file ID
 | checksum* | File's checksum | 
 | version* | File's version |
 
-**Response Object if success**
+**Response object if success**
 
 <!--| Name | Schema |  Description |
 | -------- | ------- |  ---- |
@@ -328,7 +328,7 @@ List files by category ID
 | locale* | String | File's locale |
 | nextToken | String | Token for next data |
 
-**Response Object if success**
+**Response object if success**
 
 <!--| Name | Schema |  Description |
 | -------- | ------- |  ---- |
@@ -372,7 +372,7 @@ List files by category ID
 | 404 | Category ID not found |
 ---
 
-### PUT /files/{fileId}
+### PUT /files/{checksum}/versions/{version}
 Update file by file ID
 
 **Description**
@@ -400,7 +400,7 @@ Update file's information by file ID
 | 404 | File not found |
 
 ---
-### *DELETE* /files/{fileId} 
+### *DELETE* /files/{checksum}/versions/{version}
 Delete file by ID
 
 **Path Parameter**
