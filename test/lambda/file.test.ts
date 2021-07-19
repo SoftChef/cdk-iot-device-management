@@ -800,7 +800,6 @@ test('Update file API', async () => {
       ],
     },
   });
-  console.log(response);
   expect(response.statusCode).toEqual(200);
   documentClientMock.restore();
 });
