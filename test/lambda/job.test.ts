@@ -157,7 +157,7 @@ const expected = {
         executionNumber: 1,
       },
     }],
-    nextToken: '12345',
+    nextToken: '123',
   },
   invalidJob: expectedInvalidJob,
   invalidTargets: [
@@ -273,6 +273,10 @@ test('Cancel job with invalid jobId expect failure', async () => {
     pathParameters: {
       jobId: expected.invalidJob.jobId,
     },
+    body: {
+      comment: expected.cancelJob.comment,
+      force: expected.cancelJob.force,
+    },
   });
   const body = JSON.parse(response.body);
   expect(response.statusCode).toEqual(404);
@@ -379,7 +383,7 @@ test('Get job document success', async () => {
   iotClientMock.on(GetJobDocumentCommand, {
     jobId: expected.job.jobId,
   }).resolves({
-    document: 'Test',
+    document: expected.document,
   });
   const response = await getJobDocument.handler({
     pathParameters: {
@@ -910,10 +914,10 @@ test('List job executions for job success', async () => {
         queuedAt: expected.executionSummariesTime.queuedAt,
         startedAt: expected.executionSummariesTime.startedAt,
         lastUpdatedAt: expected.executionSummariesTime.lastUpdatedAt,
-        executionNumber: 1,
+        executionNumber: expected.jobExecution.executionNumber,
       },
     }],
-    nextToken: '12345',
+    nextToken: expected.listJobExecutionForJob.nextToken,
   });
   const response = await ListJobExecutionsForJob.handler({
     queryStringParameters: {
@@ -942,10 +946,10 @@ test('List job Executions For job with nextToken success', async () => {
         queuedAt: expected.executionSummariesTime.queuedAt,
         startedAt: expected.executionSummariesTime.startedAt,
         lastUpdatedAt: expected.executionSummariesTime.lastUpdatedAt,
-        executionNumber: 1,
+        executionNumber: expected.jobExecution.executionNumber,
       },
     }],
-    nextToken: '12345',
+    nextToken: expected.listJobExecutionForJob.nextToken,
   });
   const response = await ListJobExecutionsForJob.handler({
     queryStringParameters: {
@@ -975,10 +979,10 @@ test('List job executions for thing success', async () => {
         queuedAt: expected.executionSummariesTime.queuedAt,
         startedAt: expected.executionSummariesTime.startedAt,
         lastUpdatedAt: expected.executionSummariesTime.lastUpdatedAt,
-        executionNumber: 1,
+        executionNumber: expected.jobExecution.executionNumber,
       },
     }],
-    nextToken: '12345',
+    nextToken: expected.listJobExecutionForThing.nextToken,
   });
   const response = await ListJobExecutionsForThing.handler({
     queryStringParameters: {
@@ -1007,10 +1011,10 @@ test('List job executions for thing with nextToken success', async () => {
         queuedAt: expected.executionSummariesTime.queuedAt,
         startedAt: expected.executionSummariesTime.startedAt,
         lastUpdatedAt: expected.executionSummariesTime.lastUpdatedAt,
-        executionNumber: 1,
+        executionNumber: expected.jobExecution.executionNumber,
       },
     }],
-    nextToken: '12345',
+    nextToken: expected.listJobExecutionForThing.nextToken,
   });
   const response = await ListJobExecutionsForThing.handler({
     queryStringParameters: {
@@ -1021,7 +1025,7 @@ test('List job executions for thing with nextToken success', async () => {
   });
   const body = JSON.parse(response.body);
   expect(Array.isArray(body.executionSummaries)).toBe(true);
-  expect(body.executionSummaries).toEqual(expected.listJobExecutionForThing.executionSummaries);
+  expect(body).toEqual(expected.listJobExecutionForThing);
   expect(response.statusCode).toEqual(200);
   iotClientMock.restore();
 });

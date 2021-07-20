@@ -4,16 +4,16 @@ import { Request, Response } from '@softchef/lambda-events';
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
   const response = new Response();
-  const validated = request.validate(joi => {
-    return {
-      jobId: joi.string().required(),
-      status: joi.string().allow('CANCELED', 'FAILED', 'IN_PROGRESS', 'QUEUED', 'REJECTED', 'REMOVED', 'SUCCEEDED', 'TIMED_OUT'),
-    };
-  });
-  if (validated.error) {
-    return response.error(validated.details, 422);
-  }
   try {
+    const validated = request.validate(joi => {
+      return {
+        jobId: joi.string().required(),
+        status: joi.string().allow('CANCELED', 'FAILED', 'IN_PROGRESS', 'QUEUED', 'REJECTED', 'REMOVED', 'SUCCEEDED', 'TIMED_OUT' ),
+      };
+    });
+    if (validated.error) {
+      return response.error(validated.details, 422);
+    }
     let parameters: { [key: string]: any } = {};
     if (request.has('nextToken')) {
       parameters.nextToken = request.get('nextToken');
