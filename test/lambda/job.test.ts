@@ -4,39 +4,46 @@
  * - Job full properties
  */
 import {
-  // AssociateTargetsWithJobCommand,
+  IoTClient,
+  AssociateTargetsWithJobCommand,
+  CancelJobCommand,
+  CancelJobExecutionCommand,
   CreateJobCommand,
   CreateJobTemplateCommand,
   DeleteJobCommand,
   DeleteJobTemplateCommand,
-  // DeleteJobExecutionCommand,
+  DeleteJobExecutionCommand,
   DescribeJobCommand,
+  GetJobDocumentCommand,
   DescribeJobExecutionCommand,
   DescribeJobTemplateCommand,
-  IoTClient,
   ListJobsCommand,
   ListJobTemplatesCommand,
-  // ListJobExecutionsForJobCommand,
-  // ListJobExecutionsForThingCommand,
+  ListJobExecutionsForJobCommand,
+  ListJobExecutionsForThingCommand,
   UpdateJobCommand,
 } from '@aws-sdk/client-iot';
 import {
   mockClient,
   AwsError,
 } from 'aws-sdk-client-mock';
+import * as associateTargetsWithJob from '../../lambda-assets/jobs/associate-targets-with-job/app';
+import * as cancelJobExecution from '../../lambda-assets/jobs/cancel-job-execution/app';
+import * as cancelJob from '../../lambda-assets/jobs/cancel-job/app';
 import * as createJobTemplate from '../../lambda-assets/jobs/create-job-template/app';
 import * as createJob from '../../lambda-assets/jobs/create-job/app';
-// import * as cancelJobExecution from '../../lambda-assets/jobs/cancel-job-execution/app';
-// import * as deleteJobExecution from '../../lambda-assets/jobs/delete-job-execution/app';
+import * as deleteJobExecution from '../../lambda-assets/jobs/delete-job-execution/app';
 import * as deleteJobTemplate from '../../lambda-assets/jobs/delete-job-template/app';
 import * as deleteJob from '../../lambda-assets/jobs/delete-job/app';
+import * as getJobDocument from '../../lambda-assets/jobs/get-job-document/app';
 import * as getJobExecution from '../../lambda-assets/jobs/get-job-execution/app';
 import * as getJobTemplate from '../../lambda-assets/jobs/get-job-template/app';
 import * as getJob from '../../lambda-assets/jobs/get-job/app';
+import * as ListJobExecutionsForJob from '../../lambda-assets/jobs/list-job-execution-job/app';
+import * as ListJobExecutionsForThing from '../../lambda-assets/jobs/list-job-execution-thing/app';
 import * as listJobTemplates from '../../lambda-assets/jobs/list-job-templates/app';
 import * as listJobs from '../../lambda-assets/jobs/list-jobs/app';
 import * as updateJob from '../../lambda-assets/jobs/update-job/app';
-// import * as updateJobTargets from '../../lambda-assets/jobs/update-job-targets/app';
 
 const expectedJob = {
   jobArn: 'arn:aws:iot:ap-northeast-1:012345678901:job/85f6509f-023c-48fb-8252-981653ffd561',
@@ -103,9 +110,16 @@ const expected = {
     }),
     description: expectedJob.description,
   },
+  document: 'Test',
   forceDeleteJob: {
     jobId: expectedJob.jobId,
     force: true,
+  },
+  cancelJob: {
+    jobId: expectedJob.jobId,
+    comment: 'comment',
+    force: true,
+    expectedVersion: 1,
   },
   job: expectedJob,
   listJobs: {
@@ -114,19 +128,53 @@ const expected = {
     ],
     nextToken: '12345',
   },
+  executionSummariesTime: {
+    queuedAt: new Date(2021, 6, 17, 3, 24, 0),
+    startedAt: new Date(2021, 6, 18, 3, 24, 0),
+    lastUpdatedAt: new Date(2021, 6, 16, 3, 24, 0),
+  },
+  listJobExecutionForJob: {
+    executionSummaries: [{
+      thingArn: expectedJobExecution.thingArn,
+      jobExecutionSummary: {
+        status: 'SUCCESS',
+        queuedAt: new Date(2021, 6, 17, 3, 24, 0).toISOString(),
+        startedAt: new Date(2021, 6, 18, 3, 24, 0).toISOString(),
+        lastUpdatedAt: new Date(2021, 6, 16, 3, 24, 0).toISOString(),
+        executionNumber: 1,
+      },
+    }],
+    nextToken: '12345',
+  },
+  listJobExecutionForThing: {
+    executionSummaries: [{
+      jobId: expectedJobExecution.jobId,
+      jobExecutionSummary: {
+        status: 'SUCCESS',
+        queuedAt: new Date(2021, 6, 17, 3, 24, 0).toISOString(),
+        startedAt: new Date(2021, 6, 18, 3, 24, 0).toISOString(),
+        lastUpdatedAt: new Date(2021, 6, 16, 3, 24, 0).toISOString(),
+        executionNumber: 1,
+      },
+    }],
+    nextToken: '123',
+  },
   invalidJob: expectedInvalidJob,
-  invalidJobError: <AwsError> {
+  invalidTargets: [
+    'not-exists-targets',
+  ],
+  invalidJobError: <AwsError>{
     Code: 'ResourceNotFoundException',
     message: `ResourceNotFoundException: Job ${expectedInvalidJob.jobId} cannot be found.`,
   },
   jobExecution: expectedJobExecution,
   invalidJobExecution: expectedInvalidJobExecution,
-  invalidJobExecutionError: <AwsError> {
+  invalidJobExecutionError: <AwsError>{
     Code: 'ResourceNotFoundException',
     message: `ResourceNotFoundException: Job execution cannot be found as the Job ${expectedInvalidJobExecution.jobId} does not exist`,
   },
   invalidThingForJobExecution: expectedInvalidThingForJobExecution,
-  invalidThingForJobExecutionError: <AwsError> {
+  invalidThingForJobExecutionError: <AwsError>{
     Code: 'ResourceNotFoundException',
     message: `ResourceNotFoundException: Job execution for thing a cannot be found within job ${expectedInvalidThingForJobExecution.thingName}`,
   },
@@ -146,13 +194,99 @@ const expected = {
     nextToken: '12345',
   },
   invalidJobTemplate: expectedInvalidJobTemplate,
-  invalidJobTemplateError: <AwsError> {
+  invalidJobTemplateError: <AwsError>{
     Code: 'ResourceNotFoundException',
     message: `ResourceNotFoundException: Job template ${expectedInvalidJobTemplate.jobTemplateId} cannot be found.`,
   },
 };
 
-test('Create job success', async() => {
+test('Associate targets with job success', async () => {
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(AssociateTargetsWithJobCommand, {
+    jobId: expected.job.jobId,
+    targets: expected.job.targets,
+  }).resolves({});
+  const response = await associateTargetsWithJob.handler({
+    pathParameters: {
+      jobId: expected.job.jobId,
+    },
+    body: {
+      targets: expected.job.targets,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(body.associate).toEqual(true);
+  expect(response.statusCode).toEqual(200);
+  iotClientMock.restore();
+});
+
+test('Associate targets with job with invalid jobId expect failure', async () => {
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(AssociateTargetsWithJobCommand, {
+    jobId: expected.invalidJob.jobId,
+    targets: expected.invalidTargets,
+  }).rejects(expected.invalidJobError);
+  const response = await associateTargetsWithJob.handler({
+    pathParameters: {
+      jobId: expected.invalidJob.jobId,
+    },
+    body: {
+      targets: expected.invalidTargets,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(response.statusCode).toEqual(404);
+  expect(body.error).toEqual(
+    Object.assign(new Error(), expected.invalidJobError).toString(),
+  );
+  iotClientMock.restore();
+});
+
+test('Cancel job success', async () => {
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(CancelJobCommand, {
+    jobId: expected.job.jobId,
+    comment: expected.cancelJob.comment,
+    force: expected.cancelJob.force,
+  }).resolves({});
+  const response = await cancelJob.handler({
+    pathParameters: {
+      jobId: expected.job.jobId,
+    },
+    body: {
+      comment: expected.cancelJob.comment,
+      force: expected.cancelJob.force,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(body.canceled).toEqual(true);
+  expect(response.statusCode).toEqual(200);
+  iotClientMock.restore();
+});
+
+test('Cancel job with invalid jobId expect failure', async () => {
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(CancelJobCommand, {
+    jobId: expected.invalidJob.jobId,
+  }).rejects(expected.invalidJobError);
+  const response = await cancelJob.handler({
+    pathParameters: {
+      jobId: expected.invalidJob.jobId,
+    },
+    body: {
+      comment: expected.cancelJob.comment,
+      force: expected.cancelJob.force,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(response.statusCode).toEqual(404);
+  expect(body.error).toEqual(
+    Object.assign(new Error(), expected.invalidJobError).toString(),
+  );
+  iotClientMock.restore();
+});
+
+test('Create job success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(CreateJobCommand, {
     targets: expected.newJob.targets,
@@ -182,7 +316,7 @@ test('Create job success', async() => {
   iotClientMock.restore();
 });
 
-test('Create job with invalid inputs expect failure', async() => {
+test('Create job with invalid inputs expect failure', async () => {
   const response = await createJob.handler({});
   const body = JSON.parse(response.body);
   expect(response.statusCode).toEqual(422);
@@ -208,7 +342,7 @@ test('Create job with invalid inputs expect failure', async() => {
   ]);
 });
 
-test('Get job suucess', async() => {
+test('Get job success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(DescribeJobCommand, {
     jobId: expected.job.jobId,
@@ -226,7 +360,7 @@ test('Get job suucess', async() => {
   iotClientMock.restore();
 });
 
-test('Get job with invalid jobId expect failure', async() => {
+test('Get job with invalid jobId expect failure', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(DescribeJobCommand, {
     jobId: expected.invalidJob.jobId,
@@ -244,7 +378,43 @@ test('Get job with invalid jobId expect failure', async() => {
   iotClientMock.restore();
 });
 
-test('List jobs success', async() => {
+test('Get job document success', async () => {
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(GetJobDocumentCommand, {
+    jobId: expected.job.jobId,
+  }).resolves({
+    document: expected.document,
+  });
+  const response = await getJobDocument.handler({
+    pathParameters: {
+      jobId: expected.job.jobId,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(body.document).toEqual(expected.document);
+  expect(response.statusCode).toEqual(200);
+  iotClientMock.restore();
+});
+
+test('Get job document with invalid jobId expect failure', async () => {
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(GetJobDocumentCommand, {
+    jobId: expected.invalidJob.jobId,
+  }).rejects(expected.invalidJobError);
+  const response = await getJobDocument.handler({
+    pathParameters: {
+      jobId: expected.invalidJob.jobId,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(response.statusCode).toEqual(404);
+  expect(body.error).toEqual(
+    Object.assign(new Error(), expected.invalidJobError).toString(),
+  );
+  iotClientMock.restore();
+});
+
+test('List jobs success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(ListJobsCommand, {
   }).resolves({
@@ -258,7 +428,7 @@ test('List jobs success', async() => {
   iotClientMock.restore();
 });
 
-test('List jobs with nextToken success', async() => {
+test('List jobs with nextToken success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(ListJobsCommand, {
     nextToken: expected.listJobs.nextToken,
@@ -279,7 +449,7 @@ test('List jobs with nextToken success', async() => {
   iotClientMock.restore();
 });
 
-test('Update job success', async() => {
+test('Update job success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(UpdateJobCommand, {
     jobId: expected.job.jobId,
@@ -299,7 +469,7 @@ test('Update job success', async() => {
   iotClientMock.restore();
 });
 
-test('Update job with invalid inputs expect failure', async() => {
+test('Update job with invalid inputs expect failure', async () => {
   const response = await updateJob.handler({
     pathParameters: {
       jobId: expected.job.jobId,
@@ -320,7 +490,7 @@ test('Update job with invalid inputs expect failure', async() => {
   ]);
 });
 
-test('Update job with invalid jobId expect failure', async() => {
+test('Update job with invalid jobId expect failure', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(UpdateJobCommand, {
     jobId: expected.invalidJob.jobId,
@@ -341,13 +511,13 @@ test('Update job with invalid jobId expect failure', async() => {
   iotClientMock.restore();
 });
 
-test('Update job targets success', async() => {});
+test('Update job targets success', async () => { });
 
-test('Update job targets with invalid inputs expect failure', async() => {});
+test('Update job targets with invalid inputs expect failure', async () => { });
 
-test('Update job targets with invalid jobId expect failure', async() => {});
+test('Update job targets with invalid jobId expect failure', async () => { });
 
-test('Delete job success', async() => {
+test('Delete job success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(DeleteJobCommand, {
     jobId: expected.forceDeleteJob.jobId,
@@ -367,7 +537,7 @@ test('Delete job success', async() => {
   iotClientMock.restore();
 });
 
-test('Delete job with invalid jobId expect failure', async() => {
+test('Delete job with invalid jobId expect failure', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(DeleteJobCommand, {
     jobId: expected.invalidJob.jobId,
@@ -385,7 +555,7 @@ test('Delete job with invalid jobId expect failure', async() => {
   iotClientMock.restore();
 });
 
-test('Create job template success', async() => {
+test('Create job template success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(CreateJobTemplateCommand, {
     document: expected.newJobTemplate.document,
@@ -406,7 +576,7 @@ test('Create job template success', async() => {
   iotClientMock.restore();
 });
 
-test('Create job template with invalid inputs expect failure', async() => {
+test('Create job template with invalid inputs expect failure', async () => {
   const response = await createJobTemplate.handler({});
   const body = JSON.parse(response.body);
   expect(response.statusCode).toEqual(422);
@@ -426,7 +596,7 @@ test('Create job template with invalid inputs expect failure', async() => {
   ]);
 });
 
-test('Get job template success', async() => {
+test('Get job template success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(DescribeJobTemplateCommand, {
     jobTemplateId: expected.jobTemplate.jobTemplateId,
@@ -442,7 +612,7 @@ test('Get job template success', async() => {
   iotClientMock.restore();
 });
 
-test('Get job template with invalid jobTemplateId expect failure', async() => {
+test('Get job template with invalid jobTemplateId expect failure', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(DescribeJobTemplateCommand, {
     jobTemplateId: expected.invalidJobTemplate.jobTemplateId,
@@ -460,7 +630,7 @@ test('Get job template with invalid jobTemplateId expect failure', async() => {
   iotClientMock.restore();
 });
 
-test('List job templates success', async() => {
+test('List job templates success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(ListJobTemplatesCommand, {
   }).resolves({
@@ -474,7 +644,7 @@ test('List job templates success', async() => {
   iotClientMock.restore();
 });
 
-test('List job templates with nextToken success', async() => {
+test('List job templates with nextToken success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(ListJobTemplatesCommand, {
     nextToken: expected.listJobTemplates.nextToken,
@@ -495,7 +665,7 @@ test('List job templates with nextToken success', async() => {
   iotClientMock.restore();
 });
 
-test('Delete job template success', async() => {
+test('Delete job template success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(DeleteJobTemplateCommand, {
     jobTemplateId: expected.jobTemplate.jobTemplateId,
@@ -511,7 +681,7 @@ test('Delete job template success', async() => {
   iotClientMock.restore();
 });
 
-test('Delete job template with invalid jobTemplateId expect failure', async() => {
+test('Delete job template with invalid jobTemplateId expect failure', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(DeleteJobTemplateCommand, {
     jobTemplateId: expected.invalidJobTemplate.jobTemplateId,
@@ -529,7 +699,7 @@ test('Delete job template with invalid jobTemplateId expect failure', async() =>
   iotClientMock.restore();
 });
 
-test('Get job execution success', async() => {
+test('Get job execution success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(DescribeJobExecutionCommand, {
     jobId: expected.jobExecution.jobId,
@@ -549,7 +719,7 @@ test('Get job execution success', async() => {
   iotClientMock.restore();
 });
 
-test('Get job execution with invalid jobId expect failure', async() => {
+test('Get job execution with invalid jobId expect failure', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(DescribeJobExecutionCommand, {
     jobId: expected.invalidJobExecution.jobId,
@@ -569,7 +739,7 @@ test('Get job execution with invalid jobId expect failure', async() => {
   iotClientMock.restore();
 });
 
-test('Get job execution with invalid thingName expect failure', async() => {
+test('Get job execution with invalid thingName expect failure', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(DescribeJobExecutionCommand, {
     jobId: expected.invalidThingForJobExecution.jobId,
@@ -589,12 +759,273 @@ test('Get job execution with invalid thingName expect failure', async() => {
   iotClientMock.restore();
 });
 
-test('Cancel job execution success', async() => {
-  // const response = await cancelJobExecution.handler({});
-  // const body = JSON.parse(response.body);
+test('Cancel job execution success', async () => {
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(CancelJobExecutionCommand, {
+    jobId: expected.jobExecution.jobId,
+    thingName: expected.jobExecution.thingName,
+    expectedVersion: expected.jobExecution.executionNumber,
+    statusDetails: expected.jobExecution.statusDetails.detailsMap,
+    force: expected.cancelJob.force,
+  }).resolves({});
+  const response = await cancelJobExecution.handler({
+    pathParameters: {
+      jobId: expected.jobExecution.jobId,
+      thingName: expected.jobExecution.thingName,
+    },
+    body: {
+      expectedVersion: expected.cancelJob.expectedVersion,
+      statusDetails: expected.jobExecution.statusDetails.detailsMap,
+      force: expected.cancelJob.force,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(response.statusCode).toEqual(200);
+  expect(body.canceled).toEqual(true);
+  iotClientMock.restore();
 });
 
-test('Delete job execution success', async() => {
-  // const response = await deleteJobExecution.handler({});
-  // const body = JSON.parse(response.body);
+test('Cancel job execution with invalid jobId expect failure', async () => {
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(CancelJobExecutionCommand, {
+    jobId: expected.invalidJobExecution.jobId,
+    thingName: expected.invalidJobExecution.thingName,
+  }).rejects(expected.invalidJobExecutionError);
+  const response = await cancelJobExecution.handler({
+    pathParameters: {
+      jobId: expected.invalidJobExecution.jobId,
+      thingName: expected.invalidJobExecution.thingName,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(response.statusCode).toEqual(404);
+  expect(body.error).toEqual(
+    Object.assign(new Error(), expected.invalidJobExecutionError).toString(),
+  );
+  iotClientMock.restore();
+});
+
+test('Cancel job execution with invalid thingName expect failure', async () => {
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(CancelJobExecutionCommand, {
+    jobId: expected.invalidThingForJobExecution.jobId,
+    thingName: expected.invalidThingForJobExecution.thingName,
+  }).rejects(expected.invalidJobExecutionError);
+  const response = await cancelJobExecution.handler({
+    pathParameters: {
+      jobId: expected.invalidThingForJobExecution.jobId,
+      thingName: expected.invalidThingForJobExecution.thingName,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(response.statusCode).toEqual(404);
+  expect(body.error).toEqual(
+    Object.assign(new Error(), expected.invalidJobExecutionError).toString(),
+  );
+  iotClientMock.restore();
+});
+
+test('Delete job execution success', async () => {
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(DeleteJobExecutionCommand, {
+    jobId: expected.jobExecution.jobId,
+    thingName: expected.jobExecution.thingName,
+    executionNumber: expected.jobExecution.executionNumber,
+    force: expected.forceDeleteJob.force,
+  }).resolves({});
+  const response = await deleteJobExecution.handler({
+    pathParameters: {
+      jobId: expected.jobExecution.jobId,
+      thingName: expected.jobExecution.thingName,
+    },
+    body: {
+      executionNumber: expected.jobExecution.executionNumber,
+      force: expected.forceDeleteJob.force,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(response.statusCode).toEqual(200);
+  expect(body.deleted).toEqual(true);
+  iotClientMock.restore();
+});
+
+test('Delete job execution with invalid jobId expect failure', async () => {
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(DeleteJobExecutionCommand, {
+    jobId: expected.invalidJobExecution.jobId,
+    thingName: expected.invalidJobExecution.thingName,
+    executionNumber: expected.jobExecution.executionNumber,
+    force: expected.forceDeleteJob.force,
+  }).rejects(expected.invalidJobExecutionError);
+  const response = await deleteJobExecution.handler({
+    pathParameters: {
+      jobId: expected.invalidJobExecution.jobId,
+      thingName: expected.invalidJobExecution.thingName,
+    },
+    body: {
+      executionNumber: expected.jobExecution.executionNumber,
+      force: expected.forceDeleteJob.force,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(response.statusCode).toEqual(404);
+  expect(body.error).toEqual(
+    Object.assign(new Error(), expected.invalidJobExecutionError).toString(),
+  );
+  iotClientMock.restore();
+});
+
+test('Delete job execution with invalid thingName expect failure', async () => {
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(DeleteJobExecutionCommand, {
+    jobId: expected.invalidThingForJobExecution.jobId,
+    thingName: expected.invalidThingForJobExecution.thingName,
+    executionNumber: expected.jobExecution.executionNumber,
+    force: expected.forceDeleteJob.force,
+  }).rejects(expected.invalidJobExecutionError);
+  const response = await deleteJobExecution.handler({
+    pathParameters: {
+      jobId: expected.invalidThingForJobExecution.jobId,
+      thingName: expected.invalidThingForJobExecution.thingName,
+    },
+    body: {
+      executionNumber: expected.jobExecution.executionNumber,
+      force: expected.forceDeleteJob.force,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(response.statusCode).toEqual(404);
+  expect(body.error).toEqual(
+    Object.assign(new Error(), expected.invalidJobExecutionError).toString(),
+  );
+  iotClientMock.restore();
+});
+
+test('List job executions for job success', async () => {
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(ListJobExecutionsForJobCommand, {
+    jobId: expected.jobExecution.jobId,
+    status: expected.jobExecution.status,
+  }).resolves({
+    executionSummaries: [{
+      thingArn: expectedJobExecution.thingArn,
+      jobExecutionSummary: {
+        status: expected.jobExecution.status,
+        queuedAt: expected.executionSummariesTime.queuedAt,
+        startedAt: expected.executionSummariesTime.startedAt,
+        lastUpdatedAt: expected.executionSummariesTime.lastUpdatedAt,
+        executionNumber: expected.jobExecution.executionNumber,
+      },
+    }],
+    nextToken: expected.listJobExecutionForJob.nextToken,
+  });
+  const response = await ListJobExecutionsForJob.handler({
+    queryStringParameters: {
+      jobId: expected.jobExecution.jobId,
+      status: expected.jobExecution.status,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(Array.isArray(body.executionSummaries)).toBe(true);
+  expect(body.executionSummaries).toEqual(expected.listJobExecutionForJob.executionSummaries);
+  expect(response.statusCode).toEqual(200);
+  iotClientMock.restore();
+});
+
+test('List job Executions For job with nextToken success', async () => {
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(ListJobExecutionsForJobCommand, {
+    jobId: expected.jobExecution.jobId,
+    status: expected.jobExecution.status,
+    nextToken: expected.listJobExecutionForJob.nextToken,
+  }).resolves({
+    executionSummaries: [{
+      thingArn: expectedJobExecution.thingArn,
+      jobExecutionSummary: {
+        status: expected.jobExecution.status,
+        queuedAt: expected.executionSummariesTime.queuedAt,
+        startedAt: expected.executionSummariesTime.startedAt,
+        lastUpdatedAt: expected.executionSummariesTime.lastUpdatedAt,
+        executionNumber: expected.jobExecution.executionNumber,
+      },
+    }],
+    nextToken: expected.listJobExecutionForJob.nextToken,
+  });
+  const response = await ListJobExecutionsForJob.handler({
+    queryStringParameters: {
+      jobId: expected.jobExecution.jobId,
+      status: expected.jobExecution.status,
+      nextToken: expected.listJobExecutionForJob.nextToken,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(Array.isArray(body.executionSummaries)).toBe(true);
+  expect(body.executionSummaries).toEqual(expected.listJobExecutionForJob.executionSummaries);
+  expect(response.statusCode).toEqual(200);
+  iotClientMock.restore();
+});
+
+test('List job executions for thing success', async () => {
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(ListJobExecutionsForThingCommand, {
+    thingName: expected.jobExecution.thingName,
+    status: expected.jobExecution.status,
+    nextToken: expected.listJobExecutionForThing.nextToken,
+  }).resolves({
+    executionSummaries: [{
+      jobId: expectedJobExecution.jobId,
+      jobExecutionSummary: {
+        status: expected.jobExecution.status,
+        queuedAt: expected.executionSummariesTime.queuedAt,
+        startedAt: expected.executionSummariesTime.startedAt,
+        lastUpdatedAt: expected.executionSummariesTime.lastUpdatedAt,
+        executionNumber: expected.jobExecution.executionNumber,
+      },
+    }],
+    nextToken: expected.listJobExecutionForThing.nextToken,
+  });
+  const response = await ListJobExecutionsForThing.handler({
+    queryStringParameters: {
+      thingName: expected.jobExecution.thingName,
+      status: expected.jobExecution.status,
+      nextToken: expected.listJobExecutionForThing.nextToken,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(Array.isArray(body.executionSummaries)).toBe(true);
+  expect(body.executionSummaries).toEqual(expected.listJobExecutionForThing.executionSummaries);
+  expect(response.statusCode).toEqual(200);
+  iotClientMock.restore();
+});
+
+test('List job executions for thing with nextToken success', async () => {
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(ListJobExecutionsForThingCommand, {
+    thingName: expected.jobExecution.thingName,
+    nextToken: expected.listJobExecutionForThing.nextToken,
+  }).resolves({
+    executionSummaries: [{
+      jobId: expected.jobExecution.jobId,
+      jobExecutionSummary: {
+        status: expected.jobExecution.status,
+        queuedAt: expected.executionSummariesTime.queuedAt,
+        startedAt: expected.executionSummariesTime.startedAt,
+        lastUpdatedAt: expected.executionSummariesTime.lastUpdatedAt,
+        executionNumber: expected.jobExecution.executionNumber,
+      },
+    }],
+    nextToken: expected.listJobExecutionForThing.nextToken,
+  });
+  const response = await ListJobExecutionsForThing.handler({
+    queryStringParameters: {
+      thingName: expected.jobExecution.thingName,
+      status: expected.jobExecution.status,
+      nextToken: expected.listJobExecutionForThing.nextToken,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(Array.isArray(body.executionSummaries)).toBe(true);
+  expect(body).toEqual(expected.listJobExecutionForThing);
+  expect(response.statusCode).toEqual(200);
+  iotClientMock.restore();
 });
