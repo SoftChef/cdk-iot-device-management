@@ -17,10 +17,14 @@ export async function handler(event: { [key: string]: any }) {
               .concat(joi.string().when('checksumType', { is: 'crc32', then: joi.string().length(8).required() }))
               .concat(joi.string().when('checksumType', { is: 'sha1', then: joi.string().length(40).required() })),
             version: joi.string().required(),
-            locale: joi.string().required(),
             categoryId: joi.string().required(),
-            description: joi.string().allow(null, ''),
-            summary: joi.string().allow(null, ''),
+            locales: joi.array().items(
+              joi.object().keys({
+                locale: joi.string().required(),
+                description: joi.string().allow('').required(),
+                summary: joi.string().allow('').required(),
+              }),
+            ),
           }),
         ),
       };
@@ -28,63 +32,77 @@ export async function handler(event: { [key: string]: any }) {
     if (validated.error) {
       return response.error(validated.details, 422);
     }
-    const files = request.input('files');
-    const firstFile: { [key: string]: any } = files[0];
+    const requestFiles = request.input('files');
+    const files: object[] = [];
+    const currentTime = Date.now();
+    const validateFile = requestFiles.map((file: any) => {
+      file.locales.map((locale: any) => {
+        files.push(
+          {
+            PutRequest: {
+              Item: {
+                fileId: uuid.v4(),
+                categoryId: file.categoryId,
+                version: file.version,
+                location: file.location,
+                checksum: file.checksum,
+                checksumType: file.checksumType,
+                locale: locale.locale,
+                summary: locale.summary,
+                description: locale.description,
+                createdAt: currentTime,
+                updatedAt: currentTime,
+              },
+            },
+          },
+        );
+      });
+      return {
+        version: file.version,
+        checksum: file.checksum,
+        categoryId: file.categoryId,
+      };
+    });
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({}),
     );
-    const { Item: category } = await ddbDocClient.send(
-      new GetCommand({
-        TableName: process.env.CATEGORY_TABLE_NAME,
-        Key: {
-          categoryId: firstFile.categoryId,
-        },
-      }),
-    );
-    if (!category) {
-      return response.error('Category does not exist.', 422);
-    };
-    const existsFiles = await ddbDocClient.send(
-      new QueryCommand({
-        TableName: process.env.FILE_TABLE_NAME,
-        IndexName: 'get-file-by-checksum-and-version',
-        KeyConditionExpression: '#checksum = :checksum and #version = :version',
-        ExpressionAttributeNames: {
-          '#checksum': 'checksum',
-          '#version': 'version',
-        },
-        ExpressionAttributeValues: {
-          ':checksum': firstFile.checksum,
-          ':version': firstFile.version,
-        },
-      }),
-    );
-    if (existsFiles.Items && existsFiles.Items.length) {
-      return response.error('File already exists.', 422);
-    };
-    const currentTime = Date.now();
+    for (let file = 0; file < validateFile.length ; file += 1) {
+      const { Item: category } = await ddbDocClient.send(
+        new GetCommand({
+          TableName: process.env.CATEGORY_TABLE_NAME,
+          Key: {
+            categoryId: validateFile[file].categoryId,
+          },
+        }),
+      );
+      if (!category) {
+        return response.error('Category does not exist.', 422);
+      };
+    }
+    for (let file = 0; file < validateFile.length ; file += 1) {
+      const existsFiles = await ddbDocClient.send(
+        new QueryCommand({
+          TableName: process.env.FILE_TABLE_NAME,
+          IndexName: 'get-file-by-checksum-and-version',
+          KeyConditionExpression: '#checksum = :checksum and #version = :version',
+          ExpressionAttributeNames: {
+            '#checksum': 'checksum',
+            '#version': 'version',
+          },
+          ExpressionAttributeValues: {
+            ':checksum': validateFile[file].checksum,
+            ':version': validateFile[file].version,
+          },
+        }),
+      );
+      if (existsFiles.Items && existsFiles.Items.length) {
+        return response.error('File already exists.', 422);
+      };
+    }
     await ddbDocClient.send(
       new BatchWriteCommand({
         RequestItems: {
-          [`${process.env.FILE_TABLE_NAME}`]: files.map((file: any) => {
-            return {
-              PutRequest: {
-                Item: {
-                  fileId: uuid.v4(),
-                  version: file.version,
-                  categoryId: file.categoryId,
-                  checksum: file.checksum,
-                  summary: file.summary,
-                  checksumType: file.checksumType,
-                  location: file.location,
-                  locale: file.locale,
-                  description: file.description,
-                  createdAt: currentTime,
-                  updatedAt: currentTime,
-                },
-              },
-            };
-          }),
+          [`${process.env.FILE_TABLE_NAME}`]: files,
         },
       }),
     );
