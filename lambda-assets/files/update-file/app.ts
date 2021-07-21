@@ -45,6 +45,7 @@ export async function handler(event: { [key: string]: any }) {
               Item: {
                 fileId: file.fileId,
                 categoryId: file.categoryId,
+                checksumType: file.checksumType,
                 checksum: file.checksum,
                 version: file.version,
                 location: file.location,
