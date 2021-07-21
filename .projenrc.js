@@ -27,7 +27,7 @@ const project = new AwsCdkConstructLibrary({
     '@aws-sdk/lib-dynamodb',
     '@aws-sdk/util-dynamodb',
     '@softchef/cdk-restapi',
-    '@softchef/cdk-schedule-function',
+    // '@softchef/cdk-schedule-function',
     '@softchef/lambda-events',
     '@types/node@15.12.2',
     '@types/semver',
