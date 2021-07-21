@@ -4,21 +4,23 @@ import * as iam from '@aws-cdk/aws-iam';
 import * as lambda from '@aws-cdk/aws-lambda-nodejs';
 import * as cdk from '@aws-cdk/core';
 import { RestApi, HttpMethod } from '@softchef/cdk-restapi';
+// import { ScheduleFunction } from '@softchef/cdk-schedule-function';
 
 const LAMBDA_ASSETS_PATH = path.resolve(__dirname, '../lambda-assets/jobs');
 
 export interface JobApiProps {
   readonly authorizationType?: apigateway.AuthorizationType;
   readonly authorizer?: apigateway.IAuthorizer | undefined;
+  readonly scheduleFunction?: any | undefined; // ScheduleFunction
 }
 
 export class JobApi extends cdk.Construct {
 
-  public readonly restApiId: string;
+  private readonly _restApi: RestApi;
 
   constructor(scope: cdk.Construct, id: string, props?: JobApiProps) {
     super(scope, id);
-    const restApi = new RestApi(this, 'JobRestApi', {
+    this._restApi = new RestApi(this, 'JobRestApi', {
       enableCors: true,
       authorizationType: props?.authorizationType ?? apigateway.AuthorizationType.NONE,
       authorizer: props?.authorizer ?? undefined,
@@ -110,7 +112,64 @@ export class JobApi extends cdk.Construct {
         },
       ],
     });
-    this.restApiId = restApi.restApiId;
+    if (props?.scheduleFunction) {
+      const targetType: string = 'CreateJob';
+      props.scheduleFunction.addTargetFunction(targetType, {
+        targetFunction: this.createCreateScheduleJobFunction(),
+      });
+      props?.scheduleFunction?.listSchedulesFunction.addEnvironment('FIXED_TARGET_TYPE', targetType);
+      props?.scheduleFunction?.createScheduleFunction.addEnvironment('FIXED_TARGET_TYPE', targetType);
+      this._restApi.addResources([
+        {
+          path: '/schedules',
+          httpMethod: HttpMethod.GET,
+          lambdaFunction: props?.scheduleFunction.listSchedulesFunction,
+        },
+        {
+          path: '/schedules',
+          httpMethod: HttpMethod.POST,
+          lambdaFunction: props?.scheduleFunction.createScheduleFunction,
+        },
+        {
+          path: '/schedules/{scheduleId}',
+          httpMethod: HttpMethod.GET,
+          lambdaFunction: props?.scheduleFunction.fetchScheduleFunction,
+        },
+        {
+          path: '/schedules/{scheduleId}',
+          httpMethod: HttpMethod.PUT,
+          lambdaFunction: props?.scheduleFunction.updateScheduleFunction,
+        },
+        {
+          path: '/schedules/{scheduleId}',
+          httpMethod: HttpMethod.DELETE,
+          lambdaFunction: props?.scheduleFunction.deleteScheduleFunction,
+        },
+      ]);
+    }
+  }
+
+  get restApiId(): string {
+    return this._restApi.restApiId;
+  }
+
+  private createCreateScheduleJobFunction(): lambda.NodejsFunction {
+    const createJobFunction = new lambda.NodejsFunction(this, 'CreateScheduleJobFunction', {
+      entry: `${LAMBDA_ASSETS_PATH}/create-schedule-job/app.ts`,
+    });
+    createJobFunction.role?.attachInlinePolicy(
+      new iam.Policy(this, 'iot-create-schedule-job-policy', {
+        statements: [
+          new iam.PolicyStatement({
+            actions: [
+              'iot:CreateJob',
+            ],
+            resources: ['*'],
+          }),
+        ],
+      }),
+    );
+    return createJobFunction;
   }
 
   private createAssociateTargetsWithJobFunction(): lambda.NodejsFunction {

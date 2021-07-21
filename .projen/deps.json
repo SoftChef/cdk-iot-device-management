@@ -27,10 +27,6 @@
       "type": "build"
     },
     {
-      "name": "aws-sdk-mock",
-      "type": "build"
-    },
-    {
       "name": "eslint",
       "type": "build"
     },
@@ -124,6 +120,10 @@
     },
     {
       "name": "@softchef/cdk-restapi",
+      "type": "bundled"
+    },
+    {
+      "name": "@softchef/cdk-schedule-function",
       "type": "bundled"
     },
     {

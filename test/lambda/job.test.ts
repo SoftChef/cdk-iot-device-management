@@ -32,6 +32,7 @@ import * as cancelJobExecution from '../../lambda-assets/jobs/cancel-job-executi
 import * as cancelJob from '../../lambda-assets/jobs/cancel-job/app';
 import * as createJobTemplate from '../../lambda-assets/jobs/create-job-template/app';
 import * as createJob from '../../lambda-assets/jobs/create-job/app';
+import * as createScheduleJob from '../../lambda-assets/jobs/create-schedule-job/app';
 import * as deleteJobExecution from '../../lambda-assets/jobs/delete-job-execution/app';
 import * as deleteJobTemplate from '../../lambda-assets/jobs/delete-job-template/app';
 import * as deleteJob from '../../lambda-assets/jobs/delete-job/app';
@@ -109,6 +110,12 @@ const expected = {
       operation: 'Work',
     }),
     description: expectedJob.description,
+  },
+  schedule: {
+    scheduleId: 'xxx',
+    scheduledAt: '209901011234',
+    id: 'uuuu-uuuu-iiii-dddd-4444',
+    context: {},
   },
   document: 'Test',
   forceDeleteJob: {
@@ -342,7 +349,57 @@ test('Create job with invalid inputs expect failure', async () => {
   ]);
 });
 
-test('Get job success', async () => {
+test('Create schedule job success', async() => {
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(CreateJobCommand, {
+    targets: expected.newJob.targets,
+    document: expected.newJob.document,
+    targetSelection: expected.newJob.targetSelection,
+  }).resolves({
+    jobArn: expected.job.jobArn,
+  });
+  const response = await createScheduleJob.handler({
+    ...expected.schedule,
+    ...{
+      context: expected.newJob,
+    },
+  });
+  expect(response.scheduleId).toEqual(expected.schedule.scheduleId),
+  expect(response.success).toEqual(true);
+  expect(response.result).toEqual({
+    job: {
+      jobArn: expect.any(String),
+    },
+  });
+  iotClientMock.restore();
+});
+
+test('Create job with invalid inputs expect failure', async() => {
+  const response = await createScheduleJob.handler({
+    ...expected.schedule,
+  });
+  expect(response.scheduleId).toEqual(expected.schedule.scheduleId),
+  expect(response.success).toEqual(false);
+  expect(response.result).toEqual([
+    {
+      label: 'targets',
+      key: 'targets',
+      message: expect.any(String),
+    },
+    {
+      label: 'targetSelection',
+      key: 'targetSelection',
+      message: expect.any(String),
+    },
+    {
+      label: 'document',
+      key: 'document',
+      message: expect.any(String),
+    },
+  ]);
+});
+
+test('Get job suucess', async() => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(DescribeJobCommand, {
     jobId: expected.job.jobId,
