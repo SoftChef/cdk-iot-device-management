@@ -197,14 +197,15 @@ Create file's information
 
 | Name | Schema | Description |
 | -------- | ------- |  ---- |
+| categoryId* | String | From category |
+| version* | String | File's version|
 | location* | URI | File's path|
 | checksum* | String | An encrypt md5 / crc32 / sha1 value |
 | checksumType* | 'md5' \| 'crc32' \| 'sha1' | File's checksum type|
-| version* | String | File's version|
+| locales* | Array | File's information |
 | locale* | String | File's locale |
 | summary* | string (Allow empty string) | File's summary|
-| categoryId* | String | From category |
-| description | String | File's description |
+| description* | String (Allow empty string) | File's description |
 
 
 **Response Status**
@@ -390,11 +391,15 @@ Update file's information by file ID
 | Name | Schema | Description |
 | -------- | ------- |  ---- |
 | fileId* | String | File's ID |
-| checksum* | String | An encrypt md5 / crc32 / sha1 value |
+| categoryId* | String | From category |
 | checksumType* | 'md5' \| 'crc32' \| 'sha1' | File's checksum type|
+| checksum* | String | An encrypt md5 / crc32 / sha1 value |
+| version* | String | File's version|
+| location* | URI | File's path|
+| locales* | Array | File's information |
 | locale* | String | File's locale |
 | summary* | string (Allow empty string) | File's summary|
-| description | String | File's description |
+| description* | String (Allow empty string) | File's description |
 
 **Response Status**
 
