@@ -14,8 +14,8 @@ export async function handler(event: { [key: string]: any }) {
       new ListNamedShadowsForThingCommand({
         thingName: request.parameter('thingName'),
         ...parameters,
-      })
-    )
+      }),
+    );
     return response.json({
       thingShadows,
     });

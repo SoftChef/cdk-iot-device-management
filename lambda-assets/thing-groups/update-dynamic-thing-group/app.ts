@@ -12,7 +12,7 @@ export async function handler(event: { [key: string]: any }) {
     });
     if (validated.error) {
       return response.error(validated.details, 422);
-    };
+    }
     const iotClient = new IoTClient({});
     const thingGroup = await iotClient.send(
       new UpdateDynamicThingGroupCommand({

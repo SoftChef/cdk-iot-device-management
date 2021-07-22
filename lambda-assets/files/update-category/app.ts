@@ -13,7 +13,7 @@ export async function handler(event: { [key: string]: any }) {
     });
     if (validated.error) {
       return response.error(validated.details, 422);
-    };
+    }
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({}),
     );
@@ -27,7 +27,7 @@ export async function handler(event: { [key: string]: any }) {
     );
     if (!category) {
       return response.error('Not found.', 404);
-    };
+    }
     await ddbDocClient.send(
       new UpdateCommand({
         TableName: process.env.CATEGORY_TABLE_NAME,

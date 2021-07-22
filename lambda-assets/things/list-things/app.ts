@@ -8,11 +8,11 @@ export async function handler(event: { [key: string]: any }) {
     let parameters: { [key: string]: any } = {};
     if (request.has('nextToken')) {
       parameters.nextToken = request.get('nextToken');
-    };
+    }
     if (request.has('attributeName')) {
       parameters.attributeName = request.get('attributeName');
       parameters.attributeValue = request.get('attributeValue');
-    };
+    }
     const iotClient = new IoTClient({});
     const things = await iotClient.send(
       new ListThingsCommand(parameters),

@@ -40,7 +40,6 @@ const project = new AwsCdkConstructLibrary({
     '@types/semver',
     '@softchef/cdk-restapi',
     '@softchef/lambda-events',
-    'aws-sdk',
     '@aws-sdk/client-iot',
     '@aws-sdk/client-iot-data-plane',
     '@aws-sdk/client-dynamodb',

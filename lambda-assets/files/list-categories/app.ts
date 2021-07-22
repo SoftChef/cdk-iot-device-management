@@ -17,7 +17,7 @@ export async function handler(event: { [key: string]: any }) {
           Buffer.from(request.get('nextToken'), 'base64').toString('utf8'),
         ),
       };
-    };
+    }
     if (request.has('parentId')) {
       parameters.IndexName = 'query-by-parent-id';
       parameters.KeyConditionExpression = '#parentId = :parentId';
@@ -38,7 +38,7 @@ export async function handler(event: { [key: string]: any }) {
         nextToken = Buffer.from(
           JSON.stringify(lastEvaluatedKey),
         ).toString('base64');
-      };
+      }
       return response.json({
         categories,
         nextToken,
@@ -59,12 +59,12 @@ export async function handler(event: { [key: string]: any }) {
         nextToken = Buffer.from(
           JSON.stringify(lastEvaluatedKey),
         ).toString('base64');
-      };
+      }
       return response.json({
         categories,
         nextToken,
       });
-    };
+    }
   } catch (error) {
     return response.error(error);
   }

@@ -16,7 +16,7 @@ export async function handler(event: { [key: string]: any }) {
     });
     if (validated.error) {
       return response.error(validated.details, 422);
-    };
+    }
     const currentTime = Date.now();
     const name = request.input('name', null);
     const parentId = request.input('parentId');
@@ -30,7 +30,7 @@ export async function handler(event: { [key: string]: any }) {
       itemParameters.parentId = parentId;
     } else {
       itemParameters.categoryId = md5.update(name).digest('hex');
-    };
+    }
     const { Item: category } = await ddbDocClient.send(
       new GetCommand({
         TableName: process.env.CATEGORY_TABLE_NAME,
@@ -41,7 +41,7 @@ export async function handler(event: { [key: string]: any }) {
     );
     if (category) {
       return response.error('Category already exists.', 422);
-    };
+    }
     await ddbDocClient.send(
       new PutCommand({
         TableName: process.env.CATEGORY_TABLE_NAME,

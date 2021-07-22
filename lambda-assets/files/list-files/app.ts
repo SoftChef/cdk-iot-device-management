@@ -16,7 +16,7 @@ export async function handler(event: { [key: string]: any }) {
           Buffer.from(request.get('nextToken'), 'base64').toString('utf8'),
         ),
       };
-    };
+    }
     const { Items: files, LastEvaluatedKey: lastEvaluatedKey } = await ddbDocClient.send(
       new ScanCommand({
         TableName: process.env.FILE_TABLE_NAME,

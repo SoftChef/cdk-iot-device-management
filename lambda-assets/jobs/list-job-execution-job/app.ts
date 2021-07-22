@@ -17,7 +17,7 @@ export async function handler(event: { [key: string]: any }) {
     let parameters: { [key: string]: any } = {};
     if (request.has('nextToken')) {
       parameters.nextToken = request.get('nextToken');
-    };
+    }
     const iotClient = new IoTClient({});
     const jobsExecutionJob = await iotClient.send(
       new ListJobExecutionsForJobCommand({
@@ -32,6 +32,6 @@ export async function handler(event: { [key: string]: any }) {
       return response.error(error, 404);
     } else {
       return response.error(error);
-    };
+    }
   }
 }
