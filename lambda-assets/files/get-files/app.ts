@@ -1,5 +1,5 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, BatchWriteCommand, QueryCommand } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBDocumentClient, QueryCommand } from '@aws-sdk/lib-dynamodb';
 import { Request, Response } from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
@@ -25,25 +25,10 @@ export async function handler(event: { [key: string]: any }) {
       }),
     );
     if (!existsFiles || existsFiles.length === 0) {
-      return response.error('Not found.', 404);
+      return response.error('File not found.', 404);
     };
-    await ddbDocClient.send(
-      new BatchWriteCommand({
-        RequestItems: {
-          [`${process.env.FILE_TABLE_NAME}`]: existsFiles.map(file => {
-            return {
-              DeleteRequest: {
-                Key: {
-                  fileId: file,
-                },
-              },
-            };
-          }),
-        },
-      }),
-    );
     return response.json({
-      deleted: true,
+      file: existsFiles,
     });
   } catch (error) {
     return response.error(error);

@@ -125,9 +125,14 @@ export class FileApi extends cdk.Construct {
           lambdaFunction: this.createListFilesFunction(),
         },
         {
-          path: '/files/{checksum}/versions/{version}',
+          path: '/files/{fileId}',
           httpMethod: HttpMethod.GET,
           lambdaFunction: this.createGetFileFunction(),
+        },
+        {
+          path: '/files/{checksum}/versions/{version}',
+          httpMethod: HttpMethod.GET,
+          lambdaFunction: this.createGetFilesFunction(),
         },
         {
           path: '/files/{checksum}/versions/{version}',
@@ -355,7 +360,7 @@ export class FileApi extends cdk.Construct {
         statements: [
           new iam.PolicyStatement({
             actions: [
-              'dynamodb:Get',
+              'dynamodb:GetItem',
             ],
             resources: [
               this.fileTable.tableArn,
@@ -365,6 +370,30 @@ export class FileApi extends cdk.Construct {
       }),
     );
     return getFileFunction;
+  }
+
+  private createGetFilesFunction(): lambda.NodejsFunction {
+    const getFilesFunction = new lambda.NodejsFunction(this, 'GetFilesFunction', {
+      entry: `${LAMBDA_ASSETS_PATH}/get-files/app.ts`,
+      environment: {
+        FILE_TABLE_NAME: this.fileTable.tableName,
+      },
+    });
+    getFilesFunction.role?.attachInlinePolicy(
+      new iam.Policy(this, 'get-files-policy', {
+        statements: [
+          new iam.PolicyStatement({
+            actions: [
+              'dynamodb:Query',
+            ],
+            resources: [
+              this.fileTable.tableArn,
+            ],
+          }),
+        ],
+      }),
+    );
+    return getFilesFunction;
   }
 
   private createUpdateFileFunction(): lambda.NodejsFunction {
