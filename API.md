@@ -221,6 +221,66 @@ const fileApiProps: FileApiProps = { ... }
 
 ---
 
+##### `categoryTableQueryByParentIdRCU`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.categoryTableQueryByParentIdRCU"></a>
+
+- *Type:* `number`
+
+---
+
+##### `categoryTableQueryByParentIdWCU`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.categoryTableQueryByParentIdWCU"></a>
+
+- *Type:* `number`
+
+---
+
+##### `categoryTableRCU`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.categoryTableRCU"></a>
+
+- *Type:* `number`
+
+---
+
+##### `categoryTableWCU`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.categoryTableWCU"></a>
+
+- *Type:* `number`
+
+---
+
+##### `fileTableGetFileByChecksumAndVersionRCU`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.fileTableGetFileByChecksumAndVersionRCU"></a>
+
+- *Type:* `number`
+
+---
+
+##### `fileTableGetFileByChecksumAndVersionWCU`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.fileTableGetFileByChecksumAndVersionWCU"></a>
+
+- *Type:* `number`
+
+---
+
+##### `fileTableQueryByCategoryIdAndLocaleRCU`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.fileTableQueryByCategoryIdAndLocaleRCU"></a>
+
+- *Type:* `number`
+
+---
+
+##### `fileTableQueryByCategoryIdAndLocaleWCU`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.fileTableQueryByCategoryIdAndLocaleWCU"></a>
+
+- *Type:* `number`
+
+---
+
+##### `fileTableRCU`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.fileTableRCU"></a>
+
+- *Type:* `number`
+
+---
+
+##### `fileTableWCU`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.fileTableWCU"></a>
+
+- *Type:* `number`
+
+---
+
 ### JobApiProps <a name="@softchef/cdk-iot-device-management.JobApiProps"></a>
 
 #### Initializer <a name="[object Object].Initializer"></a>
