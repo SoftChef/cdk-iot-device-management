@@ -1,11 +1,11 @@
 ## Thing Type API
 
-- [CreateThingType](#post-thing-types)
-- [DeleteThingType](#delete-thing-typesthingtypename)
-- [DeprecateThingType](#put-thing-typesthingtypenamedeprecate)
-- [GetThingType](#get-thing-typesthingtypename)
-- [ListThingTypes](#get-thing-types)
-- [UndeprecateThingType](#put-thing-typesthingtypenameundeprecate)
+- [Create Thing Type](#post-thing-types)
+- [Delete Thing Type](#delete-thing-typesthingtypename)
+- [Deprecate Thing Type](#put-thing-typesthingtypenamedeprecate)
+- [Get Thing Type](#get-thing-typesthingtypename)
+- [List Thing Types](#get-thing-types)
+- [Undeprecate Thing Type](#put-thing-typesthingtypenameundeprecate)
 
 ---
 

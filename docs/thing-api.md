@@ -1,14 +1,14 @@
 ## Thing API
 
-- [CreateThing](#post-things)
-- [DeleteThing](#delete-thingsthingname)
-- [DeleteThingShadow](#delete-thingsthingnameshadowsshadowname)
-- [GetThing](#get-thingsthingname)
-- [GetThingShadow](#get-thingsthingnameshadowsshadowname)
-- [ListThing](#get-things)
-- [ListThingShadows](#get-thingsthingnameshadows)
-- [UpdateThing](#put-thingsthingname)
-- [UpdateThingShadow](#put-thingsthingnameshadowsshadowname)
+- [Create Thing](#post-things)
+- [Delete Thing](#delete-thingsthingname)
+- [Delete Thing Shadow](#delete-thingsthingnameshadowsshadowname)
+- [Get Thing](#get-thingsthingname)
+- [Get Thing Shadow](#get-thingsthingnameshadowsshadowname)
+- [List Thing](#get-things)
+- [List Thing Shadows](#get-thingsthingnameshadows)
+- [Update Thing](#put-thingsthingname)
+- [Update Thing Shadow](#put-thingsthingnameshadowsshadowname)
 
 ---
 
