@@ -1,4 +1,4 @@
-## Thing Type API
+## Thing Type API Documentation
 
 - [Create Thing Type](#post-thing-types)
 - [Delete Thing Type](#delete-thing-typesthingtypename)

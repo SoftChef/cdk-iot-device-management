@@ -1,4 +1,4 @@
-## Thing API
+## Thing API Documentation
 
 - [Create Thing](#post-things)
 - [Delete Thing](#delete-thingsthingname)

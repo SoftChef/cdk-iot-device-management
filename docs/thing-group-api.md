@@ -1,4 +1,4 @@
-## Thing Group API
+## Thing Group API Documentation
 
 - [Add Thing to Thing Group](#put-thing-groupsthinggroupnamethingsthingname)
 - [Create Dynamic Thing Group](#post-dynamic-thing-groups)

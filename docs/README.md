@@ -1,4 +1,4 @@
-## RESTful API Overview
+## RESTful API Documentations
 
 - [Thing Type API Docs](./thing-type-api.md)
 
