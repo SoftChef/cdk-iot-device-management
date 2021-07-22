@@ -145,7 +145,7 @@ export class FileApi extends cdk.Construct {
           lambdaFunction: this.createGetFilesFunction(),
         },
         {
-          path: '/files/{checksum}/versions/{version}',
+          path: '/files/{fileId}',
           httpMethod: HttpMethod.PUT,
           lambdaFunction: this.createUpdateFileFunction(),
         },
@@ -418,6 +418,7 @@ export class FileApi extends cdk.Construct {
         statements: [
           new iam.PolicyStatement({
             actions: [
+              'dynamodb:GetItem',
               'dynamodb:UpdateItem',
             ],
             resources: [
