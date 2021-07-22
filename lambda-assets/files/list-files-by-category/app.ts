@@ -45,5 +45,5 @@ export async function handler(event: { [key: string]: any }) {
     });
   } catch (error) {
     return response.error(error);
-  };
+  }
 }

@@ -98,5 +98,5 @@ export async function handler(event: { [key: string]: any }) {
     } else {
       return response.error(error);
     };
-  };
+  }
 }
