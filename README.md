@@ -1,162 +1,93 @@
-## Features
+# CDK Construct - IoT Device Management
 
-## Thing Type API
+![Build](https://github.com/SoftChef/cdk-iot-device-management/actions/workflows/build.yml/badge.svg)
+![tag](https://img.shields.io/github/v/tag/softchef/cdk-iot-device-management)
+![dependencies](https://david-dm.org/softchef/cdk-iot-device-management.svg)
+
+IoT device management is composed of things, thing types, thing groups, jobs API services. The constructs can be used independently, that are based on full-managed service to create an API Gateway & Lambda function.
+
+## Installation
+
 ```
-exports.ThingTypeApi = class ThingTypeApi extends cdk.Construct {
-  // Define the resources
-}
-```
-- GET /thing-types - Get thing type list
-- GET /thing-types/{thingTypeName} - Get thing type by name
-- POST /thing-types - Create new thing type
-- PUT /thing-types/{thingTypeName}/deprecate - Deprecated thing type by name
-- PUT /thing-types/{thingTypeName}/undeprecate - Undeprecate thing type by name
-- DELETE /thing-types/{thingTypeName} - Delete thing type
+npm install @softchef/cdk-iot-device-management
 
----
+or
 
-## Thing API
-```
-ThingApiProps: {
-  enableSearchIndex: boolean
-}
+yarn add @softchef/cdk-iot-device-management
 
-exports.ThingApi = class ThingApi extends cdk.Construct {
-  // Define the resources
-}
-```
-- GET /things - Get thing list
-- GET /things/{thingName} - Get thing by name
-- POST /things - Create new thing
-- PUT /things/{thingName} - Update thing by name
-- DELETE /things/{thingName} - Delete thing by name
-
-- GET /search
-
----
-
-## Thing Group API
-```
-ThingGroupApiProps: {
-  enableSearchIndex: boolean
-}
-
-exports.ThingGroupApi = class ThingGroupApi extends cdk.Construct {
-  // Define the resources
-}
-```
-- GET /thing-groups - Get thing group list
-- GET /thing-groups/{thingGroupName} - Get thing group by name
-- POST /thing-groups - Create new thing group
-- PUT /thing-groups/{thingGroupName} - Update thing group by name
-- DELETE /thing-groups/{thingGroupName} - Delete thing group by name
-
-- PUT /thing-groups/{thingGroupName}/things/{thingName} - Add thing to thing group by name
-- DELETE /thing-groups/{thingGroupName}/things/{thingName} - Remove thing to thing group by name
-
-- POST /dynamic-thing-groups - Create new dynamic thing group
-- PUT /dynamic-thing-groups/{thingGroupName} - Update dynamic thing group by name
-- DELETE /dynamic-thing-groups/{thingGroupName} - Delete dynamic thing group by name
-// BillingGroup not join
-
----
-
-## File API
-```
-exports.FileApi = class FileApi extends cdk.Construct {
-  // Define the resources
-}
-```
-- GET /categories - Get root category list
-- GET /categories/{categoryId} - Get category by ID, if category is root will return children category list
-- POST /categories - Create new category
-- PUT /categories/{categoryId} - Update category by ID
-- DELETE /categories/{categoryId} - Delete category by ID
-
-- GET /files - Get root files list
-- GET /files/{categoryId} - Get files by category ID
-- GET /files/{fileId} - Get file by ID
-- POST /files - Create new file
-- PUT /files/{fileId} - Update file by ID
-- DELETE /files/{fileId} - Delete file by ID
-
-### POST /categories Body
-```
-{
-  id: string, // The uniqu id
-  name: string,
-  description: string,
-  parent: string // Optional, the exists category id when category is sub-category, null is root category
-}
 ```
 
-### POST /files Body
-```
-{
-  location: string, // File URI location
-  checksum: string, // MD5/CRC32/SHA1 file checksum
-  checksumType: string // MD5/CRC32/SHA1
-  version: string, // Semantic version format
-  categoryId: string, // Follow the category ID
-  description: string
-}
-```
-> Semantic versioning https://semver.org/
+## Constructs
 
----
+### Thing Type API construct
 
-## Job API
 ```
-exports.FileApi = class FileApi extends cdk.Construct {
-  // Define the resources
-}
-```
-- GET /jobs - Get job list
-- GET /jobs/{jobId} - Get job by ID
-- GET /jobs/{jobId}/things/{thingName} - Get job's thing status by job ID and thing name
-- POST /jobs - Create new job
-- PUT /jobs/{jobId} - Update job by ID
-- DELETE /jobs/{jobId} - Delete job by ID
-- DELETE /jobs/{jobId}/things/{thingName} - Delete job's thing by job ID and thing name
+import { ThingTypeApi } from '@softchef/cdk-iot-device-management'
 
-- GET /job-templates - Get job template list
-- GET /job-templates/{jobTemplateId} - Get job template by ID
-- POST /job-templates - Create new job template
-- DELETE /job-templates/{jobTemplateId} - Delete job template by ID
-
-### POST /jobs Body
-```
-{
-  jobTemplateArn: string, // Optional, if you don't specify a value for "document"
-  document: string, // Optional, if don't specify a value for "jobTemplateArn"
-  targets: string[], // Array of things or thing groups
-  targetSelection: string // CONTINUOUS or SNAPSHOT
-}
+const thingTypeApi = new ThingTypeApi(scope, id, {
+  authorizationType?: apigateway.AuthorizationType;
+  authorizer?: apigateway.IAuthorizer
+})
 ```
 
----
+[Thing Type API Docs](./docs/thing-type-api.md)
 
-## DynamoDB Table Schema
+### Thing API construct
 
-### File Table
+```
+import { ThingApi } from '@softchef/cdk-iot-device-management'
 
-| Key | Columns  | Type | Description |
-| ------------- | ------------- | ------------- | ------------- |
-| PK  | fileId | string | checksum |
-| SK | version | string | - |
-| GPK  | categoryId | string | - |
-| -  | location | string | - |
-| -  | description | string | - |
-| -  | createdAt | string | - |
-| -  | updatedAt | string | - |
+const thingApi = new ThingApi(scope, id, {
+  authorizationType?: apigateway.AuthorizationType;
+  authorizer?: apigateway.IAuthorizer
+})
+```
 
-### Category Table
+[Thing API Docs](./docs/thing-api.md)
 
-| Key | Columns  | Type | Description |
-| ------------- | ------------- | ------------- | ------------- |
-| PK  | categoryId | string | - |
-| GPK  | parentId | string | - |
-| -  | name | string | - |
-| -  | description | string | - |
-| -  | createdAt | string | - |
-| -  | updatedAt | string | - |
+### Thing Group API construct
+
+```
+import { ThingGroupApi } from '@softchef/cdk-iot-device-management'
+
+const thingGroupApi = new ThingGroupApi(scope, id, {
+  authorizationType?: apigateway.AuthorizationType;
+  authorizer?: apigateway.IAuthorizer
+})
+```
+[Thing Group API Docs](./docs/thing-group-api.md)
+
+### Job API construct
+
+```
+import { JobApi } from '@softchef/cdk-iot-device-management'
+
+const jobApi = new JobApi(scope, id, {
+  authorizationType?: apigateway.AuthorizationType;
+  authorizer?: apigateway.IAuthorizer;
+  scheduleFunction: ScheduleFunction
+})
+```
+
+> The [ScheduleFunction](https://www.npmjs.com/package/@softchef/cdk-schedule-function/v/0.0.15) is support to custom create job by schedule time.
+
+[Job API Docs](./job-api.md)
+
+### File API construct
+
+The file api has category & file api to manage IoT devices firmware.
+```
+import { fileApi } from '@softchef/cdk-iot-device-management'
+
+const FileApi = new FileApi(scope, id, {
+  authorizationType?: apigateway.AuthorizationType;
+  authorizer?: apigateway.IAuthorizer;
+})
+```
+
+[File API Docs](./docs/file-api.md)
+
+
+### Table Schema(PI, GSI)
+
+### Roadmap
