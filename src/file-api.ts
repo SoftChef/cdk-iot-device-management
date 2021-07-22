@@ -11,6 +11,16 @@ const LAMBDA_ASSETS_PATH = path.resolve(__dirname, '../lambda-assets/files');
 export interface FileApiProps {
   readonly authorizationType?: apigateway.AuthorizationType;
   readonly authorizer?: apigateway.IAuthorizer | undefined;
+  readonly categoryTableRCU?: number | 1;
+  readonly categoryTableWCU?: number | 1;
+  readonly categoryTableQueryByParentIdRCU?: number | 1;
+  readonly categoryTableQueryByParentIdWCU?: number | 1;
+  readonly fileTableRCU?: number | 1;
+  readonly fileTableWCU?: number | 1;
+  readonly fileTableQueryByCategoryIdAndLocaleRCU?: number | 1;
+  readonly fileTableQueryByCategoryIdAndLocaleWCU?: number | 1;
+  readonly fileTableGetFileByChecksumAndVersionRCU?: number | 1;
+  readonly fileTableGetFileByChecksumAndVersionWCU?: number | 1;
 }
 
 export class FileApi extends cdk.Construct {
@@ -28,8 +38,8 @@ export class FileApi extends cdk.Construct {
         name: 'categoryId',
         type: dynamodb.AttributeType.STRING,
       },
-      readCapacity: 1,
-      writeCapacity: 1,
+      readCapacity: props?.categoryTableRCU,
+      writeCapacity: props?.categoryTableWCU,
     });
     this.categoryTable.addGlobalSecondaryIndex({
       indexName: 'query-by-parent-id',
@@ -38,16 +48,16 @@ export class FileApi extends cdk.Construct {
         type: dynamodb.AttributeType.STRING,
       },
       projectionType: dynamodb.ProjectionType.ALL,
-      readCapacity: 1,
-      writeCapacity: 1,
+      readCapacity: props?.categoryTableQueryByParentIdRCU,
+      writeCapacity: props?.categoryTableQueryByParentIdWCU,
     });
     this.fileTable = new dynamodb.Table(this, 'FileTable', {
       partitionKey: {
         name: 'fileId',
         type: dynamodb.AttributeType.STRING,
       },
-      readCapacity: 1,
-      writeCapacity: 1,
+      readCapacity: props?.fileTableRCU,
+      writeCapacity: props?.fileTableWCU,
     });
     this.fileTable.addGlobalSecondaryIndex({
       indexName: 'query-by-category-id-and-locale',
@@ -60,8 +70,8 @@ export class FileApi extends cdk.Construct {
         type: dynamodb.AttributeType.STRING,
       },
       projectionType: dynamodb.ProjectionType.ALL,
-      readCapacity: 1,
-      writeCapacity: 1,
+      readCapacity: props?.fileTableQueryByCategoryIdAndLocaleRCU,
+      writeCapacity: props?.fileTableQueryByCategoryIdAndLocaleWCU,
     });
     this.fileTable.addGlobalSecondaryIndex({
       indexName: 'get-file-by-checksum-and-version',
@@ -74,8 +84,8 @@ export class FileApi extends cdk.Construct {
         type: dynamodb.AttributeType.STRING,
       },
       projectionType: dynamodb.ProjectionType.ALL,
-      readCapacity: 1,
-      writeCapacity: 1,
+      readCapacity: props?.fileTableGetFileByChecksumAndVersionRCU,
+      writeCapacity: props?.fileTableGetFileByChecksumAndVersionWCU,
     });
 
 

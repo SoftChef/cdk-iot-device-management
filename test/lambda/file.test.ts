@@ -12,18 +12,18 @@ import {
 import {
   mockClient,
 } from 'aws-sdk-client-mock';
-import * as listCategories from '../../lambda-assets/files/list-categories/app';
 import * as createCategory from '../../lambda-assets/files/create-category/app';
-import * as deleteCategory from '../../lambda-assets/files/delete-category/app';
-import * as getCategory from '../../lambda-assets/files/get-category/app';
-import * as updateCategory from '../../lambda-assets/files/update-category/app';
 import * as createFile from '../../lambda-assets/files/create-file/app';
+import * as deleteCategory from '../../lambda-assets/files/delete-category/app';
+import * as deleteFile from '../../lambda-assets/files/delete-file/app';
+import * as getCategory from '../../lambda-assets/files/get-category/app';
 import * as getFile from '../../lambda-assets/files/get-file/app';
 import * as getFiles from '../../lambda-assets/files/get-files/app';
+import * as listCategories from '../../lambda-assets/files/list-categories/app';
 import * as listFilesByCategory from '../../lambda-assets/files/list-files-by-category/app';
 import * as listFiles from '../../lambda-assets/files/list-files/app';
+import * as updateCategory from '../../lambda-assets/files/update-category/app';
 import * as updateFile from '../../lambda-assets/files/update-file/app';
-import * as deleteFile from '../../lambda-assets/files/delete-file/app';
 const CATEGORY_TABLE_NAME = 'category_table_name';
 const FILE_TABLE_NAME = 'file_table_name';
 
