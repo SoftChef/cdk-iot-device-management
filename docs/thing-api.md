@@ -47,7 +47,7 @@ Create new thing
 
 ---
 
-### DELETE /things/{thingName}
+### *DELETE* /things/{thingName}
 
 Delete thing
 
