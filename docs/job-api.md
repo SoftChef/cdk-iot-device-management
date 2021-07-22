@@ -235,7 +235,7 @@ Delete job by job ID
 
 | Name | Description |
 | ---- | ----------- |
-| jobId* | Job's ID |
+| jobId | Job's ID |
 
 **Body**
 
@@ -319,7 +319,7 @@ Delete job template by job template ID
 
 | Name | Description |
 | ---- | ----------- |
-| jobTemplateId | String |
+| jobTemplateId | Job template's ID |
 
 **Response Success Body**
 
@@ -423,7 +423,7 @@ Get job template by Job Template ID
 
 | Name | Description |
 | ---- | ----------- |
-| jobTemplateId | Job Template's ID |
+| jobTemplateId | Job template's ID |
 
 **Response Success Body**
 

@@ -22,8 +22,8 @@ Add thing to thing group
 
 | Name | Description |
 | ---- | ----------- |
-| thingGroupName | String | Thing group's name |
-| thingName | String | Thing's name |
+| thingGroupName | Thing group's name |
+| thingName | Thing's name |
 
 **Response Success Body**
 
@@ -49,7 +49,6 @@ Add thing to thing group
 | 404 | Thing group or thing not found |
 
 ---
-
 
 ### *POST* /dynamic-thing-groups
 
@@ -126,11 +125,11 @@ Create new thing group
 
 Delete dynamic thing group
 
-**Body**
+**Path Parameters**
 
-| Name | Schema | Description |
-| ---- | ------ | ----------- |
-| thingGroupName | String | Dynamic thing group's name |
+| Name | Description |
+| ---- | ----------- |
+| thingGroupName | Dynamic thing group's name |
 
 **Response Success Body**
 
@@ -161,11 +160,11 @@ Delete dynamic thing group
 
 Delete thing group
 
-**Body**
+**Path Parameters**
 
-| Name | Schema | Description |
-| ---- | ------ | ----------- |
-| thingGroupName | String | Thing group's name |
+| Name | Description |
+| ---- | ----------- |
+| thingGroupName | Thing group's name |
 
 **Response Success Body**
 
@@ -269,8 +268,8 @@ List things by thing group
 
 **Query String Parameters**
 
-| Name | Description |
-| ---- | ----------- |
+| Name | Schema | Description |
+| ---- | ------ | ----------- |
 | nextToken | String | Token for next data |
 
 **Response Success Body**
@@ -301,13 +300,13 @@ Update dynamic thing group
 
 | Name | Description |
 | ---- | ----------- |
-| thingGroupName* | String | Dynamic thing group's name |
+| thingGroupName* | Dynamic thing group's name |
 
 **Body**
 
 | Name | Schema | Description |
 | ---- | ------ | ----------- |
-| description* | Thing group's description
+| description* | String | Thing group's description
 
 **Response Success Body**
 
@@ -336,7 +335,7 @@ Update dynamic thing group
 
 ---
 
-### PUT /thing-groups/{thingGroupName}
+### *PUT* /thing-groups/{thingGroupName}
 
 Update thing group
 
@@ -348,7 +347,7 @@ Update thing group
 
 **Body**
 
-| Name | Group | Description |
+| Name | Schema | Description |
 | ---- | ----- | ----------- |
 | thingGroupDescription | String | Thing group's description |
 
@@ -384,10 +383,10 @@ Remove thing from thing group
 
 **Path Parameters**
 
-| Name | Schema | Description |
-| ---- | ------ | ----------- |
-| thingGroupName | String | Thing group's name |
-| thingName | String | Thing's name |
+| Name | Description |
+| ---- | ----------- |
+| thingGroupName | Thing group's name |
+| thingName | Thing's name |
 
 **Response Success Body**
 

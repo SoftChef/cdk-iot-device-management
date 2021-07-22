@@ -52,7 +52,7 @@ Delete thing type
 
 | Name | Description |
 | ---- | ----------- |
-| thingTypeName | String | Thing type's name |
+| thingTypeName | Thing type's name |
 
 **Response Success Body**
 
@@ -80,9 +80,6 @@ Delete thing type
 
 ---
 
-
-
-
 ### *PUT* /thing-types/{thingTypeName}/deprecate
 
 Deprecated thing
@@ -91,7 +88,7 @@ Deprecated thing
 
 | Name | Description |
 | ---- | ----------- |
-| thingTypeName | String | Thing type's name |
+| thingTypeName | Thing type's name |
 
 **Response Success Body**
 
@@ -124,9 +121,9 @@ Get thing type by thing type name
 
 **Path Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| thingTypeName | String | Thing type's name |
+| Name | Description |
+| ---- | ----------- |
+| thingTypeName | Thing type's name |
 
 **Response Success Body**
 
@@ -155,8 +152,8 @@ List thing types
 
 **Query String Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name | Schema | Description |
+| ---- | ------ | ----------- |
 | nextToken? | String | Token for next data |
 
 **Response Success Body**
@@ -182,7 +179,7 @@ List thing types
 
 ---
 
-### PUT /thing-types/{thingTypeName}/undeprecate
+### *PUT* /thing-types/{thingTypeName}/undeprecate
 
 Undeprecate thing type
 

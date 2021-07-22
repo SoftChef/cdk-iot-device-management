@@ -158,7 +158,7 @@ Get thing shadow
 
 | Name | Description |
 | ---- | ----------- |
-| thingName* | Thing's name
+| thingName | Thing's name
 | shadowName | Thing shadow's name
 
 **Response Success Body**
@@ -197,7 +197,7 @@ List things
     },
     ...more thing objects
   ],
-  "nextToken": "{Token for next data}",
+  "nextToken": "{Token for next data}"
 }
 ```
 
@@ -217,11 +217,11 @@ List thing shadow
 
 | Name | Description |
 | ---- | ----------- |
-| thingName | String | Thing's name |
+| thingName | Thing's name |
 
 **Query String Parameters**
 
-| Name | Group | Description |
+| Name | Schema | Description |
 | ---- | ----- | ----------- |
 | nextToken | String | Token for next data |
 
@@ -261,7 +261,7 @@ Update thing
 
 **Body**
 
-| Name | Group | Description |
+| Name | Schema | Description |
 | ---- | ----- | ----------- |
 | thingTypeName | String | Thing's thing type name |
 | attributePayload | Object | Thing's attribute payload |
