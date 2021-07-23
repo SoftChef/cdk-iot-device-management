@@ -6,6 +6,8 @@
 
 IoT device management is composed of things, thing types, thing groups, jobs, files API services. The constructs can be used independently, that are based on full-managed service to create an API Gateway & Lambda function.
 
+![Architecture](docs/cdk-iot-device-management.png)
+
 ## Installation
 
 ```
