@@ -28,6 +28,17 @@ import * as removeThingFromThingGroup from '../../lambda-assets/thing-groups/rem
 import * as updateDynamicThingGroup from '../../lambda-assets/thing-groups/update-dynamic-thing-group/app';
 import * as updateThingGroup from '../../lambda-assets/thing-groups/update-thing-group/app';
 
+const expectedThingGroup = {
+  thingGroupName: 'TestGetThingGroupName',
+  thingGroupId: 'TestGetThingGroupId',
+  thingGroupArn: 'TestGetThingGroupArn',
+  version: 1,
+  indexName: 'TestGetThingGroupIndexName',
+  queryString: 'TestGetThingGroupQueryString',
+  queryVersion: 'TestGetThingGroupQueryVersion',
+  status: 'TestGetThingGroupStatus',
+};
+
 const expectedInvalidThingGroup = {
   thingGroupName: 'not-exists-thing-group-name',
 };
@@ -51,16 +62,7 @@ const expected = {
     thingGroupName: 'TestCreateThingGroupName',
     queryString: 'TestCreateQueryString',
   },
-  getThingGroup: {
-    thingGroupName: 'TestGetThingGroupName',
-    thingGroupId: 'TestGetThingGroupId',
-    thingGroupArn: 'TestGetThingGroupArn',
-    version: 1,
-    indexName: 'TestGetThingGroupIndexName',
-    queryString: 'TestGetThingGroupQueryString',
-    queryVersion: 'TestGetThingGroupQueryVersion',
-    status: 'TestGetThingGroupStatus',
-  },
+  getThingGroup: expectedThingGroup,
   updateThingGroup: {
     thingGroupName: 'TestUpdateThingGroupName',
     thingGroupProperties: {
@@ -68,11 +70,19 @@ const expected = {
     },
   },
   listThingGroups: {
-    thingGroups: [],
+    thingGroups: [
+      {
+        groupArn: 'TestGroupArn',
+        groupName: 'TestGroup',
+      },
+    ],
     nextToken: 'TestNextToken',
   },
   listThingsInThingGroups: {
-    things: [],
+    thingGroupName: 'TestListThingGroupName',
+    things: [
+      'TestThing',
+    ],
     nextToken: 'TestNextToken',
   },
   invalidThingGroup: {
@@ -151,9 +161,7 @@ test('Get thing group with invalid thingGroupName expect failure', async () => {
 
 test('List thing groups success', async () => {
   const iotClientMock = mockClient(IoTClient);
-  iotClientMock.on(ListThingGroupsCommand, {
-    nextToken: expected.listThingGroups.nextToken,
-  }).resolves({
+  iotClientMock.on(ListThingGroupsCommand).resolves({
     thingGroups: expected.listThingGroups.thingGroups,
     nextToken: expected.listThingGroups.nextToken,
   });
@@ -176,9 +184,16 @@ test('List thing groups with nextToken success', async () => {
 test('List things in thing groups success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(ListThingsInThingGroupCommand, {
-    thingGroupName: expected.createThingGroup.thingGroupName,
-  }).resolves(expected.listThingsInThingGroups);
-  const response = await listThingsInThingGroup.handler({});
+    thingGroupName: expected.listThingsInThingGroups.thingGroupName,
+  }).resolves({
+    things: expected.listThingsInThingGroups.things,
+    nextToken: expected.listThingsInThingGroups.nextToken,
+  });
+  const response = await listThingsInThingGroup.handler({
+    pathParameters: {
+      thingGroupName: expected.listThingsInThingGroups.thingGroupName,
+    },
+  });
   expect(response.statusCode).toEqual(200);
   iotClientMock.restore();
 });
@@ -186,9 +201,7 @@ test('List things in thing groups success', async () => {
 test('List things in thing groups with invalid thingGroupName expect failure', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(ListThingsInThingGroupCommand).rejects(expected.invalidThingGroupError);
-  const response = await listThingsInThingGroup.handler({
-    thingGroupName: expected.thingGroupName,
-  });
+  const response = await listThingsInThingGroup.handler({});
   const body = JSON.parse(response.body);
   expect(response.statusCode).toEqual(404);
   expect(body.error).toEqual(

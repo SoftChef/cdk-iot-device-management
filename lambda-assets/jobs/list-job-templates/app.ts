@@ -5,15 +5,22 @@ export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
   const response = new Response();
   try {
-    let parameters: { [key: string]: any } = {};
+    let parameters: {
+      nextToken: string | undefined;
+    } = {
+      nextToken: undefined,
+    };
     if (request.has('nextToken')) {
       parameters.nextToken = request.get('nextToken');
     }
     const iotClient = new IoTClient({});
-    const jobTemplates = await iotClient.send(
+    const { jobTemplates, nextToken } = await iotClient.send(
       new ListJobTemplatesCommand(parameters),
     );
-    return response.json(jobTemplates);
+    return response.json({
+      jobTemplates: jobTemplates,
+      nextToken: nextToken,
+    });
   } catch (error) {
     return response.error(error);
   }

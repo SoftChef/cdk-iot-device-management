@@ -14,24 +14,31 @@ export async function handler(event: { [key: string]: any }) {
     if (validated.error) {
       return response.error(validated.details, 422);
     }
-    let parameters: { [key: string]: any } = {};
+    let parameters: {
+      nextToken: string | undefined;
+    } = {
+      nextToken: undefined,
+    };
     if (request.has('nextToken')) {
       parameters.nextToken = request.get('nextToken');
-    };
+    }
     const iotClient = new IoTClient({});
-    const jobsExecutionJob = await iotClient.send(
+    const jobsExecutionForJob = await iotClient.send(
       new ListJobExecutionsForJobCommand({
         jobId: request.get('jobId'),
         status: request.get('status'),
         ...parameters,
       }),
     );
-    return response.json(jobsExecutionJob);
+    return response.json({
+      executionSummaries: jobsExecutionForJob.executionSummaries,
+      nextToken: jobsExecutionForJob.nextToken,
+    });
   } catch (error) {
     if (error.Code === 'ResourceNotFoundException') {
       return response.error(error, 404);
     } else {
       return response.error(error);
-    };
+    }
   }
 }

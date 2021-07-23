@@ -71,7 +71,7 @@ test('Create thing type with invalid inputs expect failure', async () => {
   });
   const body = JSON.parse(response.body);
   expect(response.statusCode).toEqual(422);
-  expect(body.error.details).toEqual([
+  expect(body.error).toEqual([
     {
       key: 'thingTypeName',
       label: 'thingTypeName',

@@ -66,13 +66,14 @@ const expected = {
     things: [
       expectedThingResponse,
     ],
-    nextToken: '12345',
+    nextToken: 'testNextToken',
   },
   listThingShadows: {
     results: [
       'test',
     ],
-    nextToken: '12345',
+    nextToken: 'testNextToken',
+    timestamp: Date.now(),
   },
   updateThing: {
     thingTypeName: expectedThingResponse.thingTypeName,
@@ -255,6 +256,7 @@ test('List thing shadows success', async () => {
     thingName: expected.thingName,
   }).resolves({
     results: expected.listThingShadows.results,
+    timestamp: expected.listThingShadows.timestamp,
   });
   const response = await listThingShadows.handler({
     pathParameters: {
@@ -262,8 +264,8 @@ test('List thing shadows success', async () => {
     },
   });
   const body = JSON.parse(response.body);
-  expect(Array.isArray(body.thingShadows.results)).toBe(true);
-  expect(body.thingShadows.results).toEqual(expected.listThingShadows.results);
+  expect(Array.isArray(body.thingShadows)).toBe(true);
+  expect(body.thingShadows).toEqual(expected.listThingShadows.results);
   expect(response.statusCode).toEqual(200);
   iotDataPlaneClientMock.restore();
 });
@@ -303,9 +305,9 @@ test('List thing shadows with nextToken success', async () => {
     },
   });
   const body = JSON.parse(response.body);
-  expect(Array.isArray(body.thingShadows.results)).toBe(true);
-  expect(body.thingShadows.results).toEqual(expected.listThingShadows.results);
-  expect(body.thingShadows.nextToken).toEqual(expected.listThingShadows.nextToken);
+  expect(Array.isArray(body.thingShadows)).toBe(true);
+  expect(body.thingShadows).toEqual(expected.listThingShadows.results);
+  expect(body.nextToken).toEqual(expected.listThingShadows.nextToken);
   expect(response.statusCode).toEqual(200);
   iotDataPlaneClientMock.restore();
 });

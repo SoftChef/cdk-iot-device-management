@@ -19,7 +19,7 @@ export async function handler(event: { [key: string]: any }) {
     );
     if (existsFile.Item) {
       return response.json({
-        file: existsFile,
+        file: existsFile.Item,
       });
     } else {
       return response.error('File not found.', 404);

@@ -16,7 +16,7 @@ export async function handler(event: { [key: string]: any }) {
     });
     if (validated.error) {
       return response.error(validated.details, 422);
-    };
+    }
     const currentTime = Date.now();
     const name = request.input('name');
     const ddbDocClient = DynamoDBDocumentClient.from(
@@ -44,7 +44,7 @@ export async function handler(event: { [key: string]: any }) {
     );
     if (category) {
       return response.error('Category already exists.', 422);
-    };
+    }
     await ddbDocClient.send(
       new PutCommand({
         TableName: process.env.CATEGORY_TABLE_NAME,

@@ -6,13 +6,15 @@ export async function handler(event: { [key: string]: any }) {
   const response = new Response();
   try {
     const iotClient = new IoTClient({});
-    const jobExecution = await iotClient.send(
+    const { execution } = await iotClient.send(
       new DescribeJobExecutionCommand({
         jobId: request.parameter('jobId'),
         thingName: request.parameter('thingName'),
       }),
     );
-    return response.json(jobExecution);
+    return response.json({
+      execution: execution,
+    });
   } catch (error) {
     if (error.Code === 'ResourceNotFoundException') {
       return response.error(error, 404);

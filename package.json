@@ -84,7 +84,6 @@
     "@types/node": "15.12.2",
     "@types/semver": "^7.3.7",
     "@types/uuid": "^8.3.1",
-    "aws-sdk": "^2.950.0",
     "joi": "^17.4.1",
     "semver": "^7.3.5",
     "uuid": "^8.3.2"
@@ -102,7 +101,6 @@
     "@types/node",
     "@types/semver",
     "@types/uuid",
-    "aws-sdk",
     "joi",
     "semver",
     "uuid"

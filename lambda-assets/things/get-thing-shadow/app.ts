@@ -13,7 +13,7 @@ export async function handler(event: { [key: string]: any }) {
       }),
     );
     return response.json({
-      payload: String.fromCharCode(...payload)
+      payload: String.fromCharCode(...payload),
     });
   } catch (error) {
     if (error.Code === 'ResourceNotFoundException') {

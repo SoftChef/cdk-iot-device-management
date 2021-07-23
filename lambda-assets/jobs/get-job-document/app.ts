@@ -6,17 +6,19 @@ export async function handler(event: { [key: string]: any }) {
   const response = new Response();
   try {
     const iotClient = new IoTClient({});
-    const document = await iotClient.send(
+    const { document } = await iotClient.send(
       new GetJobDocumentCommand({
         jobId: request.parameter('jobId'),
       }),
     );
-    return response.json(document);
+    return response.json({
+      document: document,
+    });
   } catch (error) {
     if (error.Code === 'ResourceNotFoundException') {
       return response.error(error, 404);
     } else {
       return response.error(error);
-    };
+    }
   }
 }

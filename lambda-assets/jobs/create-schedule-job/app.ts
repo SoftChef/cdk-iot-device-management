@@ -25,12 +25,14 @@ export async function handler(event: { [key: string]: any }) {
       },
     );
     if (validated.error) {
-      return response.failed(validated.error.details.map((detail) => {
-        return {
-          ...detail.context,
-          message: detail.message,
-        };
-      }));
+      return response.failed(
+        validated.error.details.map((detail) => {
+          return {
+            ...detail.context,
+            message: detail.message,
+          };
+        }),
+      );
     }
     const iotClient = new IoTClient({});
     const job = await iotClient.send(
