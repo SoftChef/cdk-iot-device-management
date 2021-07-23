@@ -13,8 +13,8 @@
 - [List Files](#get-files)
 - [List Files by Category](#get-categoriescategoryidfiles)
 - [Update Category](#put-categoriescategoryid)
-- [Update Files](#put-files)
 - [Update File](#put-filesfileid)
+- [Update Files](#put-files)
 ---
 
 ### *POST* /categories
@@ -645,9 +645,9 @@ Update file summary and description by file ID.
 | 404 | File not found |
 | 422 | Variable type incorrect |
 
-### *PUT* /files/{fileId}
+### *PUT* /files
 
-Update file summary and description by file ID.
+Update files summary and description by file ID.
 
 **Path Parameters**
 
