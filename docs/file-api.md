@@ -9,12 +9,12 @@
 - [List Files](#get-files)
 - [List Files by Category](#get-categoriescategoryidfiles)
 - [Update Category](#put-categoriescategoryid)
-- [Update Files](#put-fileschecksumversionsversion)
+- [Update Files](#put-filesfileids)
 ---
 
 ### *POST* /categories
 
-Create new file category
+Create a new file category
 
 **Body**
 
@@ -46,7 +46,7 @@ Create new file category
 | ---------------- | ----------- |
 | 200 | Create success |
 | 404 | Parent category id not found |
-| 422 | Missing require field / Variable type incorrect |
+| 422 | Category already exists / Variable type incorrect |
 
 ---
 
@@ -58,11 +58,11 @@ Create files
 
 | Name | Schema | Description |
 | -------- | ------- | ---- |
-| categoryId* | String | From category |
 | version* | String | File's version|
-| location* | URI | File's path|
+| categoryId* | String | From category |
 | checksum* | String | An encrypt md5 / crc32 / sha1 value |
 | checksumType* | 'md5' \| 'crc32' \| 'sha1' | File's checksum type|
+| location* | URI | File's path|
 | locale* | String | File's locale |
 | summary* | string (Allow empty string) | File's summary|
 | description* | String (Allow empty string) | File's description |
@@ -88,8 +88,8 @@ Create files
 | HTTP Status Code | Description |
 | ---------------- | ----------- |
 | 200 | Create file success |
-| 422 | Missing require field / Variable type incorrect / File exists |
-| 404 | Category ID not found |
+| 422 | Variable type incorrect |
+| 404 | Category does not exist. |
 
 ---
 
@@ -105,10 +105,11 @@ Delete file
 | version | File's version |
 
 **Response Success Body**
+```
 {
   "deleted": true
 }
-
+```
 **Response Failure Body**
 
 ```
@@ -155,7 +156,7 @@ Get category by category ID, if category is root will return children category.
 | HTTP Status Code | Description |
 | ---------------- | ----------- |
 | 200 | Get Category Success |
-| 404 | Category ID not found |
+| 404 | Category does not exist |
 
 ---
 
@@ -198,7 +199,7 @@ Get root category list
 
 ### *DELETE* /categories/{categoryId}
 
-Delete category by categoty ID
+Delete category by category ID
 
 **Path Parameters**
 
@@ -227,7 +228,6 @@ Delete category by categoty ID
 | HTTP Status Code | Description |
 | ---------------- | ----------- |
 | 200 | Delete success |
-| 404 | Category ID not found |
 
 ---
 
@@ -360,7 +360,7 @@ List files by category ID
 | HTTP Status Code | Description |
 | ---------------- | ----------- |
 | 200 | List files success |
-| 404 | Category ID not found |
+| 404 | Category not found |
 
 ---
 
@@ -401,33 +401,25 @@ Update category description by category ID
 | HTTP Status Code | Description |
 | ---------------- | ----------- |
 | 200 | Update success |
-| 404 | Category ID not found |
-| 422 | Missing require field / Variable type incorrect |
+| 404 | Category not found |
+| 422 | Variable type incorrect |
 
 ---
 
-### *PUT* /files/{checksum}/versions/{version}
+### *PUT* /files/{fileId}
 
-Update file
+Update file summary and description by file ID.
 
 **Path Parameters**
 
 | Name | Description |
 | ---- | ----------- |
-| checksum | File's checksum |
-| version | File's version |
+| fileId | File's ID |
 
 **Body**
 
 | Name | Schema | Description |
 | ---- | ------ | ----------- |
-| fileId* | String | File's ID |
-| categoryId* | String | From category |
-| checksumType* | 'md5' \| 'crc32' \| 'sha1' | File's checksum type|
-| checksum* | String | An encrypt md5 / crc32 / sha1 value |
-| version* | String | File's version|
-| location* | URI | File's path|
-| locale* | String | File's locale |
 | summary* | string (Allow empty string) | File's summary|
 | description* | String (Allow empty string) | File's description |
 
@@ -453,4 +445,4 @@ Update file
 | ---------------- | ----------- |
 | 200 | Update success |
 | 404 | File not found |
-| 422 | Missing require field / Variable type incorrect |
+| 422 | Variable type incorrect |

@@ -8,7 +8,7 @@ export async function handler(event: { [key: string]: any }) {
   try {
     const validated = request.validate(joi => {
       return {
-        description: joi.string(),
+        description: joi.string().allow(''),
       };
     });
     if (validated.error) {
@@ -17,29 +17,30 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({}),
     );
-    const { Item: category } = await ddbDocClient.send(
+    const categoryId = request.parameter('categoryId');
+    const category = await ddbDocClient.send(
       new GetCommand({
         TableName: process.env.CATEGORY_TABLE_NAME,
         Key: {
-          categoryId: request.parameter('categoryId'),
+          categoryId,
         },
       }),
     );
-    if (!category) {
-      return response.error('Not found.', 404);
+    if (!category.Item) {
+      return response.error('Category does not exist.', 404);
     };
     await ddbDocClient.send(
       new UpdateCommand({
         TableName: process.env.CATEGORY_TABLE_NAME,
         Key: {
-          categoryId: request.parameter('categoryId'),
+          categoryId,
         },
         UpdateExpression: 'set #description = :description',
         ExpressionAttributeNames: {
           '#description': 'description',
         },
         ExpressionAttributeValues: {
-          ':description': request.input('description', ''),
+          ':description': request.input('description'),
         },
       }),
     );

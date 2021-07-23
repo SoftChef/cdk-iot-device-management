@@ -28,7 +28,7 @@ export async function handler(event: { [key: string]: any }) {
       }),
     );
     if (!file.Item) {
-      return response.error('File does not exists.', 400);
+      return response.error('File does not exists.', 404);
     };
     await ddbDocClient.send(
       new UpdateCommand({

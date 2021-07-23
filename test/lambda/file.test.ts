@@ -99,6 +99,10 @@ const expected = {
       updatedAt: Date.now(),
     },
   ],
+  LastEvaluatedKey: {
+    checksum: expectedFile.checksum,
+    version: expectedFile.version,
+  },
 };
 
 beforeEach(() => {
@@ -294,7 +298,7 @@ test('Update with does not exist category', async () => {
   });
   const body = JSON.parse(response.body);
   expect(response.statusCode).toEqual(404);
-  expect(body.error).toEqual('Not found.');
+  expect(body.error).toEqual('Category does not exist.');
   documentClientMock.restore();
 });
 
@@ -371,8 +375,8 @@ test('Create file with does not exist category', async () => {
     },
   });
   const body = JSON.parse(response.body);
-  expect(response.statusCode).toEqual(422);
-  expect(body.error).toEqual('Category does not exists.');
+  expect(response.statusCode).toEqual(404);
+  expect(body.error).toEqual('Category does not exist.');
   documentClientMock.restore();
 });
 
@@ -507,6 +511,41 @@ test('Get file API success', async () => {
     },
   });
   expect(response.statusCode).toEqual(200);
+  documentClientMock.restore();
+});
+
+test('Get file API with nextToken', async () => {
+  const documentClientMock = mockClient(DynamoDBDocumentClient);
+  documentClientMock.on(QueryCommand, {
+    TableName: FILE_TABLE_NAME,
+    IndexName: 'get-file-by-checksum-and-version',
+    KeyConditionExpression: '#checksum = :checksum and #version = :version',
+    ExpressionAttributeNames: {
+      '#checksum': 'checksum',
+      '#version': 'version',
+    },
+    ExpressionAttributeValues: {
+      ':checksum': expected.file.checksum,
+      ':version': expected.file.version,
+    },
+  }).resolves({
+    Items: expected.files,
+    LastEvaluatedKey: expected.LastEvaluatedKey,
+  });
+  const response = await getFiles.handler({
+    pathParameters: {
+      checksum: expected.file.checksum,
+      version: expected.file.version,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(response.statusCode).toEqual(200);
+  expect(body).toEqual({
+    file: expected.files,
+    nextToken: Buffer.from(
+      JSON.stringify(expected.LastEvaluatedKey),
+    ).toString('base64'),
+  });
   documentClientMock.restore();
 });
 
@@ -646,7 +685,7 @@ test('Update file when file does not exist.', async () => {
       description: expected.file.description,
     },
   });
-  expect(response.statusCode).toEqual(400);
+  expect(response.statusCode).toEqual(404);
   documentClientMock.restore();
 });
 
@@ -703,5 +742,34 @@ test('Delete file API', async () => {
     },
   });
   expect(response.statusCode).toEqual(200);
+  documentClientMock.restore();
+});
+
+test('Delete does not exist file', async () => {
+  const documentClientMock = mockClient(DynamoDBDocumentClient);
+  documentClientMock.on(QueryCommand, {
+    TableName: FILE_TABLE_NAME,
+    IndexName: 'get-file-by-checksum-and-version',
+    KeyConditionExpression: '#checksum = :checksum and #version = :version',
+    ExpressionAttributeNames: {
+      '#checksum': 'checksum',
+      '#version': 'version',
+    },
+    ExpressionAttributeValues: {
+      ':checksum': expected.file.checksum,
+      ':version': expected.file.version,
+    },
+  }).resolves({
+    Items: [],
+  });
+  const response = await deleteFile.handler({
+    pathParameters: {
+      checksum: expected.file.checksum,
+      version: expected.file.version,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(response.statusCode).toEqual(404);
+  expect(body.error).toEqual('File not found.');
   documentClientMock.restore();
 });

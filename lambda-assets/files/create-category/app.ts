@@ -18,19 +18,22 @@ export async function handler(event: { [key: string]: any }) {
       return response.error(validated.details, 422);
     };
     const currentTime = Date.now();
-    const name = request.input('name', null);
-    const parentId = request.input('parentId');
+    const name = request.input('name');
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({}),
     );
     const md5 = crypto.createHash('md5');
     let itemParameters: { [key: string]: any } = {};
     if (request.has('parentId')) {
+      const parentId = request.input('parentId');
       itemParameters.categoryId = md5.update(`${parentId}-${name}`).digest('hex');
       itemParameters.parentId = parentId;
     } else {
       itemParameters.categoryId = md5.update(name).digest('hex');
     };
+    if (request.has('description')) {
+      itemParameters.description = request.input('description');
+    }
     const { Item: category } = await ddbDocClient.send(
       new GetCommand({
         TableName: process.env.CATEGORY_TABLE_NAME,
@@ -48,7 +51,6 @@ export async function handler(event: { [key: string]: any }) {
         Item: {
           ...itemParameters,
           name,
-          description: request.input('description'),
           createdAt: currentTime,
           updatedAt: currentTime,
         },

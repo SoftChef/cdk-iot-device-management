@@ -25,7 +25,7 @@ export async function handler(event: { [key: string]: any }) {
       }),
     );
     if (!existsFiles || existsFiles.length === 0) {
-      return response.error('Not found.', 404);
+      return response.error('File not found.', 404);
     };
     await ddbDocClient.send(
       new BatchWriteCommand({

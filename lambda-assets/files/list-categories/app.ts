@@ -9,7 +9,6 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({}),
     );
-    const parentId = request.get('parentId', undefined);
     let parameters: { [key: string]: any } = {};
     if (request.has('nextToken')) {
       parameters.ExclusiveStartKey = {
@@ -25,7 +24,7 @@ export async function handler(event: { [key: string]: any }) {
         '#parentId': 'parentId',
       };
       parameters.ExpressionAttributeValues = {
-        ':parentId': parentId,
+        ':parentId': request.get('parentId'),
       };
       const { Items: categories, LastEvaluatedKey: lastEvaluatedKey } = await ddbDocClient.send(
         new QueryCommand({

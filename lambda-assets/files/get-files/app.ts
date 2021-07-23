@@ -9,7 +9,15 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({}),
     );
-    const { Items: existsFiles } = await ddbDocClient.send(
+    let parameters: { [key: string]: any } = {};
+    if (request.has('nextToken')) {
+      parameters.ExclusiveStartKey = {
+        Key: JSON.parse(
+          Buffer.from(request.get('nextToken'), 'base64').toString('utf8'),
+        ),
+      };
+    };
+    const { Items: existsFiles, LastEvaluatedKey: lastEvaluatedKey } = await ddbDocClient.send(
       new QueryCommand({
         TableName: process.env.FILE_TABLE_NAME,
         IndexName: 'get-file-by-checksum-and-version',
@@ -24,11 +32,18 @@ export async function handler(event: { [key: string]: any }) {
         },
       }),
     );
+    let nextToken = null;
+    if (lastEvaluatedKey) {
+      nextToken = Buffer.from(
+        JSON.stringify(lastEvaluatedKey),
+      ).toString('base64');
+    };
     if (!existsFiles || existsFiles.length === 0) {
       return response.error('File not found.', 404);
     };
     return response.json({
       file: existsFiles,
+      nextToken,
     });
   } catch (error) {
     return response.error(error);
