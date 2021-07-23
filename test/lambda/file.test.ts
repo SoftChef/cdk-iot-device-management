@@ -406,28 +406,9 @@ test('Create files API success', async () => {
           checksum: expected.newFile.checksum,
           version: expected.newFile.version,
           categoryId: expected.newFile.categoryId,
-          locales: [{
-            locale: expected.newFile.locale,
-            summary: expected.newFile.summary,
-            description: expected.newFile.description,
-          }],
-        },
-        {
-          location: expected.newFile.location,
-          checksumType: expected.newFile.checksumType,
-          checksum: expected.newFile.checksum,
-          version: expected.newFile.version,
-          categoryId: expected.newFile.categoryId,
-          locales: [{
-            locale: expected.newFile.locale,
-            summary: expected.newFile.summary,
-            description: expected.newFile.description,
-          },
-          {
-            locale: expected.newFile.locale,
-            summary: expected.newFile.summary,
-            description: expected.newFile.description,
-          }],
+          locale: expected.newFile.locale,
+          summary: expected.newFile.summary,
+          description: expected.newFile.description,
         },
       ],
     },
@@ -449,16 +430,9 @@ test('Create files with invalid inputs expect failure (value in files array)', a
           checksumType: '',
           checksum: '',
           location: '',
-          locales: [{
-            locale: null,
-            summary: null,
-            description: null,
-          },
-          {
-            locale: null,
-            summary: null,
-            description: null,
-          }],
+          locale: null,
+          summary: null,
+          description: null,
         },
       ],
     },
@@ -497,13 +471,7 @@ test('Create files with invalid inputs expect failure (value in files array)', a
       message: expect.any(String),
     },
     {
-      label: 'files[0].locales[0].locale',
-      value: null,
-      key: 'locale',
-      message: expect.any(String),
-    },
-    {
-      label: 'files[0].locales[1].locale',
+      label: 'files[0].locale',
       value: null,
       key: 'locale',
       message: expect.any(String),
@@ -847,41 +815,29 @@ test('Update file when file does not exist.', async () => {
 
 test('Update files API', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(QueryCommand, {
+  documentClientMock.on(GetCommand, {
     TableName: process.env.FILE_TABLE_NAME,
-    IndexName: 'get-file-by-checksum-and-version',
-    KeyConditionExpression: '#checksum = :checksum and #version = :version',
-    ExpressionAttributeNames: {
-      '#checksum': 'checksum',
-      '#version': 'version',
-    },
-    ExpressionAttributeValues: {
-      ':checksum': expected.newFile.checksum,
-      ':version': expected.newFile.version,
+    Key: {
+      fileId: expected.newFile.fileId,
     },
   }).resolves({
-    Items: [expected.newFile],
+    Item: expected.newFile,
   });
-  documentClientMock.on(BatchWriteCommand, {
-    RequestItems: {
-      [`${process.env.FILE_TABLE_NAME}`]: [
-        {
-          PutRequest: {
-            Item: {
-              fileId: expected.newFile.fileId,
-              categoryId: expected.newFile.categoryId,
-              checksumType: expected.newFile.checksumType,
-              checksum: expected.newFile.checksum,
-              version: expected.newFile.version,
-              location: expected.newFile.location,
-              locale: expected.newFile.locale,
-              summary: expected.newFile.summary,
-              description: expected.newFile.description,
-              updatedAt: expect.any(Number),
-            },
-          },
-        },
-      ],
+  documentClientMock.on(UpdateCommand, {
+    TableName: process.env.FILE_TABLE_NAME,
+    Key: {
+      fileId: expected.newFile.fileId,
+    },
+    UpdateExpression: 'set #summary = :summary and #description = :description and #updatedAt = :updatedAt',
+    ExpressionAttributeNames: {
+      '#summary': 'summary',
+      '#description': 'description',
+      '#updatedAt': 'updatedAt',
+    },
+    ExpressionAttributeValues: {
+      ':summary': expected.newFile.summary,
+      ':description': expected.newFile.description,
+      ':updatedAt': expect.any(Number),
     },
   }).resolves({});
   const response = await updateFiles.handler({
@@ -889,16 +845,8 @@ test('Update files API', async () => {
       files: [
         {
           fileId: expected.newFile.fileId,
-          location: expected.newFile.location,
-          checksumType: expected.newFile.checksumType,
-          checksum: expected.newFile.checksum,
-          version: expected.newFile.version,
-          categoryId: expected.newFile.categoryId,
-          locales: [{
-            locale: expected.newFile.locale,
-            summary: expected.newFile.summary,
-            description: expected.newFile.description,
-          }],
+          summary: expected.newFile.summary,
+          description: expected.newFile.description,
         },
       ],
     },
@@ -909,41 +857,26 @@ test('Update files API', async () => {
 
 test('Update files when file does not exist.', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(QueryCommand, {
+  documentClientMock.on(GetCommand, {
     TableName: FILE_TABLE_NAME,
-    IndexName: 'get-file-by-checksum-and-version',
-    KeyConditionExpression: '#checksum = :checksum and #version = :version',
-    ExpressionAttributeNames: {
-      '#checksum': 'checksum',
-      '#version': 'version',
+    Key: {
+      fileId: expected.newFile.fileId,
     },
-    ExpressionAttributeValues: {
-      ':checksum': expected.newFile.checksum,
-      ':version': expected.newFile.version,
-    },
-  }).resolves({
-    Items: [],
-  });
+  }).resolves({});
   const response = await updateFiles.handler({
     body: {
       files: [
         {
           fileId: expected.newFile.fileId,
-          categoryId: expected.newFile.categoryId,
-          checksumType: expected.newFile.checksumType,
-          checksum: expected.newFile.checksum,
-          version: expected.newFile.version,
-          location: expected.newFile.location,
-          locales: [{
-            locale: expected.newFile.locale,
-            summary: expected.newFile.summary,
-            description: expected.newFile.description,
-          }],
+          summary: expected.newFile.summary,
+          description: expected.newFile.description,
         },
       ],
     },
   });
+  const body = JSON.parse(response.body);
   expect(response.statusCode).toEqual(404);
+  expect(body.error).toEqual('File not found.');
   documentClientMock.restore();
 });
 

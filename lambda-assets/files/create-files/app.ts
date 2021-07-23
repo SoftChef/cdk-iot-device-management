@@ -18,13 +18,9 @@ export async function handler(event: { [key: string]: any }) {
               .concat(joi.string().when('checksumType', { is: 'crc32', then: joi.string().length(8).required() }))
               .concat(joi.string().when('checksumType', { is: 'sha1', then: joi.string().length(40).required() })),
             location: joi.string().uri().required(),
-            locales: joi.array().items(
-              joi.object().keys({
-                locale: joi.string().required(),
-                summary: joi.string().allow(null).required(),
-                description: joi.string().allow(null).required(),
-              }),
-            ),
+            locale: joi.string().required(),
+            summary: joi.string().allow(null).required(),
+            description: joi.string().allow(null).required(),
           }),
         ),
       };
@@ -36,27 +32,18 @@ export async function handler(event: { [key: string]: any }) {
     const files: object[] = [];
     const currentTime = Date.now();
     const validateFile = requestFiles.map((file: any) => {
-      file.locales.map((locale: any) => {
-        files.push(
-          {
-            PutRequest: {
-              Item: {
-                fileId: uuid.v4(),
-                categoryId: file.categoryId,
-                version: file.version,
-                location: file.location,
-                checksum: file.checksum,
-                checksumType: file.checksumType,
-                locale: locale.locale,
-                summary: locale.summary,
-                description: locale.description,
-                createdAt: currentTime,
-                updatedAt: currentTime,
-              },
+      files.push(
+        {
+          PutRequest: {
+            Item: {
+              fileId: uuid.v4(),
+              ...file,
+              createdAt: currentTime,
+              updatedAt: currentTime,
             },
           },
-        );
-      });
+        },
+      );
       return {
         version: file.version,
         checksum: file.checksum,

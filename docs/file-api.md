@@ -114,11 +114,9 @@ Create files
       "checksum": "{an encrypt md5 / crc32 / sha1 value}",
       "checksumType" : "{file's checksum type}",
       "location": "{file' path}",
-      "locales": [{
-        locale": "{file's locale}",
-        summary": "{file's summary}",
-        description": "{file's description}",
-      }],
+      "locale"": "{file's locale}",
+      "summary"": "{file's summary}",
+      "description"": "{file's description}",
     },
     ...more file objects
   ]
@@ -176,11 +174,9 @@ Create files
       checksumType: "{File's checksum type}",
       checksum: "{File checksum}",
       location: "{File URI}",
-      locales: [{
-        locale: "{File's locale}",
-        summary: "{File's summary}",
-        description: "{File's description}",
-      }],
+      "locale": "{File's locale}",
+      "summary": "{File's summary}",
+      "description": "{File's description}",
     },
   ],
 }
@@ -662,16 +658,8 @@ Update files summary and description by file ID.
   files: [
     {
       "fileId": "{file' ID}",
-      "categoryId": "{file's category ID}",
-      "version": "{file's version}",
-      "checksum": "{an encrypt md5 / crc32 / sha1 value}",
-      "checksumType" : "{file's checksum type}",
-      "location": "{file' path}",
-      "locales": [{
-        locale": "{file's locale}",
-        summary": "{file's summary}",
-        description": "{file's description}",
-      }],
+      "summary"": "{file's summary}",
+      "description"": "{file's description}",
     },
     ...more file objects
   ]
@@ -681,12 +669,6 @@ Update files summary and description by file ID.
 | Name | Schema | Description |
 | -------- | ------- | ---- |
 | fileId* | String | File's ID|
-| version* | String | File's version|
-| categoryId* | String | From category |
-| checksum* | String | An encrypt md5 / crc32 / sha1 value |
-| checksumType* | 'md5' \| 'crc32' \| 'sha1' | File's checksum type|
-| location* | URI | File's path|
-| locale* | String | File's locale |
 | summary* | string (Allow empty string) | File's summary|
 | description* | String (Allow empty string) | File's description |
 
