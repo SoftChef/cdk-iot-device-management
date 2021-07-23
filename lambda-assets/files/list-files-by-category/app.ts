@@ -17,19 +17,29 @@ export async function handler(event: { [key: string]: any }) {
         ),
       };
     }
+    if (request.has('locale')) {
+      parameters.KeyConditionExpression = '#categoryId = :categoryId and #locale = :locale';
+      parameters.ExpressionAttributeNames = {
+        '#categoryId': 'categoryId',
+        '#locale': 'locale',
+      };
+      parameters.ExpressionAttributeValues = {
+        ':categoryId': request.parameter('categoryId'),
+        ':locale': request.get('locale'),
+      };
+    } else {
+      parameters.KeyConditionExpression = '#categoryId = :categoryId';
+      parameters.ExpressionAttributeNames = {
+        '#categoryId': 'categoryId',
+      };
+      parameters.ExpressionAttributeValues = {
+        ':categoryId': request.parameter('categoryId'),
+      };
+    }
     const { Items: files, LastEvaluatedKey: lastEvaluatedKey } = await ddbDocClient.send(
       new QueryCommand({
         TableName: process.env.FILE_TABLE_NAME,
         IndexName: 'query-by-category-id-and-locale',
-        KeyConditionExpression: '#categoryId = :categoryId and #locale = :locale',
-        ExpressionAttributeNames: {
-          '#categoryId': 'categoryId',
-          '#locale': 'locale',
-        },
-        ExpressionAttributeValues: {
-          ':categoryId': request.parameter('categoryId'),
-          ':locale': request.get('locale'),
-        },
         ...parameters,
       }),
     );

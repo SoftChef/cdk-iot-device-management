@@ -126,13 +126,23 @@ export class FileApi extends cdk.Construct {
         },
         {
           path: '/files',
-          httpMethod: HttpMethod.POST,
-          lambdaFunction: this.createCreateFileFunction(),
+          httpMethod: HttpMethod.GET,
+          lambdaFunction: this.createListFilesFunction(),
         },
         {
           path: '/files',
-          httpMethod: HttpMethod.GET,
-          lambdaFunction: this.createListFilesFunction(),
+          httpMethod: HttpMethod.POST,
+          lambdaFunction: this.createCreateFilesFunction(),
+        },
+        {
+          path: '/files',
+          httpMethod: HttpMethod.PUT,
+          lambdaFunction: this.createUpdateFilesFunction(),
+        },
+        {
+          path: '/files/file',
+          httpMethod: HttpMethod.POST,
+          lambdaFunction: this.createCreateFileFunction(),
         },
         {
           path: '/files/{fileId}',
@@ -140,19 +150,24 @@ export class FileApi extends cdk.Construct {
           lambdaFunction: this.createGetFileFunction(),
         },
         {
-          path: '/files/{checksum}/versions/{version}',
-          httpMethod: HttpMethod.GET,
-          lambdaFunction: this.createGetFilesFunction(),
-        },
-        {
           path: '/files/{fileId}',
           httpMethod: HttpMethod.PUT,
           lambdaFunction: this.createUpdateFileFunction(),
         },
         {
-          path: '/files/{checksum}/versions/{version}',
+          path: '/files/{fileId}',
           httpMethod: HttpMethod.DELETE,
           lambdaFunction: this.createDeleteFileFunction(),
+        },
+        {
+          path: '/files/{checksum}/versions/{version}',
+          httpMethod: HttpMethod.GET,
+          lambdaFunction: this.createGetFilesFunction(),
+        },
+        {
+          path: '/files/{checksum}/versions/{version}',
+          httpMethod: HttpMethod.DELETE,
+          lambdaFunction: this.createDeleteFilesFunction(),
         },
       ],
     });
@@ -309,6 +324,31 @@ export class FileApi extends cdk.Construct {
     return createFileFunction;
   }
 
+  private createCreateFilesFunction(): lambda.NodejsFunction {
+    const createFilesFunction = new lambda.NodejsFunction(this, 'CreateFilesFunction', {
+      entry: `${LAMBDA_ASSETS_PATH}/create-files/app.ts`,
+      environment: {
+        FILE_TABLE_NAME: this.fileTable.tableName,
+      },
+    });
+    createFilesFunction.role?.attachInlinePolicy(
+      new iam.Policy(this, 'create-file-policy', {
+        statements: [
+          new iam.PolicyStatement({
+            actions: [
+              'dynamodb:GetItem',
+              'dynamodb:PutItem',
+            ],
+            resources: [
+              this.fileTable.tableArn,
+            ],
+          }),
+        ],
+      }),
+    );
+    return createFilesFunction;
+  }
+
   private createListFilesFunction(): lambda.NodejsFunction {
     const listFilesFunction = new lambda.NodejsFunction(this, 'ListFilesFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/list-files/app.ts`,
@@ -431,6 +471,31 @@ export class FileApi extends cdk.Construct {
     return updateFileFunction;
   }
 
+  private createUpdateFilesFunction(): lambda.NodejsFunction {
+    const updateFilesFunction = new lambda.NodejsFunction(this, 'UpdateFilesFunction', {
+      entry: `${LAMBDA_ASSETS_PATH}/update-files/app.ts`,
+      environment: {
+        FILE_TABLE_NAME: this.fileTable.tableName,
+      },
+    });
+    updateFilesFunction.role?.attachInlinePolicy(
+      new iam.Policy(this, 'update-file-policy', {
+        statements: [
+          new iam.PolicyStatement({
+            actions: [
+              'dynamodb:Query',
+              'dynamodb:BatchWriteItem',
+            ],
+            resources: [
+              this.fileTable.tableArn,
+            ],
+          }),
+        ],
+      }),
+    );
+    return updateFilesFunction;
+  }
+
   private createDeleteFileFunction(): lambda.NodejsFunction {
     const deleteFileFunction = new lambda.NodejsFunction(this, 'DeleteFileFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/delete-file/app.ts`,
@@ -453,5 +518,29 @@ export class FileApi extends cdk.Construct {
       }),
     );
     return deleteFileFunction;
+  }
+
+  private createDeleteFilesFunction(): lambda.NodejsFunction {
+    const deletesFileFunction = new lambda.NodejsFunction(this, 'DeletesFileFunction', {
+      entry: `${LAMBDA_ASSETS_PATH}/delete-files/app.ts`,
+      environment: {
+        FILE_TABLE_NAME: this.fileTable.tableName,
+      },
+    });
+    deletesFileFunction.role?.attachInlinePolicy(
+      new iam.Policy(this, 'delete-file-policy', {
+        statements: [
+          new iam.PolicyStatement({
+            actions: [
+              'dynamodb:DeleteItem',
+            ],
+            resources: [
+              this.fileTable.tableArn,
+            ],
+          }),
+        ],
+      }),
+    );
+    return deletesFileFunction;
   }
 }
