@@ -89,7 +89,7 @@ Create files
 | ---------------- | ----------- |
 | 200 | Create file success |
 | 422 | Variable type incorrect |
-| 404 | Category does not exist. |
+| 404 | Category ID not found |
 
 ---
 
@@ -156,7 +156,7 @@ Get category by category ID, if category is root will return children category.
 | HTTP Status Code | Description |
 | ---------------- | ----------- |
 | 200 | Get Category Success |
-| 404 | Category does not exist |
+| 404 | Category ID not found |
 
 ---
 
@@ -360,7 +360,7 @@ List files by category ID
 | HTTP Status Code | Description |
 | ---------------- | ----------- |
 | 200 | List files success |
-| 404 | Category not found |
+| 404 | Category ID not found |
 
 ---
 
@@ -401,7 +401,7 @@ Update category description by category ID
 | HTTP Status Code | Description |
 | ---------------- | ----------- |
 | 200 | Update success |
-| 404 | Category not found |
+| 404 | Category ID not found |
 | 422 | Variable type incorrect |
 
 ---
