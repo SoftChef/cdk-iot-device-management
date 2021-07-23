@@ -12,7 +12,7 @@ export async function handler(event: { [key: string]: any }) {
       }),
     );
     return response.json({
-      thingType,
+      thingType: thingType,
     });
   } catch (error) {
     if (error.Code === 'ResourceNotFoundException') {

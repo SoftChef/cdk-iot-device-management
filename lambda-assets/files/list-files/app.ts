@@ -30,8 +30,8 @@ export async function handler(event: { [key: string]: any }) {
       ).toString('base64');
     }
     return response.json({
-      files,
-      nextToken,
+      files: files,
+      nextToken: nextToken,
     });
   } catch (error) {
     return response.error(error);

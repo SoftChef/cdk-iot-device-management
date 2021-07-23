@@ -13,8 +13,8 @@
 - [Get Job Execution](#get-jobsjobidthingsthingname)
 - [Get Job Template](#get-job-templatesjobtemplateid)
 - [List Jobs](#get-jobs)
-- [List Job Executions for Job](#get-jobs-executionsjobsjobid)
-- [List Job Executions for Thing](#get-jobs-executionsthingsthingname)
+- [List Job Executions for Job](#get-jobsjobidstatus)
+- [List Job Executions for Thing](#get-thingsthingnamejobs)
 - [List Job Templates](#get-job-templates)
 - [Update Job](#put-jobsjobid)
 
@@ -527,7 +527,7 @@ List all Jobs
 
 ---
 
-### *GET* /jobs-executions/jobs/{jobId}
+### *GET* /jobs/{jobId}/status
 
 List job executions for job
 
@@ -547,7 +547,7 @@ List job executions for job
 
 ```
 {
-  "jobExecutions": [
+  "executionSummaries": [
     {
       "thingArn": "{thing's ARN}",
       "jobExecution": {
@@ -573,7 +573,7 @@ List job executions for job
 
 ---
 
-### *GET* /jobs-executions/things/{thingName}
+### *GET* /things/{thingName}/jobs
 
 List job execution for thing
 
@@ -593,7 +593,7 @@ List job execution for thing
 
 ```
 {
-  "jobExecution": [
+  "executionSummaries": [
     {
       "jobId": "{job's ID}",
       "jobExecution": {

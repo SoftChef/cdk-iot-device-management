@@ -40,8 +40,8 @@ export async function handler(event: { [key: string]: any }) {
         ).toString('base64');
       }
       return response.json({
-        categories,
-        nextToken,
+        categories: categories,
+        nextToken: nextToken,
       });
     } else {
       parameters.ExpressionAttributeNames = {
@@ -61,8 +61,8 @@ export async function handler(event: { [key: string]: any }) {
         ).toString('base64');
       }
       return response.json({
-        categories,
-        nextToken,
+        categories: categories,
+        nextToken: nextToken,
       });
     }
   } catch (error) {

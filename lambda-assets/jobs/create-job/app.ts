@@ -23,7 +23,7 @@ export async function handler(event: { [key: string]: any }) {
       return response.error(validated.details, 422);
     }
     const iotClient = new IoTClient({});
-    const job = await iotClient.send(
+    await iotClient.send(
       new CreateJobCommand({
         jobId: uuidv4(),
         targets: request.input('targets', []),
@@ -34,7 +34,6 @@ export async function handler(event: { [key: string]: any }) {
     );
     return response.json({
       created: true,
-      job,
     });
   } catch (error) {
     return response.error(error);

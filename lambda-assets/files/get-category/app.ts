@@ -21,7 +21,7 @@ export async function handler(event: { [key: string]: any }) {
       return response.error('Category does not exist.', 404);
     }
     return response.json({
-      category,
+      category: category,
     });
   } catch (error) {
     return response.error(error);

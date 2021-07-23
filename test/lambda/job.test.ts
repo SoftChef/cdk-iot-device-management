@@ -40,8 +40,8 @@ import * as getJobDocument from '../../lambda-assets/jobs/get-job-document/app';
 import * as getJobExecution from '../../lambda-assets/jobs/get-job-execution/app';
 import * as getJobTemplate from '../../lambda-assets/jobs/get-job-template/app';
 import * as getJob from '../../lambda-assets/jobs/get-job/app';
-import * as ListJobExecutionsForJob from '../../lambda-assets/jobs/list-job-execution-job/app';
-import * as ListJobExecutionsForThing from '../../lambda-assets/jobs/list-job-execution-thing/app';
+import * as ListJobExecutionsForJob from '../../lambda-assets/jobs/list-job-executions-for-job/app';
+import * as ListJobExecutionsForThing from '../../lambda-assets/jobs/list-job-executions-for-thing/app';
 import * as listJobTemplates from '../../lambda-assets/jobs/list-job-templates/app';
 import * as listJobs from '../../lambda-assets/jobs/list-jobs/app';
 import * as updateJob from '../../lambda-assets/jobs/update-job/app';
@@ -222,7 +222,7 @@ test('Associate targets with job success', async () => {
     },
   });
   const body = JSON.parse(response.body);
-  expect(body.associate).toEqual(true);
+  expect(body.associated).toEqual(true);
   expect(response.statusCode).toEqual(200);
   iotClientMock.restore();
 });
@@ -315,11 +315,6 @@ test('Create job success', async () => {
   const body = JSON.parse(response.body);
   expect(response.statusCode).toEqual(200);
   expect(body.created).toEqual(true);
-  expect(body.job).toEqual({
-    jobArn: expected.job.jobArn,
-    jobId: expected.job.jobId,
-    description: expected.job.description,
-  });
   iotClientMock.restore();
 });
 
