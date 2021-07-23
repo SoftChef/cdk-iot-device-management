@@ -1,5 +1,12 @@
-import { IoTClient, AssociateTargetsWithJobCommand } from '@aws-sdk/client-iot';
-import { Request, Response } from '@softchef/lambda-events';
+import {
+  AssociateTargetsWithJobCommand,
+  AssociateTargetsWithJobCommandInput,
+  IoTClient,
+} from '@aws-sdk/client-iot';
+import {
+  Request,
+  Response,
+} from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
@@ -15,12 +22,13 @@ export async function handler(event: { [key: string]: any }) {
     if (validated.error) {
       return response.error(validated.details, 422);
     }
+    const parameters: AssociateTargetsWithJobCommandInput = {
+      jobId: request.parameter('jobId'),
+      targets: request.input('targets'),
+    };
     const iotClient = new IoTClient({});
     await iotClient.send(
-      new AssociateTargetsWithJobCommand({
-        jobId: request.parameter('jobId'),
-        targets: request.input('targets'),
-      }),
+      new AssociateTargetsWithJobCommand(parameters),
     );
     return response.json({
       associated: true,

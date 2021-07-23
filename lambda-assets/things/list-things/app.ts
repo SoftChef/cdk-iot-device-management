@@ -1,19 +1,18 @@
-import { IoTClient, ListThingsCommand } from '@aws-sdk/client-iot';
-import { Request, Response } from '@softchef/lambda-events';
+import {
+  IoTClient,
+  ListThingsCommand,
+  ListThingsCommandInput,
+} from '@aws-sdk/client-iot';
+import {
+  Request,
+  Response,
+} from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
   const response = new Response();
   try {
-    let parameters: {
-      attributeName: string | undefined;
-      attributeValue: string | undefined;
-      nextToken: string | undefined;
-    } = {
-      attributeName: undefined,
-      attributeValue: undefined,
-      nextToken: undefined,
-    };
+    const parameters: ListThingsCommandInput = {};
     if (request.has('attributeName')) {
       parameters.attributeName = request.get('attributeName');
       parameters.attributeValue = request.get('attributeValue');

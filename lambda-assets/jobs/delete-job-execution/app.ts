@@ -1,5 +1,8 @@
 import { DeleteJobExecutionCommand, IoTClient } from '@aws-sdk/client-iot';
-import { Request, Response } from '@softchef/lambda-events';
+import {
+  Request,
+  Response,
+} from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);

@@ -1,5 +1,12 @@
-import { IoTClient, CreateThingCommand } from '@aws-sdk/client-iot';
-import { Request, Response } from '@softchef/lambda-events';
+import {
+  CreateThingCommand,
+  CreateThingCommandInput,
+  IoTClient,
+} from '@aws-sdk/client-iot';
+import {
+  Request,
+  Response,
+} from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
@@ -13,11 +20,12 @@ export async function handler(event: { [key: string]: any }) {
     if (validated.error) {
       return response.error(validated.details, 422);
     }
+    const parameters: CreateThingCommandInput = {
+      thingName: request.input('thingName'),
+    };
     const iotClient = new IoTClient({});
     await iotClient.send(
-      new CreateThingCommand({
-        thingName: request.input('thingName'),
-      }),
+      new CreateThingCommand(parameters),
     );
     return response.json({
       created: true,

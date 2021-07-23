@@ -1,5 +1,12 @@
-import { CancelJobExecutionCommand, IoTClient } from '@aws-sdk/client-iot';
-import { Request, Response } from '@softchef/lambda-events';
+import {
+  CancelJobExecutionCommand,
+  CancelJobExecutionCommandInput,
+  IoTClient,
+} from '@aws-sdk/client-iot';
+import {
+  Request,
+  Response,
+} from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
@@ -15,15 +22,16 @@ export async function handler(event: { [key: string]: any }) {
     if (validated.error) {
       return response.error(validated.details, 422);
     }
+    const parameters: CancelJobExecutionCommandInput = {
+      jobId: request.parameter('jobId'),
+      thingName: request.parameter('thingName'),
+      expectedVersion: request.input('expectedVersion', 1),
+      statusDetails: request.input('statusDetail', {}),
+      force: request.input('force', false),
+    };
     const iotClient = new IoTClient({});
     await iotClient.send(
-      new CancelJobExecutionCommand({
-        jobId: request.parameter('jobId'),
-        thingName: request.parameter('thingName'),
-        expectedVersion: request.input('expectedVersion', 1),
-        statusDetails: request.input('statusDetail', {}),
-        force: request.input('force', false),
-      }),
+      new CancelJobExecutionCommand(parameters),
     );
     return response.json({
       canceled: true,

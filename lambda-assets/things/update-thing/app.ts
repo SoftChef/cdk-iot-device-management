@@ -1,5 +1,12 @@
-import { IoTClient, UpdateThingCommand } from '@aws-sdk/client-iot';
-import { Request, Response } from '@softchef/lambda-events';
+import {
+  IoTClient,
+  UpdateThingCommand,
+  UpdateThingCommandInput,
+} from '@aws-sdk/client-iot';
+import {
+  Request,
+  Response,
+} from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
@@ -16,19 +23,24 @@ export async function handler(event: { [key: string]: any }) {
     if (validated.error) {
       return response.error(validated.details, 422);
     }
+    const parameters: UpdateThingCommandInput = {
+      thingName: request.parameter('thingName'),
+    };
+    if (request.has('thingTypename')) {
+      parameters.thingTypeName = request.input('thingTypename');
+    }
+    if (request.has('attributePayload')) {
+      parameters.attributePayload = request.input('attributePayload');
+    }
+    if (request.has('expectedVersion')) {
+      parameters.expectedVersion = request.input('expectedVersion');
+    }
+    if (request.has('removeThingType')) {
+      parameters.removeThingType = request.input('removeThingType');
+    }
     const iotClient = new IoTClient({});
-    let parameters: { [key: string]: any } = {};
-    const attributes = ['thingTypeName', 'attributePayload', 'expectedVersion', 'removeThingType'];
-    attributes.map(attribute => {
-      if (request.has(attribute)) {
-        parameters[attribute] = request.input(attribute);
-      }
-    });
     await iotClient.send(
-      new UpdateThingCommand({
-        thingName: request.parameter('thingName'),
-        ...parameters,
-      }),
+      new UpdateThingCommand(parameters),
     );
     return response.json({
       updated: true,

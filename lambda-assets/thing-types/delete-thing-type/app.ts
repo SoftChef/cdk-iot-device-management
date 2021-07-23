@@ -1,15 +1,23 @@
-import { IoTClient, DeleteThingTypeCommand } from '@aws-sdk/client-iot';
-import { Request, Response } from '@softchef/lambda-events';
+import {
+  DeleteThingTypeCommand,
+  DeleteThingTypeCommandInput,
+  IoTClient,
+} from '@aws-sdk/client-iot';
+import {
+  Request,
+  Response,
+} from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
   const response = new Response();
   try {
+    const parameters: DeleteThingTypeCommandInput = {
+      thingTypeName: request.parameter('thingTypeName'),
+    };
     const iotClient = new IoTClient({});
     await iotClient.send(
-      new DeleteThingTypeCommand({
-        thingTypeName: request.parameter('thingTypeName'),
-      }),
+      new DeleteThingTypeCommand(parameters),
     );
     return response.json({
       deleted: true,
