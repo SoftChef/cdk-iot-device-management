@@ -71,7 +71,7 @@ const jobApi = new JobApi(scope, id, {
 
 > The [ScheduleFunction](https://www.npmjs.com/package/@softchef/cdk-schedule-function/v/0.0.15) is support to custom create job by schedule time.
 
-[Job API Docs](./job-api.md)
+[Job API Docs](./docs/job-api.md)
 
 ### File API construct
 
