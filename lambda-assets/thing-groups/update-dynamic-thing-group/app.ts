@@ -12,9 +12,9 @@ export async function handler(event: { [key: string]: any }) {
     });
     if (validated.error) {
       return response.error(validated.details, 422);
-    };
+    }
     const iotClient = new IoTClient({});
-    const thingGroup = await iotClient.send(
+    await iotClient.send(
       new UpdateDynamicThingGroupCommand({
         thingGroupName: request.parameter('thingGroupName'),
         thingGroupProperties: {
@@ -23,7 +23,7 @@ export async function handler(event: { [key: string]: any }) {
       }),
     );
     return response.json({
-      thingGroup,
+      updated: true,
     });
   } catch (error) {
     if (error.Code === 'ResourceNotFoundException') {

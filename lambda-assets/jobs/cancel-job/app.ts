@@ -17,10 +17,10 @@ export async function handler(event: { [key: string]: any }) {
     let parameters: { [key: string]: any } = {};
     if (request.has('comment')) {
       parameters.comment = request.input('comment');
-    };
+    }
     if (request.has('force')) {
       parameters.force = request.input('force');
-    };
+    }
     const iotClient = new IoTClient({});
     await iotClient.send(
       new CancelJobCommand({
@@ -36,6 +36,6 @@ export async function handler(event: { [key: string]: any }) {
       return response.error(error, 404);
     } else {
       return response.error(error);
-    };
+    }
   }
 }

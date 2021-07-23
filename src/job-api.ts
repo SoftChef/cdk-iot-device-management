@@ -326,7 +326,7 @@ export class JobApi extends cdk.Construct {
 
   private createListJobExecutionForJobFunction(): lambda.NodejsFunction {
     const listJobExecutionForJob = new lambda.NodejsFunction(this, 'listJobExecutionForJob', {
-      entry: `${LAMBDA_ASSETS_PATH}/list-job-execution-job/app.ts`,
+      entry: `${LAMBDA_ASSETS_PATH}/list-job-executions-for-job/app.ts`,
     });
     listJobExecutionForJob.role?.attachInlinePolicy(
       new iam.Policy(this, 'list-job-execution-for-job', {
@@ -345,7 +345,7 @@ export class JobApi extends cdk.Construct {
 
   private createListJobExecutionForThingFunction(): lambda.NodejsFunction {
     const listJobExecutionForThing = new lambda.NodejsFunction(this, 'listJobExecutionForThing', {
-      entry: `${LAMBDA_ASSETS_PATH}/list-job-execution-thing/app.ts`,
+      entry: `${LAMBDA_ASSETS_PATH}/list-job-executions-for-thing/app.ts`,
     });
     listJobExecutionForThing.role?.attachInlinePolicy(
       new iam.Policy(this, 'list-job-execution-for-thing', {

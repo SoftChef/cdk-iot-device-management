@@ -1,4 +1,4 @@
-import { IoTClient, DeleteThingCommand } from '@aws-sdk/client-iot'
+import { IoTClient, DeleteThingCommand } from '@aws-sdk/client-iot';
 import { Request, Response } from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
@@ -20,5 +20,5 @@ export async function handler(event: { [key: string]: any }) {
     } else {
       return response.error(error);
     }
-  };
+  }
 }
