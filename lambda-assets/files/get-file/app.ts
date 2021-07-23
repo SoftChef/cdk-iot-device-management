@@ -23,7 +23,7 @@ export async function handler(event: { [key: string]: any }) {
       });
     } else {
       return response.error('File not found.', 404);
-    };
+    }
   } catch (error) {
     return response.error(error);
   }

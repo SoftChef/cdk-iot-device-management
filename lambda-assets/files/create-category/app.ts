@@ -30,7 +30,7 @@ export async function handler(event: { [key: string]: any }) {
       itemParameters.parentId = parentId;
     } else {
       itemParameters.categoryId = md5.update(name).digest('hex');
-    };
+    }
     if (request.has('description')) {
       itemParameters.description = request.input('description');
     }

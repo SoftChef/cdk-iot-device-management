@@ -31,7 +31,7 @@ export async function handler(event: { [key: string]: any }) {
     });
     if (validated.error) {
       return response.error(validated.details, 422);
-    };
+    }
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({}),
     );
@@ -82,7 +82,7 @@ export async function handler(event: { [key: string]: any }) {
       );
       if (!existsFiles.Items || existsFiles.Items.length === 0) {
         return response.error('File not found.', 404);
-      };
+      }
     };
     new BatchWriteCommand({
       RequestItems: {
@@ -97,6 +97,6 @@ export async function handler(event: { [key: string]: any }) {
       return response.error(error, 404);
     } else {
       return response.error(error);
-    };
+    }
   }
 }

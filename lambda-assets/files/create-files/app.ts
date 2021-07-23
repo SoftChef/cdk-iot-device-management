@@ -77,7 +77,7 @@ export async function handler(event: { [key: string]: any }) {
       );
       if (!category) {
         return response.error('Category does not exist.', 404);
-      };
+      }
     };
     for (let file = 0; file < validateFile.length; file += 1) {
       const existsFiles = await ddbDocClient.send(
@@ -97,7 +97,7 @@ export async function handler(event: { [key: string]: any }) {
       );
       if (existsFiles.Items && existsFiles.Items.length) {
         return response.error('File already exists.', 404);
-      };
+      }
     };
     await ddbDocClient.send(
       new BatchWriteCommand({

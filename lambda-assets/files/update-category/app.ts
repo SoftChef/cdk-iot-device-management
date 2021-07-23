@@ -28,7 +28,7 @@ export async function handler(event: { [key: string]: any }) {
     );
     if (!category.Item) {
       return response.error('Category does not exist.', 404);
-    };
+    }
     await ddbDocClient.send(
       new UpdateCommand({
         TableName: process.env.CATEGORY_TABLE_NAME,

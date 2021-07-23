@@ -14,7 +14,7 @@ export async function handler(event: { [key: string]: any }) {
     });
     if (validated.error) {
       return response.error(validated.details, 422);
-    };
+    }
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({}),
     );
@@ -29,7 +29,7 @@ export async function handler(event: { [key: string]: any }) {
     );
     if (!file.Item) {
       return response.error('File does not exists.', 404);
-    };
+    }
     await ddbDocClient.send(
       new UpdateCommand({
         TableName: process.env.FILE_TABLE_NAME,
@@ -55,6 +55,6 @@ export async function handler(event: { [key: string]: any }) {
       return response.error(error, 404);
     } else {
       return response.error(error);
-    };
+    }
   }
 }

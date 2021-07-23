@@ -28,7 +28,7 @@ export async function handler(event: { [key: string]: any }) {
       nextToken = Buffer.from(
         JSON.stringify(lastEvaluatedKey),
       ).toString('base64');
-    };
+    }
     return response.json({
       files: files,
       nextToken: nextToken,

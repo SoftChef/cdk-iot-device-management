@@ -16,7 +16,7 @@ export async function handler(event: { [key: string]: any }) {
           Buffer.from(request.get('nextToken'), 'base64').toString('utf8'),
         ),
       };
-    };
+    }
     const { Items: existsFiles, LastEvaluatedKey: lastEvaluatedKey } = await ddbDocClient.send(
       new QueryCommand({
         TableName: process.env.FILE_TABLE_NAME,
@@ -37,10 +37,10 @@ export async function handler(event: { [key: string]: any }) {
       nextToken = Buffer.from(
         JSON.stringify(lastEvaluatedKey),
       ).toString('base64');
-    };
+    }
     if (!existsFiles || existsFiles.length === 0) {
       return response.error('File not found.', 404);
-    };
+    }
     return response.json({
       file: existsFiles,
       nextToken,
