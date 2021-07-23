@@ -9,13 +9,27 @@ import { RestApi, HttpMethod } from '@softchef/cdk-restapi';
 const LAMBDA_ASSETS_PATH = path.resolve(__dirname, '../lambda-assets/jobs');
 
 export interface JobApiProps {
+  /**
+   * Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE
+   * @default apigateway.AuthorizationType.NONE
+   */
   readonly authorizationType?: apigateway.AuthorizationType;
+  /**
+   * Specify API Gateway's authorizer, CognitoUserPool/Lambda
+   * @default undefined
+   */
   readonly authorizer?: apigateway.IAuthorizer | undefined;
+  /**
+   * Specify Schedule Function to enable create schedule job function
+   * @default undefined
+   */
   readonly scheduleFunction?: any | undefined; // ScheduleFunction
 }
 
 export class JobApi extends cdk.Construct {
-
+  /**
+   * The Job API Gateway's ID
+   */
   private readonly _restApi: RestApi;
 
   constructor(scope: cdk.Construct, id: string, props?: JobApiProps) {

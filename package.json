@@ -1,5 +1,6 @@
 {
   "name": "@softchef/cdk-iot-device-management",
+  "description": "IoT device management is composed of things, thing types, thing groups, jobs, files API services. The constructs can be used independently, that are based on full-managed service to create an API Gateway & Lambda function.",
   "repository": {
     "type": "git",
     "url": "git@github.com:SoftChef/cdk-iot-device-management.git"
@@ -33,7 +34,7 @@
     "organization": false
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.114.0",
+    "@aws-cdk/assert": "^1.95.2",
     "@types/jest": "^26.0.24",
     "@types/node": "^10.17.0",
     "@typescript-eslint/eslint-plugin": "^4.28.4",
@@ -57,29 +58,28 @@
     "typescript": "^4.3.5"
   },
   "peerDependencies": {
-    "@aws-cdk/aws-apigateway": "^1.114.0",
-    "@aws-cdk/aws-dynamodb": "^1.114.0",
-    "@aws-cdk/aws-iam": "^1.114.0",
-    "@aws-cdk/aws-lambda": "^1.114.0",
-    "@aws-cdk/aws-lambda-nodejs": "^1.114.0",
-    "@aws-cdk/core": "^1.114.0",
+    "@aws-cdk/aws-apigateway": "^1.95.2",
+    "@aws-cdk/aws-dynamodb": "^1.95.2",
+    "@aws-cdk/aws-iam": "^1.95.2",
+    "@aws-cdk/aws-lambda": "^1.95.2",
+    "@aws-cdk/aws-lambda-nodejs": "^1.95.2",
+    "@aws-cdk/core": "^1.95.2",
     "constructs": "^3.2.27"
   },
   "dependencies": {
-    "@aws-cdk/aws-apigateway": "^1.114.0",
-    "@aws-cdk/aws-dynamodb": "^1.114.0",
-    "@aws-cdk/aws-iam": "^1.114.0",
-    "@aws-cdk/aws-lambda": "^1.114.0",
-    "@aws-cdk/aws-lambda-nodejs": "^1.114.0",
-    "@aws-cdk/core": "^1.114.0",
-    "@aws-sdk/client-cognito-identity-provider": "^3.22.0",
+    "@aws-cdk/aws-apigateway": "^1.95.2",
+    "@aws-cdk/aws-dynamodb": "^1.95.2",
+    "@aws-cdk/aws-iam": "^1.95.2",
+    "@aws-cdk/aws-lambda": "^1.95.2",
+    "@aws-cdk/aws-lambda-nodejs": "^1.95.2",
+    "@aws-cdk/core": "^1.95.2",
     "@aws-sdk/client-dynamodb": "^3.22.0",
     "@aws-sdk/client-iot": "^3.22.0",
     "@aws-sdk/client-iot-data-plane": "^3.22.0",
     "@aws-sdk/lib-dynamodb": "^3.22.0",
     "@aws-sdk/util-dynamodb": "^3.22.0",
-    "@softchef/cdk-restapi": "^0.1.5",
-    "@softchef/cdk-schedule-function": "^0.0.15",
+    "@softchef/cdk-restapi": "^0.1.6",
+    "@softchef/cdk-schedule-function": "^0.0.18",
     "@softchef/lambda-events": "^1.0.2",
     "@types/node": "15.12.2",
     "@types/semver": "^7.3.7",
@@ -89,7 +89,6 @@
     "uuid": "^8.3.2"
   },
   "bundledDependencies": [
-    "@aws-sdk/client-cognito-identity-provider",
     "@aws-sdk/client-dynamodb",
     "@aws-sdk/client-iot",
     "@aws-sdk/client-iot-data-plane",

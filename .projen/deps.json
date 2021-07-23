@@ -2,7 +2,7 @@
   "dependencies": [
     {
       "name": "@aws-cdk/assert",
-      "version": "^1.114.0",
+      "version": "^1.95.2",
       "type": "build"
     },
     {
@@ -95,10 +95,6 @@
       "type": "build"
     },
     {
-      "name": "@aws-sdk/client-cognito-identity-provider",
-      "type": "bundled"
-    },
-    {
       "name": "@aws-sdk/client-dynamodb",
       "type": "bundled"
     },
@@ -157,32 +153,32 @@
     },
     {
       "name": "@aws-cdk/aws-apigateway",
-      "version": "^1.114.0",
+      "version": "^1.95.2",
       "type": "peer"
     },
     {
       "name": "@aws-cdk/aws-dynamodb",
-      "version": "^1.114.0",
+      "version": "^1.95.2",
       "type": "peer"
     },
     {
       "name": "@aws-cdk/aws-iam",
-      "version": "^1.114.0",
+      "version": "^1.95.2",
       "type": "peer"
     },
     {
       "name": "@aws-cdk/aws-lambda-nodejs",
-      "version": "^1.114.0",
+      "version": "^1.95.2",
       "type": "peer"
     },
     {
       "name": "@aws-cdk/aws-lambda",
-      "version": "^1.114.0",
+      "version": "^1.95.2",
       "type": "peer"
     },
     {
       "name": "@aws-cdk/core",
-      "version": "^1.114.0",
+      "version": "^1.95.2",
       "type": "peer"
     },
     {
@@ -192,32 +188,32 @@
     },
     {
       "name": "@aws-cdk/aws-apigateway",
-      "version": "^1.114.0",
+      "version": "^1.95.2",
       "type": "runtime"
     },
     {
       "name": "@aws-cdk/aws-dynamodb",
-      "version": "^1.114.0",
+      "version": "^1.95.2",
       "type": "runtime"
     },
     {
       "name": "@aws-cdk/aws-iam",
-      "version": "^1.114.0",
+      "version": "^1.95.2",
       "type": "runtime"
     },
     {
       "name": "@aws-cdk/aws-lambda-nodejs",
-      "version": "^1.114.0",
+      "version": "^1.95.2",
       "type": "runtime"
     },
     {
       "name": "@aws-cdk/aws-lambda",
-      "version": "^1.114.0",
+      "version": "^1.95.2",
       "type": "runtime"
     },
     {
       "name": "@aws-cdk/core",
-      "version": "^1.114.0",
+      "version": "^1.95.2",
       "type": "runtime"
     }
   ],
