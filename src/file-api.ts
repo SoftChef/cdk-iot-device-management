@@ -9,16 +9,30 @@ import { RestApi, HttpMethod } from '@softchef/cdk-restapi';
 const LAMBDA_ASSETS_PATH = path.resolve(__dirname, '../lambda-assets/files');
 
 export interface FileApiProps {
+  /**
+   * Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE
+   * @default apigateway.AuthorizationType.NONE
+   */
   readonly authorizationType?: apigateway.AuthorizationType;
+  /**
+   * Specify API Gateway's authorizer, CognitoUserPool/Lambda
+   * @default undefined
+   */
   readonly authorizer?: apigateway.IAuthorizer | undefined;
 }
 
 export class FileApi extends cdk.Construct {
-
+  /**
+   * The File API Gateway's ID
+   */
   public readonly restApiId: string;
-
+  /**
+   * The category table
+   */
   private readonly categoryTable: dynamodb.Table;
-
+  /**
+   * The file table
+   */
   private readonly fileTable: dynamodb.Table;
 
   constructor(scope: cdk.Construct, id: string, props?: FileApiProps) {

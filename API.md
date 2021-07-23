@@ -38,6 +38,8 @@ new FileApi(scope: Construct, id: string, props?: FileApiProps)
 
 - *Type:* `string`
 
+The File API Gateway's ID.
+
 ---
 
 
@@ -116,6 +118,8 @@ new ThingApi(scope: Construct, id: string, props?: ThingApiProps)
 
 - *Type:* `string`
 
+The Thing API Gateway's ID.
+
 ---
 
 
@@ -154,6 +158,8 @@ new ThingGroupApi(scope: Construct, id: string, props?: ThingGroupApiProps)
 ##### `restApiId`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingGroupApi.property.restApiId"></a>
 
 - *Type:* `string`
+
+The ThingGroup API Gateway's ID.
 
 ---
 
@@ -194,6 +200,8 @@ new ThingTypeApi(scope: Construct, id: string, props?: ThingTypeApiProps)
 
 - *Type:* `string`
 
+The ThingType API Gateway's ID.
+
 ---
 
 
@@ -212,12 +220,18 @@ const fileApiProps: FileApiProps = { ... }
 ##### `authorizationType`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.authorizationType"></a>
 
 - *Type:* [`@aws-cdk/aws-apigateway.AuthorizationType`](#@aws-cdk/aws-apigateway.AuthorizationType)
+- *Default:* apigateway.AuthorizationType.NONE
+
+Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE.
 
 ---
 
 ##### `authorizer`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.authorizer"></a>
 
 - *Type:* [`@aws-cdk/aws-apigateway.IAuthorizer`](#@aws-cdk/aws-apigateway.IAuthorizer)
+- *Default:* undefined
+
+Specify API Gateway's authorizer, CognitoUserPool/Lambda.
 
 ---
 
@@ -234,18 +248,27 @@ const jobApiProps: JobApiProps = { ... }
 ##### `authorizationType`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.JobApiProps.property.authorizationType"></a>
 
 - *Type:* [`@aws-cdk/aws-apigateway.AuthorizationType`](#@aws-cdk/aws-apigateway.AuthorizationType)
+- *Default:* apigateway.AuthorizationType.NONE
+
+Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE.
 
 ---
 
 ##### `authorizer`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.JobApiProps.property.authorizer"></a>
 
 - *Type:* [`@aws-cdk/aws-apigateway.IAuthorizer`](#@aws-cdk/aws-apigateway.IAuthorizer)
+- *Default:* undefined
+
+Specify API Gateway's authorizer, CognitoUserPool/Lambda.
 
 ---
 
 ##### `scheduleFunction`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.JobApiProps.property.scheduleFunction"></a>
 
 - *Type:* `any`
+- *Default:* undefined
+
+Specify Schedule Function to enable create schedule job function.
 
 ---
 
@@ -262,12 +285,18 @@ const thingApiProps: ThingApiProps = { ... }
 ##### `authorizationType`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingApiProps.property.authorizationType"></a>
 
 - *Type:* [`@aws-cdk/aws-apigateway.AuthorizationType`](#@aws-cdk/aws-apigateway.AuthorizationType)
+- *Default:* apigateway.AuthorizationType.NONE
+
+Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE.
 
 ---
 
 ##### `authorizer`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingApiProps.property.authorizer"></a>
 
 - *Type:* [`@aws-cdk/aws-apigateway.IAuthorizer`](#@aws-cdk/aws-apigateway.IAuthorizer)
+- *Default:* undefined
+
+Specify API Gateway's authorizer, CognitoUserPool/Lambda.
 
 ---
 
@@ -284,12 +313,18 @@ const thingGroupApiProps: ThingGroupApiProps = { ... }
 ##### `authorizationType`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingGroupApiProps.property.authorizationType"></a>
 
 - *Type:* [`@aws-cdk/aws-apigateway.AuthorizationType`](#@aws-cdk/aws-apigateway.AuthorizationType)
+- *Default:* apigateway.AuthorizationType.NONE
+
+Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE.
 
 ---
 
 ##### `authorizer`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingGroupApiProps.property.authorizer"></a>
 
 - *Type:* [`@aws-cdk/aws-apigateway.IAuthorizer`](#@aws-cdk/aws-apigateway.IAuthorizer)
+- *Default:* undefined
+
+Specify API Gateway's authorizer, CognitoUserPool/Lambda.
 
 ---
 
@@ -306,12 +341,18 @@ const thingTypeApiProps: ThingTypeApiProps = { ... }
 ##### `authorizationType`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingTypeApiProps.property.authorizationType"></a>
 
 - *Type:* [`@aws-cdk/aws-apigateway.AuthorizationType`](#@aws-cdk/aws-apigateway.AuthorizationType)
+- *Default:* apigateway.AuthorizationType.NONE
+
+Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE.
 
 ---
 
 ##### `authorizer`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingTypeApiProps.property.authorizer"></a>
 
 - *Type:* [`@aws-cdk/aws-apigateway.IAuthorizer`](#@aws-cdk/aws-apigateway.IAuthorizer)
+- *Default:* undefined
+
+Specify API Gateway's authorizer, CognitoUserPool/Lambda.
 
 ---
 
