@@ -1,5 +1,12 @@
-import { IoTClient, UpdateJobCommand } from '@aws-sdk/client-iot';
-import { Request, Response } from '@softchef/lambda-events';
+import {
+  IoTClient,
+  UpdateJobCommand,
+  UpdateJobCommandInput,
+} from '@aws-sdk/client-iot';
+import {
+  Request,
+  Response,
+} from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
@@ -13,12 +20,13 @@ export async function handler(event: { [key: string]: any }) {
     if (validated.error) {
       return response.error(validated.details, 422);
     }
+    const parameters: UpdateJobCommandInput = {
+      jobId: request.parameter('jobId'),
+      description: request.input('description', ''),
+    };
     const iotClient = new IoTClient({});
     await iotClient.send(
-      new UpdateJobCommand({
-        jobId: request.parameter('jobId'),
-        description: request.input('description', ''),
-      }),
+      new UpdateJobCommand(parameters),
     );
     return response.json({
       updated: true,

@@ -1,16 +1,24 @@
-import { IoTDataPlaneClient, GetThingShadowCommand } from '@aws-sdk/client-iot-data-plane';
-import { Request, Response } from '@softchef/lambda-events';
+import {
+  GetThingShadowCommand,
+  GetThingShadowCommandInput,
+  IoTDataPlaneClient,
+} from '@aws-sdk/client-iot-data-plane';
+import {
+  Request,
+  Response,
+} from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
   const response = new Response();
   try {
+    const parameters: GetThingShadowCommandInput = {
+      thingName: request.parameter('thingName'),
+      shadowName: request.parameter('shadowName'),
+    };
     const client = new IoTDataPlaneClient({});
     const { payload = [] } = await client.send(
-      new GetThingShadowCommand({
-        thingName: request.parameter('thingName'),
-        shadowName: request.parameter('shadowName'),
-      }),
+      new GetThingShadowCommand(parameters),
     );
     return response.json({
       payload: String.fromCharCode(...payload),

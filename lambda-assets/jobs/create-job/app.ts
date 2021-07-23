@@ -1,10 +1,12 @@
-/**
- * @todo
- * 1. verify targets "ARN" format
- * 2. verify document "JSON" format
- */
-import { CreateJobCommand, IoTClient } from '@aws-sdk/client-iot';
-import { Request, Response } from '@softchef/lambda-events';
+import {
+  CreateJobCommand,
+  CreateJobCommandInput,
+  IoTClient,
+} from '@aws-sdk/client-iot';
+import {
+  Request,
+  Response,
+} from '@softchef/lambda-events';
 import { v4 as uuidv4 } from 'uuid';
 
 export async function handler(event: { [key: string]: any }) {
@@ -22,15 +24,16 @@ export async function handler(event: { [key: string]: any }) {
     if (validated.error) {
       return response.error(validated.details, 422);
     }
+    const parameters: CreateJobCommandInput = {
+      jobId: uuidv4(),
+      targets: request.input('targets', []),
+      document: request.input('document'),
+      targetSelection: request.input('targetSelection', 'SNAPSHOT') === 'SNAPSHOT' ? 'SNAPSHOT' : 'CONTINUOUS',
+      description: request.input('description', ''),
+    };
     const iotClient = new IoTClient({});
     await iotClient.send(
-      new CreateJobCommand({
-        jobId: uuidv4(),
-        targets: request.input('targets', []),
-        document: request.input('document'),
-        targetSelection: request.input('targetSelection', 'SNAPSHOT') === 'SNAPSHOT' ? 'SNAPSHOT' : 'CONTINUOUS',
-        description: request.input('description', ''),
-      }),
+      new CreateJobCommand(parameters),
     );
     return response.json({
       created: true,

@@ -1,16 +1,19 @@
-import { IoTClient, ListThingsInThingGroupCommand } from '@aws-sdk/client-iot';
-import { Request, Response } from '@softchef/lambda-events';
+import {
+  IoTClient,
+  ListThingsInThingGroupCommand,
+  ListThingsInThingGroupCommandInput,
+} from '@aws-sdk/client-iot';
+import {
+  Request,
+  Response,
+} from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
   const response = new Response();
   try {
-    let parameters: {
-      thingGroupName: string;
-      nextToken: string | undefined;
-    } = {
+    const parameters: ListThingsInThingGroupCommandInput = {
       thingGroupName: request.parameter('thingGroupName'),
-      nextToken: undefined,
     };
     if (request.has('nextToken')) {
       parameters.nextToken = request.get('nextToken');
