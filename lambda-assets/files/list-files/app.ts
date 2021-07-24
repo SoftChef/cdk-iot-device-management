@@ -1,5 +1,5 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, ScanCommand } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBDocumentClient, ScanCommand, ScanCommandInput } from '@aws-sdk/lib-dynamodb';
 import { Request, Response } from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
@@ -9,7 +9,9 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({}),
     );
-    let parameters: { [key: string]: any } = {};
+    let parameters: ScanCommandInput = {
+      TableName: process.env.FILE_TABLE_NAME,
+    };
     if (request.has('nextToken')) {
       parameters.ExclusiveStartKey = {
         Key: JSON.parse(
@@ -18,10 +20,7 @@ export async function handler(event: { [key: string]: any }) {
       };
     }
     const { Items: files, LastEvaluatedKey: lastEvaluatedKey } = await ddbDocClient.send(
-      new ScanCommand({
-        TableName: process.env.FILE_TABLE_NAME,
-        ...parameters,
-      }),
+      new ScanCommand(parameters),
     );
     let nextToken = null;
     if (lastEvaluatedKey) {

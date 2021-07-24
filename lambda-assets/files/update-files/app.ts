@@ -1,5 +1,5 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, GetCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBDocumentClient, BatchGetCommand, BatchWriteCommand } from '@aws-sdk/lib-dynamodb';
 import { Request, Response } from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
@@ -8,7 +8,7 @@ export async function handler(event: { [key: string]: any }) {
   try {
     const validated = request.validate(joi => {
       return {
-        files: joi.array().min(1).items(
+        files: joi.array().min(1).max(24).items(
           joi.object().keys({
             fileId: joi.string().required(),
             description: joi.string().allow('').required(),
@@ -25,54 +25,48 @@ export async function handler(event: { [key: string]: any }) {
     );
     const timestamp = Date.now();
     const requestFiles = request.input('files');
-    const updateFileList = requestFiles.map((file: any) => {
+    const fileList = requestFiles.map((requestFile: any) => {
       return {
-        fileId: file.fileId,
-        summary: file.summary,
-        description: file.description,
+        fileId: requestFile.fileId,
+        summary: requestFile.summary,
+        description: requestFile.description,
       };
     });
-    for (let index = 0; index < updateFileList.length; index += 1) {
-      const existsFile = await ddbDocClient.send(
-        new GetCommand({
-          TableName: process.env.FILE_TABLE_NAME,
-          Key: {
-            fileId: updateFileList[index].fileId,
+    const existsFiles: { [key: string]: any } = await ddbDocClient.send(
+      new BatchGetCommand({
+        RequestItems: {
+          [`${process.env.FILE_TABLE_NAME}`]: {
+            Keys: fileList.map((file: any) => {
+              return {
+                fileId: file.fileId,
+              };
+            }),
           },
-        }),
-      );
-      if (existsFile.Item) {
-        await ddbDocClient.send(
-          new UpdateCommand({
-            TableName: process.env.FILE_TABLE_NAME,
-            Key: {
-              fileId: existsFile.Item.fileId,
-            },
-            UpdateExpression: 'set #summary = :summary and #description = :description and #updatedAt = :updatedAt',
-            ExpressionAttributeNames: {
-              '#summary': 'summary',
-              '#updatedAt': 'updatedAt',
-              '#description': 'description',
-            },
-            ExpressionAttributeValues: {
-              ':summary': updateFileList[index].summary,
-              ':description': updateFileList[index].description,
-              ':updatedAt': timestamp,
-            },
+        },
+      }),
+    );
+    const updateFileList = existsFiles.Responses[`${process.env.FILE_TABLE_NAME}`].map((existsFile: any) => {
+      return Object.assign({}, existsFile, existsFiles[existsFile.fileId], {
+        updatedAt: timestamp,
+      });
+    });
+    await ddbDocClient.send(
+      new BatchWriteCommand({
+        RequestItems: {
+          [`${process.env.FILE_TABLE_NAME}`]: updateFileList.map((updateFile: any) => {
+            return {
+              PutRequest: {
+                Item: updateFile,
+              },
+            };
           }),
-        );
-      } else {
-        return response.error('File not found.', 404);
-      }
-    }
+        },
+      }),
+    );
     return response.json({
       updated: true,
     });
   } catch (error) {
-    if (error.Code === 'ResourceNotFoundException') {
-      return response.error(error, 404);
-    } else {
-      return response.error(error);
-    }
+    return response.error(error);
   }
 }

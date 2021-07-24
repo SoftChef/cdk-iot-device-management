@@ -4,6 +4,7 @@ import {
   ScanCommand,
   QueryCommand,
   PutCommand,
+  BatchGetCommand,
   BatchWriteCommand,
   GetCommand,
   UpdateCommand,
@@ -13,19 +14,15 @@ import {
   mockClient,
 } from 'aws-sdk-client-mock';
 import * as createCategory from '../../lambda-assets/files/create-category/app';
-import * as createFile from '../../lambda-assets/files/create-file/app';
 import * as createFiles from '../../lambda-assets/files/create-files/app';
 import * as deleteCategory from '../../lambda-assets/files/delete-category/app';
-import * as deleteFile from '../../lambda-assets/files/delete-file/app';
 import * as deleteFiles from '../../lambda-assets/files/delete-files/app';
 import * as getCategory from '../../lambda-assets/files/get-category/app';
-import * as getFile from '../../lambda-assets/files/get-file/app';
 import * as getFiles from '../../lambda-assets/files/get-files/app';
 import * as listCategories from '../../lambda-assets/files/list-categories/app';
 import * as listFilesByCategory from '../../lambda-assets/files/list-files-by-category/app';
 import * as listFiles from '../../lambda-assets/files/list-files/app';
 import * as updateCategory from '../../lambda-assets/files/update-category/app';
-import * as updateFile from '../../lambda-assets/files/update-file/app';
 import * as updateFiles from '../../lambda-assets/files/update-files/app';
 const CATEGORY_TABLE_NAME = 'category_table_name';
 const FILE_TABLE_NAME = 'file_table_name';
@@ -324,33 +321,6 @@ test('Delete category success', async () => {
   documentClientMock.restore();
 });
 
-test('Create file API success', async () => {
-  const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(GetCommand, {
-    TableName: CATEGORY_TABLE_NAME,
-    Key: {
-      categoryId: expected.newFile.categoryId,
-    },
-  }).resolves(expected.category);
-  documentClientMock.on(PutCommand).resolves({});
-  const response = await createFile.handler({
-    body: {
-      version: expected.newFile.version,
-      categoryId: expected.newFile.categoryId,
-      checksumType: expected.newFile.checksumType,
-      checksum: expected.newFile.checksum,
-      location: expected.newFile.location,
-      locale: expected.newFile.description,
-      summary: expected.newFile.description,
-      description: expected.newFile.description,
-    },
-  });
-  const body = JSON.parse(response.body);
-  expect(response.statusCode).toEqual(200);
-  expect(body.created).toEqual(true);
-  documentClientMock.restore();
-});
-
 test('Create files API success', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
   documentClientMock.on(GetCommand, {
@@ -477,137 +447,6 @@ test('Create files with invalid inputs expect failure (value in files array)', a
       message: expect.any(String),
     },
   ]);
-});
-
-test('Create file with does not exist category', async () => {
-  const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(GetCommand, {
-    TableName: CATEGORY_TABLE_NAME,
-    Key: {
-      categoryId: expected.newFile.categoryId,
-    },
-  }).resolves({});
-  const response = await createFile.handler({
-    body: {
-      version: expected.newFile.version,
-      categoryId: expected.newFile.categoryId,
-      checksumType: expected.newFile.checksumType,
-      checksum: expected.newFile.checksum,
-      location: expected.newFile.location,
-      locale: expected.newFile.description,
-      summary: expected.newFile.description,
-      description: expected.newFile.description,
-    },
-  });
-  const body = JSON.parse(response.body);
-  expect(response.statusCode).toEqual(404);
-  expect(body.error).toEqual('Category does not exist.');
-  documentClientMock.restore();
-});
-
-test('Create a file with invalid inputs expect failure (value in files array)', async () => {
-  const response = await createFile.handler({
-    body: {
-      version: '',
-      categoryId: '',
-      checksumType: '',
-      checksum: '',
-      location: '',
-      locale: '',
-      summary: '',
-      description: '',
-    },
-  });
-  const body = JSON.parse(response.body);
-  expect(response.statusCode).toEqual(422);
-  expect(body.error).toEqual([
-    {
-      label: 'version',
-      key: 'version',
-      value: '',
-      message: expect.any(String),
-    },
-    {
-      label: 'categoryId',
-      key: 'categoryId',
-      value: '',
-      message: expect.any(String),
-    },
-    {
-      label: 'checksumType',
-      key: 'checksumType',
-      value: '',
-      message: expect.any(String),
-    },
-    {
-      label: 'checksum',
-      key: 'checksum',
-      value: '',
-      message: expect.any(String),
-    },
-    {
-      label: 'location',
-      key: 'location',
-      value: '',
-      message: expect.any(String),
-    },
-    {
-      label: 'locale',
-      key: 'locale',
-      value: '',
-      message: expect.any(String),
-    },
-    {
-      label: 'summary',
-      key: 'summary',
-      value: '',
-      message: expect.any(String),
-    },
-    {
-      label: 'description',
-      key: 'description',
-      value: '',
-      message: expect.any(String),
-    },
-  ]);
-});
-
-test('Get file API success', async () => {
-  const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(GetCommand, {
-    TableName: FILE_TABLE_NAME,
-    Key: {
-      fileId: expected.file.fileId,
-    },
-  }).resolves({
-    Item: expected.file,
-  });
-  const response = await getFile.handler({
-    pathParameters: {
-      fileId: expected.file.fileId,
-    },
-  });
-  expect(response.statusCode).toEqual(200);
-  documentClientMock.restore();
-});
-
-test('Get file with invalid inputs expect failure', async () => {
-  const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(GetCommand, {
-    TableName: FILE_TABLE_NAME,
-    Key: {
-      fileId: expected.file.fileId,
-    },
-  }).resolves({});
-  const response = await getFile.handler({
-    pathParameters: {
-      fileId: expected.file.fileId,
-    },
-  });
-  const body = JSON.parse(response.body);
-  expect(response.statusCode).toEqual(404);
-  expect(body.error).toEqual('File not found.');
-  documentClientMock.restore();
 });
 
 test('Get file API success', async () => {
@@ -738,186 +577,91 @@ test('List files by category API success', async () => {
   documentClientMock.restore();
 });
 
-test('Update file API', async () => {
-  const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(GetCommand, {
-    TableName: FILE_TABLE_NAME,
-    Key: {
-      fileId: expected.file.fileId,
-    },
-  }).resolves({
-    Item: expected.file,
-  });
-  documentClientMock.on(UpdateCommand, {
-    TableName: FILE_TABLE_NAME,
-    Key: {
-      fileId: expected.file.fileId,
-    },
-    UpdateExpression: 'set #summary = :summary and #description = :description',
-    ExpressionAttributeNames: {
-      '#summary': 'summary',
-      '#description': 'description',
-    },
-    ExpressionAttributeValues: {
-      ':summary': expected.file.summary,
-      ':description': expected.file.description,
-    },
-  }).resolves({});
-  const response = await updateFile.handler({
-    pathParameters: {
-      fileId: expected.file.fileId,
-    },
-    body: {
-      summary: expected.file.summary,
-      description: expected.file.description,
-    },
-  });
-  expect(response.statusCode).toEqual(200);
-  documentClientMock.restore();
-});
-
-test('Update file when file does not exist.', async () => {
-  const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(GetCommand, {
-    TableName: FILE_TABLE_NAME,
-    Key: {
-      fileId: expected.file.fileId,
-    },
-  }).resolves({});
-  documentClientMock.on(UpdateCommand, {
-    TableName: FILE_TABLE_NAME,
-    Key: {
-      fileId: expected.file.fileId,
-    },
-    UpdateExpression: 'set #summary = :summary and #description = :description',
-    ExpressionAttributeNames: {
-      '#summary': 'summary',
-      '#description': 'description',
-    },
-    ExpressionAttributeValues: {
-      ':summary': expected.file.summary,
-      ':description': expected.file.description,
-    },
-  }).resolves({});
-  const response = await updateFile.handler({
-    pathParameters: {
-      fileId: expected.file.fileId,
-    },
-    body: {
-      summary: expected.newFile.summary,
-      description: expected.newFile.description,
-    },
-  });
-
-  expect(response.statusCode).toEqual(404);
-  documentClientMock.restore();
-});
-
 test('Update files API', async () => {
   const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(GetCommand, {
-    TableName: process.env.FILE_TABLE_NAME,
-    Key: {
-      fileId: expected.newFile.fileId,
+  documentClientMock.on(BatchGetCommand, {
+    RequestItems: {
+      [`${FILE_TABLE_NAME}`]: {
+        Keys: [{
+          fileId: expected.file.fileId,
+        }],
+      },
     },
   }).resolves({
-    Item: expected.newFile,
-  });
-  documentClientMock.on(UpdateCommand, {
-    TableName: process.env.FILE_TABLE_NAME,
-    Key: {
-      fileId: expected.newFile.fileId,
+    Responses: {
+      [`${FILE_TABLE_NAME}`]: expected.files,
     },
-    UpdateExpression: 'set #summary = :summary and #description = :description and #updatedAt = :updatedAt',
-    ExpressionAttributeNames: {
-      '#summary': 'summary',
-      '#description': 'description',
-      '#updatedAt': 'updatedAt',
-    },
-    ExpressionAttributeValues: {
-      ':summary': expected.newFile.summary,
-      ':description': expected.newFile.description,
-      ':updatedAt': expect.any(Number),
-    },
-  }).resolves({});
-  const response = await updateFiles.handler({
-    body: {
-      files: [
-        {
-          fileId: expected.newFile.fileId,
-          summary: expected.newFile.summary,
-          description: expected.newFile.description,
-        },
-      ],
-    },
-  });
-  expect(response.statusCode).toEqual(200);
-  documentClientMock.restore();
-});
-
-test('Update files when file does not exist.', async () => {
-  const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(GetCommand, {
-    TableName: FILE_TABLE_NAME,
-    Key: {
-      fileId: expected.newFile.fileId,
-    },
-  }).resolves({});
-  const response = await updateFiles.handler({
-    body: {
-      files: [
-        {
-          fileId: expected.newFile.fileId,
-          summary: expected.newFile.summary,
-          description: expected.newFile.description,
-        },
-      ],
-    },
-  });
-  const body = JSON.parse(response.body);
-  expect(response.statusCode).toEqual(404);
-  expect(body.error).toEqual('File not found.');
-  documentClientMock.restore();
-});
-
-test('Delete file API', async () => {
-  const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(QueryCommand, {
-    TableName: FILE_TABLE_NAME,
-    IndexName: 'get-file-by-checksum-and-version',
-    KeyConditionExpression: '#checksum = :checksum and #version = :version',
-    ExpressionAttributeNames: {
-      '#checksum': 'checksum',
-      '#version': 'version',
-    },
-    ExpressionAttributeValues: {
-      ':checksum': expected.file.checksum,
-      ':version': expected.file.version,
-    },
-  }).resolves({
-    Items: [{
-      checksum: expected.file.checksum,
-      version: expected.file.version,
-      fileId: expected.file.fileId,
-    }],
   });
   documentClientMock.on(BatchWriteCommand, {
     RequestItems: {
       [`${FILE_TABLE_NAME}`]: [{
-        DeleteRequest: {
-          Key: {
-            fileId: expected.file.fileId,
-          },
+        PutRequest: {
+          Item: expected.file,
         },
-      },
-      {
-        DeleteRequest: {
-          Key: {
-            fileId: expected.file.fileId,
-          },
+      }],
+    },
+  }).resolves({});
+  const response = await updateFiles.handler({
+    body: {
+      files: [
+        {
+          fileId: expected.newFile.fileId,
+          summary: expected.newFile.summary,
+          description: expected.newFile.description,
         },
-      },
-      {
+      ],
+    },
+  });
+  expect(response.statusCode).toEqual(200);
+  documentClientMock.restore();
+});
+
+test('Update files with invalid inputs expect failure (value in files array)', async () => {
+  const response = await updateFiles.handler({});
+  const body = JSON.parse(response.body);
+  expect(response.statusCode).toEqual(422);
+  expect(body.error).toEqual([
+    {
+      label: 'files',
+      value: null,
+      key: 'files',
+      message: expect.any(String),
+    },
+  ]);
+});
+
+test('Update files with invalid inputs expect failure (empty object in files array)', async () => {
+  const response = await updateFiles.handler({
+    body: {
+      files: [{}],
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(response.statusCode).toEqual(422);
+  expect(body.error).toEqual([
+    {
+      label: 'files[0].fileId',
+      key: 'fileId',
+      message: expect.any(String),
+    },
+    {
+      label: 'files[0].description',
+      key: 'description',
+      message: expect.any(String),
+    },
+    {
+      label: 'files[0].summary',
+      key: 'summary',
+      message: expect.any(String),
+    },
+  ]);
+});
+
+test('Delete files API', async () => {
+  const documentClientMock = mockClient(DynamoDBDocumentClient);
+  documentClientMock.on(BatchWriteCommand, {
+    RequestItems: {
+      [`${FILE_TABLE_NAME}`]: [{
         DeleteRequest: {
           Key: {
             fileId: expected.file.fileId,
@@ -927,55 +671,10 @@ test('Delete file API', async () => {
     },
   }).resolves({});
   const response = await deleteFiles.handler({
-    pathParameters: {
-      checksum: expected.file.checksum,
-      version: expected.file.version,
-    },
-  });
-  expect(response.statusCode).toEqual(200);
-  documentClientMock.restore();
-});
-
-test('Delete does not exist file', async () => {
-  const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(QueryCommand, {
-    TableName: FILE_TABLE_NAME,
-    IndexName: 'get-file-by-checksum-and-version',
-    KeyConditionExpression: '#checksum = :checksum and #version = :version',
-    ExpressionAttributeNames: {
-      '#checksum': 'checksum',
-      '#version': 'version',
-    },
-    ExpressionAttributeValues: {
-      ':checksum': expected.file.checksum,
-      ':version': expected.file.version,
-    },
-  }).resolves({
-    Items: [],
-  });
-  const response = await deleteFiles.handler({
-    pathParameters: {
-      checksum: expected.file.checksum,
-      version: expected.file.version,
-    },
-  });
-  const body = JSON.parse(response.body);
-  expect(response.statusCode).toEqual(404);
-  expect(body.error).toEqual('File not found.');
-  documentClientMock.restore();
-});
-
-test('Delete a file', async () => {
-  const documentClientMock = mockClient(DynamoDBDocumentClient);
-  documentClientMock.on(DeleteCommand, {
-    TableName: FILE_TABLE_NAME,
-    Key: {
-      fileId: expected.file.fileId,
-    },
-  }).resolves({});
-  const response = await deleteFile.handler({
-    pathParameters: {
-      fileId: expected.file.fileId,
+    body: {
+      files: [{
+        fileId: expected.file.fileId,
+      }],
     },
   });
   expect(response.statusCode).toEqual(200);

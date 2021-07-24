@@ -1,5 +1,5 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, QueryCommand } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBDocumentClient, QueryCommand, QueryCommandInput } from '@aws-sdk/lib-dynamodb';
 import { Request, Response } from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
@@ -9,7 +9,10 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({}),
     );
-    let parameters: { [key: string]: any } = {};
+    let parameters: QueryCommandInput = {
+      TableName: process.env.FILE_TABLE_NAME,
+      IndexName: 'query-by-category-id-and-locale',
+    };
     if (request.has('nextToken')) {
       parameters.ExclusiveStartKey = {
         Key: JSON.parse(
@@ -37,11 +40,7 @@ export async function handler(event: { [key: string]: any }) {
       };
     }
     const { Items: files, LastEvaluatedKey: lastEvaluatedKey } = await ddbDocClient.send(
-      new QueryCommand({
-        TableName: process.env.FILE_TABLE_NAME,
-        IndexName: 'query-by-category-id-and-locale',
-        ...parameters,
-      }),
+      new QueryCommand(parameters),
     );
     let nextToken = null;
     if (lastEvaluatedKey) {
