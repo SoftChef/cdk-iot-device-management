@@ -1,6 +1,16 @@
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, GetCommand, QueryCommand, BatchWriteCommand } from '@aws-sdk/lib-dynamodb';
-import { Request, Response } from '@softchef/lambda-events';
+import {
+  DynamoDBClient,
+} from '@aws-sdk/client-dynamodb';
+import {
+  DynamoDBDocumentClient,
+  GetCommand,
+  QueryCommand,
+  BatchWriteCommand,
+} from '@aws-sdk/lib-dynamodb';
+import {
+  Request,
+  Response,
+} from '@softchef/lambda-events';
 import * as uuid from 'uuid';
 
 export async function handler(event: { [key: string]: any }) {

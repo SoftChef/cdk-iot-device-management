@@ -1,5 +1,10 @@
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, DeleteCommand } from '@aws-sdk/lib-dynamodb';
+import {
+  DynamoDBClient,
+} from '@aws-sdk/client-dynamodb';
+import {
+  DynamoDBDocumentClient,
+  DeleteCommand,
+} from '@aws-sdk/lib-dynamodb';
 import {
   Request,
   Response,
