@@ -1,5 +1,6 @@
 import {
   CreateJobCommand,
+  CreateJobCommandInput,
   IoTClient,
 } from '@aws-sdk/client-iot';
 import { ScheduleFunction } from '@softchef/lambda-events';
@@ -34,18 +35,19 @@ export async function handler(event: { [key: string]: any }) {
         }),
       );
     }
+    const parameters: CreateJobCommandInput = {
+      jobId: uuidv4(),
+      targets: request.context('targets'),
+      document: request.context('document'),
+      targetSelection: request.context('targetSelection'),
+      description: request.context('description') ?? '',
+    };
     const iotClient = new IoTClient({});
     const job = await iotClient.send(
-      new CreateJobCommand({
-        jobId: uuidv4(),
-        targets: request.context('targets'),
-        document: request.context('document'),
-        targetSelection: request.context('targetSelection'),
-        description: request.context('description') ?? '',
-      }),
+      new CreateJobCommand(parameters),
     );
     return response.success({
-      job,
+      job: job,
     });
   } catch (error) {
     return response.failed(error);

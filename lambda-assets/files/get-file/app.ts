@@ -1,5 +1,5 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, DeleteCommand } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBDocumentClient, GetCommand } from '@aws-sdk/lib-dynamodb';
 import {
   Request,
   Response,
@@ -12,16 +12,20 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({}),
     );
-    await ddbDocClient.send(
-      new DeleteCommand({
-        TableName: process.env.CATEGORY_TABLE_NAME,
+    const { Item: file } = await ddbDocClient.send(
+      new GetCommand({
+        TableName: process.env.FILE_TABLE_NAME,
         Key: {
-          categoryId: request.parameter('categoryId'),
+          fileId: request.parameter('fileId'),
+          version: request.parameter('version'),
         },
       }),
     );
+    if (!file) {
+      return response.error('Not found.', 404);
+    };
     return response.json({
-      deleted: true,
+      file: file,
     });
   } catch (error) {
     return response.error(error);

@@ -1,6 +1,14 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+<<<<<<< HEAD
 import { DynamoDBDocumentClient, ScanCommand, ScanCommandInput } from '@aws-sdk/lib-dynamodb';
 import { Request, Response } from '@softchef/lambda-events';
+=======
+import { DynamoDBDocumentClient, ScanCommand } from '@aws-sdk/lib-dynamodb';
+import {
+  Request,
+  Response,
+} from '@softchef/lambda-events';
+>>>>>>> origin
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);

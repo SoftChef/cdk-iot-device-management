@@ -14,9 +14,10 @@ export async function handler(event: { [key: string]: any }) {
     );
     await ddbDocClient.send(
       new DeleteCommand({
-        TableName: process.env.CATEGORY_TABLE_NAME,
+        TableName: process.env.FILE_TABLE_NAME,
         Key: {
-          categoryId: request.parameter('categoryId'),
+          fileId: request.parameter('fileId'),
+          version: request.parameter('version'),
         },
       }),
     );

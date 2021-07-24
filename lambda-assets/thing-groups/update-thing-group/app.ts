@@ -1,5 +1,12 @@
-import { IoTClient, UpdateThingGroupCommand } from '@aws-sdk/client-iot';
-import { Request, Response } from '@softchef/lambda-events';
+import {
+  IoTClient,
+  UpdateThingGroupCommand,
+  UpdateThingGroupCommandInput,
+} from '@aws-sdk/client-iot';
+import {
+  Request,
+  Response,
+} from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
@@ -13,14 +20,15 @@ export async function handler(event: { [key: string]: any }) {
     if (validated.error) {
       return response.error(validated.details, 422);
     }
+    const parameters: UpdateThingGroupCommandInput = {
+      thingGroupName: request.parameter('thingGroupName'),
+      thingGroupProperties: {
+        thingGroupDescription: request.input('description', undefined),
+      },
+    };
     const iotClient = new IoTClient({});
     await iotClient.send(
-      new UpdateThingGroupCommand({
-        thingGroupName: request.parameter('thingGroupName'),
-        thingGroupProperties: {
-          thingGroupDescription: request.input('description', undefined),
-        },
-      }),
+      new UpdateThingGroupCommand(parameters),
     );
     return response.json({
       updated: true,

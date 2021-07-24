@@ -1,15 +1,23 @@
-import { IoTClient, GetJobDocumentCommand } from '@aws-sdk/client-iot';
-import { Request, Response } from '@softchef/lambda-events';
+import {
+  GetJobDocumentCommand,
+  GetJobDocumentCommandInput,
+  IoTClient,
+} from '@aws-sdk/client-iot';
+import {
+  Request,
+  Response,
+} from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
   const response = new Response();
   try {
+    const parameters: GetJobDocumentCommandInput = {
+      jobId: request.parameter('jobId'),
+    };
     const iotClient = new IoTClient({});
     const { document } = await iotClient.send(
-      new GetJobDocumentCommand({
-        jobId: request.parameter('jobId'),
-      }),
+      new GetJobDocumentCommand(parameters),
     );
     return response.json({
       document: document,

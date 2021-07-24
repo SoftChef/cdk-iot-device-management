@@ -1,15 +1,23 @@
-import { IoTClient, DescribeThingCommand } from '@aws-sdk/client-iot';
-import { Request, Response } from '@softchef/lambda-events';
+import {
+  DescribeThingCommand,
+  DescribeThingCommandInput,
+  IoTClient,
+} from '@aws-sdk/client-iot';
+import {
+  Request,
+  Response,
+} from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
   const response = new Response();
   try {
+    const parameters: DescribeThingCommandInput = {
+      thingName: request.parameter('thingName'),
+    };
     const iotClient = new IoTClient({});
     const thing = await iotClient.send(
-      new DescribeThingCommand({
-        thingName: request.parameter('thingName'),
-      }),
+      new DescribeThingCommand(parameters),
     );
     return response.json({
       thing: thing,

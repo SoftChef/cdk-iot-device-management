@@ -1,5 +1,12 @@
-import { IoTClient, CreateDynamicThingGroupCommand } from '@aws-sdk/client-iot';
-import { Request, Response } from '@softchef/lambda-events';
+import {
+  CreateDynamicThingGroupCommand,
+  CreateDynamicThingGroupCommandInput,
+  IoTClient,
+} from '@aws-sdk/client-iot';
+import {
+  Request,
+  Response,
+} from '@softchef/lambda-events';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
@@ -14,12 +21,13 @@ export async function handler(event: { [key: string]: any }) {
     if (validated.error) {
       return response.error(validated.details, 422);
     }
+    const parameters: CreateDynamicThingGroupCommandInput = {
+      thingGroupName: request.input('thingGroupName'),
+      queryString: request.input('queryString'),
+    };
     const iotClient = new IoTClient({});
     await iotClient.send(
-      new CreateDynamicThingGroupCommand({
-        thingGroupName: request.input('thingGroupName'),
-        queryString: request.input('queryString'),
-      }),
+      new CreateDynamicThingGroupCommand(parameters),
     );
     return response.json({
       created: true,

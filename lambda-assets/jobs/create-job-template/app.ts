@@ -1,10 +1,12 @@
-/**
- * @todo
- * 1. verify document "JSON" format
- */
-
-import { CreateJobTemplateCommand, IoTClient } from '@aws-sdk/client-iot';
-import { Request, Response } from '@softchef/lambda-events';
+import {
+  CreateJobTemplateCommand,
+  CreateJobTemplateCommandInput,
+  IoTClient,
+} from '@aws-sdk/client-iot';
+import {
+  Request,
+  Response,
+} from '@softchef/lambda-events';
 import { v4 as uuidv4 } from 'uuid';
 
 export async function handler(event: { [key: string]: any }) {
@@ -20,13 +22,14 @@ export async function handler(event: { [key: string]: any }) {
     if (validated.error) {
       return response.error(validated.details, 422);
     }
+    const parameters: CreateJobTemplateCommandInput = {
+      jobTemplateId: uuidv4(),
+      document: request.input('document'),
+      description: request.input('description'),
+    };
     const iotClient = new IoTClient({});
     await iotClient.send(
-      new CreateJobTemplateCommand({
-        jobTemplateId: uuidv4(),
-        document: request.input('document'),
-        description: request.input('description'),
-      }),
+      new CreateJobTemplateCommand(parameters),
     );
     return response.json({
       created: true,

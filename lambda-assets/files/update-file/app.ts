@@ -1,5 +1,5 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, GetCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBDocumentClient, UpdateCommand } from '@aws-sdk/lib-dynamodb';
 import {
   Request,
   Response,
@@ -11,7 +11,11 @@ export async function handler(event: { [key: string]: any }) {
   try {
     const validated = request.validate(joi => {
       return {
-        description: joi.string().allow(''),
+        checksumType: joi.string().allow('md5', 'crc32', 'sha1'),
+        fileId: joi.string().when('checksumType', { is: 'md5', then: joi.string().length(32).required() })
+          .concat(joi.string().when('checksumType', { is: 'crc32', then: joi.string().length(8).required() }))
+          .concat(joi.string().when('checksumType', { is: 'sha1', then: joi.string().length(40).required() })),
+        version: joi.string(),
       };
     });
     if (validated.error) {
@@ -20,30 +24,19 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({}),
     );
-    const categoryId = request.parameter('categoryId');
-    const category = await ddbDocClient.send(
-      new GetCommand({
-        TableName: process.env.CATEGORY_TABLE_NAME,
-        Key: {
-          categoryId,
-        },
-      }),
-    );
-    if (!category.Item) {
-      return response.error('Category does not exist.', 404);
-    }
     await ddbDocClient.send(
       new UpdateCommand({
-        TableName: process.env.CATEGORY_TABLE_NAME,
+        TableName: process.env.FILE_TABLE_NAME,
         Key: {
-          categoryId,
+          fileId: request.parameter('fileId'),
+          version: request.parameter('version'),
         },
         UpdateExpression: 'set #description = :description',
         ExpressionAttributeNames: {
           '#description': 'description',
         },
         ExpressionAttributeValues: {
-          ':description': request.input('description'),
+          ':description': request.input('description', ''),
         },
       }),
     );
@@ -51,6 +44,10 @@ export async function handler(event: { [key: string]: any }) {
       updated: true,
     });
   } catch (error) {
-    return response.error(error);
+    if (error.Code === 'ResourceNotFoundException') {
+      return response.error(error, 404);
+    } else {
+      return response.error(error);
+    }
   }
 }
