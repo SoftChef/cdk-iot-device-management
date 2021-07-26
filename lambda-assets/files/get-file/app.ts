@@ -17,7 +17,7 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({}),
     );
-    const { Item: file } = await ddbDocClient.send(
+    const file = await ddbDocClient.send(
       new GetCommand({
         TableName: process.env.FILE_TABLE_NAME,
         Key: {
@@ -26,7 +26,7 @@ export async function handler(event: { [key: string]: any }) {
         },
       }),
     );
-    if (!file) {
+    if (!file || !file.Item) {
       return response.error('Not found.', 404);
     };
     return response.json({

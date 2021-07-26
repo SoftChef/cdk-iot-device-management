@@ -4,7 +4,9 @@ import {
 import {
   DynamoDBDocumentClient,
   ScanCommand,
+  ScanCommandInput,
   QueryCommand,
+  QueryCommandInput,
 } from '@aws-sdk/lib-dynamodb';
 import {
   Request,
@@ -18,28 +20,27 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({}),
     );
-    let parameters: { [key: string]: any } = {};
-    if (request.has('nextToken')) {
-      parameters.ExclusiveStartKey = {
-        Key: JSON.parse(
-          Buffer.from(request.get('nextToken'), 'base64').toString('utf8'),
-        ),
-      };
-    }
     if (request.has('parentId')) {
-      parameters.IndexName = 'query-by-parent-id';
-      parameters.KeyConditionExpression = '#parentId = :parentId';
-      parameters.ExpressionAttributeNames = {
-        '#parentId': 'parentId',
+      let parameters: QueryCommandInput = {
+        TableName: process.env.CATEGORY_TABLE_NAME,
+        IndexName: 'query-by-parent-id',
+        KeyConditionExpression: '#parentId = :parentId',
+        ExpressionAttributeNames: {
+          '#parentId': 'parentId',
+        },
+        ExpressionAttributeValues: {
+          ':parentId': request.get('parentId'),
+        },
       };
-      parameters.ExpressionAttributeValues = {
-        ':parentId': request.get('parentId'),
-      };
+      if (request.has('nextToken')) {
+        parameters.ExclusiveStartKey = {
+          Key: JSON.parse(
+            Buffer.from(request.get('nextToken'), 'base64').toString('utf8'),
+          ),
+        };
+      }
       const { Items: categories, LastEvaluatedKey: lastEvaluatedKey } = await ddbDocClient.send(
-        new QueryCommand({
-          TableName: process.env.CATEGORY_TABLE_NAME,
-          ...parameters,
-        }),
+        new QueryCommand(parameters),
       );
       let nextToken = null;
       if (lastEvaluatedKey) {
@@ -52,15 +53,22 @@ export async function handler(event: { [key: string]: any }) {
         nextToken: nextToken,
       });
     } else {
-      parameters.ExpressionAttributeNames = {
-        '#parentId': 'parentId',
+      let parameters: ScanCommandInput = {
+        TableName: process.env.CATEGORY_TABLE_NAME,
+        ExpressionAttributeNames: {
+          '#parentId': 'parentId',
+        },
+        FilterExpression: 'attribute_not_exists(#parentId)',
       };
-      parameters.FilterExpression = 'attribute_not_exists(#parentId)';
+      if (request.has('nextToken')) {
+        parameters.ExclusiveStartKey = {
+          Key: JSON.parse(
+            Buffer.from(request.get('nextToken'), 'base64').toString('utf8'),
+          ),
+        };
+      }
       const { Items: categories, LastEvaluatedKey: lastEvaluatedKey } = await ddbDocClient.send(
-        new ScanCommand({
-          TableName: process.env.CATEGORY_TABLE_NAME,
-          ...parameters,
-        }),
+        new ScanCommand(parameters),
       );
       let nextToken = null;
       if (lastEvaluatedKey) {
