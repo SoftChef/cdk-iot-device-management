@@ -4,6 +4,7 @@ import {
 import {
   DynamoDBDocumentClient,
   GetCommand,
+  GetCommandInput,
 } from '@aws-sdk/lib-dynamodb';
 import {
   Request,
@@ -17,14 +18,15 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({}),
     );
+    const getParameters: GetCommandInput = {
+      TableName: process.env.FILE_TABLE_NAME,
+      Key: {
+        fileId: request.parameter('fileId'),
+        version: request.parameter('version'),
+      },
+    };
     const file = await ddbDocClient.send(
-      new GetCommand({
-        TableName: process.env.FILE_TABLE_NAME,
-        Key: {
-          fileId: request.parameter('fileId'),
-          version: request.parameter('version'),
-        },
-      }),
+      new GetCommand(getParameters),
     );
     if (!file || !file.Item) {
       return response.error('Not found.', 404);

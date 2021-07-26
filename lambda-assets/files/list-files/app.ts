@@ -18,7 +18,7 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({}),
     );
-    let parameters: ScanCommandInput = {
+    const parameters: ScanCommandInput = {
       TableName: process.env.FILE_TABLE_NAME,
     };
     if (request.has('nextToken')) {

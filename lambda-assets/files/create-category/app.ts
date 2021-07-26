@@ -5,7 +5,9 @@ import {
 import {
   DynamoDBDocumentClient,
   GetCommand,
+  GetCommandInput,
   PutCommand,
+  PutCommandInput,
 } from '@aws-sdk/lib-dynamodb';
 import {
   Request,
@@ -32,38 +34,41 @@ export async function handler(event: { [key: string]: any }) {
       new DynamoDBClient({}),
     );
     const md5 = crypto.createHash('md5');
-    let itemParameters: { [key: string]: any } = {};
+    const putParameters: PutCommandInput = {
+      TableName: process.env.CATEGORY_TABLE_NAME,
+      Item: {
+        name,
+        createdAt: currentTime,
+        updatedAt: currentTime,
+      },
+    };
+    if (!putParameters.Item) {
+      return response.error('Parameters error.', 422);
+    }
     if (request.has('parentId')) {
       const parentId = request.input('parentId');
-      itemParameters.categoryId = md5.update(`${parentId}-${name}`).digest('hex');
-      itemParameters.parentId = parentId;
+      putParameters.Item.categoryId = md5.update(`${parentId}-${name}`).digest('hex');
+      putParameters.Item.parentId = parentId;
     } else {
-      itemParameters.categoryId = md5.update(name).digest('hex');
+      putParameters.Item.categoryId = md5.update(name).digest('hex');
     }
     if (request.has('description')) {
-      itemParameters.description = request.input('description');
+      putParameters.Item.description = request.input('description');
     }
+    const getParameters: GetCommandInput = {
+      TableName: process.env.CATEGORY_TABLE_NAME,
+      Key: {
+        categoryId: putParameters.Item.categoryId,
+      },
+    };
     const { Item: category } = await ddbDocClient.send(
-      new GetCommand({
-        TableName: process.env.CATEGORY_TABLE_NAME,
-        Key: {
-          categoryId: itemParameters.categoryId,
-        },
-      }),
+      new GetCommand(getParameters),
     );
     if (category) {
       return response.error('Category already exists.', 422);
     }
     await ddbDocClient.send(
-      new PutCommand({
-        TableName: process.env.CATEGORY_TABLE_NAME,
-        Item: {
-          ...itemParameters,
-          name,
-          createdAt: currentTime,
-          updatedAt: currentTime,
-        },
-      }),
+      new PutCommand(putParameters),
     );
     return response.json({
       created: true,

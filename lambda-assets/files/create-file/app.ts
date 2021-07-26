@@ -4,7 +4,9 @@ import {
 import {
   DynamoDBDocumentClient,
   GetCommand,
+  GetCommandInput,
   PutCommand,
+  PutCommandInput,
 } from '@aws-sdk/lib-dynamodb';
 import {
   Request,
@@ -33,31 +35,33 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({}),
     );
-    const { Item: category } = await ddbDocClient.send(
-      new GetCommand({
-        TableName: process.env.CATEGORY_TABLE_NAME,
-        Key: {
-          categoryId,
-        },
-      }),
+    const getParameters: GetCommandInput = {
+      TableName: process.env.CATEGORY_TABLE_NAME,
+      Key: {
+        categoryId,
+      },
+    };
+    const category = await ddbDocClient.send(
+      new GetCommand(getParameters),
     );
-    if (!category) {
+    if (!category || !category.Item) {
       return response.error('Category does not exist.', 422);
     }
     const currentTime = Date.now();
+    const putParameters: PutCommandInput = {
+      TableName: process.env.FILE_TABLE_NAME,
+      Item: {
+        fileId: request.input('checksum'),
+        version: request.input('version'),
+        categoryId,
+        location: request.input('location'),
+        description: request.input('description'),
+        createdAt: currentTime,
+        updatedAt: currentTime,
+      },
+    };
     await ddbDocClient.send(
-      new PutCommand({
-        TableName: process.env.FILE_TABLE_NAME,
-        Item: {
-          fileId: request.input('checksum'),
-          version: request.input('version'),
-          categoryId,
-          location: request.input('location'),
-          description: request.input('description'),
-          createdAt: currentTime,
-          updatedAt: currentTime,
-        },
-      }),
+      new PutCommand(putParameters),
     );
     return response.json({
       created: true,

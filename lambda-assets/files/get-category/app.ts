@@ -4,6 +4,7 @@ import {
 import {
   DynamoDBDocumentClient,
   GetCommand,
+  GetCommandInput,
 } from '@aws-sdk/lib-dynamodb';
 import {
   Request,
@@ -17,13 +18,14 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({}),
     );
+    const getParameters: GetCommandInput = {
+      TableName: process.env.CATEGORY_TABLE_NAME,
+      Key: {
+        categoryId: request.parameter('categoryId'),
+      },
+    };
     const { Item: category } = await ddbDocClient.send(
-      new GetCommand({
-        TableName: process.env.CATEGORY_TABLE_NAME,
-        Key: {
-          categoryId: request.parameter('categoryId'),
-        },
-      }),
+      new GetCommand(getParameters),
     );
     if (!category) {
       return response.error('Category does not exist.', 404);

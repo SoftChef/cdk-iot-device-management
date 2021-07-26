@@ -4,8 +4,11 @@ import {
 import {
   DynamoDBDocumentClient,
   GetCommand,
+  GetCommandInput,
   QueryCommand,
+  QueryCommandInput,
   BatchWriteCommand,
+  BatchWriteCommandInput,
 } from '@aws-sdk/lib-dynamodb';
 import {
   Request,
@@ -64,44 +67,47 @@ export async function handler(event: { [key: string]: any }) {
       new DynamoDBClient({}),
     );
     for (let file = 0; file < validateFile.length; file += 1) {
+      const getParameters: GetCommandInput = {
+        TableName: process.env.CATEGORY_TABLE_NAME,
+        Key: {
+          categoryId: validateFile[file].categoryId,
+        },
+      };
       const { Item: category } = await ddbDocClient.send(
-        new GetCommand({
-          TableName: process.env.CATEGORY_TABLE_NAME,
-          Key: {
-            categoryId: validateFile[file].categoryId,
-          },
-        }),
+        new GetCommand(getParameters),
       );
       if (!category) {
         return response.error('Category does not exist.', 404);
       }
     };
     for (let file = 0; file < validateFile.length; file += 1) {
+      const queryParameters: QueryCommandInput = {
+        TableName: process.env.FILE_TABLE_NAME,
+        IndexName: 'get-file-by-checksum-and-version',
+        KeyConditionExpression: '#checksum = :checksum and #version = :version',
+        ExpressionAttributeNames: {
+          '#checksum': 'checksum',
+          '#version': 'version',
+        },
+        ExpressionAttributeValues: {
+          ':checksum': validateFile[file].checksum,
+          ':version': validateFile[file].version,
+        },
+      };
       const existsFiles = await ddbDocClient.send(
-        new QueryCommand({
-          TableName: process.env.FILE_TABLE_NAME,
-          IndexName: 'get-file-by-checksum-and-version',
-          KeyConditionExpression: '#checksum = :checksum and #version = :version',
-          ExpressionAttributeNames: {
-            '#checksum': 'checksum',
-            '#version': 'version',
-          },
-          ExpressionAttributeValues: {
-            ':checksum': validateFile[file].checksum,
-            ':version': validateFile[file].version,
-          },
-        }),
+        new QueryCommand(queryParameters),
       );
       if (existsFiles.Items && existsFiles.Items.length) {
         return response.error('File already exists.', 404);
       }
     };
+    const batchWriteParameters: BatchWriteCommandInput = {
+      RequestItems: {
+        [`${process.env.FILE_TABLE_NAME}`]: files,
+      },
+    };
     await ddbDocClient.send(
-      new BatchWriteCommand({
-        RequestItems: {
-          [`${process.env.FILE_TABLE_NAME}`]: files,
-        },
-      }),
+      new BatchWriteCommand(batchWriteParameters),
     );
     return response.json({
       created: true,

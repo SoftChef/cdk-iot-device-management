@@ -4,6 +4,7 @@ import {
 import {
   DynamoDBDocumentClient,
   BatchWriteCommand,
+  BatchWriteCommandInput,
 } from '@aws-sdk/lib-dynamodb';
 import {
   Request,
@@ -30,20 +31,21 @@ export async function handler(event: { [key: string]: any }) {
       new DynamoDBClient({}),
     );
     const files = request.input('files');
-    await ddbDocClient.send(
-      new BatchWriteCommand({
-        RequestItems: {
-          [`${process.env.FILE_TABLE_NAME}`]: files.map((file: any) => {
-            return {
-              DeleteRequest: {
-                Key: {
-                  fileId: file.fileId,
-                },
+    const batchWriteParameters: BatchWriteCommandInput = {
+      RequestItems: {
+        [`${process.env.FILE_TABLE_NAME}`]: files.map((file: any) => {
+          return {
+            DeleteRequest: {
+              Key: {
+                fileId: file.fileId,
               },
-            };
-          }),
-        },
-      }),
+            },
+          };
+        }),
+      },
+    };
+    await ddbDocClient.send(
+      new BatchWriteCommand(batchWriteParameters),
     );
     return response.json({
       deleted: true,

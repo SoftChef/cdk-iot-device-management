@@ -4,7 +4,9 @@ import {
 import {
   DynamoDBDocumentClient,
   BatchGetCommand,
+  BatchGetCommandInput,
   BatchWriteCommand,
+  BatchWriteCommandInput,
 } from '@aws-sdk/lib-dynamodb';
 import {
   Request,
@@ -41,36 +43,38 @@ export async function handler(event: { [key: string]: any }) {
         description: requestFile.description,
       };
     });
-    const existsFiles: { [key: string]: any } = await ddbDocClient.send(
-      new BatchGetCommand({
-        RequestItems: {
-          [`${process.env.FILE_TABLE_NAME}`]: {
-            Keys: fileList.map((file: any) => {
-              return {
-                fileId: file.fileId,
-              };
-            }),
-          },
+    const batchGetParameters: BatchGetCommandInput = {
+      RequestItems: {
+        [`${process.env.FILE_TABLE_NAME}`]: {
+          Keys: fileList.map((file: any) => {
+            return {
+              fileId: file.fileId,
+            };
+          }),
         },
-      }),
+      },
+    };
+    const existsFiles: { [key: string]: any } = await ddbDocClient.send(
+      new BatchGetCommand(batchGetParameters),
     );
     const updateFileList = existsFiles.Responses[`${process.env.FILE_TABLE_NAME}`].map((existsFile: any) => {
       return Object.assign({}, existsFile, existsFiles[existsFile.fileId], {
         updatedAt: timestamp,
       });
     });
+    const batchWriteParameters: BatchWriteCommandInput = {
+      RequestItems: {
+        [`${process.env.FILE_TABLE_NAME}`]: updateFileList.map((updateFile: any) => {
+          return {
+            PutRequest: {
+              Item: updateFile,
+            },
+          };
+        }),
+      },
+    };
     await ddbDocClient.send(
-      new BatchWriteCommand({
-        RequestItems: {
-          [`${process.env.FILE_TABLE_NAME}`]: updateFileList.map((updateFile: any) => {
-            return {
-              PutRequest: {
-                Item: updateFile,
-              },
-            };
-          }),
-        },
-      }),
+      new BatchWriteCommand(batchWriteParameters),
     );
     return response.json({
       updated: true,

@@ -18,7 +18,7 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({}),
     );
-    let parameters: QueryCommandInput = {
+    const parameters: QueryCommandInput = {
       TableName: process.env.FILE_TABLE_NAME,
       IndexName: 'get-file-by-checksum-and-version',
       KeyConditionExpression: '#checksum = :checksum and #version = :version',

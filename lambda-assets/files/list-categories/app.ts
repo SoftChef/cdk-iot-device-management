@@ -21,7 +21,7 @@ export async function handler(event: { [key: string]: any }) {
       new DynamoDBClient({}),
     );
     if (request.has('parentId')) {
-      let parameters: QueryCommandInput = {
+      const parameters: QueryCommandInput = {
         TableName: process.env.CATEGORY_TABLE_NAME,
         IndexName: 'query-by-parent-id',
         KeyConditionExpression: '#parentId = :parentId',
@@ -53,7 +53,7 @@ export async function handler(event: { [key: string]: any }) {
         nextToken: nextToken,
       });
     } else {
-      let parameters: ScanCommandInput = {
+      const parameters: ScanCommandInput = {
         TableName: process.env.CATEGORY_TABLE_NAME,
         ExpressionAttributeNames: {
           '#parentId': 'parentId',
