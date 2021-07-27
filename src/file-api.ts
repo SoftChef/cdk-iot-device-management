@@ -9,8 +9,8 @@ import { RestApi, HttpMethod } from '@softchef/cdk-restapi';
 const LAMBDA_ASSETS_PATH = path.resolve(__dirname, '../lambda-assets/files');
 
 export interface Capacity {
-  readonly writeCapacity: number;
-  readonly readCapacity: number;
+  readonly writeCapacity?: number;
+  readonly readCapacity?: number;
 }
 
 export interface CategoryTableConfig {
