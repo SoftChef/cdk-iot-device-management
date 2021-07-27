@@ -233,13 +233,13 @@ import { Capacity } from '@softchef/cdk-iot-device-management'
 const capacity: Capacity = { ... }
 ```
 
-##### `readCapacity`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.Capacity.property.readCapacity"></a>
+##### `readCapacity`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.Capacity.property.readCapacity"></a>
 
 - *Type:* `number`
 
 ---
 
-##### `writeCapacity`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.Capacity.property.writeCapacity"></a>
+##### `writeCapacity`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.Capacity.property.writeCapacity"></a>
 
 - *Type:* `number`
 
