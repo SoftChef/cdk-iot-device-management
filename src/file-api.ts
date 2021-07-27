@@ -10,27 +10,27 @@ const LAMBDA_ASSETS_PATH = path.resolve(__dirname, '../lambda-assets/files');
 
 interface CategoryTableConfig {
   readonly primaryIndex: {
-    writeCapacity: number;
-    readCapacity: number;
+    writeCapacity: Number;
+    readCapacity: Number;
   };
   readonly queryByParentId: {
-    writeCapacity: number;
-    readCapacity: number;
+    writeCapacity: Number;
+    readCapacity: Number;
   };
 }
 
 interface FileTableConfig {
   readonly primaryIndex: {
-    writeCapacity: number;
-    readCapacity: number;
+    writeCapacity: Number;
+    readCapacity: Number;
   };
   readonly queryByCategoryIdAndLocale: {
-    writeCapacity: number;
-    readCapacity: number;
+    writeCapacity: Number;
+    readCapacity: Number;
   };
   readonly getFileByChecksumAndVersion: {
-    writeCapacity: number;
-    readCapacity: number;
+    writeCapacity: Number;
+    readCapacity: Number;
   };
 }
 
