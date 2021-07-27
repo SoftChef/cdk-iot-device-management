@@ -34,6 +34,22 @@ new FileApi(scope: Construct, id: string, props?: FileApiProps)
 
 #### Properties <a name="Properties"></a>
 
+##### `categoryTable`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileApi.property.categoryTable"></a>
+
+- *Type:* [`@aws-cdk/aws-dynamodb.Table`](#@aws-cdk/aws-dynamodb.Table)
+
+The category table.
+
+---
+
+##### `fileTable`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileApi.property.fileTable"></a>
+
+- *Type:* [`@aws-cdk/aws-dynamodb.Table`](#@aws-cdk/aws-dynamodb.Table)
+
+The file table.
+
+---
+
 ##### `restApiId`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileApi.property.restApiId"></a>
 
 - *Type:* `string`
@@ -207,6 +223,50 @@ The ThingType API Gateway's ID.
 
 ## Structs <a name="Structs"></a>
 
+### Capacity <a name="@softchef/cdk-iot-device-management.Capacity"></a>
+
+#### Initializer <a name="[object Object].Initializer"></a>
+
+```typescript
+import { Capacity } from '@softchef/cdk-iot-device-management'
+
+const capacity: Capacity = { ... }
+```
+
+##### `readCapacity`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.Capacity.property.readCapacity"></a>
+
+- *Type:* `number`
+
+---
+
+##### `writeCapacity`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.Capacity.property.writeCapacity"></a>
+
+- *Type:* `number`
+
+---
+
+### CategoryTableConfig <a name="@softchef/cdk-iot-device-management.CategoryTableConfig"></a>
+
+#### Initializer <a name="[object Object].Initializer"></a>
+
+```typescript
+import { CategoryTableConfig } from '@softchef/cdk-iot-device-management'
+
+const categoryTableConfig: CategoryTableConfig = { ... }
+```
+
+##### `indexQueryByParentId`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.CategoryTableConfig.property.indexQueryByParentId"></a>
+
+- *Type:* [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity)
+
+---
+
+##### `primaryIndex`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.CategoryTableConfig.property.primaryIndex"></a>
+
+- *Type:* [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity)
+
+---
+
 ### FileApiProps <a name="@softchef/cdk-iot-device-management.FileApiProps"></a>
 
 #### Initializer <a name="[object Object].Initializer"></a>
@@ -235,63 +295,49 @@ Specify API Gateway's authorizer, CognitoUserPool/Lambda.
 
 ---
 
-##### `categoryTableQueryByParentIdRCU`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.categoryTableQueryByParentIdRCU"></a>
+##### `categoryTableConfig`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.categoryTableConfig"></a>
 
-- *Type:* `number`
+- *Type:* [`@softchef/cdk-iot-device-management.CategoryTableConfig`](#@softchef/cdk-iot-device-management.CategoryTableConfig)
+- *Default:* undefined
 
----
-
-##### `categoryTableQueryByParentIdWCU`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.categoryTableQueryByParentIdWCU"></a>
-
-- *Type:* `number`
+Category Table Configuration,.
 
 ---
 
-##### `categoryTableRCU`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.categoryTableRCU"></a>
+##### `fileTableConfig`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.fileTableConfig"></a>
 
-- *Type:* `number`
+- *Type:* [`@softchef/cdk-iot-device-management.FileTableConfig`](#@softchef/cdk-iot-device-management.FileTableConfig)
+- *Default:* undefined
 
----
-
-##### `categoryTableWCU`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.categoryTableWCU"></a>
-
-- *Type:* `number`
+File Table Configuration,.
 
 ---
 
-##### `fileTableGetFileByChecksumAndVersionRCU`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.fileTableGetFileByChecksumAndVersionRCU"></a>
+### FileTableConfig <a name="@softchef/cdk-iot-device-management.FileTableConfig"></a>
 
-- *Type:* `number`
+#### Initializer <a name="[object Object].Initializer"></a>
 
----
+```typescript
+import { FileTableConfig } from '@softchef/cdk-iot-device-management'
 
-##### `fileTableGetFileByChecksumAndVersionWCU`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.fileTableGetFileByChecksumAndVersionWCU"></a>
+const fileTableConfig: FileTableConfig = { ... }
+```
 
-- *Type:* `number`
+##### `indexGetFileByChecksumAndVersion`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileTableConfig.property.indexGetFileByChecksumAndVersion"></a>
 
----
-
-##### `fileTableQueryByCategoryIdAndLocaleRCU`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.fileTableQueryByCategoryIdAndLocaleRCU"></a>
-
-- *Type:* `number`
+- *Type:* [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity)
 
 ---
 
-##### `fileTableQueryByCategoryIdAndLocaleWCU`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.fileTableQueryByCategoryIdAndLocaleWCU"></a>
+##### `indexQueryByCategoryIdAndLocale`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileTableConfig.property.indexQueryByCategoryIdAndLocale"></a>
 
-- *Type:* `number`
-
----
-
-##### `fileTableRCU`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.fileTableRCU"></a>
-
-- *Type:* `number`
+- *Type:* [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity)
 
 ---
 
-##### `fileTableWCU`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.fileTableWCU"></a>
+##### `primaryIndex`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileTableConfig.property.primaryIndex"></a>
 
-- *Type:* `number`
+- *Type:* [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity)
 
 ---
 
