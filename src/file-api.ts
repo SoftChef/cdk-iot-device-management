@@ -321,7 +321,8 @@ export class FileApi extends cdk.Construct {
           new iam.PolicyStatement({
             actions: [
               'dynamodb:GetItem',
-              'dynamodb:PutItem',
+              'dynamodb:Query',
+              'dynamodb:BatchWriteItem',
             ],
             resources: [
               this.fileTable.tableArn,
@@ -418,8 +419,8 @@ export class FileApi extends cdk.Construct {
         statements: [
           new iam.PolicyStatement({
             actions: [
-              'dynamodb:Query',
               'dynamodb:BatchWriteItem',
+              'dynamodb:BatchGetItem',
             ],
             resources: [
               this.fileTable.tableArn,
@@ -443,7 +444,7 @@ export class FileApi extends cdk.Construct {
         statements: [
           new iam.PolicyStatement({
             actions: [
-              'dynamodb:DeleteItem',
+              'dynamodb:BatchWriteItem',
             ],
             resources: [
               this.fileTable.tableArn,
