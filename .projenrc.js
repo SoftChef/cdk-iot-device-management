@@ -1,12 +1,14 @@
-const { AwsCdkConstructLibrary, NpmAccess } = require('projen');
+const { AwsCdkConstructLibrary, DependenciesUpgradeMechanism, NpmAccess } = require('projen');
+
+const AUTOMATION_TOKEN = 'PROJEN_GITHUB_TOKEN';
 
 const project = new AwsCdkConstructLibrary({
-  author: 'softchef-iot-lab',
+  author: 'SoftChef',
   authorEmail: 'poke@softchef.com',
+  authorUrl: 'https://www.softchef.com',
+  authorOrganization: true,
   npmAccess: NpmAccess.PUBLIC,
   cdkVersion: '1.95.2',
-  projenVersion: '0.27.6',
-  initialVersion: '0.1.0',
   defaultReleaseBranch: 'main',
   name: '@softchef/cdk-iot-device-management',
   description: 'IoT device management is composed of things, thing types, thing groups, jobs, files API services. The constructs can be used independently, that are based on full-managed service to create an API Gateway & Lambda function.',
@@ -35,6 +37,17 @@ const project = new AwsCdkConstructLibrary({
     'semver',
     'uuid',
   ],
+  depsUpgrade: DependenciesUpgradeMechanism.githubWorkflow({
+    ignoreProjen: false,
+    workflowOptions: {
+      labels: ['auto-approve', 'auto-merge'],
+      secret: AUTOMATION_TOKEN,
+    },
+  }),
+  autoApproveOptions: {
+    secret: 'GITHUB_TOKEN',
+    allowedUsernames: ['MinCheTsai'],
+  },
   devDeps: [
     'aws-sdk-client-mock',
   ],
