@@ -9,26 +9,26 @@ import { RestApi, HttpMethod } from '@softchef/cdk-restapi';
 const LAMBDA_ASSETS_PATH = path.resolve(__dirname, '../lambda-assets/files');
 
 interface CategoryTableConfig {
-  primaryIndex: {
+  readonly primaryIndex: {
     writeCapacity: number;
     readCapacity: number;
   };
-  queryByParentId: {
+  readonly queryByParentId: {
     writeCapacity: number;
     readCapacity: number;
   };
 }
 
 interface FileTableConfig {
-  primaryIndex: {
+  readonly primaryIndex: {
     writeCapacity: number;
     readCapacity: number;
   };
-  queryByCategoryIdAndLocale: {
+  readonly queryByCategoryIdAndLocale: {
     writeCapacity: number;
     readCapacity: number;
   };
-  getFileByChecksumAndVersion: {
+  readonly getFileByChecksumAndVersion: {
     writeCapacity: number;
     readCapacity: number;
   };
@@ -49,12 +49,12 @@ export interface FileApiProps {
    * Category Table Configuration,
    * @default undefined
    */
-  categoryTableConfig?: CategoryTableConfig;
+  readonly categoryTableConfig?: CategoryTableConfig;
   /**
    * File Table Configuration,
    * @default undefined
    */
-  fileTableConfig?: FileTableConfig;
+  readonly fileTableConfig?: FileTableConfig;
 }
 
 export class FileApi extends cdk.Construct {
