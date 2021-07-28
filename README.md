@@ -1,8 +1,8 @@
 # CDK Construct - IoT Device Management
 
-![Build](https://github.com/SoftChef/cdk-iot-device-management/actions/workflows/build.yml/badge.svg)
-![tag](https://img.shields.io/github/v/tag/softchef/cdk-iot-device-management)
-![dependencies](https://david-dm.org/softchef/cdk-iot-device-management.svg)
+[![npm version](https://badge.fury.io/js/%40softchef%2Fcdk-iot-device-management.svg)](https://badge.fury.io/js/%40softchef%2Fcdk-iot-device-management)
+![Release](https://github.com/SoftChef/cdk-iot-device-management/workflows/Release/badge.svg)
+![npm](https://img.shields.io/npm/dt/@softchef/cdk-iot-device-management?label=NPM%20Downloads&color=orange)
 
 IoT device management is composed of things, thing types, thing groups, jobs, files API services. The constructs can be used independently, that are based on full-managed service to create an API Gateway & Lambda function.
 
