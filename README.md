@@ -90,6 +90,16 @@ const FileApi = new FileApi(scope, id, {
 [File API Docs](./docs/file-api.md)
 
 
-### Table Schema(PI, GSI)
+### Category Table Schema(PI, GSI)
+| Key | primaryIndex | indexQueryByParentId |
+| ---- | ------ | ----------- |
+| partitionKey | categoryId(string) | parentId(string) |
+| sortKey |  |  |
+
+### File Table Schema(PI, GSI)
+| Key | primaryIndex | indexQueryByCategoryIdAndLocale | indexGetFileByChecksumAndVersion |
+| ---- | ------ | ----------- | ----------- |
+| partitionKey | fileId(string) | categoryId(string) | checksum(string) |
+| sortKey |  | locale(string) | version(string) |
 
 ### Roadmap

@@ -35,10 +35,10 @@ export async function handler(event: { [key: string]: any }) {
         categoryId,
       },
     };
-    const category = await ddbDocClient.send(
+    const { Item: category } = await ddbDocClient.send(
       new GetCommand(getParameters),
     );
-    if (!category || !category.Item) {
+    if (!category) {
       return response.error('Category does not exist.', 404);
     }
     const updateParameters: UpdateCommandInput = {

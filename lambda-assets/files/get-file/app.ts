@@ -25,15 +25,16 @@ export async function handler(event: { [key: string]: any }) {
         version: request.parameter('version'),
       },
     };
-    const file = await ddbDocClient.send(
+    const { Item: file } = await ddbDocClient.send(
       new GetCommand(getParameters),
     );
-    if (!file || !file.Item) {
+    if (file) {
+      return response.json({
+        file: file,
+      });
+    } else {
       return response.error('Not found.', 404);
     };
-    return response.json({
-      file: file,
-    });
   } catch (error) {
     return response.error(error);
   }

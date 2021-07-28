@@ -313,6 +313,7 @@ export class FileApi extends cdk.Construct {
       entry: `${LAMBDA_ASSETS_PATH}/create-files/app.ts`,
       environment: {
         FILE_TABLE_NAME: this.fileTable.tableName,
+        CATEGORY_TABLE_NAME: this.categoryTable.tableName,
       },
     });
     createFilesFunction.role?.attachInlinePolicy(
@@ -326,6 +327,8 @@ export class FileApi extends cdk.Construct {
             ],
             resources: [
               this.fileTable.tableArn,
+              `${this.fileTable.tableArn}/index/get-file-by-checksum-and-version`,
+              this.categoryTable.tableArn,
             ],
           }),
         ],
@@ -374,7 +377,7 @@ export class FileApi extends cdk.Construct {
             ],
             resources: [
               this.fileTable.tableArn,
-              `${this.fileTable.tableArn}/index/query-by-category-id`,
+              `${this.fileTable.tableArn}/index/query-by-category-id-and-locale`,
             ],
           }),
         ],
