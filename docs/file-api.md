@@ -360,6 +360,7 @@ List files by category ID
 {
   "files": [
     {
+      "fileId": "{file' ID}",
       "location": "{file' path}",
       "checksum": "{an encrypt md5 / crc32 / sha1 value}",
       "checksumType" : "{file's checksum type}",
