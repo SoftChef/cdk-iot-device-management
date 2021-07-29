@@ -1,0 +1,2899 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`minimal usage 1`] = `
+Object {
+  "Outputs": Object {
+    "ThingGroupApiThingGroupRestApiEndpoint0B2B9489": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://",
+            Object {
+              "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+            },
+            ".execute-api.",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            ".",
+            Object {
+              "Ref": "AWS::URLSuffix",
+            },
+            "/",
+            Object {
+              "Ref": "ThingGroupApiThingGroupRestApiDeploymentStageprod50BAFA84",
+            },
+            "/",
+          ],
+        ],
+      },
+    },
+  },
+  "Parameters": Object {
+    "AssetParameters1f843ff64d9f918307e5163ae00345d3d7727ce3a930bc9aaa927a08ecb00290ArtifactHash90C2ACB2": Object {
+      "Description": "Artifact hash for asset \\"1f843ff64d9f918307e5163ae00345d3d7727ce3a930bc9aaa927a08ecb00290\\"",
+      "Type": "String",
+    },
+    "AssetParameters1f843ff64d9f918307e5163ae00345d3d7727ce3a930bc9aaa927a08ecb00290S3BucketB6217335": Object {
+      "Description": "S3 bucket for asset \\"1f843ff64d9f918307e5163ae00345d3d7727ce3a930bc9aaa927a08ecb00290\\"",
+      "Type": "String",
+    },
+    "AssetParameters1f843ff64d9f918307e5163ae00345d3d7727ce3a930bc9aaa927a08ecb00290S3VersionKey8A148612": Object {
+      "Description": "S3 key for asset version \\"1f843ff64d9f918307e5163ae00345d3d7727ce3a930bc9aaa927a08ecb00290\\"",
+      "Type": "String",
+    },
+    "AssetParameters3012df79c517985274b8b351efeac07dcaeeb06ccfabe32ce83d765de247db79ArtifactHashA90A7452": Object {
+      "Description": "Artifact hash for asset \\"3012df79c517985274b8b351efeac07dcaeeb06ccfabe32ce83d765de247db79\\"",
+      "Type": "String",
+    },
+    "AssetParameters3012df79c517985274b8b351efeac07dcaeeb06ccfabe32ce83d765de247db79S3BucketA6637DC2": Object {
+      "Description": "S3 bucket for asset \\"3012df79c517985274b8b351efeac07dcaeeb06ccfabe32ce83d765de247db79\\"",
+      "Type": "String",
+    },
+    "AssetParameters3012df79c517985274b8b351efeac07dcaeeb06ccfabe32ce83d765de247db79S3VersionKey6303BF4F": Object {
+      "Description": "S3 key for asset version \\"3012df79c517985274b8b351efeac07dcaeeb06ccfabe32ce83d765de247db79\\"",
+      "Type": "String",
+    },
+    "AssetParameters3707108260fd168d8b26768b0388bb7f9553380ba87941a32f2d343772e13b2eArtifactHashBB15B8D7": Object {
+      "Description": "Artifact hash for asset \\"3707108260fd168d8b26768b0388bb7f9553380ba87941a32f2d343772e13b2e\\"",
+      "Type": "String",
+    },
+    "AssetParameters3707108260fd168d8b26768b0388bb7f9553380ba87941a32f2d343772e13b2eS3Bucket49F97C8C": Object {
+      "Description": "S3 bucket for asset \\"3707108260fd168d8b26768b0388bb7f9553380ba87941a32f2d343772e13b2e\\"",
+      "Type": "String",
+    },
+    "AssetParameters3707108260fd168d8b26768b0388bb7f9553380ba87941a32f2d343772e13b2eS3VersionKey406E61C3": Object {
+      "Description": "S3 key for asset version \\"3707108260fd168d8b26768b0388bb7f9553380ba87941a32f2d343772e13b2e\\"",
+      "Type": "String",
+    },
+    "AssetParameters37d916be8509af3ec7d5f6efded8c632db1de175f1066d607c2e2d0393617b01ArtifactHash0D588C86": Object {
+      "Description": "Artifact hash for asset \\"37d916be8509af3ec7d5f6efded8c632db1de175f1066d607c2e2d0393617b01\\"",
+      "Type": "String",
+    },
+    "AssetParameters37d916be8509af3ec7d5f6efded8c632db1de175f1066d607c2e2d0393617b01S3BucketB74B101F": Object {
+      "Description": "S3 bucket for asset \\"37d916be8509af3ec7d5f6efded8c632db1de175f1066d607c2e2d0393617b01\\"",
+      "Type": "String",
+    },
+    "AssetParameters37d916be8509af3ec7d5f6efded8c632db1de175f1066d607c2e2d0393617b01S3VersionKeyC79665AD": Object {
+      "Description": "S3 key for asset version \\"37d916be8509af3ec7d5f6efded8c632db1de175f1066d607c2e2d0393617b01\\"",
+      "Type": "String",
+    },
+    "AssetParameters5a09d8790b1a91df3bbc08960bc1c4a07cd078fcc13910c8f10e55cd90ff80dcArtifactHash3D825378": Object {
+      "Description": "Artifact hash for asset \\"5a09d8790b1a91df3bbc08960bc1c4a07cd078fcc13910c8f10e55cd90ff80dc\\"",
+      "Type": "String",
+    },
+    "AssetParameters5a09d8790b1a91df3bbc08960bc1c4a07cd078fcc13910c8f10e55cd90ff80dcS3Bucket7E738086": Object {
+      "Description": "S3 bucket for asset \\"5a09d8790b1a91df3bbc08960bc1c4a07cd078fcc13910c8f10e55cd90ff80dc\\"",
+      "Type": "String",
+    },
+    "AssetParameters5a09d8790b1a91df3bbc08960bc1c4a07cd078fcc13910c8f10e55cd90ff80dcS3VersionKeyCDCD8F09": Object {
+      "Description": "S3 key for asset version \\"5a09d8790b1a91df3bbc08960bc1c4a07cd078fcc13910c8f10e55cd90ff80dc\\"",
+      "Type": "String",
+    },
+    "AssetParameters8073293fa2dce86108a9e59a017161c6d232dab881d8963eaaa1dc9b01e519d1ArtifactHash5707AFB2": Object {
+      "Description": "Artifact hash for asset \\"8073293fa2dce86108a9e59a017161c6d232dab881d8963eaaa1dc9b01e519d1\\"",
+      "Type": "String",
+    },
+    "AssetParameters8073293fa2dce86108a9e59a017161c6d232dab881d8963eaaa1dc9b01e519d1S3BucketAB2ED602": Object {
+      "Description": "S3 bucket for asset \\"8073293fa2dce86108a9e59a017161c6d232dab881d8963eaaa1dc9b01e519d1\\"",
+      "Type": "String",
+    },
+    "AssetParameters8073293fa2dce86108a9e59a017161c6d232dab881d8963eaaa1dc9b01e519d1S3VersionKey0DD23146": Object {
+      "Description": "S3 key for asset version \\"8073293fa2dce86108a9e59a017161c6d232dab881d8963eaaa1dc9b01e519d1\\"",
+      "Type": "String",
+    },
+    "AssetParametersb1c4a4cbf07435fb40d52be8e6972031ea7fe818efdc1c6d82e86bcabfb84b2fArtifactHash19ABA868": Object {
+      "Description": "Artifact hash for asset \\"b1c4a4cbf07435fb40d52be8e6972031ea7fe818efdc1c6d82e86bcabfb84b2f\\"",
+      "Type": "String",
+    },
+    "AssetParametersb1c4a4cbf07435fb40d52be8e6972031ea7fe818efdc1c6d82e86bcabfb84b2fS3Bucket1E634A5D": Object {
+      "Description": "S3 bucket for asset \\"b1c4a4cbf07435fb40d52be8e6972031ea7fe818efdc1c6d82e86bcabfb84b2f\\"",
+      "Type": "String",
+    },
+    "AssetParametersb1c4a4cbf07435fb40d52be8e6972031ea7fe818efdc1c6d82e86bcabfb84b2fS3VersionKey54618C03": Object {
+      "Description": "S3 key for asset version \\"b1c4a4cbf07435fb40d52be8e6972031ea7fe818efdc1c6d82e86bcabfb84b2f\\"",
+      "Type": "String",
+    },
+    "AssetParametersb359583ecc81ecf88fc502875ad55d8b3e6d53249388684d472b64b4a1520df3ArtifactHash87E24558": Object {
+      "Description": "Artifact hash for asset \\"b359583ecc81ecf88fc502875ad55d8b3e6d53249388684d472b64b4a1520df3\\"",
+      "Type": "String",
+    },
+    "AssetParametersb359583ecc81ecf88fc502875ad55d8b3e6d53249388684d472b64b4a1520df3S3Bucket26E56649": Object {
+      "Description": "S3 bucket for asset \\"b359583ecc81ecf88fc502875ad55d8b3e6d53249388684d472b64b4a1520df3\\"",
+      "Type": "String",
+    },
+    "AssetParametersb359583ecc81ecf88fc502875ad55d8b3e6d53249388684d472b64b4a1520df3S3VersionKey4CAE1318": Object {
+      "Description": "S3 key for asset version \\"b359583ecc81ecf88fc502875ad55d8b3e6d53249388684d472b64b4a1520df3\\"",
+      "Type": "String",
+    },
+    "AssetParametersdfaf339f3baf0fe1a8e29cea4ae5ab74e2c1f1cd097084d7f70738ccf63d97bcArtifactHash090BDFDC": Object {
+      "Description": "Artifact hash for asset \\"dfaf339f3baf0fe1a8e29cea4ae5ab74e2c1f1cd097084d7f70738ccf63d97bc\\"",
+      "Type": "String",
+    },
+    "AssetParametersdfaf339f3baf0fe1a8e29cea4ae5ab74e2c1f1cd097084d7f70738ccf63d97bcS3BucketB61565B0": Object {
+      "Description": "S3 bucket for asset \\"dfaf339f3baf0fe1a8e29cea4ae5ab74e2c1f1cd097084d7f70738ccf63d97bc\\"",
+      "Type": "String",
+    },
+    "AssetParametersdfaf339f3baf0fe1a8e29cea4ae5ab74e2c1f1cd097084d7f70738ccf63d97bcS3VersionKey434BFF17": Object {
+      "Description": "S3 key for asset version \\"dfaf339f3baf0fe1a8e29cea4ae5ab74e2c1f1cd097084d7f70738ccf63d97bc\\"",
+      "Type": "String",
+    },
+    "AssetParameterse2a7a03c1f0dfdd367e07c1b426d1cf877d29331173c40019f113f68dfa7d860ArtifactHash0E98EE90": Object {
+      "Description": "Artifact hash for asset \\"e2a7a03c1f0dfdd367e07c1b426d1cf877d29331173c40019f113f68dfa7d860\\"",
+      "Type": "String",
+    },
+    "AssetParameterse2a7a03c1f0dfdd367e07c1b426d1cf877d29331173c40019f113f68dfa7d860S3Bucket0065F76B": Object {
+      "Description": "S3 bucket for asset \\"e2a7a03c1f0dfdd367e07c1b426d1cf877d29331173c40019f113f68dfa7d860\\"",
+      "Type": "String",
+    },
+    "AssetParameterse2a7a03c1f0dfdd367e07c1b426d1cf877d29331173c40019f113f68dfa7d860S3VersionKey8178863B": Object {
+      "Description": "S3 key for asset version \\"e2a7a03c1f0dfdd367e07c1b426d1cf877d29331173c40019f113f68dfa7d860\\"",
+      "Type": "String",
+    },
+  },
+  "Resources": Object {
+    "ThingGroupApiAddThingToThingGroupFunctionF4A159AF": Object {
+      "DependsOn": Array [
+        "ThingGroupApiAddThingToThingGroupFunctionServiceRoleEBD59FAC",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters1f843ff64d9f918307e5163ae00345d3d7727ce3a930bc9aaa927a08ecb00290S3BucketB6217335",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters1f843ff64d9f918307e5163ae00345d3d7727ce3a930bc9aaa927a08ecb00290S3VersionKey8A148612",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters1f843ff64d9f918307e5163ae00345d3d7727ce3a930bc9aaa927a08ecb00290S3VersionKey8A148612",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiAddThingToThingGroupFunctionServiceRoleEBD59FAC",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "ThingGroupApiAddThingToThingGroupFunctionServiceRoleEBD59FAC": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "ThingGroupApiCreateDynamicThingGroupFunctionC67540C8": Object {
+      "DependsOn": Array [
+        "ThingGroupApiCreateDynamicThingGroupFunctionServiceRoleB8CB9456",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParametersb1c4a4cbf07435fb40d52be8e6972031ea7fe818efdc1c6d82e86bcabfb84b2fS3Bucket1E634A5D",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersb1c4a4cbf07435fb40d52be8e6972031ea7fe818efdc1c6d82e86bcabfb84b2fS3VersionKey54618C03",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersb1c4a4cbf07435fb40d52be8e6972031ea7fe818efdc1c6d82e86bcabfb84b2fS3VersionKey54618C03",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiCreateDynamicThingGroupFunctionServiceRoleB8CB9456",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "ThingGroupApiCreateDynamicThingGroupFunctionServiceRoleB8CB9456": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "ThingGroupApiCreateThingGroupFunction7445B8C6": Object {
+      "DependsOn": Array [
+        "ThingGroupApiCreateThingGroupFunctionServiceRoleFF9C912C",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters5a09d8790b1a91df3bbc08960bc1c4a07cd078fcc13910c8f10e55cd90ff80dcS3Bucket7E738086",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters5a09d8790b1a91df3bbc08960bc1c4a07cd078fcc13910c8f10e55cd90ff80dcS3VersionKeyCDCD8F09",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters5a09d8790b1a91df3bbc08960bc1c4a07cd078fcc13910c8f10e55cd90ff80dcS3VersionKeyCDCD8F09",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiCreateThingGroupFunctionServiceRoleFF9C912C",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "ThingGroupApiCreateThingGroupFunctionServiceRoleFF9C912C": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "ThingGroupApiDeleteDynamicThingGroupFunction8D13A81F": Object {
+      "DependsOn": Array [
+        "ThingGroupApiDeleteDynamicThingGroupFunctionServiceRole287BF546",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters8073293fa2dce86108a9e59a017161c6d232dab881d8963eaaa1dc9b01e519d1S3BucketAB2ED602",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters8073293fa2dce86108a9e59a017161c6d232dab881d8963eaaa1dc9b01e519d1S3VersionKey0DD23146",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters8073293fa2dce86108a9e59a017161c6d232dab881d8963eaaa1dc9b01e519d1S3VersionKey0DD23146",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiDeleteDynamicThingGroupFunctionServiceRole287BF546",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "ThingGroupApiDeleteDynamicThingGroupFunctionServiceRole287BF546": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "ThingGroupApiDeleteThingGroupFunction08F04E41": Object {
+      "DependsOn": Array [
+        "ThingGroupApiDeleteThingGroupFunctionServiceRole8D37D199",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters3012df79c517985274b8b351efeac07dcaeeb06ccfabe32ce83d765de247db79S3BucketA6637DC2",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters3012df79c517985274b8b351efeac07dcaeeb06ccfabe32ce83d765de247db79S3VersionKey6303BF4F",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters3012df79c517985274b8b351efeac07dcaeeb06ccfabe32ce83d765de247db79S3VersionKey6303BF4F",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiDeleteThingGroupFunctionServiceRole8D37D199",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "ThingGroupApiDeleteThingGroupFunctionServiceRole8D37D199": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "ThingGroupApiGetThingGroupFunctionB4D168DF": Object {
+      "DependsOn": Array [
+        "ThingGroupApiGetThingGroupFunctionServiceRole80688DA1",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParametersb359583ecc81ecf88fc502875ad55d8b3e6d53249388684d472b64b4a1520df3S3Bucket26E56649",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersb359583ecc81ecf88fc502875ad55d8b3e6d53249388684d472b64b4a1520df3S3VersionKey4CAE1318",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersb359583ecc81ecf88fc502875ad55d8b3e6d53249388684d472b64b4a1520df3S3VersionKey4CAE1318",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiGetThingGroupFunctionServiceRole80688DA1",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "ThingGroupApiGetThingGroupFunctionServiceRole80688DA1": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "ThingGroupApiListThingGroupsFunction626B079A": Object {
+      "DependsOn": Array [
+        "ThingGroupApiListThingGroupsFunctionServiceRole8A98D7BD",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameterse2a7a03c1f0dfdd367e07c1b426d1cf877d29331173c40019f113f68dfa7d860S3Bucket0065F76B",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameterse2a7a03c1f0dfdd367e07c1b426d1cf877d29331173c40019f113f68dfa7d860S3VersionKey8178863B",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameterse2a7a03c1f0dfdd367e07c1b426d1cf877d29331173c40019f113f68dfa7d860S3VersionKey8178863B",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiListThingGroupsFunctionServiceRole8A98D7BD",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "ThingGroupApiListThingGroupsFunctionServiceRole8A98D7BD": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "ThingGroupApiRemoveThingFromThingGroupFunction93A1EA24": Object {
+      "DependsOn": Array [
+        "ThingGroupApiRemoveThingFromThingGroupFunctionServiceRoleD8AB0AC9",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters3707108260fd168d8b26768b0388bb7f9553380ba87941a32f2d343772e13b2eS3Bucket49F97C8C",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters3707108260fd168d8b26768b0388bb7f9553380ba87941a32f2d343772e13b2eS3VersionKey406E61C3",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters3707108260fd168d8b26768b0388bb7f9553380ba87941a32f2d343772e13b2eS3VersionKey406E61C3",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiRemoveThingFromThingGroupFunctionServiceRoleD8AB0AC9",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "ThingGroupApiRemoveThingFromThingGroupFunctionServiceRoleD8AB0AC9": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "ThingGroupApiThingGroupRestApiAccount186D0DC5": Object {
+      "DependsOn": Array [
+        "ThingGroupApiThingGroupRestApiCB757BF2",
+      ],
+      "Properties": Object {
+        "CloudWatchRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiThingGroupRestApiCloudWatchRoleC1A9E0BE",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ApiGateway::Account",
+    },
+    "ThingGroupApiThingGroupRestApiCB757BF2": Object {
+      "Properties": Object {
+        "Name": "ThingGroupRestApi",
+      },
+      "Type": "AWS::ApiGateway::RestApi",
+    },
+    "ThingGroupApiThingGroupRestApiCloudWatchRoleC1A9E0BE": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "apigateway.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "ThingGroupApiThingGroupRestApiDeploymentC78F614Aa6313a5a68115be99718efffaf3bfdfd": Object {
+      "DependsOn": Array [
+        "ThingGroupApiThingGroupRestApidynamicthinggroupsthingGroupNameDELETE903E413C",
+        "ThingGroupApiThingGroupRestApidynamicthinggroupsthingGroupNameOPTIONS5C3F137C",
+        "ThingGroupApiThingGroupRestApidynamicthinggroupsthingGroupNamePUT17AD747E",
+        "ThingGroupApiThingGroupRestApidynamicthinggroupsthingGroupName8C421BEF",
+        "ThingGroupApiThingGroupRestApidynamicthinggroupsOPTIONSFF4C74AF",
+        "ThingGroupApiThingGroupRestApidynamicthinggroupsPOST84B6A047",
+        "ThingGroupApiThingGroupRestApidynamicthinggroupsC4ED8E6C",
+        "ThingGroupApiThingGroupRestApiOPTIONS48D1B8B9",
+        "ThingGroupApiThingGroupRestApithinggroupsthingGroupNameDELETEE20337F4",
+        "ThingGroupApiThingGroupRestApithinggroupsthingGroupNameGETEAE9C91C",
+        "ThingGroupApiThingGroupRestApithinggroupsthingGroupNameOPTIONSD263A5AE",
+        "ThingGroupApiThingGroupRestApithinggroupsthingGroupNamePUTAA86708A",
+        "ThingGroupApiThingGroupRestApithinggroupsthingGroupNameF0A6E81A",
+        "ThingGroupApiThingGroupRestApithinggroupsthingGroupNamethingsthingNameDELETEB84CDAEA",
+        "ThingGroupApiThingGroupRestApithinggroupsthingGroupNamethingsthingNameOPTIONS35C12128",
+        "ThingGroupApiThingGroupRestApithinggroupsthingGroupNamethingsthingNamePUT76D4E59F",
+        "ThingGroupApiThingGroupRestApithinggroupsthingGroupNamethingsthingName3C02E972",
+        "ThingGroupApiThingGroupRestApithinggroupsthingGroupNamethingsOPTIONSE3AB95CB",
+        "ThingGroupApiThingGroupRestApithinggroupsthingGroupNamethings0C0DA311",
+        "ThingGroupApiThingGroupRestApithinggroupsGET819E4255",
+        "ThingGroupApiThingGroupRestApithinggroupsOPTIONS5AC22982",
+        "ThingGroupApiThingGroupRestApithinggroupsPOST39B60BAA",
+        "ThingGroupApiThingGroupRestApithinggroups24E29853",
+      ],
+      "Properties": Object {
+        "Description": "Automatically created by the RestApi construct",
+        "RestApiId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+        },
+      },
+      "Type": "AWS::ApiGateway::Deployment",
+    },
+    "ThingGroupApiThingGroupRestApiDeploymentStageprod50BAFA84": Object {
+      "Properties": Object {
+        "DeploymentId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApiDeploymentC78F614Aa6313a5a68115be99718efffaf3bfdfd",
+        },
+        "RestApiId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+        },
+        "StageName": "prod",
+      },
+      "Type": "AWS::ApiGateway::Stage",
+    },
+    "ThingGroupApiThingGroupRestApiOPTIONS48D1B8B9": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "Integration": Object {
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseParameters": Object {
+                "method.response.header.Access-Control-Allow-Headers": "'Origin,Content-Type,Fetch-Mode,Accept,X-Amz-Date,Accept-Encoding,Authorization,SyncCenter,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+              },
+              "StatusCode": "204",
+            },
+          ],
+          "RequestTemplates": Object {
+            "application/json": "{ statusCode: 200 }",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+            },
+            "StatusCode": "204",
+          },
+        ],
+        "ResourceId": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiThingGroupRestApiCB757BF2",
+            "RootResourceId",
+          ],
+        },
+        "RestApiId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "ThingGroupApiThingGroupRestApidynamicthinggroupsC4ED8E6C": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiThingGroupRestApiCB757BF2",
+            "RootResourceId",
+          ],
+        },
+        "PathPart": "dynamic-thing-groups",
+        "RestApiId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "ThingGroupApiThingGroupRestApidynamicthinggroupsOPTIONSFF4C74AF": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "Integration": Object {
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseParameters": Object {
+                "method.response.header.Access-Control-Allow-Headers": "'Origin,Content-Type,Fetch-Mode,Accept,X-Amz-Date,Accept-Encoding,Authorization,SyncCenter,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+              },
+              "StatusCode": "204",
+            },
+          ],
+          "RequestTemplates": Object {
+            "application/json": "{ statusCode: 200 }",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+            },
+            "StatusCode": "204",
+          },
+        ],
+        "ResourceId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApidynamicthinggroupsC4ED8E6C",
+        },
+        "RestApiId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "ThingGroupApiThingGroupRestApidynamicthinggroupsPOST84B6A047": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "POST",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "ThingGroupApiCreateDynamicThingGroupFunctionC67540C8",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApidynamicthinggroupsC4ED8E6C",
+        },
+        "RestApiId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "ThingGroupApiThingGroupRestApidynamicthinggroupsPOSTApiPermissionTestdemostackThingGroupApiThingGroupRestApi6B98B78DPOSTdynamicthinggroups2FDECC90": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiCreateDynamicThingGroupFunctionC67540C8",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+              },
+              "/test-invoke-stage/POST/dynamic-thing-groups",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "ThingGroupApiThingGroupRestApidynamicthinggroupsPOSTApiPermissiondemostackThingGroupApiThingGroupRestApi6B98B78DPOSTdynamicthinggroupsD0E9501C": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiCreateDynamicThingGroupFunctionC67540C8",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+              },
+              "/",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiDeploymentStageprod50BAFA84",
+              },
+              "/POST/dynamic-thing-groups",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "ThingGroupApiThingGroupRestApidynamicthinggroupsthingGroupName8C421BEF": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApidynamicthinggroupsC4ED8E6C",
+        },
+        "PathPart": "{thingGroupName}",
+        "RestApiId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "ThingGroupApiThingGroupRestApidynamicthinggroupsthingGroupNameDELETE903E413C": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "DELETE",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "ThingGroupApiDeleteDynamicThingGroupFunction8D13A81F",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApidynamicthinggroupsthingGroupName8C421BEF",
+        },
+        "RestApiId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "ThingGroupApiThingGroupRestApidynamicthinggroupsthingGroupNameDELETEApiPermissionTestdemostackThingGroupApiThingGroupRestApi6B98B78DDELETEdynamicthinggroupsthingGroupName9BF1DD1B": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiDeleteDynamicThingGroupFunction8D13A81F",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+              },
+              "/test-invoke-stage/DELETE/dynamic-thing-groups/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "ThingGroupApiThingGroupRestApidynamicthinggroupsthingGroupNameDELETEApiPermissiondemostackThingGroupApiThingGroupRestApi6B98B78DDELETEdynamicthinggroupsthingGroupNameF23E43C9": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiDeleteDynamicThingGroupFunction8D13A81F",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+              },
+              "/",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiDeploymentStageprod50BAFA84",
+              },
+              "/DELETE/dynamic-thing-groups/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "ThingGroupApiThingGroupRestApidynamicthinggroupsthingGroupNameOPTIONS5C3F137C": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "Integration": Object {
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseParameters": Object {
+                "method.response.header.Access-Control-Allow-Headers": "'Origin,Content-Type,Fetch-Mode,Accept,X-Amz-Date,Accept-Encoding,Authorization,SyncCenter,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+              },
+              "StatusCode": "204",
+            },
+          ],
+          "RequestTemplates": Object {
+            "application/json": "{ statusCode: 200 }",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+            },
+            "StatusCode": "204",
+          },
+        ],
+        "ResourceId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApidynamicthinggroupsthingGroupName8C421BEF",
+        },
+        "RestApiId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "ThingGroupApiThingGroupRestApidynamicthinggroupsthingGroupNamePUT17AD747E": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "PUT",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "ThingGroupApiUpdateDynamicThingGroupFunction3CEE9758",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApidynamicthinggroupsthingGroupName8C421BEF",
+        },
+        "RestApiId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "ThingGroupApiThingGroupRestApidynamicthinggroupsthingGroupNamePUTApiPermissionTestdemostackThingGroupApiThingGroupRestApi6B98B78DPUTdynamicthinggroupsthingGroupNameC33BC4A9": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiUpdateDynamicThingGroupFunction3CEE9758",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+              },
+              "/test-invoke-stage/PUT/dynamic-thing-groups/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "ThingGroupApiThingGroupRestApidynamicthinggroupsthingGroupNamePUTApiPermissiondemostackThingGroupApiThingGroupRestApi6B98B78DPUTdynamicthinggroupsthingGroupName3D38EEED": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiUpdateDynamicThingGroupFunction3CEE9758",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+              },
+              "/",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiDeploymentStageprod50BAFA84",
+              },
+              "/PUT/dynamic-thing-groups/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "ThingGroupApiThingGroupRestApithinggroups24E29853": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiThingGroupRestApiCB757BF2",
+            "RootResourceId",
+          ],
+        },
+        "PathPart": "thing-groups",
+        "RestApiId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsGET819E4255": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "GET",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "ThingGroupApiListThingGroupsFunction626B079A",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApithinggroups24E29853",
+        },
+        "RestApiId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsGETApiPermissionTestdemostackThingGroupApiThingGroupRestApi6B98B78DGETthinggroupsFB14F32F": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiListThingGroupsFunction626B079A",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+              },
+              "/test-invoke-stage/GET/thing-groups",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsGETApiPermissiondemostackThingGroupApiThingGroupRestApi6B98B78DGETthinggroupsBC5785E2": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiListThingGroupsFunction626B079A",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+              },
+              "/",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiDeploymentStageprod50BAFA84",
+              },
+              "/GET/thing-groups",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsOPTIONS5AC22982": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "Integration": Object {
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseParameters": Object {
+                "method.response.header.Access-Control-Allow-Headers": "'Origin,Content-Type,Fetch-Mode,Accept,X-Amz-Date,Accept-Encoding,Authorization,SyncCenter,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+              },
+              "StatusCode": "204",
+            },
+          ],
+          "RequestTemplates": Object {
+            "application/json": "{ statusCode: 200 }",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+            },
+            "StatusCode": "204",
+          },
+        ],
+        "ResourceId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApithinggroups24E29853",
+        },
+        "RestApiId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsPOST39B60BAA": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "POST",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "ThingGroupApiCreateThingGroupFunction7445B8C6",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApithinggroups24E29853",
+        },
+        "RestApiId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsPOSTApiPermissionTestdemostackThingGroupApiThingGroupRestApi6B98B78DPOSTthinggroups26F742A4": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiCreateThingGroupFunction7445B8C6",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+              },
+              "/test-invoke-stage/POST/thing-groups",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsPOSTApiPermissiondemostackThingGroupApiThingGroupRestApi6B98B78DPOSTthinggroups54E65162": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiCreateThingGroupFunction7445B8C6",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+              },
+              "/",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiDeploymentStageprod50BAFA84",
+              },
+              "/POST/thing-groups",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsthingGroupNameDELETEApiPermissionTestdemostackThingGroupApiThingGroupRestApi6B98B78DDELETEthinggroupsthingGroupNameAF7F875F": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiDeleteThingGroupFunction08F04E41",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+              },
+              "/test-invoke-stage/DELETE/thing-groups/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsthingGroupNameDELETEApiPermissiondemostackThingGroupApiThingGroupRestApi6B98B78DDELETEthinggroupsthingGroupName31231D46": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiDeleteThingGroupFunction08F04E41",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+              },
+              "/",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiDeploymentStageprod50BAFA84",
+              },
+              "/DELETE/thing-groups/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsthingGroupNameDELETEE20337F4": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "DELETE",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "ThingGroupApiDeleteThingGroupFunction08F04E41",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApithinggroupsthingGroupNameF0A6E81A",
+        },
+        "RestApiId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsthingGroupNameF0A6E81A": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApithinggroups24E29853",
+        },
+        "PathPart": "{thingGroupName}",
+        "RestApiId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsthingGroupNameGETApiPermissionTestdemostackThingGroupApiThingGroupRestApi6B98B78DGETthinggroupsthingGroupNameCF20F512": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiGetThingGroupFunctionB4D168DF",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+              },
+              "/test-invoke-stage/GET/thing-groups/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsthingGroupNameGETApiPermissiondemostackThingGroupApiThingGroupRestApi6B98B78DGETthinggroupsthingGroupName0A02A3FA": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiGetThingGroupFunctionB4D168DF",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+              },
+              "/",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiDeploymentStageprod50BAFA84",
+              },
+              "/GET/thing-groups/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsthingGroupNameGETEAE9C91C": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "GET",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "ThingGroupApiGetThingGroupFunctionB4D168DF",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApithinggroupsthingGroupNameF0A6E81A",
+        },
+        "RestApiId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsthingGroupNameOPTIONSD263A5AE": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "Integration": Object {
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseParameters": Object {
+                "method.response.header.Access-Control-Allow-Headers": "'Origin,Content-Type,Fetch-Mode,Accept,X-Amz-Date,Accept-Encoding,Authorization,SyncCenter,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+              },
+              "StatusCode": "204",
+            },
+          ],
+          "RequestTemplates": Object {
+            "application/json": "{ statusCode: 200 }",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+            },
+            "StatusCode": "204",
+          },
+        ],
+        "ResourceId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApithinggroupsthingGroupNameF0A6E81A",
+        },
+        "RestApiId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsthingGroupNamePUTAA86708A": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "PUT",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "ThingGroupApiUpdateThingGroupFunctionC3E79424",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApithinggroupsthingGroupNameF0A6E81A",
+        },
+        "RestApiId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsthingGroupNamePUTApiPermissionTestdemostackThingGroupApiThingGroupRestApi6B98B78DPUTthinggroupsthingGroupName0872AC08": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiUpdateThingGroupFunctionC3E79424",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+              },
+              "/test-invoke-stage/PUT/thing-groups/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsthingGroupNamePUTApiPermissiondemostackThingGroupApiThingGroupRestApi6B98B78DPUTthinggroupsthingGroupName5D65766E": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiUpdateThingGroupFunctionC3E79424",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+              },
+              "/",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiDeploymentStageprod50BAFA84",
+              },
+              "/PUT/thing-groups/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsthingGroupNamethings0C0DA311": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApithinggroupsthingGroupNameF0A6E81A",
+        },
+        "PathPart": "things",
+        "RestApiId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsthingGroupNamethingsOPTIONSE3AB95CB": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "Integration": Object {
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseParameters": Object {
+                "method.response.header.Access-Control-Allow-Headers": "'Origin,Content-Type,Fetch-Mode,Accept,X-Amz-Date,Accept-Encoding,Authorization,SyncCenter,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+              },
+              "StatusCode": "204",
+            },
+          ],
+          "RequestTemplates": Object {
+            "application/json": "{ statusCode: 200 }",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+            },
+            "StatusCode": "204",
+          },
+        ],
+        "ResourceId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApithinggroupsthingGroupNamethings0C0DA311",
+        },
+        "RestApiId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsthingGroupNamethingsthingName3C02E972": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApithinggroupsthingGroupNamethings0C0DA311",
+        },
+        "PathPart": "{thingName}",
+        "RestApiId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsthingGroupNamethingsthingNameDELETEApiPermissionTestdemostackThingGroupApiThingGroupRestApi6B98B78DDELETEthinggroupsthingGroupNamethingsthingName3C5E4BEA": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiRemoveThingFromThingGroupFunction93A1EA24",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+              },
+              "/test-invoke-stage/DELETE/thing-groups/*/things/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsthingGroupNamethingsthingNameDELETEApiPermissiondemostackThingGroupApiThingGroupRestApi6B98B78DDELETEthinggroupsthingGroupNamethingsthingName1A940741": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiRemoveThingFromThingGroupFunction93A1EA24",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+              },
+              "/",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiDeploymentStageprod50BAFA84",
+              },
+              "/DELETE/thing-groups/*/things/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsthingGroupNamethingsthingNameDELETEB84CDAEA": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "DELETE",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "ThingGroupApiRemoveThingFromThingGroupFunction93A1EA24",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApithinggroupsthingGroupNamethingsthingName3C02E972",
+        },
+        "RestApiId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsthingGroupNamethingsthingNameOPTIONS35C12128": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "Integration": Object {
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseParameters": Object {
+                "method.response.header.Access-Control-Allow-Headers": "'Origin,Content-Type,Fetch-Mode,Accept,X-Amz-Date,Accept-Encoding,Authorization,SyncCenter,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+              },
+              "StatusCode": "204",
+            },
+          ],
+          "RequestTemplates": Object {
+            "application/json": "{ statusCode: 200 }",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+            },
+            "StatusCode": "204",
+          },
+        ],
+        "ResourceId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApithinggroupsthingGroupNamethingsthingName3C02E972",
+        },
+        "RestApiId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsthingGroupNamethingsthingNamePUT76D4E59F": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "PUT",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "ThingGroupApiAddThingToThingGroupFunctionF4A159AF",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApithinggroupsthingGroupNamethingsthingName3C02E972",
+        },
+        "RestApiId": Object {
+          "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsthingGroupNamethingsthingNamePUTApiPermissionTestdemostackThingGroupApiThingGroupRestApi6B98B78DPUTthinggroupsthingGroupNamethingsthingName50A0112F": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiAddThingToThingGroupFunctionF4A159AF",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+              },
+              "/test-invoke-stage/PUT/thing-groups/*/things/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "ThingGroupApiThingGroupRestApithinggroupsthingGroupNamethingsthingNamePUTApiPermissiondemostackThingGroupApiThingGroupRestApi6B98B78DPUTthinggroupsthingGroupNamethingsthingName414D31CD": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiAddThingToThingGroupFunctionF4A159AF",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiCB757BF2",
+              },
+              "/",
+              Object {
+                "Ref": "ThingGroupApiThingGroupRestApiDeploymentStageprod50BAFA84",
+              },
+              "/PUT/thing-groups/*/things/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "ThingGroupApiUpdateDynamicThingGroupFunction3CEE9758": Object {
+      "DependsOn": Array [
+        "ThingGroupApiUpdateDynamicThingGroupFunctionServiceRole94D7BEC3",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters37d916be8509af3ec7d5f6efded8c632db1de175f1066d607c2e2d0393617b01S3BucketB74B101F",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters37d916be8509af3ec7d5f6efded8c632db1de175f1066d607c2e2d0393617b01S3VersionKeyC79665AD",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters37d916be8509af3ec7d5f6efded8c632db1de175f1066d607c2e2d0393617b01S3VersionKeyC79665AD",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiUpdateDynamicThingGroupFunctionServiceRole94D7BEC3",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "ThingGroupApiUpdateDynamicThingGroupFunctionServiceRole94D7BEC3": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "ThingGroupApiUpdateThingGroupFunctionC3E79424": Object {
+      "DependsOn": Array [
+        "ThingGroupApiUpdateThingGroupFunctionServiceRole39DC05F4",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParametersdfaf339f3baf0fe1a8e29cea4ae5ab74e2c1f1cd097084d7f70738ccf63d97bcS3BucketB61565B0",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersdfaf339f3baf0fe1a8e29cea4ae5ab74e2c1f1cd097084d7f70738ccf63d97bcS3VersionKey434BFF17",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersdfaf339f3baf0fe1a8e29cea4ae5ab74e2c1f1cd097084d7f70738ccf63d97bcS3VersionKey434BFF17",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "ThingGroupApiUpdateThingGroupFunctionServiceRole39DC05F4",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "ThingGroupApiUpdateThingGroupFunctionServiceRole39DC05F4": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "ThingGroupApiiotaddthingtothinggrouppolicy330A6FD8": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "iot:AddThingToThingGroup",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ThingGroupApiiotaddthingtothinggrouppolicy330A6FD8",
+        "Roles": Array [
+          Object {
+            "Ref": "ThingGroupApiAddThingToThingGroupFunctionServiceRoleEBD59FAC",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "ThingGroupApiiotcreatedynamicthinggrouppolicy3239BF3E": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "iot:CreateDynamicThingGroup",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ThingGroupApiiotcreatedynamicthinggrouppolicy3239BF3E",
+        "Roles": Array [
+          Object {
+            "Ref": "ThingGroupApiCreateDynamicThingGroupFunctionServiceRoleB8CB9456",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "ThingGroupApiiotcreatethinggrouppolicy16DC8197": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "iot:CreateThingGroup",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ThingGroupApiiotcreatethinggrouppolicy16DC8197",
+        "Roles": Array [
+          Object {
+            "Ref": "ThingGroupApiCreateThingGroupFunctionServiceRoleFF9C912C",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "ThingGroupApiiotdeletedynamicthinggrouppolicyC88692C6": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "iot:DeleteDynamicThingGroup",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ThingGroupApiiotdeletedynamicthinggrouppolicyC88692C6",
+        "Roles": Array [
+          Object {
+            "Ref": "ThingGroupApiDeleteDynamicThingGroupFunctionServiceRole287BF546",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "ThingGroupApiiotdeletethinggrouppolicy3741DF5D": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "iot:DeleteThingGroup",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ThingGroupApiiotdeletethinggrouppolicy3741DF5D",
+        "Roles": Array [
+          Object {
+            "Ref": "ThingGroupApiDeleteThingGroupFunctionServiceRole8D37D199",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "ThingGroupApiiotdescribethinggrouppolicyD42BA821": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "iot:DescribeThingGroup",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ThingGroupApiiotdescribethinggrouppolicyD42BA821",
+        "Roles": Array [
+          Object {
+            "Ref": "ThingGroupApiGetThingGroupFunctionServiceRole80688DA1",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "ThingGroupApiiotlistthingspolicy91AE084B": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "iot:ListThingGroups",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ThingGroupApiiotlistthingspolicy91AE084B",
+        "Roles": Array [
+          Object {
+            "Ref": "ThingGroupApiListThingGroupsFunctionServiceRole8A98D7BD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "ThingGroupApiiotremovethingfromthinggrouppolicy818DE0C7": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "iot:RemoveThingFromThingGroup",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ThingGroupApiiotremovethingfromthinggrouppolicy818DE0C7",
+        "Roles": Array [
+          Object {
+            "Ref": "ThingGroupApiRemoveThingFromThingGroupFunctionServiceRoleD8AB0AC9",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "ThingGroupApiiotupdatedynamicthinggrouppolicy614ADD4F": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "iot:UpdateDynamicThingGroup",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ThingGroupApiiotupdatedynamicthinggrouppolicy614ADD4F",
+        "Roles": Array [
+          Object {
+            "Ref": "ThingGroupApiUpdateDynamicThingGroupFunctionServiceRole94D7BEC3",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "ThingGroupApiiotupdatethinggrouppolicy3378B146": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "iot:UpdateThingGroup",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ThingGroupApiiotupdatethinggrouppolicy3378B146",
+        "Roles": Array [
+          Object {
+            "Ref": "ThingGroupApiUpdateThingGroupFunctionServiceRole39DC05F4",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+  },
+}
+`;

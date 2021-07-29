@@ -4,18 +4,7 @@ import * as lambda from '@aws-cdk/aws-lambda';
 import * as cdk from '@aws-cdk/core';
 import { ScheduleFunction } from '@softchef/cdk-schedule-function';
 import { JobApi } from '../src/index';
-
-const fnGetAttArn = (arn: string): { [key: string]: string[] } => {
-  return {
-    'Fn::GetAtt': [arn, 'Arn'],
-  };
-};
-
-const ref = (name: string): { [key: string]: string } => {
-  return {
-    Ref: name,
-  };
-};
+import { fnGetAttArn, ref } from './utils';
 
 const expectedRoles: {
   [name: string]: string;

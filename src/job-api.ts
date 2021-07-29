@@ -28,7 +28,7 @@ export interface JobApiProps {
 
 export class JobApi extends cdk.Construct {
   /**
-   * The Job API Gateway's ID
+   * The Job API Gateway
    */
   private readonly _restApi: RestApi;
 
