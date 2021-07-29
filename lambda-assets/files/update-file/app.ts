@@ -1,5 +1,11 @@
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, UpdateCommand } from '@aws-sdk/lib-dynamodb';
+import {
+  DynamoDBClient,
+} from '@aws-sdk/client-dynamodb';
+import {
+  DynamoDBDocumentClient,
+  UpdateCommand,
+  UpdateCommandInput,
+} from '@aws-sdk/lib-dynamodb';
 import {
   Request,
   Response,
@@ -24,21 +30,22 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({}),
     );
+    const updateParameters: UpdateCommandInput = {
+      TableName: process.env.FILE_TABLE_NAME,
+      Key: {
+        fileId: request.parameter('fileId'),
+        version: request.parameter('version'),
+      },
+      UpdateExpression: 'set #description = :description',
+      ExpressionAttributeNames: {
+        '#description': 'description',
+      },
+      ExpressionAttributeValues: {
+        ':description': request.input('description', ''),
+      },
+    };
     await ddbDocClient.send(
-      new UpdateCommand({
-        TableName: process.env.FILE_TABLE_NAME,
-        Key: {
-          fileId: request.parameter('fileId'),
-          version: request.parameter('version'),
-        },
-        UpdateExpression: 'set #description = :description',
-        ExpressionAttributeNames: {
-          '#description': 'description',
-        },
-        ExpressionAttributeValues: {
-          ':description': request.input('description', ''),
-        },
-      }),
+      new UpdateCommand(updateParameters),
     );
     return response.json({
       updated: true,

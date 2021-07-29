@@ -3,8 +3,8 @@ import {
 } from '@aws-sdk/client-dynamodb';
 import {
   DynamoDBDocumentClient,
-  ScanCommand,
-  ScanCommandInput,
+  QueryCommand,
+  QueryCommandInput,
 } from '@aws-sdk/lib-dynamodb';
 import {
   Request,
@@ -18,8 +18,18 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({}),
     );
-    const parameters: ScanCommandInput = {
+    const parameters: QueryCommandInput = {
       TableName: process.env.FILE_TABLE_NAME,
+      IndexName: 'get-file-by-checksum-and-version',
+      KeyConditionExpression: '#checksum = :checksum and #version = :version',
+      ExpressionAttributeNames: {
+        '#checksum': 'checksum',
+        '#version': 'version',
+      },
+      ExpressionAttributeValues: {
+        ':checksum': request.parameter('checksum'),
+        ':version': request.parameter('version'),
+      },
     };
     if (request.has('nextToken')) {
       parameters.ExclusiveStartKey = {
@@ -28,8 +38,8 @@ export async function handler(event: { [key: string]: any }) {
         ),
       };
     }
-    const { Items: files, LastEvaluatedKey: lastEvaluatedKey } = await ddbDocClient.send(
-      new ScanCommand(parameters),
+    const { Items: existsFiles, LastEvaluatedKey: lastEvaluatedKey } = await ddbDocClient.send(
+      new QueryCommand(parameters),
     );
     let nextToken = null;
     if (lastEvaluatedKey) {
@@ -37,9 +47,12 @@ export async function handler(event: { [key: string]: any }) {
         JSON.stringify(lastEvaluatedKey),
       ).toString('base64');
     }
+    if (!existsFiles || existsFiles.length === 0) {
+      return response.error('File not found.', 404);
+    }
     return response.json({
-      files: files,
-      nextToken: nextToken,
+      file: existsFiles,
+      nextToken,
     });
   } catch (error) {
     return response.error(error);

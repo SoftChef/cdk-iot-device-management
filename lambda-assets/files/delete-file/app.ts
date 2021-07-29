@@ -1,5 +1,11 @@
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, DeleteCommand } from '@aws-sdk/lib-dynamodb';
+import {
+  DynamoDBClient,
+} from '@aws-sdk/client-dynamodb';
+import {
+  DynamoDBDocumentClient,
+  DeleteCommand,
+  DeleteCommandInput,
+} from '@aws-sdk/lib-dynamodb';
 import {
   Request,
   Response,
@@ -12,14 +18,15 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({}),
     );
+    const deleteParameters: DeleteCommandInput = {
+      TableName: process.env.FILE_TABLE_NAME,
+      Key: {
+        fileId: request.parameter('fileId'),
+        version: request.parameter('version'),
+      },
+    };
     await ddbDocClient.send(
-      new DeleteCommand({
-        TableName: process.env.FILE_TABLE_NAME,
-        Key: {
-          fileId: request.parameter('fileId'),
-          version: request.parameter('version'),
-        },
-      }),
+      new DeleteCommand(deleteParameters),
     );
     return response.json({
       deleted: true,

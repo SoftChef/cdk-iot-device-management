@@ -1,20 +1,21 @@
 ## File API Documentation
 
 - [Create Category](#post-categories)
-- [Create File](#post-files)
+- [Create Files](#post-files)
 - [Delete Category](#delete-categoriescategoryid)
+- [Delete Files](#delete-files)
 - [Get Category](#get-categoriescategoryid)
 - [Get Files](#get-fileschecksumversionsversion)
 - [List Categories](#get-categories)
 - [List Files](#get-files)
 - [List Files by Category](#get-categoriescategoryidfiles)
 - [Update Category](#put-categoriescategoryid)
-- [Update Files](#put-fileschecksumversionsversion)
+- [Update Files](#put-files)
 ---
 
 ### *POST* /categories
 
-Create new file category
+Create a new file category
 
 **Body**
 
@@ -46,23 +47,39 @@ Create new file category
 | ---------------- | ----------- |
 | 200 | Create success |
 | 404 | Parent category id not found |
-| 422 | Missing require field / Variable type incorrect |
+| 422 | Missing require field / Category already exists / Variable type incorrect |
 
 ---
-
 ### *POST* /files
 
 Create files
 
 **Body**
 
+```
+{
+  files: [
+    {
+      "categoryId": "{file's category ID}",
+      "version": "{file's version}",
+      "checksum": "{an encrypt md5 / crc32 / sha1 value}",
+      "checksumType" : "{file's checksum type}",
+      "location": "{file' path}",
+      "locale"": "{file's locale}",
+      "summary"": "{file's summary}",
+      "description"": "{file's description}",
+    },
+    ...more file objects
+  ]
+}
+```
 | Name | Schema | Description |
 | -------- | ------- | ---- |
-| categoryId* | String | From category |
 | version* | String | File's version|
-| location* | URI | File's path|
+| categoryId* | String | From category |
 | checksum* | String | An encrypt md5 / crc32 / sha1 value |
 | checksumType* | 'md5' \| 'crc32' \| 'sha1' | File's checksum type|
+| location* | URI | File's path|
 | locale* | String | File's locale |
 | summary* | string (Allow empty string) | File's summary|
 | description* | String (Allow empty string) | File's description |
@@ -88,26 +105,28 @@ Create files
 | HTTP Status Code | Description |
 | ---------------- | ----------- |
 | 200 | Create file success |
-| 422 | Missing require field / Variable type incorrect / File exists |
 | 404 | Category ID not found |
+| 422 | File already exists / Variable type incorrect |
 
 ---
 
-### *DELETE* /files/{checksum}/versions/{version}
+### *DELETE* /categories/{categoryId}
 
-Delete file
+Delete category by category ID
 
 **Path Parameters**
 
 | Name | Description |
-| -------- | ------- |
-| checksum | File's checksum |
-| version | File's version |
+| ---- | ----------- |
+| categoryId | Category's ID |
 
 **Response Success Body**
+
+```
 {
   "deleted": true
 }
+```
 
 **Response Failure Body**
 
@@ -122,7 +141,45 @@ Delete file
 | HTTP Status Code | Description |
 | ---------------- | ----------- |
 | 200 | Delete success |
-| 404 | File not found |
+
+---
+
+### *DELETE* /files
+
+Delete files
+
+**Body**
+
+```
+{
+  files: [
+    {
+      "fileId": "{file' ID}",
+    },
+    ...more file objects
+  ]
+}
+```
+
+**Response Success Body**
+```
+{
+  "deleted": true
+}
+```
+**Response Failure Body**
+
+```
+{
+  "error": "{reason}"
+}
+```
+
+**Response Status**
+
+| HTTP Status Code | Description |
+| ---------------- | ----------- |
+| 200 | Delete success |
 
 ---
 
@@ -155,78 +212,6 @@ Get category by category ID, if category is root will return children category.
 | HTTP Status Code | Description |
 | ---------------- | ----------- |
 | 200 | Get Category Success |
-| 404 | Category ID not found |
-
----
-
-### *GET* /categories
-
-Get root category list
-
-**Query String Parameters**
-
-| Name | Schema | Description |
-| ---- | ------ | ----------- |
-| parentId | String | Parent category's ID |
-| nextToken | String | Token for next data |
-
-**Response Success Body**
-
-```
-{
-  categories: [
-    {
-      "categoryId": "{the category id}",
-      "parentId": "{parent category id}",
-      "description": "{category's description}",
-      "createdAt": "{created timestamp}",
-      "updatedAt": "{last updated timestamp}",
-    },
-    ... more category object
-  ]
-  "nextToken": "{Token for next data}"
-}
-```
-
-**Response Status**
-
-| HTTP Status Code | Description |
-| ---------------- | ----------- |
-| 200 | List category success |
-
----
-
-### *DELETE* /categories/{categoryId}
-
-Delete category by categoty ID
-
-**Path Parameters**
-
-| Name | Description |
-| ---- | ----------- |
-| categoryId | Category's ID |
-
-**Response Success Body**
-
-```
-{
-  "deleted": true
-}
-```
-
-**Response Failure Body**
-
-```
-{
-  "error": "{reason}"
-}
-```
-
-**Response Status**
-
-| HTTP Status Code | Description |
-| ---------------- | ----------- |
-| 200 | Delete success |
 | 404 | Category ID not found |
 
 ---
@@ -271,6 +256,43 @@ Get file by checksum & version
 | ---------------- | ----------- |
 | 200 | Create success |
 | 404 | File not found |
+
+---
+
+### *GET* /categories
+
+Get root category list
+
+**Query String Parameters**
+
+| Name | Schema | Description |
+| ---- | ------ | ----------- |
+| parentId | String | Parent category's ID |
+| nextToken | String | Token for next data |
+
+**Response Success Body**
+
+```
+{
+  categories: [
+    {
+      "categoryId": "{the category id}",
+      "parentId": "{parent category id}",
+      "description": "{category's description}",
+      "createdAt": "{created timestamp}",
+      "updatedAt": "{last updated timestamp}",
+    },
+    ... more category object
+  ]
+  "nextToken": "{Token for next data}"
+}
+```
+
+**Response Status**
+
+| HTTP Status Code | Description |
+| ---------------- | ----------- |
+| 200 | List category success |
 
 ---
 
@@ -338,6 +360,7 @@ List files by category ID
 {
   "files": [
     {
+      "fileId": "{file' ID}",
       "location": "{file' path}",
       "checksum": "{an encrypt md5 / crc32 / sha1 value}",
       "checksumType" : "{file's checksum type}",
@@ -402,32 +425,38 @@ Update category description by category ID
 | ---------------- | ----------- |
 | 200 | Update success |
 | 404 | Category ID not found |
-| 422 | Missing require field / Variable type incorrect |
+| 422 | Missing require description / Variable type incorrect |
 
 ---
 
-### *PUT* /files/{checksum}/versions/{version}
+### *PUT* /files
 
-Update file
+Update files summary and description by file ID.
 
 **Path Parameters**
 
 | Name | Description |
 | ---- | ----------- |
-| checksum | File's checksum |
-| version | File's version |
+| fileId | File's ID |
 
 **Body**
 
+```
+{
+  files: [
+    {
+      "fileId": "{file' ID}",
+      "summary"": "{file's summary}",
+      "description"": "{file's description}",
+    },
+    ...more file objects
+  ]
+}
+```
+
 | Name | Schema | Description |
-| ---- | ------ | ----------- |
-| fileId* | String | File's ID |
-| categoryId* | String | From category |
-| checksumType* | 'md5' \| 'crc32' \| 'sha1' | File's checksum type|
-| checksum* | String | An encrypt md5 / crc32 / sha1 value |
-| version* | String | File's version|
-| location* | URI | File's path|
-| locale* | String | File's locale |
+| -------- | ------- | ---- |
+| fileId* | String | File's ID|
 | summary* | string (Allow empty string) | File's summary|
 | description* | String (Allow empty string) | File's description |
 
@@ -452,5 +481,4 @@ Update file
 | HTTP Status Code | Description |
 | ---------------- | ----------- |
 | 200 | Update success |
-| 404 | File not found |
-| 422 | Missing require field / Variable type incorrect |
+| 422 | Variable type incorrect |

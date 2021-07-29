@@ -1,5 +1,11 @@
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, QueryCommand } from '@aws-sdk/lib-dynamodb';
+import {
+  DynamoDBClient,
+} from '@aws-sdk/client-dynamodb';
+import {
+  DynamoDBDocumentClient,
+  QueryCommand,
+  QueryCommandInput,
+} from '@aws-sdk/lib-dynamodb';
 import {
   Request,
   Response,
@@ -12,7 +18,10 @@ export async function handler(event: { [key: string]: any }) {
     const ddbDocClient = DynamoDBDocumentClient.from(
       new DynamoDBClient({}),
     );
-    let parameters: { [key: string]: any } = {};
+    const parameters: QueryCommandInput = {
+      TableName: process.env.FILE_TABLE_NAME,
+      IndexName: 'query-by-category-id-and-locale',
+    };
     if (request.has('nextToken')) {
       parameters.ExclusiveStartKey = {
         Key: JSON.parse(
@@ -20,19 +29,27 @@ export async function handler(event: { [key: string]: any }) {
         ),
       };
     }
+    if (request.has('locale')) {
+      parameters.KeyConditionExpression = '#categoryId = :categoryId and #locale = :locale';
+      parameters.ExpressionAttributeNames = {
+        '#categoryId': 'categoryId',
+        '#locale': 'locale',
+      };
+      parameters.ExpressionAttributeValues = {
+        ':categoryId': request.parameter('categoryId'),
+        ':locale': request.get('locale'),
+      };
+    } else {
+      parameters.KeyConditionExpression = '#categoryId = :categoryId';
+      parameters.ExpressionAttributeNames = {
+        '#categoryId': 'categoryId',
+      };
+      parameters.ExpressionAttributeValues = {
+        ':categoryId': request.parameter('categoryId'),
+      };
+    }
     const { Items: files, LastEvaluatedKey: lastEvaluatedKey } = await ddbDocClient.send(
-      new QueryCommand({
-        TableName: process.env.FILE_TABLE_NAME,
-        IndexName: 'query-by-category-id',
-        KeyConditionExpression: '#categoryId = :categoryId',
-        ExpressionAttributeNames: {
-          '#categoryId': 'categoryId',
-        },
-        ExpressionAttributeValues: {
-          ':categoryId': request.parameter('categoryId'),
-        },
-        ...parameters,
-      }),
+      new QueryCommand(parameters),
     );
     let nextToken = null;
     if (lastEvaluatedKey) {

@@ -90,6 +90,26 @@ const FileApi = new FileApi(scope, id, {
 [File API Docs](./docs/file-api.md)
 
 
-### Table Schema(PI, GSI)
+### Category Table Schema
+| Name        | Schema | Primary Index | GSI(Query By ParentId) |
+| ----------- | ------ | ------------- | ---------------------- |
+| categoryId  | String | Partition Key |                        |
+| parentId    | String |               | Partition Key          |
+| name        | String |               |                        |
+| description	| String |               |                        |
 
+### File Table Schema
+| Name         | Schema | Primary Index | GSI(Query By CategoryId And Locale) | GSI(Get File By Checksum And Version) |
+| ------------ | ------ | ------------- | ----------------------------------- | ------------------------------------- |
+| fileId        | String | Partition Key |                                     |                                       |
+| categoryId   | String |               | Partition Key                       |                                       |
+| checksum	   | String |               |                                     | Partition Key                         |
+| version      | String |               |                                     | Sort Key                              |
+| checksumType | String |               |                                     |                                       |
+| location  	 | String |               |                                     |                                       |
+| locale    	 | String |               | Sort Key                            |                                       |
+| summary	     | String |               |                                     |                                       |
+| description	 | String |               |                                     |                                       |
+| updatedAt  	 | Number |               |                                     |                                       |
+| createdAt	   | Number |               |                                     |                                       |
 ### Roadmap
