@@ -90,26 +90,26 @@ const FileApi = new FileApi(scope, id, {
 [File API Docs](./docs/file-api.md)
 
 
-### Category Table Schema(PI, GSI)
-| Name        | Schema | Primary Index | GSI(QueryByParentId) |
-| ----------- | ------ | ------------- | -------------------- |
-| categoryId  | String | Partition Key |                      |
-| parentId    | String |               | Partition Key        |
-| name        | String |               |                      |
-| description	| String |               |                      |
+### Category Table Schema
+| Name        | Schema | Primary Index | GSI(Query By ParentId) |
+| ----------- | ------ | ------------- | ---------------------- |
+| categoryId  | String | Partition Key |                        |
+| parentId    | String |               | Partition Key          |
+| name        | String |               |                        |
+| description	| String |               |                        |
 
-### File Table Schema(PI, GSI)
-| Name         | Schema | Primary Index | GSI(QueryByCategoryIdAndLocale) | GSI(GetFileByChecksumAndVersion) |
-| ------------ | ------ | ------------- | ------------------------------- | -------------------------------- |
-| fileId        | String | Partition Key |                                 |                                  |
-| categoryId   | String |               | Partition Key                   |                                  |
-| checksum	   | String |               |                                 | Partition Key                    |
-| version      | String |               |                                 | Sort Key                         |
-| checksumType | String |               |                                 |                                  |
-| location  	 | String |               |                                 |                                  |
-| locale    	 | String |               | Sort Key                        |                                  |
-| summary	     | String |               |                                 |                                  |
-| description	 | String |               |                                 |                                  |
-| updatedAt  	 | Number |               |                                 |                                  |
-| createdAt	   | Number |               |                                 |                                  |
+### File Table Schema
+| Name         | Schema | Primary Index | GSI(Query By CategoryId And Locale) | GSI(Get File By Checksum And Version) |
+| ------------ | ------ | ------------- | ----------------------------------- | ------------------------------------- |
+| fileId        | String | Partition Key |                                     |                                       |
+| categoryId   | String |               | Partition Key                       |                                       |
+| checksum	   | String |               |                                     | Partition Key                         |
+| version      | String |               |                                     | Sort Key                              |
+| checksumType | String |               |                                     |                                       |
+| location  	 | String |               |                                     |                                       |
+| locale    	 | String |               | Sort Key                            |                                       |
+| summary	     | String |               |                                     |                                       |
+| description	 | String |               |                                     |                                       |
+| updatedAt  	 | Number |               |                                     |                                       |
+| createdAt	   | Number |               |                                     |                                       |
 ### Roadmap

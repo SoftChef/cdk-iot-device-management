@@ -436,13 +436,13 @@ export class FileApi extends cdk.Construct {
   }
 
   private createDeleteFilesFunction(): lambda.NodejsFunction {
-    const deletesFileFunction = new lambda.NodejsFunction(this, 'DeletesFileFunction', {
+    const deleteFilesFunction = new lambda.NodejsFunction(this, 'DeleteFilesFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/delete-files/app.ts`,
       environment: {
         FILE_TABLE_NAME: this.fileTable.tableName,
       },
     });
-    deletesFileFunction.role?.attachInlinePolicy(
+    deleteFilesFunction.role?.attachInlinePolicy(
       new iam.Policy(this, 'delete-file-policy', {
         statements: [
           new iam.PolicyStatement({
@@ -456,6 +456,6 @@ export class FileApi extends cdk.Construct {
         ],
       }),
     );
-    return deletesFileFunction;
+    return deleteFilesFunction;
   }
 }
