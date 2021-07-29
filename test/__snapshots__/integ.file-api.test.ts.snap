@@ -1,0 +1,3482 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`minimal usage 1`] = `
+Object {
+  "Outputs": Object {
+    "FileApiFileRestApiEndpoint96CC75CB": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://",
+            Object {
+              "Ref": "FileApiFileRestApiCF4E0F2A",
+            },
+            ".execute-api.",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            ".",
+            Object {
+              "Ref": "AWS::URLSuffix",
+            },
+            "/",
+            Object {
+              "Ref": "FileApiFileRestApiDeploymentStageprodE43B9431",
+            },
+            "/",
+          ],
+        ],
+      },
+    },
+  },
+  "Parameters": Object {
+    "AssetParameters230e62fa0fc614e2082362cfe49d7c0e60696d5659a0e5b99229a98e62c4e4c6ArtifactHashC629BCF2": Object {
+      "Description": "Artifact hash for asset \\"230e62fa0fc614e2082362cfe49d7c0e60696d5659a0e5b99229a98e62c4e4c6\\"",
+      "Type": "String",
+    },
+    "AssetParameters230e62fa0fc614e2082362cfe49d7c0e60696d5659a0e5b99229a98e62c4e4c6S3BucketE90A9186": Object {
+      "Description": "S3 bucket for asset \\"230e62fa0fc614e2082362cfe49d7c0e60696d5659a0e5b99229a98e62c4e4c6\\"",
+      "Type": "String",
+    },
+    "AssetParameters230e62fa0fc614e2082362cfe49d7c0e60696d5659a0e5b99229a98e62c4e4c6S3VersionKey52E44123": Object {
+      "Description": "S3 key for asset version \\"230e62fa0fc614e2082362cfe49d7c0e60696d5659a0e5b99229a98e62c4e4c6\\"",
+      "Type": "String",
+    },
+    "AssetParameters4050d0281f9d7f365f5696c7d99ae1026453c830ea8115788f984d4e0df450c1ArtifactHash9B91022A": Object {
+      "Description": "Artifact hash for asset \\"4050d0281f9d7f365f5696c7d99ae1026453c830ea8115788f984d4e0df450c1\\"",
+      "Type": "String",
+    },
+    "AssetParameters4050d0281f9d7f365f5696c7d99ae1026453c830ea8115788f984d4e0df450c1S3Bucket0DD8DC18": Object {
+      "Description": "S3 bucket for asset \\"4050d0281f9d7f365f5696c7d99ae1026453c830ea8115788f984d4e0df450c1\\"",
+      "Type": "String",
+    },
+    "AssetParameters4050d0281f9d7f365f5696c7d99ae1026453c830ea8115788f984d4e0df450c1S3VersionKeyC8151B56": Object {
+      "Description": "S3 key for asset version \\"4050d0281f9d7f365f5696c7d99ae1026453c830ea8115788f984d4e0df450c1\\"",
+      "Type": "String",
+    },
+    "AssetParameters4a9168ae3ef599ae4f2ac574a2d4b90fdf3c08f197f0816095bbf837c4eacb5aArtifactHashBD12824C": Object {
+      "Description": "Artifact hash for asset \\"4a9168ae3ef599ae4f2ac574a2d4b90fdf3c08f197f0816095bbf837c4eacb5a\\"",
+      "Type": "String",
+    },
+    "AssetParameters4a9168ae3ef599ae4f2ac574a2d4b90fdf3c08f197f0816095bbf837c4eacb5aS3BucketEB92455C": Object {
+      "Description": "S3 bucket for asset \\"4a9168ae3ef599ae4f2ac574a2d4b90fdf3c08f197f0816095bbf837c4eacb5a\\"",
+      "Type": "String",
+    },
+    "AssetParameters4a9168ae3ef599ae4f2ac574a2d4b90fdf3c08f197f0816095bbf837c4eacb5aS3VersionKey59F9CB38": Object {
+      "Description": "S3 key for asset version \\"4a9168ae3ef599ae4f2ac574a2d4b90fdf3c08f197f0816095bbf837c4eacb5a\\"",
+      "Type": "String",
+    },
+    "AssetParameters55dedd50c14543738352e4ca92b6e6df9da6f958112799598bdefe4760c33682ArtifactHashDD87E0FE": Object {
+      "Description": "Artifact hash for asset \\"55dedd50c14543738352e4ca92b6e6df9da6f958112799598bdefe4760c33682\\"",
+      "Type": "String",
+    },
+    "AssetParameters55dedd50c14543738352e4ca92b6e6df9da6f958112799598bdefe4760c33682S3Bucket717BB4C9": Object {
+      "Description": "S3 bucket for asset \\"55dedd50c14543738352e4ca92b6e6df9da6f958112799598bdefe4760c33682\\"",
+      "Type": "String",
+    },
+    "AssetParameters55dedd50c14543738352e4ca92b6e6df9da6f958112799598bdefe4760c33682S3VersionKey013A0590": Object {
+      "Description": "S3 key for asset version \\"55dedd50c14543738352e4ca92b6e6df9da6f958112799598bdefe4760c33682\\"",
+      "Type": "String",
+    },
+    "AssetParameters7d0149bd5c92efab6f546a40a903dc3f885a68704d4fb943256959d823847bfbArtifactHashF8310E88": Object {
+      "Description": "Artifact hash for asset \\"7d0149bd5c92efab6f546a40a903dc3f885a68704d4fb943256959d823847bfb\\"",
+      "Type": "String",
+    },
+    "AssetParameters7d0149bd5c92efab6f546a40a903dc3f885a68704d4fb943256959d823847bfbS3BucketFB7F35AE": Object {
+      "Description": "S3 bucket for asset \\"7d0149bd5c92efab6f546a40a903dc3f885a68704d4fb943256959d823847bfb\\"",
+      "Type": "String",
+    },
+    "AssetParameters7d0149bd5c92efab6f546a40a903dc3f885a68704d4fb943256959d823847bfbS3VersionKeyFF240EB2": Object {
+      "Description": "S3 key for asset version \\"7d0149bd5c92efab6f546a40a903dc3f885a68704d4fb943256959d823847bfb\\"",
+      "Type": "String",
+    },
+    "AssetParametersa478cfac581378b5012cffedd2db49a4d80cd90c27c28072dab2845b369b0ed1ArtifactHash8CAC51BF": Object {
+      "Description": "Artifact hash for asset \\"a478cfac581378b5012cffedd2db49a4d80cd90c27c28072dab2845b369b0ed1\\"",
+      "Type": "String",
+    },
+    "AssetParametersa478cfac581378b5012cffedd2db49a4d80cd90c27c28072dab2845b369b0ed1S3Bucket95035411": Object {
+      "Description": "S3 bucket for asset \\"a478cfac581378b5012cffedd2db49a4d80cd90c27c28072dab2845b369b0ed1\\"",
+      "Type": "String",
+    },
+    "AssetParametersa478cfac581378b5012cffedd2db49a4d80cd90c27c28072dab2845b369b0ed1S3VersionKeyD03DB295": Object {
+      "Description": "S3 key for asset version \\"a478cfac581378b5012cffedd2db49a4d80cd90c27c28072dab2845b369b0ed1\\"",
+      "Type": "String",
+    },
+    "AssetParametersadfc4ad094d858ca25ce0c7cde36576ffb0de9f7360bbeeec83c99ae32c9bd31ArtifactHash57654D78": Object {
+      "Description": "Artifact hash for asset \\"adfc4ad094d858ca25ce0c7cde36576ffb0de9f7360bbeeec83c99ae32c9bd31\\"",
+      "Type": "String",
+    },
+    "AssetParametersadfc4ad094d858ca25ce0c7cde36576ffb0de9f7360bbeeec83c99ae32c9bd31S3Bucket9B069486": Object {
+      "Description": "S3 bucket for asset \\"adfc4ad094d858ca25ce0c7cde36576ffb0de9f7360bbeeec83c99ae32c9bd31\\"",
+      "Type": "String",
+    },
+    "AssetParametersadfc4ad094d858ca25ce0c7cde36576ffb0de9f7360bbeeec83c99ae32c9bd31S3VersionKeyCDEB7DA6": Object {
+      "Description": "S3 key for asset version \\"adfc4ad094d858ca25ce0c7cde36576ffb0de9f7360bbeeec83c99ae32c9bd31\\"",
+      "Type": "String",
+    },
+    "AssetParametersb46f824454d0e7acd1e35d3814619259ddb35c09b90fb615a5b2a07e2b971be5ArtifactHashEF4E9FFC": Object {
+      "Description": "Artifact hash for asset \\"b46f824454d0e7acd1e35d3814619259ddb35c09b90fb615a5b2a07e2b971be5\\"",
+      "Type": "String",
+    },
+    "AssetParametersb46f824454d0e7acd1e35d3814619259ddb35c09b90fb615a5b2a07e2b971be5S3Bucket95A81A8D": Object {
+      "Description": "S3 bucket for asset \\"b46f824454d0e7acd1e35d3814619259ddb35c09b90fb615a5b2a07e2b971be5\\"",
+      "Type": "String",
+    },
+    "AssetParametersb46f824454d0e7acd1e35d3814619259ddb35c09b90fb615a5b2a07e2b971be5S3VersionKey2A66A6A9": Object {
+      "Description": "S3 key for asset version \\"b46f824454d0e7acd1e35d3814619259ddb35c09b90fb615a5b2a07e2b971be5\\"",
+      "Type": "String",
+    },
+    "AssetParametersc935f56529e6e66b9883f9cd5ec2faaf64e590b50d25e30bb93299317d43956fArtifactHashCA4F45AF": Object {
+      "Description": "Artifact hash for asset \\"c935f56529e6e66b9883f9cd5ec2faaf64e590b50d25e30bb93299317d43956f\\"",
+      "Type": "String",
+    },
+    "AssetParametersc935f56529e6e66b9883f9cd5ec2faaf64e590b50d25e30bb93299317d43956fS3Bucket4DACA53A": Object {
+      "Description": "S3 bucket for asset \\"c935f56529e6e66b9883f9cd5ec2faaf64e590b50d25e30bb93299317d43956f\\"",
+      "Type": "String",
+    },
+    "AssetParametersc935f56529e6e66b9883f9cd5ec2faaf64e590b50d25e30bb93299317d43956fS3VersionKeyE7FBDDD3": Object {
+      "Description": "S3 key for asset version \\"c935f56529e6e66b9883f9cd5ec2faaf64e590b50d25e30bb93299317d43956f\\"",
+      "Type": "String",
+    },
+    "AssetParametersd710cafcde1ac9967732c609bbffd1f8d0106d4c613feb9512ed290ec30c017bArtifactHashBD056EDD": Object {
+      "Description": "Artifact hash for asset \\"d710cafcde1ac9967732c609bbffd1f8d0106d4c613feb9512ed290ec30c017b\\"",
+      "Type": "String",
+    },
+    "AssetParametersd710cafcde1ac9967732c609bbffd1f8d0106d4c613feb9512ed290ec30c017bS3BucketB0946132": Object {
+      "Description": "S3 bucket for asset \\"d710cafcde1ac9967732c609bbffd1f8d0106d4c613feb9512ed290ec30c017b\\"",
+      "Type": "String",
+    },
+    "AssetParametersd710cafcde1ac9967732c609bbffd1f8d0106d4c613feb9512ed290ec30c017bS3VersionKey20A72595": Object {
+      "Description": "S3 key for asset version \\"d710cafcde1ac9967732c609bbffd1f8d0106d4c613feb9512ed290ec30c017b\\"",
+      "Type": "String",
+    },
+    "AssetParametersdba51e9b88585658ca525fa1d7c9314ce3750da51c730aa81da68c6448853d2fArtifactHashE35883DA": Object {
+      "Description": "Artifact hash for asset \\"dba51e9b88585658ca525fa1d7c9314ce3750da51c730aa81da68c6448853d2f\\"",
+      "Type": "String",
+    },
+    "AssetParametersdba51e9b88585658ca525fa1d7c9314ce3750da51c730aa81da68c6448853d2fS3Bucket528C139F": Object {
+      "Description": "S3 bucket for asset \\"dba51e9b88585658ca525fa1d7c9314ce3750da51c730aa81da68c6448853d2f\\"",
+      "Type": "String",
+    },
+    "AssetParametersdba51e9b88585658ca525fa1d7c9314ce3750da51c730aa81da68c6448853d2fS3VersionKeyAB3412B5": Object {
+      "Description": "S3 key for asset version \\"dba51e9b88585658ca525fa1d7c9314ce3750da51c730aa81da68c6448853d2f\\"",
+      "Type": "String",
+    },
+  },
+  "Resources": Object {
+    "FileApiCategoryTable812C14A4": Object {
+      "DeletionPolicy": "Retain",
+      "Properties": Object {
+        "AttributeDefinitions": Array [
+          Object {
+            "AttributeName": "categoryId",
+            "AttributeType": "S",
+          },
+          Object {
+            "AttributeName": "parentId",
+            "AttributeType": "S",
+          },
+        ],
+        "GlobalSecondaryIndexes": Array [
+          Object {
+            "IndexName": "query-by-parent-id",
+            "KeySchema": Array [
+              Object {
+                "AttributeName": "parentId",
+                "KeyType": "HASH",
+              },
+            ],
+            "Projection": Object {
+              "ProjectionType": "ALL",
+            },
+            "ProvisionedThroughput": Object {
+              "ReadCapacityUnits": 1,
+              "WriteCapacityUnits": 1,
+            },
+          },
+        ],
+        "KeySchema": Array [
+          Object {
+            "AttributeName": "categoryId",
+            "KeyType": "HASH",
+          },
+        ],
+        "ProvisionedThroughput": Object {
+          "ReadCapacityUnits": 1,
+          "WriteCapacityUnits": 1,
+        },
+      },
+      "Type": "AWS::DynamoDB::Table",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "FileApiCreateCategoryFunctionFF4E8D4D": Object {
+      "DependsOn": Array [
+        "FileApiCreateCategoryFunctionServiceRole89766587",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParametersc935f56529e6e66b9883f9cd5ec2faaf64e590b50d25e30bb93299317d43956fS3Bucket4DACA53A",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersc935f56529e6e66b9883f9cd5ec2faaf64e590b50d25e30bb93299317d43956fS3VersionKeyE7FBDDD3",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersc935f56529e6e66b9883f9cd5ec2faaf64e590b50d25e30bb93299317d43956fS3VersionKeyE7FBDDD3",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "CATEGORY_TABLE_NAME": Object {
+              "Ref": "FileApiCategoryTable812C14A4",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "FileApiCreateCategoryFunctionServiceRole89766587",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "FileApiCreateCategoryFunctionServiceRole89766587": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "FileApiCreateFilesFunctionB18787DC": Object {
+      "DependsOn": Array [
+        "FileApiCreateFilesFunctionServiceRole06894C31",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters4a9168ae3ef599ae4f2ac574a2d4b90fdf3c08f197f0816095bbf837c4eacb5aS3BucketEB92455C",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters4a9168ae3ef599ae4f2ac574a2d4b90fdf3c08f197f0816095bbf837c4eacb5aS3VersionKey59F9CB38",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters4a9168ae3ef599ae4f2ac574a2d4b90fdf3c08f197f0816095bbf837c4eacb5aS3VersionKey59F9CB38",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "CATEGORY_TABLE_NAME": Object {
+              "Ref": "FileApiCategoryTable812C14A4",
+            },
+            "FILE_TABLE_NAME": Object {
+              "Ref": "FileApiFileTable7C90566A",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "FileApiCreateFilesFunctionServiceRole06894C31",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "FileApiCreateFilesFunctionServiceRole06894C31": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "FileApiDeleteCategoryFunctionA53122D4": Object {
+      "DependsOn": Array [
+        "FileApiDeleteCategoryFunctionServiceRole8A63A4E4",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParametersb46f824454d0e7acd1e35d3814619259ddb35c09b90fb615a5b2a07e2b971be5S3Bucket95A81A8D",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersb46f824454d0e7acd1e35d3814619259ddb35c09b90fb615a5b2a07e2b971be5S3VersionKey2A66A6A9",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersb46f824454d0e7acd1e35d3814619259ddb35c09b90fb615a5b2a07e2b971be5S3VersionKey2A66A6A9",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "CATEGORY_TABLE_NAME": Object {
+              "Ref": "FileApiCategoryTable812C14A4",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "FileApiDeleteCategoryFunctionServiceRole8A63A4E4",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "FileApiDeleteCategoryFunctionServiceRole8A63A4E4": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "FileApiDeleteFilesFunctionF250501F": Object {
+      "DependsOn": Array [
+        "FileApiDeleteFilesFunctionServiceRoleF38F01D1",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters230e62fa0fc614e2082362cfe49d7c0e60696d5659a0e5b99229a98e62c4e4c6S3BucketE90A9186",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters230e62fa0fc614e2082362cfe49d7c0e60696d5659a0e5b99229a98e62c4e4c6S3VersionKey52E44123",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters230e62fa0fc614e2082362cfe49d7c0e60696d5659a0e5b99229a98e62c4e4c6S3VersionKey52E44123",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "FILE_TABLE_NAME": Object {
+              "Ref": "FileApiFileTable7C90566A",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "FileApiDeleteFilesFunctionServiceRoleF38F01D1",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "FileApiDeleteFilesFunctionServiceRoleF38F01D1": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "FileApiFileRestApiAccountDF32BF18": Object {
+      "DependsOn": Array [
+        "FileApiFileRestApiCF4E0F2A",
+      ],
+      "Properties": Object {
+        "CloudWatchRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "FileApiFileRestApiCloudWatchRoleB0F2FBCC",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ApiGateway::Account",
+    },
+    "FileApiFileRestApiCF4E0F2A": Object {
+      "Properties": Object {
+        "Name": "FileRestApi",
+      },
+      "Type": "AWS::ApiGateway::RestApi",
+    },
+    "FileApiFileRestApiCloudWatchRoleB0F2FBCC": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "apigateway.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "FileApiFileRestApiDeployment001743603c265d62422f0fdb46b150dc23ac5290": Object {
+      "DependsOn": Array [
+        "FileApiFileRestApicategoriescategoryIdDELETE9458CB3E",
+        "FileApiFileRestApicategoriescategoryIdfilesGET0BBD206F",
+        "FileApiFileRestApicategoriescategoryIdfilesOPTIONS3DCDB94E",
+        "FileApiFileRestApicategoriescategoryIdfiles6300BB07",
+        "FileApiFileRestApicategoriescategoryIdGETF50C068B",
+        "FileApiFileRestApicategoriescategoryIdOPTIONS7F84A1D9",
+        "FileApiFileRestApicategoriescategoryIdPUT2908E70B",
+        "FileApiFileRestApicategoriescategoryIdF64CB71B",
+        "FileApiFileRestApicategoriesGET60EB49C4",
+        "FileApiFileRestApicategoriesOPTIONS61BA9F2A",
+        "FileApiFileRestApicategoriesPOST6445038F",
+        "FileApiFileRestApicategories90A88046",
+        "FileApiFileRestApifileschecksumOPTIONS2427AF66",
+        "FileApiFileRestApifileschecksum56380AB4",
+        "FileApiFileRestApifileschecksumversionsversionGET227A828E",
+        "FileApiFileRestApifileschecksumversionsversionOPTIONSF6B8681B",
+        "FileApiFileRestApifileschecksumversionsversionA875684C",
+        "FileApiFileRestApifileschecksumversionsOPTIONSF0DB082E",
+        "FileApiFileRestApifileschecksumversions956F42E1",
+        "FileApiFileRestApifilesDELETE1B6017DF",
+        "FileApiFileRestApifilesGETC2811E80",
+        "FileApiFileRestApifilesOPTIONSB57ACAA3",
+        "FileApiFileRestApifilesPOST99FE9111",
+        "FileApiFileRestApifilesPUTB30E9EE3",
+        "FileApiFileRestApifiles0A6D7201",
+        "FileApiFileRestApiOPTIONS335EC00A",
+      ],
+      "Properties": Object {
+        "Description": "Automatically created by the RestApi construct",
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Deployment",
+    },
+    "FileApiFileRestApiDeploymentStageprodE43B9431": Object {
+      "Properties": Object {
+        "DeploymentId": Object {
+          "Ref": "FileApiFileRestApiDeployment001743603c265d62422f0fdb46b150dc23ac5290",
+        },
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+        "StageName": "prod",
+      },
+      "Type": "AWS::ApiGateway::Stage",
+    },
+    "FileApiFileRestApiOPTIONS335EC00A": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "Integration": Object {
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseParameters": Object {
+                "method.response.header.Access-Control-Allow-Headers": "'Origin,Content-Type,Fetch-Mode,Accept,X-Amz-Date,Accept-Encoding,Authorization,SyncCenter,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+              },
+              "StatusCode": "204",
+            },
+          ],
+          "RequestTemplates": Object {
+            "application/json": "{ statusCode: 200 }",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+            },
+            "StatusCode": "204",
+          },
+        ],
+        "ResourceId": Object {
+          "Fn::GetAtt": Array [
+            "FileApiFileRestApiCF4E0F2A",
+            "RootResourceId",
+          ],
+        },
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "FileApiFileRestApicategories90A88046": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Fn::GetAtt": Array [
+            "FileApiFileRestApiCF4E0F2A",
+            "RootResourceId",
+          ],
+        },
+        "PathPart": "categories",
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "FileApiFileRestApicategoriesGET60EB49C4": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "GET",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "FileApiListCategoriesFunctionDA43FE3D",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "FileApiFileRestApicategories90A88046",
+        },
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "FileApiFileRestApicategoriesGETApiPermissionTestdemostackFileApiFileRestApiC32F6AA3GETcategoriesC26AB59A": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "FileApiListCategoriesFunctionDA43FE3D",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "FileApiFileRestApiCF4E0F2A",
+              },
+              "/test-invoke-stage/GET/categories",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "FileApiFileRestApicategoriesGETApiPermissiondemostackFileApiFileRestApiC32F6AA3GETcategories24036944": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "FileApiListCategoriesFunctionDA43FE3D",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "FileApiFileRestApiCF4E0F2A",
+              },
+              "/",
+              Object {
+                "Ref": "FileApiFileRestApiDeploymentStageprodE43B9431",
+              },
+              "/GET/categories",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "FileApiFileRestApicategoriesOPTIONS61BA9F2A": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "Integration": Object {
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseParameters": Object {
+                "method.response.header.Access-Control-Allow-Headers": "'Origin,Content-Type,Fetch-Mode,Accept,X-Amz-Date,Accept-Encoding,Authorization,SyncCenter,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+              },
+              "StatusCode": "204",
+            },
+          ],
+          "RequestTemplates": Object {
+            "application/json": "{ statusCode: 200 }",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+            },
+            "StatusCode": "204",
+          },
+        ],
+        "ResourceId": Object {
+          "Ref": "FileApiFileRestApicategories90A88046",
+        },
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "FileApiFileRestApicategoriesPOST6445038F": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "POST",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "FileApiCreateCategoryFunctionFF4E8D4D",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "FileApiFileRestApicategories90A88046",
+        },
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "FileApiFileRestApicategoriesPOSTApiPermissionTestdemostackFileApiFileRestApiC32F6AA3POSTcategoriesE2724DA4": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "FileApiCreateCategoryFunctionFF4E8D4D",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "FileApiFileRestApiCF4E0F2A",
+              },
+              "/test-invoke-stage/POST/categories",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "FileApiFileRestApicategoriesPOSTApiPermissiondemostackFileApiFileRestApiC32F6AA3POSTcategories2E16C9D7": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "FileApiCreateCategoryFunctionFF4E8D4D",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "FileApiFileRestApiCF4E0F2A",
+              },
+              "/",
+              Object {
+                "Ref": "FileApiFileRestApiDeploymentStageprodE43B9431",
+              },
+              "/POST/categories",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "FileApiFileRestApicategoriescategoryIdDELETE9458CB3E": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "DELETE",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "FileApiDeleteCategoryFunctionA53122D4",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "FileApiFileRestApicategoriescategoryIdF64CB71B",
+        },
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "FileApiFileRestApicategoriescategoryIdDELETEApiPermissionTestdemostackFileApiFileRestApiC32F6AA3DELETEcategoriescategoryIdFBF8A015": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "FileApiDeleteCategoryFunctionA53122D4",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "FileApiFileRestApiCF4E0F2A",
+              },
+              "/test-invoke-stage/DELETE/categories/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "FileApiFileRestApicategoriescategoryIdDELETEApiPermissiondemostackFileApiFileRestApiC32F6AA3DELETEcategoriescategoryIdC16CA1AD": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "FileApiDeleteCategoryFunctionA53122D4",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "FileApiFileRestApiCF4E0F2A",
+              },
+              "/",
+              Object {
+                "Ref": "FileApiFileRestApiDeploymentStageprodE43B9431",
+              },
+              "/DELETE/categories/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "FileApiFileRestApicategoriescategoryIdF64CB71B": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Ref": "FileApiFileRestApicategories90A88046",
+        },
+        "PathPart": "{categoryId}",
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "FileApiFileRestApicategoriescategoryIdGETApiPermissionTestdemostackFileApiFileRestApiC32F6AA3GETcategoriescategoryIdA8865453": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "FileApiGetCategoryFunctionF4D65BDE",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "FileApiFileRestApiCF4E0F2A",
+              },
+              "/test-invoke-stage/GET/categories/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "FileApiFileRestApicategoriescategoryIdGETApiPermissiondemostackFileApiFileRestApiC32F6AA3GETcategoriescategoryIdDA594A29": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "FileApiGetCategoryFunctionF4D65BDE",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "FileApiFileRestApiCF4E0F2A",
+              },
+              "/",
+              Object {
+                "Ref": "FileApiFileRestApiDeploymentStageprodE43B9431",
+              },
+              "/GET/categories/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "FileApiFileRestApicategoriescategoryIdGETF50C068B": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "GET",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "FileApiGetCategoryFunctionF4D65BDE",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "FileApiFileRestApicategoriescategoryIdF64CB71B",
+        },
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "FileApiFileRestApicategoriescategoryIdOPTIONS7F84A1D9": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "Integration": Object {
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseParameters": Object {
+                "method.response.header.Access-Control-Allow-Headers": "'Origin,Content-Type,Fetch-Mode,Accept,X-Amz-Date,Accept-Encoding,Authorization,SyncCenter,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+              },
+              "StatusCode": "204",
+            },
+          ],
+          "RequestTemplates": Object {
+            "application/json": "{ statusCode: 200 }",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+            },
+            "StatusCode": "204",
+          },
+        ],
+        "ResourceId": Object {
+          "Ref": "FileApiFileRestApicategoriescategoryIdF64CB71B",
+        },
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "FileApiFileRestApicategoriescategoryIdPUT2908E70B": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "PUT",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "FileApiUpdateCategoryFunction22AA72A8",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "FileApiFileRestApicategoriescategoryIdF64CB71B",
+        },
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "FileApiFileRestApicategoriescategoryIdPUTApiPermissionTestdemostackFileApiFileRestApiC32F6AA3PUTcategoriescategoryId32B9A80A": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "FileApiUpdateCategoryFunction22AA72A8",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "FileApiFileRestApiCF4E0F2A",
+              },
+              "/test-invoke-stage/PUT/categories/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "FileApiFileRestApicategoriescategoryIdPUTApiPermissiondemostackFileApiFileRestApiC32F6AA3PUTcategoriescategoryIdDECC9EB6": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "FileApiUpdateCategoryFunction22AA72A8",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "FileApiFileRestApiCF4E0F2A",
+              },
+              "/",
+              Object {
+                "Ref": "FileApiFileRestApiDeploymentStageprodE43B9431",
+              },
+              "/PUT/categories/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "FileApiFileRestApicategoriescategoryIdfiles6300BB07": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Ref": "FileApiFileRestApicategoriescategoryIdF64CB71B",
+        },
+        "PathPart": "files",
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "FileApiFileRestApicategoriescategoryIdfilesGET0BBD206F": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "GET",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "FileApiListFilesByCategoryFunction8FC97537",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "FileApiFileRestApicategoriescategoryIdfiles6300BB07",
+        },
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "FileApiFileRestApicategoriescategoryIdfilesGETApiPermissionTestdemostackFileApiFileRestApiC32F6AA3GETcategoriescategoryIdfiles615AEF9E": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "FileApiListFilesByCategoryFunction8FC97537",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "FileApiFileRestApiCF4E0F2A",
+              },
+              "/test-invoke-stage/GET/categories/*/files",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "FileApiFileRestApicategoriescategoryIdfilesGETApiPermissiondemostackFileApiFileRestApiC32F6AA3GETcategoriescategoryIdfilesE6A898C9": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "FileApiListFilesByCategoryFunction8FC97537",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "FileApiFileRestApiCF4E0F2A",
+              },
+              "/",
+              Object {
+                "Ref": "FileApiFileRestApiDeploymentStageprodE43B9431",
+              },
+              "/GET/categories/*/files",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "FileApiFileRestApicategoriescategoryIdfilesOPTIONS3DCDB94E": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "Integration": Object {
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseParameters": Object {
+                "method.response.header.Access-Control-Allow-Headers": "'Origin,Content-Type,Fetch-Mode,Accept,X-Amz-Date,Accept-Encoding,Authorization,SyncCenter,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+              },
+              "StatusCode": "204",
+            },
+          ],
+          "RequestTemplates": Object {
+            "application/json": "{ statusCode: 200 }",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+            },
+            "StatusCode": "204",
+          },
+        ],
+        "ResourceId": Object {
+          "Ref": "FileApiFileRestApicategoriescategoryIdfiles6300BB07",
+        },
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "FileApiFileRestApifiles0A6D7201": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Fn::GetAtt": Array [
+            "FileApiFileRestApiCF4E0F2A",
+            "RootResourceId",
+          ],
+        },
+        "PathPart": "files",
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "FileApiFileRestApifilesDELETE1B6017DF": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "DELETE",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "FileApiDeleteFilesFunctionF250501F",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "FileApiFileRestApifiles0A6D7201",
+        },
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "FileApiFileRestApifilesDELETEApiPermissionTestdemostackFileApiFileRestApiC32F6AA3DELETEfiles45BCFD63": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "FileApiDeleteFilesFunctionF250501F",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "FileApiFileRestApiCF4E0F2A",
+              },
+              "/test-invoke-stage/DELETE/files",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "FileApiFileRestApifilesDELETEApiPermissiondemostackFileApiFileRestApiC32F6AA3DELETEfiles6F9B183D": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "FileApiDeleteFilesFunctionF250501F",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "FileApiFileRestApiCF4E0F2A",
+              },
+              "/",
+              Object {
+                "Ref": "FileApiFileRestApiDeploymentStageprodE43B9431",
+              },
+              "/DELETE/files",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "FileApiFileRestApifilesGETApiPermissionTestdemostackFileApiFileRestApiC32F6AA3GETfilesC01E1BF2": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "FileApiListFilesFunction21BCBC84",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "FileApiFileRestApiCF4E0F2A",
+              },
+              "/test-invoke-stage/GET/files",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "FileApiFileRestApifilesGETApiPermissiondemostackFileApiFileRestApiC32F6AA3GETfilesEFD9E4FC": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "FileApiListFilesFunction21BCBC84",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "FileApiFileRestApiCF4E0F2A",
+              },
+              "/",
+              Object {
+                "Ref": "FileApiFileRestApiDeploymentStageprodE43B9431",
+              },
+              "/GET/files",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "FileApiFileRestApifilesGETC2811E80": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "GET",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "FileApiListFilesFunction21BCBC84",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "FileApiFileRestApifiles0A6D7201",
+        },
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "FileApiFileRestApifilesOPTIONSB57ACAA3": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "Integration": Object {
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseParameters": Object {
+                "method.response.header.Access-Control-Allow-Headers": "'Origin,Content-Type,Fetch-Mode,Accept,X-Amz-Date,Accept-Encoding,Authorization,SyncCenter,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+              },
+              "StatusCode": "204",
+            },
+          ],
+          "RequestTemplates": Object {
+            "application/json": "{ statusCode: 200 }",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+            },
+            "StatusCode": "204",
+          },
+        ],
+        "ResourceId": Object {
+          "Ref": "FileApiFileRestApifiles0A6D7201",
+        },
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "FileApiFileRestApifilesPOST99FE9111": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "POST",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "FileApiCreateFilesFunctionB18787DC",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "FileApiFileRestApifiles0A6D7201",
+        },
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "FileApiFileRestApifilesPOSTApiPermissionTestdemostackFileApiFileRestApiC32F6AA3POSTfiles62317232": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "FileApiCreateFilesFunctionB18787DC",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "FileApiFileRestApiCF4E0F2A",
+              },
+              "/test-invoke-stage/POST/files",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "FileApiFileRestApifilesPOSTApiPermissiondemostackFileApiFileRestApiC32F6AA3POSTfiles48923F13": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "FileApiCreateFilesFunctionB18787DC",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "FileApiFileRestApiCF4E0F2A",
+              },
+              "/",
+              Object {
+                "Ref": "FileApiFileRestApiDeploymentStageprodE43B9431",
+              },
+              "/POST/files",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "FileApiFileRestApifilesPUTApiPermissionTestdemostackFileApiFileRestApiC32F6AA3PUTfiles55E30F51": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "FileApiUpdateFilesFunction1F975270",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "FileApiFileRestApiCF4E0F2A",
+              },
+              "/test-invoke-stage/PUT/files",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "FileApiFileRestApifilesPUTApiPermissiondemostackFileApiFileRestApiC32F6AA3PUTfiles3010AB4D": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "FileApiUpdateFilesFunction1F975270",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "FileApiFileRestApiCF4E0F2A",
+              },
+              "/",
+              Object {
+                "Ref": "FileApiFileRestApiDeploymentStageprodE43B9431",
+              },
+              "/PUT/files",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "FileApiFileRestApifilesPUTB30E9EE3": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "PUT",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "FileApiUpdateFilesFunction1F975270",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "FileApiFileRestApifiles0A6D7201",
+        },
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "FileApiFileRestApifileschecksum56380AB4": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Ref": "FileApiFileRestApifiles0A6D7201",
+        },
+        "PathPart": "{checksum}",
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "FileApiFileRestApifileschecksumOPTIONS2427AF66": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "Integration": Object {
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseParameters": Object {
+                "method.response.header.Access-Control-Allow-Headers": "'Origin,Content-Type,Fetch-Mode,Accept,X-Amz-Date,Accept-Encoding,Authorization,SyncCenter,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+              },
+              "StatusCode": "204",
+            },
+          ],
+          "RequestTemplates": Object {
+            "application/json": "{ statusCode: 200 }",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+            },
+            "StatusCode": "204",
+          },
+        ],
+        "ResourceId": Object {
+          "Ref": "FileApiFileRestApifileschecksum56380AB4",
+        },
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "FileApiFileRestApifileschecksumversions956F42E1": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Ref": "FileApiFileRestApifileschecksum56380AB4",
+        },
+        "PathPart": "versions",
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "FileApiFileRestApifileschecksumversionsOPTIONSF0DB082E": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "Integration": Object {
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseParameters": Object {
+                "method.response.header.Access-Control-Allow-Headers": "'Origin,Content-Type,Fetch-Mode,Accept,X-Amz-Date,Accept-Encoding,Authorization,SyncCenter,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+              },
+              "StatusCode": "204",
+            },
+          ],
+          "RequestTemplates": Object {
+            "application/json": "{ statusCode: 200 }",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+            },
+            "StatusCode": "204",
+          },
+        ],
+        "ResourceId": Object {
+          "Ref": "FileApiFileRestApifileschecksumversions956F42E1",
+        },
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "FileApiFileRestApifileschecksumversionsversionA875684C": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Ref": "FileApiFileRestApifileschecksumversions956F42E1",
+        },
+        "PathPart": "{version}",
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "FileApiFileRestApifileschecksumversionsversionGET227A828E": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "GET",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "FileApiGetFilesFunctionC7911203",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "FileApiFileRestApifileschecksumversionsversionA875684C",
+        },
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "FileApiFileRestApifileschecksumversionsversionGETApiPermissionTestdemostackFileApiFileRestApiC32F6AA3GETfileschecksumversionsversionB7F30846": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "FileApiGetFilesFunctionC7911203",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "FileApiFileRestApiCF4E0F2A",
+              },
+              "/test-invoke-stage/GET/files/*/versions/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "FileApiFileRestApifileschecksumversionsversionGETApiPermissiondemostackFileApiFileRestApiC32F6AA3GETfileschecksumversionsversion3271B7BA": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "FileApiGetFilesFunctionC7911203",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "FileApiFileRestApiCF4E0F2A",
+              },
+              "/",
+              Object {
+                "Ref": "FileApiFileRestApiDeploymentStageprodE43B9431",
+              },
+              "/GET/files/*/versions/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "FileApiFileRestApifileschecksumversionsversionOPTIONSF6B8681B": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "Integration": Object {
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseParameters": Object {
+                "method.response.header.Access-Control-Allow-Headers": "'Origin,Content-Type,Fetch-Mode,Accept,X-Amz-Date,Accept-Encoding,Authorization,SyncCenter,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+              },
+              "StatusCode": "204",
+            },
+          ],
+          "RequestTemplates": Object {
+            "application/json": "{ statusCode: 200 }",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+            },
+            "StatusCode": "204",
+          },
+        ],
+        "ResourceId": Object {
+          "Ref": "FileApiFileRestApifileschecksumversionsversionA875684C",
+        },
+        "RestApiId": Object {
+          "Ref": "FileApiFileRestApiCF4E0F2A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "FileApiFileTable7C90566A": Object {
+      "DeletionPolicy": "Retain",
+      "Properties": Object {
+        "AttributeDefinitions": Array [
+          Object {
+            "AttributeName": "fileId",
+            "AttributeType": "S",
+          },
+          Object {
+            "AttributeName": "categoryId",
+            "AttributeType": "S",
+          },
+          Object {
+            "AttributeName": "locale",
+            "AttributeType": "S",
+          },
+          Object {
+            "AttributeName": "checksum",
+            "AttributeType": "S",
+          },
+          Object {
+            "AttributeName": "version",
+            "AttributeType": "S",
+          },
+        ],
+        "GlobalSecondaryIndexes": Array [
+          Object {
+            "IndexName": "query-by-category-id-and-locale",
+            "KeySchema": Array [
+              Object {
+                "AttributeName": "categoryId",
+                "KeyType": "HASH",
+              },
+              Object {
+                "AttributeName": "locale",
+                "KeyType": "RANGE",
+              },
+            ],
+            "Projection": Object {
+              "ProjectionType": "ALL",
+            },
+            "ProvisionedThroughput": Object {
+              "ReadCapacityUnits": 1,
+              "WriteCapacityUnits": 1,
+            },
+          },
+          Object {
+            "IndexName": "get-file-by-checksum-and-version",
+            "KeySchema": Array [
+              Object {
+                "AttributeName": "checksum",
+                "KeyType": "HASH",
+              },
+              Object {
+                "AttributeName": "version",
+                "KeyType": "RANGE",
+              },
+            ],
+            "Projection": Object {
+              "ProjectionType": "ALL",
+            },
+            "ProvisionedThroughput": Object {
+              "ReadCapacityUnits": 1,
+              "WriteCapacityUnits": 1,
+            },
+          },
+        ],
+        "KeySchema": Array [
+          Object {
+            "AttributeName": "fileId",
+            "KeyType": "HASH",
+          },
+        ],
+        "ProvisionedThroughput": Object {
+          "ReadCapacityUnits": 1,
+          "WriteCapacityUnits": 1,
+        },
+      },
+      "Type": "AWS::DynamoDB::Table",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "FileApiGetCategoryFunctionF4D65BDE": Object {
+      "DependsOn": Array [
+        "FileApiGetCategoryFunctionServiceRoleDBE32B06",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParametersa478cfac581378b5012cffedd2db49a4d80cd90c27c28072dab2845b369b0ed1S3Bucket95035411",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersa478cfac581378b5012cffedd2db49a4d80cd90c27c28072dab2845b369b0ed1S3VersionKeyD03DB295",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersa478cfac581378b5012cffedd2db49a4d80cd90c27c28072dab2845b369b0ed1S3VersionKeyD03DB295",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "CATEGORY_TABLE_NAME": Object {
+              "Ref": "FileApiCategoryTable812C14A4",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "FileApiGetCategoryFunctionServiceRoleDBE32B06",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "FileApiGetCategoryFunctionServiceRoleDBE32B06": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "FileApiGetFilesFunctionC7911203": Object {
+      "DependsOn": Array [
+        "FileApiGetFilesFunctionServiceRoleBDE766EC",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParametersdba51e9b88585658ca525fa1d7c9314ce3750da51c730aa81da68c6448853d2fS3Bucket528C139F",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersdba51e9b88585658ca525fa1d7c9314ce3750da51c730aa81da68c6448853d2fS3VersionKeyAB3412B5",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersdba51e9b88585658ca525fa1d7c9314ce3750da51c730aa81da68c6448853d2fS3VersionKeyAB3412B5",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "FILE_TABLE_NAME": Object {
+              "Ref": "FileApiFileTable7C90566A",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "FileApiGetFilesFunctionServiceRoleBDE766EC",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "FileApiGetFilesFunctionServiceRoleBDE766EC": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "FileApiListCategoriesFunctionDA43FE3D": Object {
+      "DependsOn": Array [
+        "FileApiListCategoriesFunctionServiceRole81F62031",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters4050d0281f9d7f365f5696c7d99ae1026453c830ea8115788f984d4e0df450c1S3Bucket0DD8DC18",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters4050d0281f9d7f365f5696c7d99ae1026453c830ea8115788f984d4e0df450c1S3VersionKeyC8151B56",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters4050d0281f9d7f365f5696c7d99ae1026453c830ea8115788f984d4e0df450c1S3VersionKeyC8151B56",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "CATEGORY_TABLE_NAME": Object {
+              "Ref": "FileApiCategoryTable812C14A4",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "FileApiListCategoriesFunctionServiceRole81F62031",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "FileApiListCategoriesFunctionServiceRole81F62031": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "FileApiListFilesByCategoryFunction8FC97537": Object {
+      "DependsOn": Array [
+        "FileApiListFilesByCategoryFunctionServiceRoleB1A15BE9",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters55dedd50c14543738352e4ca92b6e6df9da6f958112799598bdefe4760c33682S3Bucket717BB4C9",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters55dedd50c14543738352e4ca92b6e6df9da6f958112799598bdefe4760c33682S3VersionKey013A0590",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters55dedd50c14543738352e4ca92b6e6df9da6f958112799598bdefe4760c33682S3VersionKey013A0590",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "FILE_TABLE_NAME": Object {
+              "Ref": "FileApiFileTable7C90566A",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "FileApiListFilesByCategoryFunctionServiceRoleB1A15BE9",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "FileApiListFilesByCategoryFunctionServiceRoleB1A15BE9": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "FileApiListFilesFunction21BCBC84": Object {
+      "DependsOn": Array [
+        "FileApiListFilesFunctionServiceRole3F79C4A6",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParametersadfc4ad094d858ca25ce0c7cde36576ffb0de9f7360bbeeec83c99ae32c9bd31S3Bucket9B069486",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersadfc4ad094d858ca25ce0c7cde36576ffb0de9f7360bbeeec83c99ae32c9bd31S3VersionKeyCDEB7DA6",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersadfc4ad094d858ca25ce0c7cde36576ffb0de9f7360bbeeec83c99ae32c9bd31S3VersionKeyCDEB7DA6",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "FILE_TABLE_NAME": Object {
+              "Ref": "FileApiFileTable7C90566A",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "FileApiListFilesFunctionServiceRole3F79C4A6",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "FileApiListFilesFunctionServiceRole3F79C4A6": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "FileApiUpdateCategoryFunction22AA72A8": Object {
+      "DependsOn": Array [
+        "FileApiUpdateCategoryFunctionServiceRole226B9A11",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters7d0149bd5c92efab6f546a40a903dc3f885a68704d4fb943256959d823847bfbS3BucketFB7F35AE",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters7d0149bd5c92efab6f546a40a903dc3f885a68704d4fb943256959d823847bfbS3VersionKeyFF240EB2",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters7d0149bd5c92efab6f546a40a903dc3f885a68704d4fb943256959d823847bfbS3VersionKeyFF240EB2",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "CATEGORY_TABLE_NAME": Object {
+              "Ref": "FileApiCategoryTable812C14A4",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "FileApiUpdateCategoryFunctionServiceRole226B9A11",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "FileApiUpdateCategoryFunctionServiceRole226B9A11": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "FileApiUpdateFilesFunction1F975270": Object {
+      "DependsOn": Array [
+        "FileApiUpdateFilesFunctionServiceRole9074BA78",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParametersd710cafcde1ac9967732c609bbffd1f8d0106d4c613feb9512ed290ec30c017bS3BucketB0946132",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersd710cafcde1ac9967732c609bbffd1f8d0106d4c613feb9512ed290ec30c017bS3VersionKey20A72595",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersd710cafcde1ac9967732c609bbffd1f8d0106d4c613feb9512ed290ec30c017bS3VersionKey20A72595",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "FILE_TABLE_NAME": Object {
+              "Ref": "FileApiFileTable7C90566A",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "FileApiUpdateFilesFunctionServiceRole9074BA78",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "FileApiUpdateFilesFunctionServiceRole9074BA78": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "FileApicreatecategorypolicy51C0259E": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "dynamodb:GetItem",
+                "dynamodb:PutItem",
+              ],
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::GetAtt": Array [
+                  "FileApiCategoryTable812C14A4",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "FileApicreatecategorypolicy51C0259E",
+        "Roles": Array [
+          Object {
+            "Ref": "FileApiCreateCategoryFunctionServiceRole89766587",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "FileApicreatefilepolicyC0428955": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "dynamodb:GetItem",
+                "dynamodb:Query",
+                "dynamodb:BatchWriteItem",
+              ],
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "FileApiFileTable7C90566A",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      Object {
+                        "Fn::GetAtt": Array [
+                          "FileApiFileTable7C90566A",
+                          "Arn",
+                        ],
+                      },
+                      "/index/get-file-by-checksum-and-version",
+                    ],
+                  ],
+                },
+                Object {
+                  "Fn::GetAtt": Array [
+                    "FileApiCategoryTable812C14A4",
+                    "Arn",
+                  ],
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "FileApicreatefilepolicyC0428955",
+        "Roles": Array [
+          Object {
+            "Ref": "FileApiCreateFilesFunctionServiceRole06894C31",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "FileApideletecategorypolicyEE8B5523": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "dynamodb:DeleteItem",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::GetAtt": Array [
+                  "FileApiCategoryTable812C14A4",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "FileApideletecategorypolicyEE8B5523",
+        "Roles": Array [
+          Object {
+            "Ref": "FileApiDeleteCategoryFunctionServiceRole8A63A4E4",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "FileApideletefilepolicy4C5F8225": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "dynamodb:BatchWriteItem",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::GetAtt": Array [
+                  "FileApiFileTable7C90566A",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "FileApideletefilepolicy4C5F8225",
+        "Roles": Array [
+          Object {
+            "Ref": "FileApiDeleteFilesFunctionServiceRoleF38F01D1",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "FileApigetcategorypolicy02D8DE4B": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "dynamodb:GetItem",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::GetAtt": Array [
+                  "FileApiCategoryTable812C14A4",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "FileApigetcategorypolicy02D8DE4B",
+        "Roles": Array [
+          Object {
+            "Ref": "FileApiGetCategoryFunctionServiceRoleDBE32B06",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "FileApigetfilespolicy11E55CB9": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "dynamodb:Query",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::GetAtt": Array [
+                  "FileApiFileTable7C90566A",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "FileApigetfilespolicy11E55CB9",
+        "Roles": Array [
+          Object {
+            "Ref": "FileApiGetFilesFunctionServiceRoleBDE766EC",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "FileApilistcategoriespolicy47E12ECC": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "dynamodb:Query",
+                "dynamodb:Scan",
+                "dynamodb:GetItem",
+              ],
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "FileApiCategoryTable812C14A4",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      Object {
+                        "Fn::GetAtt": Array [
+                          "FileApiCategoryTable812C14A4",
+                          "Arn",
+                        ],
+                      },
+                      "/index/query-by-parent-id",
+                    ],
+                  ],
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "FileApilistcategoriespolicy47E12ECC",
+        "Roles": Array [
+          Object {
+            "Ref": "FileApiListCategoriesFunctionServiceRole81F62031",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "FileApilistfilesbycategorypolicyC48248FA": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "dynamodb:Query",
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "FileApiFileTable7C90566A",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      Object {
+                        "Fn::GetAtt": Array [
+                          "FileApiFileTable7C90566A",
+                          "Arn",
+                        ],
+                      },
+                      "/index/query-by-category-id-and-locale",
+                    ],
+                  ],
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "FileApilistfilesbycategorypolicyC48248FA",
+        "Roles": Array [
+          Object {
+            "Ref": "FileApiListFilesByCategoryFunctionServiceRoleB1A15BE9",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "FileApilistfilespolicy909BC17D": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "dynamodb:Scan",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::GetAtt": Array [
+                  "FileApiFileTable7C90566A",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "FileApilistfilespolicy909BC17D",
+        "Roles": Array [
+          Object {
+            "Ref": "FileApiListFilesFunctionServiceRole3F79C4A6",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "FileApiupdatecategorypolicy50FF0C98": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "dynamodb:GetItem",
+                "dynamodb:UpdateItem",
+              ],
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::GetAtt": Array [
+                  "FileApiCategoryTable812C14A4",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "FileApiupdatecategorypolicy50FF0C98",
+        "Roles": Array [
+          Object {
+            "Ref": "FileApiUpdateCategoryFunctionServiceRole226B9A11",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "FileApiupdatefilepolicy0E404FAF": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "dynamodb:BatchWriteItem",
+                "dynamodb:BatchGetItem",
+              ],
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::GetAtt": Array [
+                  "FileApiFileTable7C90566A",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "FileApiupdatefilepolicy0E404FAF",
+        "Roles": Array [
+          Object {
+            "Ref": "FileApiUpdateFilesFunctionServiceRole9074BA78",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+  },
+}
+`;

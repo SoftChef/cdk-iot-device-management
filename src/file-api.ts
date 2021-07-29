@@ -49,9 +49,9 @@ export interface FileApiProps {
 
 export class FileApi extends cdk.Construct {
   /**
-   * The File API Gateway's ID
+   * The File API Gateway
    */
-  public readonly restApiId: string;
+  private readonly _restApi: RestApi;
   /**
    * The category table
    */
@@ -118,7 +118,7 @@ export class FileApi extends cdk.Construct {
       writeCapacity: props?.fileTableConfig?.indexGetFileByChecksumAndVersion.writeCapacity ?? 1,
     });
 
-    const restApi = new RestApi(this, 'FileRestApi', {
+    this._restApi = new RestApi(this, 'FileRestApi', {
       enableCors: true,
       authorizationType: props?.authorizationType ?? apigateway.AuthorizationType.NONE,
       authorizer: props?.authorizer ?? undefined,
@@ -180,7 +180,10 @@ export class FileApi extends cdk.Construct {
         },
       ],
     });
-    this.restApiId = restApi.restApiId;
+  }
+
+  get restApiId(): string {
+    return this._restApi.restApiId;
   }
 
   private createCreateCategoryFunction(): lambda.NodejsFunction {

@@ -22,13 +22,13 @@ export interface ThingGroupApiProps {
 
 export class ThingGroupApi extends cdk.Construct {
   /**
-   * The ThingGroup API Gateway's ID
+   * The Thing Group API Gateway
    */
-  public readonly restApiId: string;
+  private readonly _restApi: RestApi;
 
   constructor(scope: cdk.Construct, id: string, props?: ThingGroupApiProps) {
     super(scope, id);
-    const restApi = new RestApi(this, 'ThingGroupRestApi', {
+    this._restApi = new RestApi(this, 'ThingGroupRestApi', {
       enableCors: true,
       authorizationType: props?.authorizationType ?? apigateway.AuthorizationType.NONE,
       authorizer: props?.authorizer ?? undefined,
@@ -85,7 +85,10 @@ export class ThingGroupApi extends cdk.Construct {
         },
       ],
     });
-    this.restApiId = restApi.restApiId;
+  }
+
+  get restApiId(): string {
+    return this._restApi.restApiId;
   }
 
   private createCreateThingGroupFunction(): lambda.NodejsFunction {
