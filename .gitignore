@@ -18,11 +18,9 @@
 /lib
 /test-reports/
 build/Release
-cdk.out
 coverage
 jspm_packages/
 junit.xml
-lambda-assets/**/dist
 lerna-debug.log*
 lib-cov
 logs
@@ -30,8 +28,6 @@ node_modules/
 npm-debug.log*
 pids
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
-src/**/dist
-test/**/dist
 tsconfig.json
 yarn-debug.log*
 yarn-error.log*
