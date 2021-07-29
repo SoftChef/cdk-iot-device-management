@@ -54,8 +54,6 @@ The file table.
 
 - *Type:* `string`
 
-The File API Gateway's ID.
-
 ---
 
 
@@ -134,8 +132,6 @@ new ThingApi(scope: Construct, id: string, props?: ThingApiProps)
 
 - *Type:* `string`
 
-The Thing API Gateway's ID.
-
 ---
 
 
@@ -175,8 +171,6 @@ new ThingGroupApi(scope: Construct, id: string, props?: ThingGroupApiProps)
 
 - *Type:* `string`
 
-The ThingGroup API Gateway's ID.
-
 ---
 
 
@@ -215,8 +209,6 @@ new ThingTypeApi(scope: Construct, id: string, props?: ThingTypeApiProps)
 ##### `restApiId`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingTypeApi.property.restApiId"></a>
 
 - *Type:* `string`
-
-The ThingType API Gateway's ID.
 
 ---
 
