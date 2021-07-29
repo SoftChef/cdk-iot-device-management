@@ -1,9 +1,9 @@
 // import { SynthUtils } from '@aws-cdk/assert';
 // import '@aws-cdk/assert/jest';
 // import * as lambda from '@aws-cdk/aws-lambda';
-// import * as cdk from '@aws-cdk/core';
-// import { ScheduleFunction } from '@softchef/cdk-schedule-function';
-// import { JobApi } from '../src/index';
+import * as cdk from '@aws-cdk/core';
+import { ScheduleFunction } from '@softchef/cdk-schedule-function';
+import { JobApi } from '../src/index';
 
 // const fnGetAttArn = (arn: string): { [key: string]: string[] } => {
 //   return {
@@ -65,14 +65,14 @@
 // };
 
 test('minimal usage', () => {
-  // const app = new cdk.App();
-  // const stack = new cdk.Stack(app, 'demo-stack');
-  // const scheduleFunction = new ScheduleFunction(stack, 'ScheduleFunction', {
-  //   recentMinutes: cdk.Duration.minutes(3),
-  // });
-  // new JobApi(stack, 'JobApi', {
-  //   scheduleFunction: scheduleFunction,
-  // });
+  const app = new cdk.App();
+  const stack = new cdk.Stack(app, 'demo-stack');
+  const scheduleFunction = new ScheduleFunction(stack, 'ScheduleFunction', {
+    recentMinutes: cdk.Duration.minutes(3),
+  });
+  new JobApi(stack, 'JobApi', {
+    scheduleFunction: scheduleFunction,
+  });
   // expect(SynthUtils.synthesize(stack).template).toMatchSnapshot();
   // expect(stack).toCountResources('AWS::ApiGateway::RestApi', 1);
   // expect(stack).toCountResources('AWS::ApiGateway::Resource', 16);
