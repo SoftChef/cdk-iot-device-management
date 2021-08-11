@@ -793,7 +793,7 @@
     "@aws-sdk/util-utf8-node" "3.23.0"
     tslib "^2.3.0"
 
-"@aws-sdk/client-dynamodb@^3.24.0":
+"@aws-sdk/client-dynamodb@^3.24.0", "@aws-sdk/client-dynamodb@^3.25.0":
   version "3.25.0"
   resolved "https://registry.yarnpkg.com/@aws-sdk/client-dynamodb/-/client-dynamodb-3.25.0.tgz#77f52954afcb6594271583f483cc32e08c81739a"
   integrity sha512-UvlLFKN9jQSsQW2zbi8nkZV8wVe+dPP6bwAwyoVGOcbzcS9IWsZZT/Esquhr8S8EAWocJqPZOk6+lV9iTBoLhg==
@@ -870,7 +870,7 @@
     "@aws-sdk/util-utf8-node" "3.23.0"
     tslib "^2.3.0"
 
-"@aws-sdk/client-iot-data-plane@^3.24.0":
+"@aws-sdk/client-iot-data-plane@^3.25.0":
   version "3.25.0"
   resolved "https://registry.yarnpkg.com/@aws-sdk/client-iot-data-plane/-/client-iot-data-plane-3.25.0.tgz#538192af8097b3ba4d1006543375539176ff9e2c"
   integrity sha512-Ri3H9yWJTBnCxoDz74xjNq6bROW1cz0htnYUNYOuq4bR0GO77WPAUujYKjZADE1OE7Tvkve92U8wNsAPj6Rv+Q==
@@ -907,7 +907,7 @@
     "@aws-sdk/util-utf8-node" "3.23.0"
     tslib "^2.3.0"
 
-"@aws-sdk/client-iot@^3.24.0":
+"@aws-sdk/client-iot@^3.25.0":
   version "3.25.0"
   resolved "https://registry.yarnpkg.com/@aws-sdk/client-iot/-/client-iot-3.25.0.tgz#7aa8f2783b2f880e4d48c7e5b9c62009cb9eb940"
   integrity sha512-GQ+2M8nHqQS3HlUo+pqrWg3gX1niHN5cQ2YUnjX4X95bWJRViN7FWh/KurDS3c+FG2ZU+Mnr6migKqMqVRXVFQ==
@@ -1190,7 +1190,7 @@
   dependencies:
     tslib "^2.3.0"
 
-"@aws-sdk/lib-dynamodb@^3.24.0":
+"@aws-sdk/lib-dynamodb@^3.24.0", "@aws-sdk/lib-dynamodb@^3.25.0":
   version "3.25.0"
   resolved "https://registry.yarnpkg.com/@aws-sdk/lib-dynamodb/-/lib-dynamodb-3.25.0.tgz#fde71ba97108c82d7820ba88b702e54551b47f75"
   integrity sha512-zVmapXEKPCkkLKs8rQrV7qZNE4hLkDuzyO2Ay2whxDcRBr9PxZOEZM5kSGxoN/akuq0GnB4GJFuWyuMMoeBohA==
@@ -1437,7 +1437,7 @@
     "@aws-sdk/shared-ini-file-loader" "3.23.0"
     tslib "^2.3.0"
 
-"@aws-sdk/util-dynamodb@^3.24.0":
+"@aws-sdk/util-dynamodb@^3.24.0", "@aws-sdk/util-dynamodb@^3.25.0":
   version "3.25.0"
   resolved "https://registry.yarnpkg.com/@aws-sdk/util-dynamodb/-/util-dynamodb-3.25.0.tgz#1bfc3773fa3a1df5c6a7809b44ff5a5199a0d412"
   integrity sha512-V6HludGuCv40JO7uVAU2dUq5K31bUCLRfkZ8gjiQthUdp3mwMbS7Q83fncPN5lFJ7ZELW1K7C1/BH5+Oci3kJQ==
@@ -2277,7 +2277,7 @@
     semver "^7.3.5"
     sinon "^11.1.1"
 
-"@softchef/lambda-events@^1.0.13":
+"@softchef/lambda-events@^1.0.19":
   version "1.0.19"
   resolved "https://registry.yarnpkg.com/@softchef/lambda-events/-/lambda-events-1.0.19.tgz#d6312c0aa2316b9d237fb3da581aead7c255b373"
   integrity sha512-ylwHvOOzoavlmpd6gFWwAvCk7tTGMw2la2Nu1nY5NdQGwcF1w8XCI1EUNdDZ0uNAqOj9I92ZniQqc4mqNIdGjw==
@@ -2471,7 +2471,7 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@typescript-eslint/eslint-plugin@^4.29.0":
+"@typescript-eslint/eslint-plugin@^4.29.1":
   version "4.29.1"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-4.29.1.tgz#808d206e2278e809292b5de752a91105da85860b"
   integrity sha512-AHqIU+SqZZgBEiWOrtN94ldR3ZUABV5dUG94j8Nms9rQnHFc8fvDOue/58K4CFz6r8OtDDc35Pw9NQPWo0Ayrw==
@@ -2496,7 +2496,7 @@
     eslint-scope "^5.1.1"
     eslint-utils "^3.0.0"
 
-"@typescript-eslint/parser@^4.29.0":
+"@typescript-eslint/parser@^4.29.1":
   version "4.29.1"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-4.29.1.tgz#17dfbb45c9032ffa0fe15881d20fbc2a4bdeb02d"
   integrity sha512-3fL5iN20hzX3Q4OkG7QEPFjZV2qsVGiDhEwwh+EkmE/w7oteiOvUNzmpu5eSwGJX/anCryONltJ3WDmAzAoCMg==
@@ -3860,7 +3860,7 @@ es-to-primitive@^1.2.1:
     is-date-object "^1.0.1"
     is-symbol "^1.0.2"
 
-esbuild@^0.12.17:
+esbuild@^0.12.19:
   version "0.12.19"
   resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.12.19.tgz#ab849766705a5093df5acd8ec2f6ba2159a38a6c"
   integrity sha512-5NuT1G6THW7l3fsSCDkcPepn24R0XtyPjKoqKHD8LfhqMXzCdz0mrS9HgO6hIhzVT7zt0T+JGbzCqF5AH8hS9w==
@@ -3902,7 +3902,7 @@ escodegen@^2.0.0:
   optionalDependencies:
     source-map "~0.6.1"
 
-eslint-import-resolver-node@^0.3.4, eslint-import-resolver-node@^0.3.5:
+eslint-import-resolver-node@^0.3.5:
   version "0.3.5"
   resolved "https://registry.yarnpkg.com/eslint-import-resolver-node/-/eslint-import-resolver-node-0.3.5.tgz#939bbb0f74e179e757ca87f7a4a890dabed18ac4"
   integrity sha512-XMoPKjSpXbkeJ7ZZ9icLnJMTY5Mc1kZbCakHquaFsXPpyWOwK0TK6CODO+0ca54UoM9LKOxyUNnoVZRl8TeaAg==
@@ -3929,7 +3929,7 @@ eslint-module-utils@^2.6.2:
     debug "^3.2.7"
     pkg-dir "^2.0.0"
 
-eslint-plugin-import@^2.23.4:
+eslint-plugin-import@^2.24.0:
   version "2.24.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.24.0.tgz#697ffd263e24da5e84e03b282f5fb62251777177"
   integrity sha512-Kc6xqT9hiYi2cgybOc0I2vC9OgAYga5o/rAFinam/yF/t5uBqxQbauNPMC6fgb640T/89P0gFoO27FOilJ/Cqg==
@@ -5602,7 +5602,7 @@ jsii-diff@^1.32.0:
     typescript "~3.9.9"
     yargs "^16.2.0"
 
-jsii-docgen@^3.2.18:
+jsii-docgen@^3.2.23:
   version "3.2.23"
   resolved "https://registry.yarnpkg.com/jsii-docgen/-/jsii-docgen-3.2.23.tgz#fa989ac8c469ff2316d0ee329c1b848f41eec7f1"
   integrity sha512-IHQf4nQUm5oqOoWMMsdliUBiOANFUNXg8B2lq26Q9wKDr4JIzHATksA/7JJmACz8t1OwUsLngI7XZML4QjG6Fw==
