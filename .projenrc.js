@@ -30,12 +30,16 @@ const project = new AwsCdkConstructLibrary({
     '@softchef/cdk-restapi',
     '@softchef/cdk-schedule-function',
     '@softchef/lambda-events',
-    '@types/node@15.12.2',
+    '@types/node@^12.12.6',
     '@types/semver',
     '@types/uuid',
     'joi',
     'semver',
     'uuid',
+  ],
+  devDeps: [
+    'aws-sdk-client-mock',
+    'esbuild',
   ],
   depsUpgrade: DependenciesUpgradeMechanism.githubWorkflow({
     ignoreProjen: false,
@@ -51,10 +55,6 @@ const project = new AwsCdkConstructLibrary({
     secret: 'GITHUB_TOKEN',
     allowedUsernames: ['MinCheTsai'],
   },
-  devDeps: [
-    'aws-sdk-client-mock',
-    'esbuild',
-  ],
   keywords: [
     'CDK',
     'IoT',
