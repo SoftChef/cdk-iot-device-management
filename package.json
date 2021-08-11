@@ -79,7 +79,7 @@
     "@aws-sdk/client-iot-data-plane": "^3.24.0",
     "@aws-sdk/lib-dynamodb": "^3.24.0",
     "@aws-sdk/util-dynamodb": "^3.24.0",
-    "@softchef/cdk-restapi": "^0.1.21",
+    "@softchef/cdk-restapi": "^0.1.25",
     "@softchef/cdk-schedule-function": "^0.0.36",
     "@softchef/lambda-events": "^1.0.13",
     "@types/node": "^12.12.6",
