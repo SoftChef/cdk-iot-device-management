@@ -2235,7 +2235,7 @@
   resolved "https://registry.yarnpkg.com/@sinonjs/text-encoding/-/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
   integrity sha512-+iTbntw2IZPb/anVDbypzfQa+ay64MW0Zo8aJ8gZPWMMK6/OubMVb6lUPMagqjOPnmtauXnFCACVl3O7ogjeqQ==
 
-"@softchef/cdk-restapi@^0.1.34":
+"@softchef/cdk-restapi@^0.1.36":
   version "0.1.36"
   resolved "https://registry.yarnpkg.com/@softchef/cdk-restapi/-/cdk-restapi-0.1.36.tgz#c2f702fa3f9a28ac9d8af7bf5a67477370850b41"
   integrity sha512-+b+BmCaOG/ZRa2LVrKK/29mQBxxc9yLHpVQQYz6Rd/XK+j027/yMR2MKx06YQ8UkK+2qSq2v59W0w/5WpWNTPw==
@@ -2246,10 +2246,10 @@
     "@aws-cdk/aws-lambda-nodejs" "^1.95.2"
     "@aws-cdk/core" "^1.95.2"
 
-"@softchef/cdk-schedule-function@^0.0.44":
-  version "0.0.44"
-  resolved "https://registry.yarnpkg.com/@softchef/cdk-schedule-function/-/cdk-schedule-function-0.0.44.tgz#537494d6295ec9f3a17c1b0294af7984a32ff2e0"
-  integrity sha512-xxfczCPabGvASDI3tuWRxg+di5phFYJTInWvU+6Co3ZOv/RyG1Gqc5E31xl2ZnJgJLL/k3NVyyNelUihlkz9XA==
+"@softchef/cdk-schedule-function@^0.0.46":
+  version "0.0.46"
+  resolved "https://registry.yarnpkg.com/@softchef/cdk-schedule-function/-/cdk-schedule-function-0.0.46.tgz#075002918e1dcb9363c47c34ae61bd6c21c6c608"
+  integrity sha512-MQIucny89c0ttVJ3Dbx9gcwmX3/8C6jH+mI5q0vczwMnp5xr2+MPn0LoDNsGCcFFUkA67DexPduVLFCK4SLdnQ==
   dependencies:
     "@aws-cdk/aws-apigateway" "^1.95.2"
     "@aws-cdk/aws-dynamodb" "^1.95.2"
@@ -2264,7 +2264,7 @@
     "@aws-sdk/client-lambda" "^3.27.0"
     "@aws-sdk/lib-dynamodb" "^3.27.0"
     "@aws-sdk/util-dynamodb" "^3.27.0"
-    "@softchef/cdk-restapi" "^0.1.34"
+    "@softchef/cdk-restapi" "^0.1.36"
     "@softchef/lambda-events" "^0.0.8"
     "@types/node" "15.12.2"
     "@types/uuid" "^8.3.1"
@@ -2286,7 +2286,7 @@
     semver "^7.3.5"
     sinon "^11.1.1"
 
-"@softchef/lambda-events@^1.0.28":
+"@softchef/lambda-events@^1.0.29":
   version "1.0.29"
   resolved "https://registry.yarnpkg.com/@softchef/lambda-events/-/lambda-events-1.0.29.tgz#f74acb015e5dc2cf510355bea349da080ebe2c0b"
   integrity sha512-DfeefDD+nqxefdbtyk5Um1vkkUVurFoPcIEQyjGSz6x6F7MbvXl6RCVClbYPHaEsBZjDFDIv42Se3a0WkbIDow==
@@ -3869,7 +3869,7 @@ es-to-primitive@^1.2.1:
     is-date-object "^1.0.1"
     is-symbol "^1.0.2"
 
-esbuild@^0.12.21:
+esbuild@^0.12.22:
   version "0.12.22"
   resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.12.22.tgz#6031a1257b8d0307d306bed673b79c3668607f51"
   integrity sha512-yWCr9RoFehpqoe/+MwZXJpYOEIt7KOEvNnjIeMZpMSyQt+KCBASM3y7yViiN5dJRphf1wGdUz1+M4rTtWd/ulA==
@@ -5614,7 +5614,7 @@ jsii-diff@^1.33.0:
     typescript "~3.9.10"
     yargs "^16.2.0"
 
-jsii-docgen@^3.2.30:
+jsii-docgen@^3.2.32:
   version "3.2.32"
   resolved "https://registry.yarnpkg.com/jsii-docgen/-/jsii-docgen-3.2.32.tgz#f1265e038e3b2f8c10bd6340eadd957cb5711419"
   integrity sha512-/odmbHRFn8ARniY82O2lVSKIRPgo5ObSATR8kzmr7HCnN8qxp3295GXlQbo44Xeyp4hu6gsW+C5gJGgmR6s5bQ==
