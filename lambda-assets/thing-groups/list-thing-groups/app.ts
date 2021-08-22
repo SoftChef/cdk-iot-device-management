@@ -16,6 +16,9 @@ export async function handler(event: { [key: string]: any }) {
     if (request.has('nextToken')) {
       parameters.nextToken = request.get('nextToken');
     };
+    if (request.has('namePrefixFilter')) {
+      parameters.namePrefixFilter = request.get('namePrefixFilter');
+    };
     const iotClient = new IoTClient({});
     const listThingGroups = await iotClient.send(
       new ListThingGroupsCommand(parameters),
