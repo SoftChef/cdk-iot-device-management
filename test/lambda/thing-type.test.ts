@@ -31,6 +31,7 @@ const expected = {
   thingType: expectedThingType,
   newThingType: {
     thingTypeName: 'NewThingType',
+    searchableAttributes: ['serialNumber', 'description'],
   },
   listThingType: {
     ThingType: [
@@ -50,10 +51,14 @@ test('Create thing type success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(CreateThingTypeCommand, {
     thingTypeName: expected.newThingType.thingTypeName,
+    thingTypeProperties: {
+      searchableAttributes: expected.newThingType.searchableAttributes,
+    },
   });
   const response = await createThingType.handler({
     body: {
       thingTypeName: expected.newThingType.thingTypeName,
+      searchableAttributes: expected.newThingType.searchableAttributes,
     },
   });
   const body = JSON.parse(response.body);
@@ -77,6 +82,12 @@ test('Create thing type with invalid inputs expect failure', async () => {
       label: 'thingTypeName',
       message: expect.any(String),
       value: '',
+    },
+    {
+      key: 'searchableAttributes',
+      label: 'searchableAttributes',
+      message: expect.any(String),
+      value: null,
     },
   ]);
   iotClientMock.restore();
