@@ -78,6 +78,11 @@ export class ThingApi extends cdk.Construct {
           httpMethod: HttpMethod.DELETE,
           lambdaFunction: this.createDeleteThingShadowFunction(),
         },
+        {
+          path: '/things/query',
+          httpMethod: HttpMethod.GET,
+          lambdaFunction: this.createQueryThingFunction(),
+        },
       ],
     });
   }
@@ -255,5 +260,24 @@ export class ThingApi extends cdk.Construct {
       }),
     );
     return deleteThingShadowFunction;
+  }
+
+  private createQueryThingFunction(): lambda.NodejsFunction {
+    const queryThingFunction = new lambda.NodejsFunction(this, 'QueryThingFunction', {
+      entry: `${LAMBDA_ASSETS_PATH}/query-things/app.ts`,
+    });
+    queryThingFunction.role?.attachInlinePolicy(
+      new iam.Policy(this, 'iot-query-things-policy', {
+        statements: [
+          new iam.PolicyStatement({
+            actions: [
+              'iot:SearchIndex',
+            ],
+            resources: ['*'],
+          }),
+        ],
+      }),
+    );
+    return queryThingFunction;
   }
 }

@@ -15,6 +15,8 @@ export async function handler(event: { [key: string]: any }) {
     const validated = request.validate(joi => {
       return {
         thingName: joi.string().required(),
+        thingTypeName: joi.string().allow(null),
+        attributePayload: joi.object().allow(null),
       };
     });
     if (validated.error) {
@@ -22,7 +24,14 @@ export async function handler(event: { [key: string]: any }) {
     }
     const parameters: CreateThingCommandInput = {
       thingName: request.input('thingName'),
+      attributePayload: {},
     };
+    if (request.has('thingTypeName')) {
+      parameters.thingTypeName = request.input('thingTypeName');
+    }
+    if (parameters.attributePayload && request.has('attributePayload')) {
+      parameters.attributePayload.attributes = request.input('attributePayload');
+    }
     const iotClient = new IoTClient({});
     await iotClient.send(
       new CreateThingCommand(parameters),
