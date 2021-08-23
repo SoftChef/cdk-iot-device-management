@@ -17,7 +17,7 @@ const expectedRoles: {
   listThingsFunctionRole: 'ThingApiListThingsFunctionServiceRoleF1D8A60D',
   updateThingFunctionRole: 'ThingApiUpdateThingFunctionServiceRole428DBB63',
   updateThingShadowFunctionRole: 'ThingApiUpdateThingShadowFunctionServiceRoleC4BCE4CB',
-  queryThingFunctionRole: 'ThingApiQueryThingFunctionServiceRole279A6962',
+  searchThingsFunctionRole: 'ThingApiSearchThingsFunctionServiceRole04F91AAB',
 };
 
 const expectedResources: {
@@ -290,11 +290,11 @@ test('minimal usage', () => {
   // QueryThing API
   expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
-    Role: fnGetAttArn(expectedRoles.queryThingFunctionRole),
+    Role: fnGetAttArn(expectedRoles.searchThingsFunctionRole),
   });
   expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
     Roles: [
-      ref(expectedRoles.queryThingFunctionRole),
+      ref(expectedRoles.searchThingsFunctionRole),
     ],
     PolicyDocument: {
       Statement: [
