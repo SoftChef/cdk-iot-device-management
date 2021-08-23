@@ -2235,10 +2235,10 @@
   resolved "https://registry.yarnpkg.com/@sinonjs/text-encoding/-/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
   integrity sha512-+iTbntw2IZPb/anVDbypzfQa+ay64MW0Zo8aJ8gZPWMMK6/OubMVb6lUPMagqjOPnmtauXnFCACVl3O7ogjeqQ==
 
-"@softchef/cdk-restapi@^0.1.36":
-  version "0.1.36"
-  resolved "https://registry.yarnpkg.com/@softchef/cdk-restapi/-/cdk-restapi-0.1.36.tgz#c2f702fa3f9a28ac9d8af7bf5a67477370850b41"
-  integrity sha512-+b+BmCaOG/ZRa2LVrKK/29mQBxxc9yLHpVQQYz6Rd/XK+j027/yMR2MKx06YQ8UkK+2qSq2v59W0w/5WpWNTPw==
+"@softchef/cdk-restapi@^0.1.37":
+  version "0.1.37"
+  resolved "https://registry.yarnpkg.com/@softchef/cdk-restapi/-/cdk-restapi-0.1.37.tgz#f4a3c4fd27d188e682890bae24424111b9b5ab71"
+  integrity sha512-Ij/RFSIpoYUWIc/fYujdZGYpOsF9Jnn4Id/hCMEBLafHUleh9IgNdGxoUUleXzY3hyTUKEVCJexNYCg48d7wSQ==
   dependencies:
     "@aws-cdk/aws-apigateway" "^1.95.2"
     "@aws-cdk/aws-cognito" "^1.95.2"
@@ -2246,10 +2246,10 @@
     "@aws-cdk/aws-lambda-nodejs" "^1.95.2"
     "@aws-cdk/core" "^1.95.2"
 
-"@softchef/cdk-schedule-function@^0.0.46":
-  version "0.0.46"
-  resolved "https://registry.yarnpkg.com/@softchef/cdk-schedule-function/-/cdk-schedule-function-0.0.46.tgz#075002918e1dcb9363c47c34ae61bd6c21c6c608"
-  integrity sha512-MQIucny89c0ttVJ3Dbx9gcwmX3/8C6jH+mI5q0vczwMnp5xr2+MPn0LoDNsGCcFFUkA67DexPduVLFCK4SLdnQ==
+"@softchef/cdk-schedule-function@^0.0.47":
+  version "0.0.47"
+  resolved "https://registry.yarnpkg.com/@softchef/cdk-schedule-function/-/cdk-schedule-function-0.0.47.tgz#0f846d01c7bc5fccf75cfc8453e4aeca23afe45f"
+  integrity sha512-Iy1Xocsdng50DmP9/risYcPblqqT7gHZmWNrM42oxr4SdVmgjFT0nGUskczQwoVg/Brxp/2zDoQDgassLCg8lQ==
   dependencies:
     "@aws-cdk/aws-apigateway" "^1.95.2"
     "@aws-cdk/aws-dynamodb" "^1.95.2"
@@ -2264,7 +2264,7 @@
     "@aws-sdk/client-lambda" "^3.27.0"
     "@aws-sdk/lib-dynamodb" "^3.27.0"
     "@aws-sdk/util-dynamodb" "^3.27.0"
-    "@softchef/cdk-restapi" "^0.1.36"
+    "@softchef/cdk-restapi" "^0.1.37"
     "@softchef/lambda-events" "^0.0.8"
     "@types/node" "15.12.2"
     "@types/uuid" "^8.3.1"
