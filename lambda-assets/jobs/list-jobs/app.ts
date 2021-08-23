@@ -16,6 +16,12 @@ export async function handler(event: { [key: string]: any }) {
     if (request.has('nextToken')) {
       parameters.nextToken = request.get('nextToken');
     }
+    if (request.has('status')) {
+      parameters.status = request.get('status');
+    }
+    if (request.has('targetSelection')) {
+      parameters.targetSelection = request.get('targetSelection');
+    }
     const iotClient = new IoTClient({});
     const { jobs, nextToken } = await iotClient.send(
       new ListJobsCommand(parameters),

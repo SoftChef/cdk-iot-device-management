@@ -130,6 +130,8 @@ const expected = {
   },
   job: expectedJob,
   listJobs: {
+    targetSelection: 'CONTINUOUS',
+    status: 'CANCELED',
     jobs: [
       expectedJob,
     ],
@@ -483,6 +485,8 @@ test('List jobs success', async () => {
 test('List jobs with nextToken success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(ListJobsCommand, {
+    status: expected.listJobs.status,
+    targetSelection: expected.listJobs.targetSelection,
     nextToken: expected.listJobs.nextToken,
   }).resolves({
     jobs: expected.listJobs.jobs,
@@ -490,6 +494,8 @@ test('List jobs with nextToken success', async () => {
   });
   const response = await listJobs.handler({
     queryStringParameters: {
+      status: expected.listJobs.status,
+      targetSelection: expected.listJobs.targetSelection,
       nextToken: expected.listJobs.nextToken,
     },
   });
