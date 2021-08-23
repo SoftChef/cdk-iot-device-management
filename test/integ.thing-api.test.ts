@@ -17,6 +17,7 @@ const expectedRoles: {
   listThingsFunctionRole: 'ThingApiListThingsFunctionServiceRoleF1D8A60D',
   updateThingFunctionRole: 'ThingApiUpdateThingFunctionServiceRole428DBB63',
   updateThingShadowFunctionRole: 'ThingApiUpdateThingShadowFunctionServiceRoleC4BCE4CB',
+  searchThingsFunctionRole: 'ThingApiSearchThingsFunctionServiceRole04F91AAB',
 };
 
 const expectedResources: {
@@ -39,11 +40,11 @@ test('minimal usage', () => {
   new ThingApi(stack, 'ThingApi');
   expect(SynthUtils.synthesize(stack).template).toMatchSnapshot();
   expect(stack).toCountResources('AWS::ApiGateway::RestApi', 1);
-  expect(stack).toCountResources('AWS::ApiGateway::Resource', 4);
-  expect(stack).toCountResources('AWS::ApiGateway::Method', 14);
-  expect(stack).toCountResources('AWS::Lambda::Function', 9);
-  expect(stack).toCountResources('AWS::IAM::Role', 10);
-  expect(stack).toCountResources('AWS::IAM::Policy', 9);
+  expect(stack).toCountResources('AWS::ApiGateway::Resource', 5);
+  expect(stack).toCountResources('AWS::ApiGateway::Method', 16);
+  expect(stack).toCountResources('AWS::Lambda::Function', 10);
+  expect(stack).toCountResources('AWS::IAM::Role', 11);
+  expect(stack).toCountResources('AWS::IAM::Policy', 10);
   expect(stack).toHaveResourceLike('AWS::ApiGateway::RestApi', {
     Name: 'ThingRestApi',
   });
@@ -285,5 +286,29 @@ test('minimal usage', () => {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.thingsThingNameShadowsShadowNameResourceId),
     HttpMethod: 'PUT',
+  });
+  // QueryThing API
+  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+    Runtime: expected.lambdaFunctionRuntime,
+    Role: fnGetAttArn(expectedRoles.searchThingsFunctionRole),
+  });
+  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+    Roles: [
+      ref(expectedRoles.searchThingsFunctionRole),
+    ],
+    PolicyDocument: {
+      Statement: [
+        {
+          Action: 'iot:SearchIndex',
+          Effect: 'Allow',
+          Resource: '*',
+        },
+      ],
+    },
+  });
+  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+    RestApiId: ref(expected.restApiId),
+    ResourceId: ref(expectedResources.thingsResourceId),
+    HttpMethod: 'GET',
   });
 });

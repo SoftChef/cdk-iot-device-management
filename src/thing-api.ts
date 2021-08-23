@@ -78,6 +78,11 @@ export class ThingApi extends cdk.Construct {
           httpMethod: HttpMethod.DELETE,
           lambdaFunction: this.createDeleteThingShadowFunction(),
         },
+        {
+          path: '/things/search',
+          httpMethod: HttpMethod.GET,
+          lambdaFunction: this.createSearchThingsFunction(),
+        },
       ],
     });
   }
@@ -255,5 +260,24 @@ export class ThingApi extends cdk.Construct {
       }),
     );
     return deleteThingShadowFunction;
+  }
+
+  private createSearchThingsFunction(): lambda.NodejsFunction {
+    const searchThingsFunction = new lambda.NodejsFunction(this, 'SearchThingsFunction', {
+      entry: `${LAMBDA_ASSETS_PATH}/search-things/app.ts`,
+    });
+    searchThingsFunction.role?.attachInlinePolicy(
+      new iam.Policy(this, 'iot-search-things-policy', {
+        statements: [
+          new iam.PolicyStatement({
+            actions: [
+              'iot:SearchIndex',
+            ],
+            resources: ['*'],
+          }),
+        ],
+      }),
+    );
+    return searchThingsFunction;
   }
 }
