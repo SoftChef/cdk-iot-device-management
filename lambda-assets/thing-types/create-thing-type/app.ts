@@ -23,11 +23,9 @@ export async function handler(event: { [key: string]: any }) {
   try {
     const parameters: CreateThingTypeCommandInput = {
       thingTypeName: request.input('thingTypeName'),
-      thingTypeProperties: {
-        searchableAttributes: [],
-      },
     };
-    if (parameters.thingTypeProperties && request.has('attributePayload')) {
+    if (request.has('attributePayload')) {
+      parameters.thingTypeProperties= {};
       parameters.thingTypeProperties.searchableAttributes = request.input('searchableAttributes');
     }
     const iotClient = new IoTClient({});
