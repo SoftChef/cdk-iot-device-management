@@ -14,7 +14,7 @@ export async function handler(event: { [key: string]: any }) {
   const validated = request.validate(joi => {
     return {
       thingTypeName: joi.string().required(),
-      searchableAttributes: joi.array().max(3).required(),
+      searchableAttributes: joi.array().items(joi.string()).max(3).required(),
     };
   });
   if (validated.error) {
