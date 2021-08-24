@@ -16,7 +16,7 @@ export async function handler(event: { [key: string]: any }) {
       return {
         thingGroupName: joi.string().required(),
         queryString: joi.string().required(),
-        attributePayload: joi.object().allow(null),
+        attributes: joi.object().allow(null),
       };
     });
     if (validated.error) {
@@ -27,9 +27,9 @@ export async function handler(event: { [key: string]: any }) {
       queryString: request.input('queryString'),
       thingGroupProperties: {},
     };
-    if (parameters.thingGroupProperties && request.has('attributePayload')) {
+    if (parameters.thingGroupProperties && request.has('attributes')) {
       parameters.thingGroupProperties.attributePayload = {};
-      parameters.thingGroupProperties.attributePayload.attributes = request.input('attributePayload');
+      parameters.thingGroupProperties.attributePayload.attributes = request.input('attributes');
     }
     const iotClient = new IoTClient({});
     await iotClient.send(
