@@ -27,9 +27,9 @@ export async function handler(event: { [key: string]: any }) {
       queryString: request.input('queryString'),
       thingGroupProperties: {},
     };
-    if (parameters.thingGroupProperties && request.has('attributes')) {
-      parameters.thingGroupProperties.attributePayload = {};
-      parameters.thingGroupProperties.attributePayload.attributes = request.input('attributes');
+    if (request.has('attributes')) {
+      parameters.thingGroupProperties!.attributePayload = {};
+      parameters.thingGroupProperties!.attributePayload.attributes = request.input('attributes');
     }
     const iotClient = new IoTClient({});
     await iotClient.send(
@@ -39,6 +39,7 @@ export async function handler(event: { [key: string]: any }) {
       created: true,
     });
   } catch (error) {
+    console.log(error);
     return response.error(error);
   }
 }
