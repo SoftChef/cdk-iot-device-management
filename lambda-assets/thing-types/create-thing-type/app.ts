@@ -24,7 +24,7 @@ export async function handler(event: { [key: string]: any }) {
     const parameters: CreateThingTypeCommandInput = {
       thingTypeName: request.input('thingTypeName'),
     };
-    if (request.has('attributePayload')) {
+    if (request.has('searchableAttributes')) {
       parameters.thingTypeProperties= {};
       parameters.thingTypeProperties.searchableAttributes = request.input('searchableAttributes');
     }
