@@ -16,7 +16,7 @@ export async function handler(event: { [key: string]: any }) {
       return {
         thingGroupName: joi.string().required(),
         queryString: joi.string().required(),
-        attributes: joi.object().pattern(joi.string(), [joi.string()]).allow(null),
+        attributes: joi.object().pattern(joi.string(), joi.string()).allow(null),
       };
     });
     if (validated.error) {
