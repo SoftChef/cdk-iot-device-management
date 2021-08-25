@@ -1,7 +1,7 @@
 import {
   IoTClient,
-  ListJobsCommand,
-  ListJobsCommandInput,
+  SearchIndexCommand,
+  SearchIndexCommandInput,
 } from '@aws-sdk/client-iot';
 import {
   Request,
@@ -12,22 +12,18 @@ export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
   const response = new Response();
   try {
-    const parameters: ListJobsCommandInput = {};
+    const parameters: SearchIndexCommandInput = {
+      queryString: request.get('queryString', ''),
+    };
     if (request.has('nextToken')) {
       parameters.nextToken = request.get('nextToken');
     }
-    if (request.has('status')) {
-      parameters.status = request.get('status');
-    }
-    if (request.has('targetSelection')) {
-      parameters.targetSelection = request.get('targetSelection');
-    }
     const iotClient = new IoTClient({});
-    const { jobs, nextToken } = await iotClient.send(
-      new ListJobsCommand(parameters),
+    const { things, nextToken } = await iotClient.send(
+      new SearchIndexCommand(parameters),
     );
     return response.json({
-      jobs: jobs,
+      things: things,
       nextToken: nextToken,
     });
   } catch (error) {
