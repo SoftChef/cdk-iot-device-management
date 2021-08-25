@@ -53,6 +53,11 @@ const expectedInvalidThing = {
 const expected = {
   thingResponse: expectedThingResponse,
   thingName: expectedThingResponse.thingName,
+  thingTypeName: 'thingTypeName',
+  attributePayload: {
+    serialNumber: 'ABCD1234',
+    description: 'description-A',
+  },
   shadowName: 'shadowName',
   payload: new Uint8Array(
     Buffer.from(
@@ -135,7 +140,9 @@ test('Create thing success', async () => {
   });
   const response = await createThing.handler({
     body: {
-      thingName: 'Test',
+      thingName: expected.thingName,
+      thingTypeName: expected.thingTypeName,
+      attributePayload: expected.attributePayload,
     },
   });
   const body = JSON.parse(response.body);
