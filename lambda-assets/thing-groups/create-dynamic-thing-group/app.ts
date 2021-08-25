@@ -16,6 +16,7 @@ export async function handler(event: { [key: string]: any }) {
       return {
         thingGroupName: joi.string().required(),
         queryString: joi.string().required(),
+        attributes: joi.object().pattern(joi.string(), joi.string()).allow(null),
       };
     });
     if (validated.error) {
@@ -24,7 +25,12 @@ export async function handler(event: { [key: string]: any }) {
     const parameters: CreateDynamicThingGroupCommandInput = {
       thingGroupName: request.input('thingGroupName'),
       queryString: request.input('queryString'),
+      thingGroupProperties: {},
     };
+    if (request.has('attributes')) {
+      parameters.thingGroupProperties!.attributePayload = {};
+      parameters.thingGroupProperties!.attributePayload.attributes = request.input('attributes');
+    }
     const iotClient = new IoTClient({});
     await iotClient.send(
       new CreateDynamicThingGroupCommand(parameters),

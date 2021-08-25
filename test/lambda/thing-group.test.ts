@@ -48,9 +48,16 @@ const expected = {
   thingName: 'TestThingName',
   queryString: 'TestQueryString',
   description: 'TestDescription',
+  attributePayload: {
+    description: 'TestDescription',
+  },
   createDynamicThingGroup: {
     thingGroupName: 'TestCreateDynamicThingGroupName',
     queryString: 'TestCreateQueryString',
+    attributes: {
+      name: 'name',
+      value: 'value',
+    },
   },
   updateDynamicThingGroup: {
     thingGroupName: 'TestUpdateDynamicThingGroupName',
@@ -70,6 +77,7 @@ const expected = {
     },
   },
   listThingGroups: {
+    namePrefixFilter: 'Test-name',
     thingGroups: [
       {
         groupArn: 'TestGroupArn',
@@ -98,10 +106,16 @@ test('Create thing group success', async () => {
   const iotClientMock = mockClient(IoTClient);
   iotClientMock.on(CreateThingGroupCommand, {
     thingGroupName: expected.thingGroupName,
+    thingGroupProperties: {
+      attributePayload: {
+        attributes: expected.attributePayload,
+      },
+    },
   }).resolves({});
   const response = await createThingGroup.handler({
     body: {
       thingGroupName: expected.thingGroupName,
+      attributePayload: expected.attributePayload,
     },
   });
   const body = JSON.parse(response.body);
@@ -165,7 +179,11 @@ test('List thing groups success', async () => {
     thingGroups: expected.listThingGroups.thingGroups,
     nextToken: expected.listThingGroups.nextToken,
   });
-  const response = await listThingGroups.handler({});
+  const response = await listThingGroups.handler({
+    queryStringParameters: {
+      namePrefixFilter: expected.listThingGroups.namePrefixFilter,
+    },
+  });
   expect(response.statusCode).toEqual(200);
   iotClientMock.restore();
 });
@@ -371,6 +389,30 @@ test('Create dynamic thing group success', async () => {
     body: {
       thingGroupName: expected.createDynamicThingGroup.thingGroupName,
       queryString: expected.createDynamicThingGroup.queryString,
+    },
+  });
+  const body = JSON.parse(response.body);
+  expect(response.statusCode).toEqual(200);
+  expect(body.created).toEqual(true);
+  iotClientMock.restore();
+});
+
+test('Create dynamic thing group with attributes success', async () => {
+  const iotClientMock = mockClient(IoTClient);
+  iotClientMock.on(CreateDynamicThingGroupCommand, {
+    thingGroupName: expected.createDynamicThingGroup.thingGroupName,
+    queryString: expected.createDynamicThingGroup.queryString,
+    thingGroupProperties: {
+      attributePayload: {
+        attributes: expected.createDynamicThingGroup.attributes,
+      },
+    },
+  }).resolves({});
+  const response = await createDynamicThingGroup.handler({
+    body: {
+      thingGroupName: expected.createDynamicThingGroup.thingGroupName,
+      queryString: expected.createDynamicThingGroup.queryString,
+      attributes: expected.createDynamicThingGroup.attributes,
     },
   });
   const body = JSON.parse(response.body);
