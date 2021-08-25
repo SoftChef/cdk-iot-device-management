@@ -12,8 +12,9 @@ export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
   const response = new Response();
   try {
-    const parameters: ListThingTypesCommandInput = {
-      nextToken: request.get('nextToken', undefined),
+    const parameters: ListThingTypesCommandInput = {};
+    if (request.has('nextToken')) {
+      parameters.nextToken = request.get('nextToken');
     };
     const iotClient = new IoTClient({});
     const { thingTypes, nextToken } = await iotClient.send(

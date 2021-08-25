@@ -14,6 +14,7 @@ export async function handler(event: { [key: string]: any }) {
   const validated = request.validate(joi => {
     return {
       thingTypeName: joi.string().required(),
+      searchableAttributes: joi.array().items(joi.string()).max(3).required(),
     };
   });
   if (validated.error) {
@@ -23,6 +24,10 @@ export async function handler(event: { [key: string]: any }) {
     const parameters: CreateThingTypeCommandInput = {
       thingTypeName: request.input('thingTypeName'),
     };
+    if (request.has('searchableAttributes')) {
+      parameters.thingTypeProperties= {};
+      parameters.thingTypeProperties.searchableAttributes = request.input('searchableAttributes');
+    }
     const iotClient = new IoTClient({});
     await iotClient.send(
       new CreateThingTypeCommand(parameters),
