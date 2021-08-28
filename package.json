@@ -80,7 +80,7 @@
     "@aws-sdk/lib-dynamodb": "^3.27.0",
     "@aws-sdk/util-dynamodb": "^3.27.0",
     "@softchef/cdk-restapi": "^0.1.41",
-    "@softchef/cdk-schedule-function": "^0.0.50",
+    "@softchef/cdk-schedule-function": "0.0.51",
     "@softchef/lambda-events": "^1.0.33",
     "@types/node": "^12.12.6",
     "@types/semver": "^7.3.8",

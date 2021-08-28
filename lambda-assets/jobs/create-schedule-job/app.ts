@@ -50,6 +50,6 @@ export async function handler(event: { [key: string]: any }) {
       job: job,
     });
   } catch (error) {
-    return response.failed(error);
+    return response.failed((error as Error));
   }
 }

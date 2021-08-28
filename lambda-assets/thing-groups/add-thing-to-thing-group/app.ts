@@ -7,6 +7,7 @@ import {
   Request,
   Response,
 } from '@softchef/lambda-events';
+import { AwsError } from '../../constracts';
 
 export async function handler(event: { [key: string]: any }) {
   const request = new Request(event);
@@ -24,7 +25,7 @@ export async function handler(event: { [key: string]: any }) {
       added: true,
     });
   } catch (error) {
-    if (error.Code === 'ResourceNotFoundException') {
+    if ((error as AwsError).Code === 'ResourceNotFoundException') {
       return response.error(error, 404);
     } else {
       return response.error(error);
