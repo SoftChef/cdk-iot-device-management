@@ -2301,9 +2301,9 @@
     sinon "^11.1.1"
 
 "@softchef/lambda-events@^1.0.33":
-  version "1.0.34"
-  resolved "https://registry.yarnpkg.com/@softchef/lambda-events/-/lambda-events-1.0.34.tgz#9f5a08fdb98ad1ec39bb5170537a84ea93d91ec8"
-  integrity sha512-UGB10loxM5R9bJF71gaCNQuRBYxku4jOkPZgmpJbq0IUAOBXr77yyFFteXJH6SWlr4FnXcoQqthFEed6KSv+7g==
+  version "1.0.35"
+  resolved "https://registry.yarnpkg.com/@softchef/lambda-events/-/lambda-events-1.0.35.tgz#a1cd87c31dd097e60c17fe906c0e693a12402d6c"
+  integrity sha512-7UmbLlsvS1txf0Ls2qyE5W7tfDXrjW2+l1RJEYwK1EmGJBgkG/SEgg4KHdyopt6BfiiW1lmCUqs1+cuDRcmqfA==
   dependencies:
     "@aws-sdk/client-cognito-identity-provider" "^3.28.0"
     "@types/node" "15.12.2"
