@@ -75,6 +75,9 @@ const project = new AwsCdkConstructLibrary({
         'DOM',
       ],
     },
+    include: [
+      'lambda-assets/**/*.ts',
+    ],
   },
 });
 
