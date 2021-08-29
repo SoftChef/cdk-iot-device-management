@@ -2249,10 +2249,10 @@
   resolved "https://registry.yarnpkg.com/@sinonjs/text-encoding/-/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
   integrity sha512-+iTbntw2IZPb/anVDbypzfQa+ay64MW0Zo8aJ8gZPWMMK6/OubMVb6lUPMagqjOPnmtauXnFCACVl3O7ogjeqQ==
 
-"@softchef/cdk-restapi@^0.1.42":
-  version "0.1.42"
-  resolved "https://registry.yarnpkg.com/@softchef/cdk-restapi/-/cdk-restapi-0.1.42.tgz#a0db9cda50cd1ffb1b7ea48f8ad3b3bc6ccbf76e"
-  integrity sha512-OE19lD9OrF6/LP/cAyQDpofR/ybW3DU9IjaZAQdcSaElX1XNgmL/zz3BcnoCkx3tX8umIjdy4wlXpv1ngdezbg==
+"@softchef/cdk-restapi@^0.1.43":
+  version "0.1.43"
+  resolved "https://registry.yarnpkg.com/@softchef/cdk-restapi/-/cdk-restapi-0.1.43.tgz#888fd30d6d80aa076c43829751f52e1423e93025"
+  integrity sha512-qPSUOB0JBOZG218lWHwtg0c1YFBAHoQ3NxnHNb34WC8t/gLa7hzeXc+QaLoJ51wS68x6Bq1VueMzHnhX4YSbaw==
   dependencies:
     "@aws-cdk/aws-apigateway" "^1.95.2"
     "@aws-cdk/aws-cognito" "^1.95.2"
@@ -2260,10 +2260,10 @@
     "@aws-cdk/aws-lambda-nodejs" "^1.95.2"
     "@aws-cdk/core" "^1.95.2"
 
-"@softchef/cdk-schedule-function@0.0.52":
-  version "0.0.52"
-  resolved "https://registry.yarnpkg.com/@softchef/cdk-schedule-function/-/cdk-schedule-function-0.0.52.tgz#bafb876acb89105694ba4bc5df90cb95359988d4"
-  integrity sha512-G3NSfERC8XfW1DkXs+hy7MDe5S5TaRWPdNLZt7t0Dkx7iHpcPx2JsR89Zwram7TPOSsxQ09A9oT2F9tGWjeB/Q==
+"@softchef/cdk-schedule-function@0.0.53":
+  version "0.0.53"
+  resolved "https://registry.yarnpkg.com/@softchef/cdk-schedule-function/-/cdk-schedule-function-0.0.53.tgz#37dc0e9d0173098224b40064880378301d3e3d6a"
+  integrity sha512-LtueTHmKSyKuDlVLHSlS9j71dsM7uTw0t36WbdlYScqhFhgDO0Rg+6Q4pL+diRo69gr5KVliBJap8mF5ZMoqjA==
   dependencies:
     "@aws-cdk/aws-apigateway" "^1.95.2"
     "@aws-cdk/aws-dynamodb" "^1.95.2"
@@ -2278,7 +2278,7 @@
     "@aws-sdk/client-lambda" "^3.28.0"
     "@aws-sdk/lib-dynamodb" "^3.28.0"
     "@aws-sdk/util-dynamodb" "^3.28.0"
-    "@softchef/cdk-restapi" "^0.1.42"
+    "@softchef/cdk-restapi" "^0.1.43"
     "@softchef/lambda-events" "^0.0.8"
     "@types/node" "15.12.2"
     "@types/uuid" "^8.3.1"
@@ -2300,10 +2300,10 @@
     semver "^7.3.5"
     sinon "^11.1.1"
 
-"@softchef/lambda-events@^1.0.35":
-  version "1.0.35"
-  resolved "https://registry.yarnpkg.com/@softchef/lambda-events/-/lambda-events-1.0.35.tgz#a1cd87c31dd097e60c17fe906c0e693a12402d6c"
-  integrity sha512-7UmbLlsvS1txf0Ls2qyE5W7tfDXrjW2+l1RJEYwK1EmGJBgkG/SEgg4KHdyopt6BfiiW1lmCUqs1+cuDRcmqfA==
+"@softchef/lambda-events@^1.0.36":
+  version "1.0.36"
+  resolved "https://registry.yarnpkg.com/@softchef/lambda-events/-/lambda-events-1.0.36.tgz#e65eb629a5881be8d795a1e6ff98f6674697ad18"
+  integrity sha512-Kmfn9P26fGS1NFITE2psCNhImdCugm62+Ymr7br8tR9dOhS4JYrh4yntBna6n4mwC//apZ8KFKac6K3PGlvSxg==
   dependencies:
     "@aws-sdk/client-cognito-identity-provider" "^3.28.0"
     "@types/node" "15.12.2"
@@ -2422,9 +2422,9 @@
   integrity sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==
 
 "@types/node@*":
-  version "16.7.4"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.7.4.tgz#68a9384694af63ceab8848e95d76d9a3519e84b6"
-  integrity sha512-25QXpDsTiDnl2rZGUenagVMwO46way8dOUdvoC3R3p+6TrbpxeJBo/v87BEG1IHI31Jhaa8lPeSHcqwxsVBeYQ==
+  version "16.7.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.7.5.tgz#96142b243977b03d99c338fdb09241d286102711"
+  integrity sha512-E7SpxDXoHEpmZ9C1gSqwadhE6zPRtf3g0gJy9Y51DsImnR5TcDs3QEiV/3Q7zOM8LWaZp5Gph71NK6ElVMG1IQ==
 
 "@types/node@15.12.2":
   version "15.12.2"
@@ -3299,9 +3299,9 @@ console-control-strings@^1.0.0, console-control-strings@~1.1.0:
   integrity sha1-PXz0Rk22RG6mRL9LOVB/mFEAjo4=
 
 constructs@^3.3.69:
-  version "3.3.135"
-  resolved "https://registry.yarnpkg.com/constructs/-/constructs-3.3.135.tgz#b694ec32c740f335091c27050da2819f8a1e4062"
-  integrity sha512-IebqTEdGH84OfuG3xocaRS/Zqn+bEpp9BkHuHVaqxWvtz3qtS5I0lmj0iQYb5j9Ksu0lYVBVOzuYt/jPZTNwYQ==
+  version "3.3.136"
+  resolved "https://registry.yarnpkg.com/constructs/-/constructs-3.3.136.tgz#9a311737bb802f7931a1f38c5223d82fa3efd08d"
+  integrity sha512-8qGuZTTXxsV3uUtqbajcQhcuu28bcuYG5jODXlXWLpd4bSo+2dMg5vKLr0dsRm/Q3B7op7io1P0opMzaGdCO5A==
 
 conventional-changelog-angular@^5.0.12:
   version "5.0.12"
@@ -5641,10 +5641,10 @@ jsii-diff@^1.34.0:
     typescript "~3.9.10"
     yargs "^16.2.0"
 
-jsii-docgen@^3.3.6:
-  version "3.3.6"
-  resolved "https://registry.yarnpkg.com/jsii-docgen/-/jsii-docgen-3.3.6.tgz#145a88209d2c4c252d35d3170a80ba2582ed9b74"
-  integrity sha512-NN3iBvmu+nJhn9oD1j5y1NdhkT8Hs2pBtHHE7bhXqucze93y8m8DPeAW1It+WBsexIte6od/yZm/jt1Sv2p8AQ==
+jsii-docgen@^3.3.7:
+  version "3.3.7"
+  resolved "https://registry.yarnpkg.com/jsii-docgen/-/jsii-docgen-3.3.7.tgz#87d7dae728d8fac5ecde01c655505d53673fd7ea"
+  integrity sha512-RCZ3P7iPVfm6ncHfPbtZJWjp9CJ4dfI2++3mSLSx9Fd29NpHzRAdyAa9gfQVL+wB3F2sl60lnfdogOZg5AVSPA==
   dependencies:
     "@jsii/spec" "^1.34.0"
     case "^1.6.3"
@@ -8173,9 +8173,9 @@ write-file-atomic@^3.0.0:
     typedarray-to-buffer "^3.1.5"
 
 ws@^7.4.6:
-  version "7.5.3"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.3.tgz#160835b63c7d97bfab418fc1b8a9fced2ac01a74"
-  integrity sha512-kQ/dHIzuLrS6Je9+uv81ueZomEwH0qVYstcAQ4/Z93K8zeko9gtAbttJWzoC5ukqXY1PpoouV3+VSOqEAFt5wg==
+  version "7.5.4"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.4.tgz#56bfa20b167427e138a7795de68d134fe92e21f9"
+  integrity sha512-zP9z6GXm6zC27YtspwH99T3qTG7bBFv2VIkeHstMLrLlDJuzA7tQ5ls3OJ1hOGGCzTQPniNJoHXIAOS0Jljohg==
 
 xdg-basedir@^4.0.0:
   version "4.0.0"
