@@ -36,7 +36,7 @@
   "devDependencies": {
     "@aws-cdk/assert": "^1.95.2",
     "@types/jest": "^26.0.24",
-    "@types/node": "^10.17.0",
+    "@types/node": "^14.15.0",
     "@typescript-eslint/eslint-plugin": "^4.30.0",
     "@typescript-eslint/parser": "^4.30.0",
     "aws-sdk-client-mock": "^0.5.3",
@@ -79,10 +79,9 @@
     "@aws-sdk/client-iot-data-plane": "^3.29.0",
     "@aws-sdk/lib-dynamodb": "^3.29.0",
     "@aws-sdk/util-dynamodb": "^3.29.0",
-    "@softchef/cdk-restapi": "^0.1.48",
-    "@softchef/cdk-schedule-function": "0.0.58",
+    "@softchef/cdk-restapi": "^0.1.49",
+    "@softchef/cdk-schedule-function": "0.0.59",
     "@softchef/lambda-events": "^1.0.43",
-    "@types/node": "^12.12.6",
     "@types/semver": "^7.3.8",
     "@types/uuid": "^8.3.1",
     "joi": "^17.4.2",
@@ -98,7 +97,6 @@
     "@softchef/cdk-restapi",
     "@softchef/cdk-schedule-function",
     "@softchef/lambda-events",
-    "@types/node",
     "@types/semver",
     "@types/uuid",
     "joi",
@@ -113,6 +111,9 @@
     "OTA",
     "cdk"
   ],
+  "engines": {
+    "node": ">= 14.15.0"
+  },
   "main": "lib/index.js",
   "license": "Apache-2.0",
   "publishConfig": {
