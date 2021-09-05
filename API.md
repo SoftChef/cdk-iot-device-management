@@ -4,7 +4,7 @@
 
 ### FileApi <a name="@softchef/cdk-iot-device-management.FileApi"></a>
 
-#### Initializer <a name="@softchef/cdk-iot-device-management.FileApi.Initializer"></a>
+#### Initializers <a name="@softchef/cdk-iot-device-management.FileApi.Initializer"></a>
 
 ```typescript
 import { FileApi } from '@softchef/cdk-iot-device-management'
@@ -59,7 +59,7 @@ The file table.
 
 ### JobApi <a name="@softchef/cdk-iot-device-management.JobApi"></a>
 
-#### Initializer <a name="@softchef/cdk-iot-device-management.JobApi.Initializer"></a>
+#### Initializers <a name="@softchef/cdk-iot-device-management.JobApi.Initializer"></a>
 
 ```typescript
 import { JobApi } from '@softchef/cdk-iot-device-management'
@@ -98,7 +98,7 @@ new JobApi(scope: Construct, id: string, props?: JobApiProps)
 
 ### ThingApi <a name="@softchef/cdk-iot-device-management.ThingApi"></a>
 
-#### Initializer <a name="@softchef/cdk-iot-device-management.ThingApi.Initializer"></a>
+#### Initializers <a name="@softchef/cdk-iot-device-management.ThingApi.Initializer"></a>
 
 ```typescript
 import { ThingApi } from '@softchef/cdk-iot-device-management'
@@ -137,7 +137,7 @@ new ThingApi(scope: Construct, id: string, props?: ThingApiProps)
 
 ### ThingGroupApi <a name="@softchef/cdk-iot-device-management.ThingGroupApi"></a>
 
-#### Initializer <a name="@softchef/cdk-iot-device-management.ThingGroupApi.Initializer"></a>
+#### Initializers <a name="@softchef/cdk-iot-device-management.ThingGroupApi.Initializer"></a>
 
 ```typescript
 import { ThingGroupApi } from '@softchef/cdk-iot-device-management'
@@ -176,7 +176,7 @@ new ThingGroupApi(scope: Construct, id: string, props?: ThingGroupApiProps)
 
 ### ThingTypeApi <a name="@softchef/cdk-iot-device-management.ThingTypeApi"></a>
 
-#### Initializer <a name="@softchef/cdk-iot-device-management.ThingTypeApi.Initializer"></a>
+#### Initializers <a name="@softchef/cdk-iot-device-management.ThingTypeApi.Initializer"></a>
 
 ```typescript
 import { ThingTypeApi } from '@softchef/cdk-iot-device-management'
