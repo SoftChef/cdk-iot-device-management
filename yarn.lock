@@ -2249,10 +2249,10 @@
   resolved "https://registry.yarnpkg.com/@sinonjs/text-encoding/-/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
   integrity sha512-+iTbntw2IZPb/anVDbypzfQa+ay64MW0Zo8aJ8gZPWMMK6/OubMVb6lUPMagqjOPnmtauXnFCACVl3O7ogjeqQ==
 
-"@softchef/cdk-restapi@^0.1.50":
-  version "0.1.50"
-  resolved "https://registry.yarnpkg.com/@softchef/cdk-restapi/-/cdk-restapi-0.1.50.tgz#7e7e6c77831b3cfab059a3bfc39a89fe7c560273"
-  integrity sha512-ToLyDKQxMeJzGVb5J5i0XcUKbmneGx9yQY/uVSNSxUaDUYGGaMIzBSv3iUPugHAolnUwmUrB6odmMjqFCt7Bhw==
+"@softchef/cdk-restapi@^0.1.51":
+  version "0.1.51"
+  resolved "https://registry.yarnpkg.com/@softchef/cdk-restapi/-/cdk-restapi-0.1.51.tgz#422e3fb8047d8c527a4e7fe1895c9ab001d4a619"
+  integrity sha512-SrN/SwIL/SjMfyFelTKIhSnurzlAbymJsGg0UpWmE/ZBYua2qzAq2Tv/V3F6fLsekYBkw/LHoXFqmEygmyzF6A==
   dependencies:
     "@aws-cdk/aws-apigateway" "^1.95.2"
     "@aws-cdk/aws-cognito" "^1.95.2"
@@ -2260,10 +2260,10 @@
     "@aws-cdk/aws-lambda-nodejs" "^1.95.2"
     "@aws-cdk/core" "^1.95.2"
 
-"@softchef/cdk-schedule-function@0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@softchef/cdk-schedule-function/-/cdk-schedule-function-0.1.2.tgz#7031546a8712ccf88269f85b936f2f7ab41a3e2e"
-  integrity sha512-Pv4RurcLhTbqZLyPyV4NBd58VnTt7C596OOymVzzasHrmVbVO6jwcHTlqmWzJ8D9lN4/ulyqqxstuOXd7CURIA==
+"@softchef/cdk-schedule-function@0.1.3":
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@softchef/cdk-schedule-function/-/cdk-schedule-function-0.1.3.tgz#70524d09ecfc5107966ed924b4d3c4b8786c3024"
+  integrity sha512-6W/qEmLlfZkBRjVOMY/GHLdh/QFwTd6d1WZPzYl1Aj7Dn6evDjY7lKC+a3YGamdl8GZVMXxP3kZmaSOjQqLrAw==
   dependencies:
     "@aws-cdk/aws-apigateway" "^1.95.2"
     "@aws-cdk/aws-dynamodb" "^1.95.2"
@@ -2278,7 +2278,7 @@
     "@aws-sdk/client-lambda" "^3.29.0"
     "@aws-sdk/lib-dynamodb" "^3.29.0"
     "@aws-sdk/util-dynamodb" "^3.29.0"
-    "@softchef/cdk-restapi" "^0.1.50"
+    "@softchef/cdk-restapi" "^0.1.51"
     "@softchef/lambda-events" "^0.0.8"
     "@types/uuid" "^8.3.1"
     dayjs "^1.10.6"
@@ -2299,10 +2299,10 @@
     semver "^7.3.5"
     sinon "^11.1.1"
 
-"@softchef/lambda-events@^1.0.45":
-  version "1.0.45"
-  resolved "https://registry.yarnpkg.com/@softchef/lambda-events/-/lambda-events-1.0.45.tgz#0199dc82e4deb3d4d0325bfb7a5c5deb7c0a4e1b"
-  integrity sha512-BKw/FHL0qB5m56cUDYXBw5OjP8RCXEGRIgZxn82IhsLEpk1r7v747EjFwpA3DQg4+DMlpB8I+imk5Qinvnw7fA==
+"@softchef/lambda-events@^1.0.46":
+  version "1.0.46"
+  resolved "https://registry.yarnpkg.com/@softchef/lambda-events/-/lambda-events-1.0.46.tgz#5e7576d32de01d8e6ea92a30db2db9f1a3d51914"
+  integrity sha512-HMeyfz6AgzchnZ36/iHbz/pkVfcAYaXEq+AZSlXswdxL6OJU2E3PhKjxsLhrHzB6Mepfglxeo+RYlNZTrhPhzg==
   dependencies:
     "@aws-sdk/client-cognito-identity-provider" "^3.29.0"
     "@types/semver" "^7.3.8"
@@ -2963,13 +2963,13 @@ browser-process-hrtime@^1.0.0:
   integrity sha512-9o5UecI3GhkpM6DrXr69PblIuWxPKk9Y0jHBRhdocZ2y7YECBFCsHm79Pr3OyR2AvjhDkabFJaDJMYRazHgsow==
 
 browserslist@^4.16.6:
-  version "4.16.8"
-  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.16.8.tgz#cb868b0b554f137ba6e33de0ecff2eda403c4fb0"
-  integrity sha512-sc2m9ohR/49sWEbPj14ZSSZqp+kbi16aLao42Hmn3Z8FpjuMaq2xCA2l4zl9ITfyzvnvyE0hcg62YkIGKxgaNQ==
+  version "4.17.0"
+  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.17.0.tgz#1fcd81ec75b41d6d4994fb0831b92ac18c01649c"
+  integrity sha512-g2BJ2a0nEYvEFQC208q8mVAhfNwpZ5Mu8BwgtCdZKO3qx98HChmeg448fPdUzld8aFmfLgVh7yymqV+q1lJZ5g==
   dependencies:
-    caniuse-lite "^1.0.30001251"
+    caniuse-lite "^1.0.30001254"
     colorette "^1.3.0"
-    electron-to-chromium "^1.3.811"
+    electron-to-chromium "^1.3.830"
     escalade "^3.1.1"
     node-releases "^1.1.75"
 
@@ -3066,10 +3066,10 @@ camelcase@^6.2.0:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-6.2.0.tgz#924af881c9d525ac9d87f40d964e5cea982a1809"
   integrity sha512-c7wVvbw3f37nuobQNtgsgG9POC9qMbNuMQmTCqZv23b6MIz0fcYpBiOlv9gEN/hdLdnZTDQhg6e9Dq5M1vKvfg==
 
-caniuse-lite@^1.0.30001251:
-  version "1.0.30001254"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001254.tgz#974d45e8b7f6e3b63d4b1435e97752717612d4b9"
-  integrity sha512-GxeHOvR0LFMYPmFGA+NiTOt9uwYDxB3h154tW2yBYwfz2EMX3i1IBgr6gmJGfU0K8KQsqPa5XqLD8zVdP5lUzA==
+caniuse-lite@^1.0.30001254:
+  version "1.0.30001255"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001255.tgz#f3b09b59ab52e39e751a569523618f47c4298ca0"
+  integrity sha512-F+A3N9jTZL882f/fg/WWVnKSu6IOo3ueLz4zwaOPbPYHNmM/ZaDUyzyJwS1mZhX7Ex5jqTyW599Gdelh5PDYLQ==
 
 case@^1.6.3:
   version "1.6.3"
@@ -3783,7 +3783,7 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
-electron-to-chromium@^1.3.811:
+electron-to-chromium@^1.3.830:
   version "1.3.830"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.830.tgz#40e3144204f8ca11b2cebec83cf14c20d3499236"
   integrity sha512-gBN7wNAxV5vl1430dG+XRcQhD4pIeYeak6p6rjdCtlz5wWNwDad8jwvphe5oi1chL5MV6RNRikfffBBiFuj+rQ==
@@ -5644,10 +5644,10 @@ jsii-diff@^1.34.0:
     typescript "~3.9.10"
     yargs "^16.2.0"
 
-jsii-docgen@^3.4.1:
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/jsii-docgen/-/jsii-docgen-3.4.1.tgz#b77ae4bd81a97551143de13fad243dd8339186da"
-  integrity sha512-C5k+8wFI6P45S+6tTbKJNH90YcvBskMG7FqqLO0Z42vMKQZKsbYi0ypFGbfcW0WpF81UmuLgHkfZBWPM5hhADg==
+jsii-docgen@^3.4.4:
+  version "3.4.4"
+  resolved "https://registry.yarnpkg.com/jsii-docgen/-/jsii-docgen-3.4.4.tgz#52e0ecb434b16bbf512aa74b334afddc6e3dea9f"
+  integrity sha512-QXzdG2osnISDvj9h46Z/jmWixOAGcxt5u/k65PexZfDcYDlN9J+PfXH8jec8bV4g7rlQN3oulQZm1Yx6zR3K6g==
   dependencies:
     "@jsii/spec" "^1.34.0"
     case "^1.6.3"
@@ -6829,10 +6829,10 @@ progress@^2.0.0, progress@^2.0.3:
   resolved "https://registry.yarnpkg.com/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
   integrity sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==
 
-projen@^0.27.42:
-  version "0.27.42"
-  resolved "https://registry.yarnpkg.com/projen/-/projen-0.27.42.tgz#22b04154dc9ea55f1bfe2dd7517e4ef9ad907c6d"
-  integrity sha512-VniOhT+wCNi72gVv3hVIBz+ejt9Af9wFMTyzAK0oIAgoiuzUiKFf8qaMkv07GfsorIvuFedgGyTVLJ1/vtsTcw==
+projen@^0.27.50:
+  version "0.27.50"
+  resolved "https://registry.yarnpkg.com/projen/-/projen-0.27.50.tgz#f8bb845624184fc427eb31be24f276b6b6ecbb39"
+  integrity sha512-tia69y1Tj7IBV5Gf8N6jRFvF60tpai0HC+FzKbXLG4vy7FeU/3fWH0NqKlCfKX0Va0ZFhpcg2mnf9i5+h+uHgA==
   dependencies:
     "@iarna/toml" "^2.2.5"
     chalk "^4.1.2"
