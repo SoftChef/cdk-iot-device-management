@@ -13,7 +13,7 @@ const project = new AwsCdkConstructLibrary({
   name: '@softchef/cdk-iot-device-management',
   description: 'IoT device management is composed of things, thing types, thing groups, jobs, files API services. The constructs can be used independently, that are based on full-managed service to create an API Gateway & Lambda function.',
   repositoryUrl: 'git@github.com:SoftChef/cdk-iot-device-management.git',
-  minNodeVersion: '14.15.0',
+  minNodeVersion: '14.17.0',
   cdkDependencies: [
     '@aws-cdk/core',
     '@aws-cdk/aws-iam',
