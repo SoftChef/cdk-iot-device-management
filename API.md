@@ -36,6 +36,10 @@ new FileApi(scope: Construct, id: string, props?: FileApiProps)
 
 ##### `categoryTable`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileApi.property.categoryTable"></a>
 
+```typescript
+public readonly categoryTable: Table;
+```
+
 - *Type:* [`@aws-cdk/aws-dynamodb.Table`](#@aws-cdk/aws-dynamodb.Table)
 
 The category table.
@@ -44,6 +48,10 @@ The category table.
 
 ##### `fileTable`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileApi.property.fileTable"></a>
 
+```typescript
+public readonly fileTable: Table;
+```
+
 - *Type:* [`@aws-cdk/aws-dynamodb.Table`](#@aws-cdk/aws-dynamodb.Table)
 
 The file table.
@@ -51,6 +59,10 @@ The file table.
 ---
 
 ##### `restApiId`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileApi.property.restApiId"></a>
+
+```typescript
+public readonly restApiId: string;
+```
 
 - *Type:* `string`
 
@@ -91,6 +103,10 @@ new JobApi(scope: Construct, id: string, props?: JobApiProps)
 
 ##### `restApiId`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.JobApi.property.restApiId"></a>
 
+```typescript
+public readonly restApiId: string;
+```
+
 - *Type:* `string`
 
 ---
@@ -129,6 +145,10 @@ new ThingApi(scope: Construct, id: string, props?: ThingApiProps)
 #### Properties <a name="Properties"></a>
 
 ##### `restApiId`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingApi.property.restApiId"></a>
+
+```typescript
+public readonly restApiId: string;
+```
 
 - *Type:* `string`
 
@@ -169,6 +189,10 @@ new ThingGroupApi(scope: Construct, id: string, props?: ThingGroupApiProps)
 
 ##### `restApiId`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingGroupApi.property.restApiId"></a>
 
+```typescript
+public readonly restApiId: string;
+```
+
 - *Type:* `string`
 
 ---
@@ -208,6 +232,10 @@ new ThingTypeApi(scope: Construct, id: string, props?: ThingTypeApiProps)
 
 ##### `restApiId`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingTypeApi.property.restApiId"></a>
 
+```typescript
+public readonly restApiId: string;
+```
+
 - *Type:* `string`
 
 ---
@@ -227,11 +255,19 @@ const capacity: Capacity = { ... }
 
 ##### `readCapacity`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.Capacity.property.readCapacity"></a>
 
+```typescript
+public readonly readCapacity: number;
+```
+
 - *Type:* `number`
 
 ---
 
 ##### `writeCapacity`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.Capacity.property.writeCapacity"></a>
+
+```typescript
+public readonly writeCapacity: number;
+```
 
 - *Type:* `number`
 
@@ -249,11 +285,19 @@ const categoryTableConfig: CategoryTableConfig = { ... }
 
 ##### `indexQueryByParentId`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.CategoryTableConfig.property.indexQueryByParentId"></a>
 
+```typescript
+public readonly indexQueryByParentId: Capacity;
+```
+
 - *Type:* [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity)
 
 ---
 
 ##### `primaryIndex`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.CategoryTableConfig.property.primaryIndex"></a>
+
+```typescript
+public readonly primaryIndex: Capacity;
+```
 
 - *Type:* [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity)
 
@@ -271,6 +315,10 @@ const fileApiProps: FileApiProps = { ... }
 
 ##### `authorizationType`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.authorizationType"></a>
 
+```typescript
+public readonly authorizationType: AuthorizationType;
+```
+
 - *Type:* [`@aws-cdk/aws-apigateway.AuthorizationType`](#@aws-cdk/aws-apigateway.AuthorizationType)
 - *Default:* apigateway.AuthorizationType.NONE
 
@@ -279,6 +327,10 @@ Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE.
 ---
 
 ##### `authorizer`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.authorizer"></a>
+
+```typescript
+public readonly authorizer: IAuthorizer;
+```
 
 - *Type:* [`@aws-cdk/aws-apigateway.IAuthorizer`](#@aws-cdk/aws-apigateway.IAuthorizer)
 - *Default:* undefined
@@ -289,6 +341,10 @@ Specify API Gateway's authorizer, CognitoUserPool/Lambda.
 
 ##### `categoryTableConfig`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.categoryTableConfig"></a>
 
+```typescript
+public readonly categoryTableConfig: CategoryTableConfig;
+```
+
 - *Type:* [`@softchef/cdk-iot-device-management.CategoryTableConfig`](#@softchef/cdk-iot-device-management.CategoryTableConfig)
 - *Default:* undefined
 
@@ -297,6 +353,10 @@ Category Table Configuration,.
 ---
 
 ##### `fileTableConfig`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.fileTableConfig"></a>
+
+```typescript
+public readonly fileTableConfig: FileTableConfig;
+```
 
 - *Type:* [`@softchef/cdk-iot-device-management.FileTableConfig`](#@softchef/cdk-iot-device-management.FileTableConfig)
 - *Default:* undefined
@@ -317,17 +377,29 @@ const fileTableConfig: FileTableConfig = { ... }
 
 ##### `indexGetFileByChecksumAndVersion`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileTableConfig.property.indexGetFileByChecksumAndVersion"></a>
 
+```typescript
+public readonly indexGetFileByChecksumAndVersion: Capacity;
+```
+
 - *Type:* [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity)
 
 ---
 
 ##### `indexQueryByCategoryIdAndLocale`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileTableConfig.property.indexQueryByCategoryIdAndLocale"></a>
 
+```typescript
+public readonly indexQueryByCategoryIdAndLocale: Capacity;
+```
+
 - *Type:* [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity)
 
 ---
 
 ##### `primaryIndex`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileTableConfig.property.primaryIndex"></a>
+
+```typescript
+public readonly primaryIndex: Capacity;
+```
 
 - *Type:* [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity)
 
@@ -345,6 +417,10 @@ const jobApiProps: JobApiProps = { ... }
 
 ##### `authorizationType`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.JobApiProps.property.authorizationType"></a>
 
+```typescript
+public readonly authorizationType: AuthorizationType;
+```
+
 - *Type:* [`@aws-cdk/aws-apigateway.AuthorizationType`](#@aws-cdk/aws-apigateway.AuthorizationType)
 - *Default:* apigateway.AuthorizationType.NONE
 
@@ -354,6 +430,10 @@ Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE.
 
 ##### `authorizer`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.JobApiProps.property.authorizer"></a>
 
+```typescript
+public readonly authorizer: IAuthorizer;
+```
+
 - *Type:* [`@aws-cdk/aws-apigateway.IAuthorizer`](#@aws-cdk/aws-apigateway.IAuthorizer)
 - *Default:* undefined
 
@@ -362,6 +442,10 @@ Specify API Gateway's authorizer, CognitoUserPool/Lambda.
 ---
 
 ##### `scheduleFunction`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.JobApiProps.property.scheduleFunction"></a>
+
+```typescript
+public readonly scheduleFunction: any;
+```
 
 - *Type:* `any`
 - *Default:* undefined
@@ -382,6 +466,10 @@ const thingApiProps: ThingApiProps = { ... }
 
 ##### `authorizationType`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingApiProps.property.authorizationType"></a>
 
+```typescript
+public readonly authorizationType: AuthorizationType;
+```
+
 - *Type:* [`@aws-cdk/aws-apigateway.AuthorizationType`](#@aws-cdk/aws-apigateway.AuthorizationType)
 - *Default:* apigateway.AuthorizationType.NONE
 
@@ -390,6 +478,10 @@ Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE.
 ---
 
 ##### `authorizer`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingApiProps.property.authorizer"></a>
+
+```typescript
+public readonly authorizer: IAuthorizer;
+```
 
 - *Type:* [`@aws-cdk/aws-apigateway.IAuthorizer`](#@aws-cdk/aws-apigateway.IAuthorizer)
 - *Default:* undefined
@@ -410,6 +502,10 @@ const thingGroupApiProps: ThingGroupApiProps = { ... }
 
 ##### `authorizationType`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingGroupApiProps.property.authorizationType"></a>
 
+```typescript
+public readonly authorizationType: AuthorizationType;
+```
+
 - *Type:* [`@aws-cdk/aws-apigateway.AuthorizationType`](#@aws-cdk/aws-apigateway.AuthorizationType)
 - *Default:* apigateway.AuthorizationType.NONE
 
@@ -418,6 +514,10 @@ Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE.
 ---
 
 ##### `authorizer`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingGroupApiProps.property.authorizer"></a>
+
+```typescript
+public readonly authorizer: IAuthorizer;
+```
 
 - *Type:* [`@aws-cdk/aws-apigateway.IAuthorizer`](#@aws-cdk/aws-apigateway.IAuthorizer)
 - *Default:* undefined
@@ -438,6 +538,10 @@ const thingTypeApiProps: ThingTypeApiProps = { ... }
 
 ##### `authorizationType`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingTypeApiProps.property.authorizationType"></a>
 
+```typescript
+public readonly authorizationType: AuthorizationType;
+```
+
 - *Type:* [`@aws-cdk/aws-apigateway.AuthorizationType`](#@aws-cdk/aws-apigateway.AuthorizationType)
 - *Default:* apigateway.AuthorizationType.NONE
 
@@ -446,6 +550,10 @@ Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE.
 ---
 
 ##### `authorizer`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingTypeApiProps.property.authorizer"></a>
+
+```typescript
+public readonly authorizer: IAuthorizer;
+```
 
 - *Type:* [`@aws-cdk/aws-apigateway.IAuthorizer`](#@aws-cdk/aws-apigateway.IAuthorizer)
 - *Default:* undefined
