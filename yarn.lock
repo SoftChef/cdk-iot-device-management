@@ -2251,10 +2251,10 @@
   resolved "https://registry.yarnpkg.com/@sinonjs/text-encoding/-/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
   integrity sha512-+iTbntw2IZPb/anVDbypzfQa+ay64MW0Zo8aJ8gZPWMMK6/OubMVb6lUPMagqjOPnmtauXnFCACVl3O7ogjeqQ==
 
-"@softchef/cdk-restapi@^0.1.58":
-  version "0.1.58"
-  resolved "https://registry.yarnpkg.com/@softchef/cdk-restapi/-/cdk-restapi-0.1.58.tgz#e1021c02b752a0c375ba1335c55c6a921d3967eb"
-  integrity sha512-dOKvCAu+80hPh2ZUiauhhzqV8xMj8+UwuNfyjt3Z8iJWrNcxr0vzMX/Uz21c6Gwt04GOhZqgHlcIEw6Ip9+YDQ==
+"@softchef/cdk-restapi@^0.1.59":
+  version "0.1.59"
+  resolved "https://registry.yarnpkg.com/@softchef/cdk-restapi/-/cdk-restapi-0.1.59.tgz#1b7274ae3b9f73a1cd871a6d0dd42fd91ebadff5"
+  integrity sha512-DQ2rneroTnCOjGSl1WVgMEnawzn2FSX3ZuP3V9tMLvD2DWn/vrV1PSemYtnwv7+dKXWl2NM6svi3HiLsNg482Q==
   dependencies:
     "@aws-cdk/aws-apigateway" "^1.95.2"
     "@aws-cdk/aws-cognito" "^1.95.2"
@@ -2262,10 +2262,10 @@
     "@aws-cdk/aws-lambda-nodejs" "^1.95.2"
     "@aws-cdk/core" "^1.95.2"
 
-"@softchef/cdk-schedule-function@0.1.13":
-  version "0.1.13"
-  resolved "https://registry.yarnpkg.com/@softchef/cdk-schedule-function/-/cdk-schedule-function-0.1.13.tgz#4d1ee2413045ed6347562c7068fb4bcfd7784e48"
-  integrity sha512-gVO/xDpnHadpaxuPSIFb7JzshZxuHSkPYnCMZa70o/JVjOXMJFUMOU2HifaoTXBLuP/denhxj9Av7VnDQV2kIQ==
+"@softchef/cdk-schedule-function@0.1.14":
+  version "0.1.14"
+  resolved "https://registry.yarnpkg.com/@softchef/cdk-schedule-function/-/cdk-schedule-function-0.1.14.tgz#7296249226307620acc47dbe987c42bbbb49a309"
+  integrity sha512-PymhcgQwCyb7UANCH3O8DZDYeranUQN96EFFcaZ3l24ntOrctbUZqBrDVUyQAHh+uT6MDsg6LZPWnlRE6h1Psw==
   dependencies:
     "@aws-cdk/aws-apigateway" "^1.95.2"
     "@aws-cdk/aws-dynamodb" "^1.95.2"
@@ -2280,7 +2280,7 @@
     "@aws-sdk/client-lambda" "^3.31.0"
     "@aws-sdk/lib-dynamodb" "^3.31.0"
     "@aws-sdk/util-dynamodb" "^3.31.0"
-    "@softchef/cdk-restapi" "^0.1.58"
+    "@softchef/cdk-restapi" "^0.1.59"
     "@softchef/lambda-events" "^0.0.8"
     "@types/uuid" "^8.3.1"
     dayjs "^1.10.7"
@@ -2301,10 +2301,10 @@
     semver "^7.3.5"
     sinon "^11.1.1"
 
-"@softchef/lambda-events@^1.0.54":
-  version "1.0.54"
-  resolved "https://registry.yarnpkg.com/@softchef/lambda-events/-/lambda-events-1.0.54.tgz#590583eadf7d84d7c9949438613ea19680a81fe1"
-  integrity sha512-UuqzHlJ7k7zDJAv+Ulr7kuMZwSk1j7uPJL4e724L3vKJTWxKrR2dXGfP6g2GjU3e6aGasuF0tvzKEZHaieCJpQ==
+"@softchef/lambda-events@^1.0.55":
+  version "1.0.55"
+  resolved "https://registry.yarnpkg.com/@softchef/lambda-events/-/lambda-events-1.0.55.tgz#5e4838e360e9a9c9d3deec8f0cd71f6138ef98fb"
+  integrity sha512-jgZZXzYYFCguVFkngptrgB78f8F/WXOkZ2uxFpUB3T5fqEjRrll5lN49gxknwk8u6ffXlhsDnfadGCtQw9Zggw==
   dependencies:
     "@aws-sdk/client-cognito-identity-provider" "^3.31.0"
     "@types/semver" "^7.3.8"
@@ -3785,9 +3785,9 @@ ecc-jsbn@~0.1.1:
     safer-buffer "^2.1.0"
 
 electron-to-chromium@^1.3.830:
-  version "1.3.839"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.839.tgz#27a5b21468e9fefb0e328a029403617f20acec9c"
-  integrity sha512-0O7uPs9LJNjQ/U5mW78qW8gXv9H6Ba3DHZ5/yt8aBsvomOWDkV3MddT7enUYvLQEUVOURjWmgJJWVZ3K98tIwQ==
+  version "1.3.840"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.840.tgz#3f2a1df97015d9b1db5d86a4c6bd4cdb920adcbb"
+  integrity sha512-yRoUmTLDJnkIJx23xLY7GbSvnmDCq++NSuxHDQ0jiyDJ9YZBUGJcrdUqm+ZwZFzMbCciVzfem2N2AWiHJcWlbw==
 
 emittery@^0.8.1:
   version "0.8.1"
@@ -5654,10 +5654,10 @@ jsii-diff@^1.34.0:
     typescript "~3.9.10"
     yargs "^16.2.0"
 
-jsii-docgen@^3.6.2:
-  version "3.6.2"
-  resolved "https://registry.yarnpkg.com/jsii-docgen/-/jsii-docgen-3.6.2.tgz#71d775708eda38b2d48b0f6f5e2ae6ac5e89bfa3"
-  integrity sha512-Q8io2Husi7uyPKQNEmdKhYsm3AJQfgcE7rINWsXpn0Nuggibh6NY17kDhb2VOC3w5DEZAVLfuZ2aLp61GVVSMQ==
+jsii-docgen@^3.6.3:
+  version "3.6.3"
+  resolved "https://registry.yarnpkg.com/jsii-docgen/-/jsii-docgen-3.6.3.tgz#6b17351798c69442e8efdf771441bb4918bd876a"
+  integrity sha512-1IQZ4rqfAe6uPY2JehXrj3cmI8DI4x9tNmyA5DHV5cA3cdsNmVzfTBJSYCJZGTnTyIPXf7mw+iWqQ0vv2Qj2LA==
   dependencies:
     "@jsii/spec" "^1.34.0"
     case "^1.6.3"
@@ -6839,10 +6839,10 @@ progress@^2.0.0, progress@^2.0.3:
   resolved "https://registry.yarnpkg.com/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
   integrity sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==
 
-projen@^0.28.9:
-  version "0.28.9"
-  resolved "https://registry.yarnpkg.com/projen/-/projen-0.28.9.tgz#5784fd638328b58bbba38940d8278b2ccf8e1cce"
-  integrity sha512-FtyeIC7ZYHuAUWsILWfBOGPofqroeXYwafZczFjYgoqayw+7qaiBV5g6AI8ovHLFbIf1d5piUerDEqqLqtDzgw==
+projen@^0.28.11:
+  version "0.28.11"
+  resolved "https://registry.yarnpkg.com/projen/-/projen-0.28.11.tgz#d54f186437819aa6401cd165f70be69b6ff6a5f5"
+  integrity sha512-tZ8/ve/u/pm7mY/ic0KV6dN+s/RNlk398bedh9at+S0uhJ7NSXQz1/9Rwn/6Tqz+6JjdzxpuhjcETzJa5eNg0Q==
   dependencies:
     "@iarna/toml" "^2.2.5"
     chalk "^4.1.2"
@@ -7259,9 +7259,9 @@ side-channel@^1.0.3, side-channel@^1.0.4:
     object-inspect "^1.9.0"
 
 signal-exit@^3.0.0, signal-exit@^3.0.2, signal-exit@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.3.tgz#a1410c2edd8f077b08b4e253c8eacfcaf057461c"
-  integrity sha512-VUJ49FC8U1OxwZLxIbTTrDvLnf/6TDgxZcK8wxR8zs13xpx7xbG60ndBlhNrFi2EMuFRoeDoJO7wthSLq42EjA==
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.4.tgz#366a4684d175b9cab2081e3681fda3747b6c51d7"
+  integrity sha512-rqYhcAnZ6d/vTPGghdrw7iumdcbXpsk1b8IG/rz+VWV51DM0p7XCtMoJ3qhPLIbp3tvyt3pKRbaaEMZYpHto8Q==
 
 sinon@^11.1.1, sinon@^11.1.2:
   version "11.1.2"
@@ -7300,9 +7300,9 @@ smart-buffer@^4.1.0:
   integrity sha512-94hK0Hh8rPqQl2xXc3HsaBoOXKV20MToPkcXvwbISWLEs+64sBq5kFgn2kJDHb1Pry9yrP0dxrCI9RRci7RXKg==
 
 socks-proxy-agent@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/socks-proxy-agent/-/socks-proxy-agent-6.0.0.tgz#9f8749cdc05976505fa9f9a958b1818d0e60573b"
-  integrity sha512-FIgZbQWlnjVEQvMkylz64/rUggGtrKstPnx8OZyYFG0tAFR8CSBtpXxSwbFLHyeXFn/cunFL7MpuSOvDSOPo9g==
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/socks-proxy-agent/-/socks-proxy-agent-6.1.0.tgz#869cf2d7bd10fea96c7ad3111e81726855e285c3"
+  integrity sha512-57e7lwCN4Tzt3mXz25VxOErJKXlPfXmkMLnk310v/jwW20jWRVcgsOit+xNkN3eIEdB47GwnfAEBLacZ/wVIKg==
   dependencies:
     agent-base "^6.0.2"
     debug "^4.3.1"
