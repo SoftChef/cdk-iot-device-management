@@ -26,6 +26,7 @@ const project = new AwsCdkConstructLibrary({
     '@aws-sdk/client-dynamodb',
     '@aws-sdk/client-iot',
     '@aws-sdk/client-iot-data-plane',
+    '@aws-sdk/client-s3',
     '@aws-sdk/lib-dynamodb',
     '@aws-sdk/util-dynamodb',
     '@softchef/cdk-restapi',
