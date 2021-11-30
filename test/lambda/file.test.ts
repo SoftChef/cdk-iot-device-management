@@ -643,16 +643,19 @@ test('Update files with invalid inputs expect failure (empty object in files arr
       label: 'files[0].fileId',
       key: 'fileId',
       message: expect.any(String),
+      value: null,
     },
     {
       label: 'files[0].description',
       key: 'description',
       message: expect.any(String),
+      value: null,
     },
     {
       label: 'files[0].summary',
       key: 'summary',
       message: expect.any(String),
+      value: null,
     },
   ]);
 });
