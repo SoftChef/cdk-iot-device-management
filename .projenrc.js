@@ -1,20 +1,17 @@
-const { AwsCdkConstructLibrary, NpmAccess } = require('projen');
+const { awscdk } = require('projen');
 
 const AUTOMATION_TOKEN = 'PROJEN_GITHUB_TOKEN';
 
-const project = new AwsCdkConstructLibrary({
+const project = new awscdk.AwsCdkConstructLibrary({
   author: 'SoftChef',
   authorEmail: 'poke@softchef.com',
   authorUrl: 'https://www.softchef.com',
   authorOrganization: true,
-  npmAccess: NpmAccess.PUBLIC,
-  cdkVersion: '1.95.2',
+  cdkVersion: '1.73.0',
   defaultReleaseBranch: 'main',
   name: '@softchef/cdk-iot-device-management',
   description: 'IoT device management is composed of things, thing types, thing groups, jobs, files API services. The constructs can be used independently, that are based on full-managed service to create an API Gateway & Lambda function.',
   repositoryUrl: 'git@github.com:SoftChef/cdk-iot-device-management.git',
-  minNodeVersion: '12.7.0',
-  workflowNodeVersion: '12.13.0',
   cdkDependencies: [
     '@aws-cdk/core',
     '@aws-cdk/aws-iam',
