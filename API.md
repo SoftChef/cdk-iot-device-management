@@ -66,6 +66,8 @@ public readonly restApiId: string;
 
 - *Type:* `string`
 
+The File API Gateway API ID.
+
 ---
 
 
@@ -245,6 +247,8 @@ public readonly restApiId: string;
 
 ### Capacity <a name="@softchef/cdk-iot-device-management.Capacity"></a>
 
+Specify file, category table read/write capacity.
+
 #### Initializer <a name="[object Object].Initializer"></a>
 
 ```typescript
@@ -261,6 +265,8 @@ public readonly readCapacity: number;
 
 - *Type:* `number`
 
+The read capacity for the table.
+
 ---
 
 ##### `writeCapacity`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.Capacity.property.writeCapacity"></a>
@@ -270,6 +276,8 @@ public readonly writeCapacity: number;
 ```
 
 - *Type:* `number`
+
+The write capacity for the table.
 
 ---
 
@@ -291,6 +299,8 @@ public readonly indexQueryByParentId: Capacity;
 
 - *Type:* [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity)
 
+Category table global secondary index `query-by-parent-id` capacity, specify at `Capacity` interface.
+
 ---
 
 ##### `primaryIndex`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.CategoryTableConfig.property.primaryIndex"></a>
@@ -300,6 +310,8 @@ public readonly primaryIndex: Capacity;
 ```
 
 - *Type:* [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity)
+
+Category table capacity, specify at `Capacity` interface.
 
 ---
 
@@ -383,6 +395,8 @@ public readonly indexGetFileByChecksumAndVersion: Capacity;
 
 - *Type:* [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity)
 
+File table global secondary index `get-file-by-checksum-and-version` capacity, specify at `Capacity` interface.
+
 ---
 
 ##### `indexQueryByCategoryIdAndLocale`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileTableConfig.property.indexQueryByCategoryIdAndLocale"></a>
@@ -393,6 +407,8 @@ public readonly indexQueryByCategoryIdAndLocale: Capacity;
 
 - *Type:* [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity)
 
+File table global secondary index `query-by-category-id-and-locale` capacity, specify at `Capacity` interface.
+
 ---
 
 ##### `primaryIndex`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileTableConfig.property.primaryIndex"></a>
@@ -402,6 +418,8 @@ public readonly primaryIndex: Capacity;
 ```
 
 - *Type:* [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity)
+
+File table capacity, specify at `Capacity` interface.
 
 ---
 
