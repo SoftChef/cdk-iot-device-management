@@ -7,9 +7,6 @@ import { RestApi, HttpMethod } from '@softchef/cdk-restapi';
 
 const LAMBDA_ASSETS_PATH = path.resolve(__dirname, '../lambda-assets/thing-types');
 
-/**
- * Thing Type API props
- */
 export interface ThingTypeApiProps {
   /**
    * Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE
@@ -23,12 +20,9 @@ export interface ThingTypeApiProps {
   readonly authorizer?: apigateway.IAuthorizer | undefined;
 }
 
-/**
- * Thing Type API construct
- */
 export class ThingTypeApi extends cdk.Construct {
   /**
-   * The Thing Type API Gateway
+   * The ThingType API Gateway
    */
   private readonly _restApi: RestApi;
 
@@ -73,9 +67,6 @@ export class ThingTypeApi extends cdk.Construct {
     });
   }
 
-  /**
-   * Thing Type API API ID
-   */
   get restApiId(): string {
     return this._restApi.restApiId;
   }
