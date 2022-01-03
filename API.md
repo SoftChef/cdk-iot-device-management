@@ -4,6 +4,8 @@
 
 ### FileApi <a name="@softchef/cdk-iot-device-management.FileApi"></a>
 
+File API construct.
+
 #### Initializers <a name="@softchef/cdk-iot-device-management.FileApi.Initializer"></a>
 
 ```typescript
@@ -66,12 +68,14 @@ public readonly restApiId: string;
 
 - *Type:* `string`
 
-The File API Gateway API ID.
+File API API ID.
 
 ---
 
 
 ### JobApi <a name="@softchef/cdk-iot-device-management.JobApi"></a>
+
+Job API construct.
 
 #### Initializers <a name="@softchef/cdk-iot-device-management.JobApi.Initializer"></a>
 
@@ -111,10 +115,14 @@ public readonly restApiId: string;
 
 - *Type:* `string`
 
+Job API API ID.
+
 ---
 
 
 ### ThingApi <a name="@softchef/cdk-iot-device-management.ThingApi"></a>
+
+Thing API construct.
 
 #### Initializers <a name="@softchef/cdk-iot-device-management.ThingApi.Initializer"></a>
 
@@ -154,10 +162,14 @@ public readonly restApiId: string;
 
 - *Type:* `string`
 
+Thing API API ID.
+
 ---
 
 
 ### ThingGroupApi <a name="@softchef/cdk-iot-device-management.ThingGroupApi"></a>
+
+Thing Group API construct.
 
 #### Initializers <a name="@softchef/cdk-iot-device-management.ThingGroupApi.Initializer"></a>
 
@@ -196,6 +208,8 @@ public readonly restApiId: string;
 ```
 
 - *Type:* `string`
+
+Thing Group API API ID.
 
 ---
 
@@ -283,6 +297,8 @@ The write capacity for the table.
 
 ### CategoryTableConfig <a name="@softchef/cdk-iot-device-management.CategoryTableConfig"></a>
 
+Category table capacity config.
+
 #### Initializer <a name="[object Object].Initializer"></a>
 
 ```typescript
@@ -316,6 +332,8 @@ Category table capacity, specify at `Capacity` interface.
 ---
 
 ### FileApiProps <a name="@softchef/cdk-iot-device-management.FileApiProps"></a>
+
+File API props.
 
 #### Initializer <a name="[object Object].Initializer"></a>
 
@@ -360,7 +378,7 @@ public readonly categoryTableConfig: CategoryTableConfig;
 - *Type:* [`@softchef/cdk-iot-device-management.CategoryTableConfig`](#@softchef/cdk-iot-device-management.CategoryTableConfig)
 - *Default:* undefined
 
-Category Table Configuration,.
+Category Table Configuration.
 
 ---
 
@@ -373,11 +391,13 @@ public readonly fileTableConfig: FileTableConfig;
 - *Type:* [`@softchef/cdk-iot-device-management.FileTableConfig`](#@softchef/cdk-iot-device-management.FileTableConfig)
 - *Default:* undefined
 
-File Table Configuration,.
+File Table Configuration.
 
 ---
 
 ### FileTableConfig <a name="@softchef/cdk-iot-device-management.FileTableConfig"></a>
+
+File table capacity config.
 
 #### Initializer <a name="[object Object].Initializer"></a>
 
@@ -395,7 +415,7 @@ public readonly indexGetFileByChecksumAndVersion: Capacity;
 
 - *Type:* [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity)
 
-File table global secondary index `get-file-by-checksum-and-version` capacity, specify at `Capacity` interface.
+File table global secondary index `get-file-by-checksum-and-version` capacity specify at `Capacity` interface.
 
 ---
 
@@ -407,7 +427,7 @@ public readonly indexQueryByCategoryIdAndLocale: Capacity;
 
 - *Type:* [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity)
 
-File table global secondary index `query-by-category-id-and-locale` capacity, specify at `Capacity` interface.
+File table global secondary index `query-by-category-id-and-locale` capacity specify at `Capacity` interface.
 
 ---
 
@@ -419,11 +439,13 @@ public readonly primaryIndex: Capacity;
 
 - *Type:* [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity)
 
-File table capacity, specify at `Capacity` interface.
+File table capacity specify at `Capacity` interface.
 
 ---
 
 ### JobApiProps <a name="@softchef/cdk-iot-device-management.JobApiProps"></a>
+
+Job API props.
 
 #### Initializer <a name="[object Object].Initializer"></a>
 
@@ -474,6 +496,8 @@ Specify Schedule Function to enable create schedule job function.
 
 ### ThingApiProps <a name="@softchef/cdk-iot-device-management.ThingApiProps"></a>
 
+Thing API props.
+
 #### Initializer <a name="[object Object].Initializer"></a>
 
 ```typescript
@@ -509,6 +533,8 @@ Specify API Gateway's authorizer, CognitoUserPool/Lambda.
 ---
 
 ### ThingGroupApiProps <a name="@softchef/cdk-iot-device-management.ThingGroupApiProps"></a>
+
+Thing Group API props.
 
 #### Initializer <a name="[object Object].Initializer"></a>
 
