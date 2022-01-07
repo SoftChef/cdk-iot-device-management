@@ -137,3 +137,7 @@ const FileApi = new FileApi(scope, id, {
 | description  | String |               |                                     |                                       |
 | updatedAt    | Number |               |                                     |                                       |
 | createdAt    | Number |               |                                     |                                       |
+
+## License
+
+This code is licensed under the Apache License 2.0. See the [LICENSE](https://github.com/SoftChef/cdk-iot-device-management/blob/main/LICENSE) file.
