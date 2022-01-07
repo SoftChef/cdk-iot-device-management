@@ -8,14 +8,6 @@ IoT device management is composed of things, thing types, thing groups, jobs, fi
 
 ![Architecture](docs/cdk-iot-device-management.png)
 
-This construct library provides five constructs:
-
-- **Thing Type API construct** - Create and modify thing types' information.
-- **Thing API construct** - Create and modify things' information.
-- **Thing Group construct** - Create and modify thing groups' information.
-- **Job API construct** - Create and modify thing's jobs.
-- **File API construct** - Integrate API Gateway and DynamoDB to store device firmware information.
-
 ## Installation
 
 ```sh
@@ -26,6 +18,20 @@ or
 yarn add @softchef/cdk-iot-device-management
 
 ```
+
+## Why
+
+- Integrate RestAPI and AWS IoT core to implement access control.
+- Manage device firmware information.
+- Manage device, such as create an OTA jobs.
+
+This construct library provides five constructs:
+
+- **Thing Type API construct** - Create and modify thing types' information.
+- **Thing API construct** - Create and modify things' information.
+- **Thing Group construct** - Create and modify thing groups' information.
+- **Job API construct** - Create and modify thing's jobs.
+- **File API construct** - Integrate API Gateway and DynamoDB to store device firmware information.
 
 ## Constructs
 
