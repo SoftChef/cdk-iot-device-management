@@ -8,6 +8,9 @@ import { RestApi, HttpMethod } from '@softchef/cdk-restapi';
 
 const LAMBDA_ASSETS_PATH = path.resolve(__dirname, '../lambda-assets/jobs');
 
+/**
+ * Job API props
+ */
 export interface JobApiProps {
   /**
    * Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE
@@ -26,6 +29,9 @@ export interface JobApiProps {
   readonly scheduleFunction?: any | undefined; // ScheduleFunction
 }
 
+/**
+ * Job API construct
+ */
 export class JobApi extends cdk.Construct {
   /**
    * The Job API Gateway
@@ -163,6 +169,9 @@ export class JobApi extends cdk.Construct {
     }
   }
 
+  /**
+   * Job API API ID
+   */
   get restApiId(): string {
     return this._restApi.restApiId;
   }
