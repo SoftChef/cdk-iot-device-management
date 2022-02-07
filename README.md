@@ -1,8 +1,8 @@
-# CDK Construct - IoT Device Management
-
 [![npm version](https://badge.fury.io/js/%40softchef%2Fcdk-iot-device-management.svg)](https://badge.fury.io/js/%40softchef%2Fcdk-iot-device-management)
 ![Release](https://github.com/SoftChef/cdk-iot-device-management/workflows/Release/badge.svg)
 ![npm](https://img.shields.io/npm/dt/@softchef/cdk-iot-device-management?label=NPM%20Downloads&color=orange)
+
+# CDK Construct - IoT Device Management
 
 IoT device management is composed of things, thing types, thing groups, jobs, files API services. The constructs can be used independently, that are based on full-managed service to create an API Gateway & Lambda function.
 
@@ -10,7 +10,7 @@ IoT device management is composed of things, thing types, thing groups, jobs, fi
 
 ## Installation
 
-```
+```sh
 npm install @softchef/cdk-iot-device-management
 
 or
@@ -19,11 +19,27 @@ yarn add @softchef/cdk-iot-device-management
 
 ```
 
+## Why
+
+- Integrate RestAPI and AWS IoT core to implement access control.
+- Manage device firmware information.
+- Manage device, such as create an OTA jobs.
+
+This construct library provides five constructs:
+
+- **Thing Type API construct** - Create and modify thing types' information.
+- **Thing API construct** - Create and modify things' information.
+- **Thing Group construct** - Create and modify thing groups' information.
+- **Job API construct** - Create and modify thing's jobs.
+- **File API construct** - Integrate API Gateway and DynamoDB to store device firmware information.
+
 ## Constructs
 
 ### Thing Type API construct
 
-```
+Use thing type API to manage thing types.
+
+```typescript
 import { ThingTypeApi } from '@softchef/cdk-iot-device-management'
 
 const thingTypeApi = new ThingTypeApi(scope, id, {
@@ -36,7 +52,9 @@ const thingTypeApi = new ThingTypeApi(scope, id, {
 
 ### Thing API construct
 
-```
+Use thing API to manage things' information.
+
+```typescript
 import { ThingApi } from '@softchef/cdk-iot-device-management'
 
 const thingApi = new ThingApi(scope, id, {
@@ -49,7 +67,9 @@ const thingApi = new ThingApi(scope, id, {
 
 ### Thing Group API construct
 
-```
+Use thing API to manage thing groups' information.
+
+```typescript
 import { ThingGroupApi } from '@softchef/cdk-iot-device-management'
 
 const thingGroupApi = new ThingGroupApi(scope, id, {
@@ -57,11 +77,14 @@ const thingGroupApi = new ThingGroupApi(scope, id, {
   authorizer?: apigateway.IAuthorizer
 })
 ```
+
 [Thing Group API Docs](./docs/thing-group-api.md)
 
 ### Job API construct
 
-```
+Use job API to manage jobs' information.
+
+```typescript
 import { JobApi } from '@softchef/cdk-iot-device-management'
 
 const jobApi = new JobApi(scope, id, {
@@ -77,8 +100,9 @@ const jobApi = new JobApi(scope, id, {
 
 ### File API construct
 
-The file api has category & file api to manage IoT devices firmware.
-```
+Use File API to manage IoT devices firmware. File API contains category and file.
+
+```typescript
 import { fileApi } from '@softchef/cdk-iot-device-management'
 
 const FileApi = new FileApi(scope, id, {
@@ -89,27 +113,31 @@ const FileApi = new FileApi(scope, id, {
 
 [File API Docs](./docs/file-api.md)
 
-
 ### Category Table Schema
+
 | Name        | Schema | Primary Index | GSI(Query By ParentId) |
 | ----------- | ------ | ------------- | ---------------------- |
 | categoryId  | String | Partition Key |                        |
 | parentId    | String |               | Partition Key          |
 | name        | String |               |                        |
-| description	| String |               |                        |
+| description | String |               |                        |
 
 ### File Table Schema
+
 | Name         | Schema | Primary Index | GSI(Query By CategoryId And Locale) | GSI(Get File By Checksum And Version) |
 | ------------ | ------ | ------------- | ----------------------------------- | ------------------------------------- |
-| fileId        | String | Partition Key |                                     |                                       |
+| fileId       | String | Partition Key |                                     |                                       |
 | categoryId   | String |               | Partition Key                       |                                       |
-| checksum	   | String |               |                                     | Partition Key                         |
+| checksum     | String |               |                                     | Partition Key                         |
 | version      | String |               |                                     | Sort Key                              |
 | checksumType | String |               |                                     |                                       |
-| location  	 | String |               |                                     |                                       |
-| locale    	 | String |               | Sort Key                            |                                       |
-| summary	     | String |               |                                     |                                       |
-| description	 | String |               |                                     |                                       |
-| updatedAt  	 | Number |               |                                     |                                       |
-| createdAt	   | Number |               |                                     |                                       |
-### Roadmap
+| location     | String |               |                                     |                                       |
+| locale       | String |               | Sort Key                            |                                       |
+| summary      | String |               |                                     |                                       |
+| description  | String |               |                                     |                                       |
+| updatedAt    | Number |               |                                     |                                       |
+| createdAt    | Number |               |                                     |                                       |
+
+## License
+
+This code is licensed under the Apache License 2.0. See the [LICENSE](https://github.com/SoftChef/cdk-iot-device-management/blob/main/LICENSE) file.

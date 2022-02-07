@@ -4,6 +4,8 @@
 
 ### FileApi <a name="@softchef/cdk-iot-device-management.FileApi" id="softchefcdkiotdevicemanagementfileapi"></a>
 
+File API construct.
+
 #### Initializers <a name="@softchef/cdk-iot-device-management.FileApi.Initializer" id="softchefcdkiotdevicemanagementfileapiinitializer"></a>
 
 ```typescript
@@ -46,7 +48,7 @@ new FileApi(scope: Construct, id: string, props?: FileApiProps)
 | --- | --- | --- |
 | [`categoryTable`](#softchefcdkiotdevicemanagementfileapipropertycategorytable)<span title="Required">*</span> | [`@aws-cdk/aws-dynamodb.Table`](#@aws-cdk/aws-dynamodb.Table) | The category table. |
 | [`fileTable`](#softchefcdkiotdevicemanagementfileapipropertyfiletable)<span title="Required">*</span> | [`@aws-cdk/aws-dynamodb.Table`](#@aws-cdk/aws-dynamodb.Table) | The file table. |
-| [`restApiId`](#softchefcdkiotdevicemanagementfileapipropertyrestapiid)<span title="Required">*</span> | `string` | *No description.* |
+| [`restApiId`](#softchefcdkiotdevicemanagementfileapipropertyrestapiid)<span title="Required">*</span> | `string` | File API API ID. |
 
 ---
 
@@ -82,10 +84,14 @@ public readonly restApiId: string;
 
 - *Type:* `string`
 
+File API API ID.
+
 ---
 
 
 ### JobApi <a name="@softchef/cdk-iot-device-management.JobApi" id="softchefcdkiotdevicemanagementjobapi"></a>
+
+Job API construct.
 
 #### Initializers <a name="@softchef/cdk-iot-device-management.JobApi.Initializer" id="softchefcdkiotdevicemanagementjobapiinitializer"></a>
 
@@ -127,7 +133,7 @@ new JobApi(scope: Construct, id: string, props?: JobApiProps)
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| [`restApiId`](#softchefcdkiotdevicemanagementjobapipropertyrestapiid)<span title="Required">*</span> | `string` | *No description.* |
+| [`restApiId`](#softchefcdkiotdevicemanagementjobapipropertyrestapiid)<span title="Required">*</span> | `string` | Job API API ID. |
 
 ---
 
@@ -139,10 +145,14 @@ public readonly restApiId: string;
 
 - *Type:* `string`
 
+Job API API ID.
+
 ---
 
 
 ### ThingApi <a name="@softchef/cdk-iot-device-management.ThingApi" id="softchefcdkiotdevicemanagementthingapi"></a>
+
+Thing API construct.
 
 #### Initializers <a name="@softchef/cdk-iot-device-management.ThingApi.Initializer" id="softchefcdkiotdevicemanagementthingapiinitializer"></a>
 
@@ -184,7 +194,7 @@ new ThingApi(scope: Construct, id: string, props?: ThingApiProps)
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| [`restApiId`](#softchefcdkiotdevicemanagementthingapipropertyrestapiid)<span title="Required">*</span> | `string` | *No description.* |
+| [`restApiId`](#softchefcdkiotdevicemanagementthingapipropertyrestapiid)<span title="Required">*</span> | `string` | Thing API API ID. |
 
 ---
 
@@ -196,10 +206,14 @@ public readonly restApiId: string;
 
 - *Type:* `string`
 
+Thing API API ID.
+
 ---
 
 
 ### ThingGroupApi <a name="@softchef/cdk-iot-device-management.ThingGroupApi" id="softchefcdkiotdevicemanagementthinggroupapi"></a>
+
+Thing Group API construct.
 
 #### Initializers <a name="@softchef/cdk-iot-device-management.ThingGroupApi.Initializer" id="softchefcdkiotdevicemanagementthinggroupapiinitializer"></a>
 
@@ -241,7 +255,7 @@ new ThingGroupApi(scope: Construct, id: string, props?: ThingGroupApiProps)
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| [`restApiId`](#softchefcdkiotdevicemanagementthinggroupapipropertyrestapiid)<span title="Required">*</span> | `string` | *No description.* |
+| [`restApiId`](#softchefcdkiotdevicemanagementthinggroupapipropertyrestapiid)<span title="Required">*</span> | `string` | Thing Group API API ID. |
 
 ---
 
@@ -252,6 +266,8 @@ public readonly restApiId: string;
 ```
 
 - *Type:* `string`
+
+Thing Group API API ID.
 
 ---
 
@@ -317,6 +333,8 @@ public readonly restApiId: string;
 
 ### Capacity <a name="@softchef/cdk-iot-device-management.Capacity" id="softchefcdkiotdevicemanagementcapacity"></a>
 
+Specify file, category table read/write capacity.
+
 #### Initializer <a name="[object Object].Initializer" id="object-objectinitializer"></a>
 
 ```typescript
@@ -329,8 +347,8 @@ const capacity: Capacity = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| [`readCapacity`](#softchefcdkiotdevicemanagementcapacitypropertyreadcapacity) | `number` | *No description.* |
-| [`writeCapacity`](#softchefcdkiotdevicemanagementcapacitypropertywritecapacity) | `number` | *No description.* |
+| [`readCapacity`](#softchefcdkiotdevicemanagementcapacitypropertyreadcapacity) | `number` | The read capacity for the table. |
+| [`writeCapacity`](#softchefcdkiotdevicemanagementcapacitypropertywritecapacity) | `number` | The write capacity for the table. |
 
 ---
 
@@ -342,6 +360,8 @@ public readonly readCapacity: number;
 
 - *Type:* `number`
 
+The read capacity for the table.
+
 ---
 
 ##### `writeCapacity`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.Capacity.property.writeCapacity" id="softchefcdkiotdevicemanagementcapacitypropertywritecapacity"></a>
@@ -352,9 +372,13 @@ public readonly writeCapacity: number;
 
 - *Type:* `number`
 
+The write capacity for the table.
+
 ---
 
 ### CategoryTableConfig <a name="@softchef/cdk-iot-device-management.CategoryTableConfig" id="softchefcdkiotdevicemanagementcategorytableconfig"></a>
+
+Category table capacity config.
 
 #### Initializer <a name="[object Object].Initializer" id="object-objectinitializer"></a>
 
@@ -368,8 +392,8 @@ const categoryTableConfig: CategoryTableConfig = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| [`indexQueryByParentId`](#softchefcdkiotdevicemanagementcategorytableconfigpropertyindexquerybyparentid)<span title="Required">*</span> | [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity) | *No description.* |
-| [`primaryIndex`](#softchefcdkiotdevicemanagementcategorytableconfigpropertyprimaryindex)<span title="Required">*</span> | [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity) | *No description.* |
+| [`indexQueryByParentId`](#softchefcdkiotdevicemanagementcategorytableconfigpropertyindexquerybyparentid)<span title="Required">*</span> | [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity) | Category table global secondary index `query-by-parent-id` capacity, specify at `Capacity` interface. |
+| [`primaryIndex`](#softchefcdkiotdevicemanagementcategorytableconfigpropertyprimaryindex)<span title="Required">*</span> | [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity) | Category table capacity, specify at `Capacity` interface. |
 
 ---
 
@@ -381,6 +405,8 @@ public readonly indexQueryByParentId: Capacity;
 
 - *Type:* [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity)
 
+Category table global secondary index `query-by-parent-id` capacity, specify at `Capacity` interface.
+
 ---
 
 ##### `primaryIndex`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.CategoryTableConfig.property.primaryIndex" id="softchefcdkiotdevicemanagementcategorytableconfigpropertyprimaryindex"></a>
@@ -391,9 +417,13 @@ public readonly primaryIndex: Capacity;
 
 - *Type:* [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity)
 
+Category table capacity, specify at `Capacity` interface.
+
 ---
 
 ### FileApiProps <a name="@softchef/cdk-iot-device-management.FileApiProps" id="softchefcdkiotdevicemanagementfileapiprops"></a>
+
+File API props.
 
 #### Initializer <a name="[object Object].Initializer" id="object-objectinitializer"></a>
 
@@ -409,8 +439,8 @@ const fileApiProps: FileApiProps = { ... }
 | --- | --- | --- |
 | [`authorizationType`](#softchefcdkiotdevicemanagementfileapipropspropertyauthorizationtype) | [`@aws-cdk/aws-apigateway.AuthorizationType`](#@aws-cdk/aws-apigateway.AuthorizationType) | Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE. |
 | [`authorizer`](#softchefcdkiotdevicemanagementfileapipropspropertyauthorizer) | [`@aws-cdk/aws-apigateway.IAuthorizer`](#@aws-cdk/aws-apigateway.IAuthorizer) | Specify API Gateway's authorizer, CognitoUserPool/Lambda. |
-| [`categoryTableConfig`](#softchefcdkiotdevicemanagementfileapipropspropertycategorytableconfig) | [`@softchef/cdk-iot-device-management.CategoryTableConfig`](#@softchef/cdk-iot-device-management.CategoryTableConfig) | Category Table Configuration,. |
-| [`fileTableConfig`](#softchefcdkiotdevicemanagementfileapipropspropertyfiletableconfig) | [`@softchef/cdk-iot-device-management.FileTableConfig`](#@softchef/cdk-iot-device-management.FileTableConfig) | File Table Configuration,. |
+| [`categoryTableConfig`](#softchefcdkiotdevicemanagementfileapipropspropertycategorytableconfig) | [`@softchef/cdk-iot-device-management.CategoryTableConfig`](#@softchef/cdk-iot-device-management.CategoryTableConfig) | Category Table Configuration. |
+| [`fileTableConfig`](#softchefcdkiotdevicemanagementfileapipropspropertyfiletableconfig) | [`@softchef/cdk-iot-device-management.FileTableConfig`](#@softchef/cdk-iot-device-management.FileTableConfig) | File Table Configuration. |
 
 ---
 
@@ -449,7 +479,7 @@ public readonly categoryTableConfig: CategoryTableConfig;
 - *Type:* [`@softchef/cdk-iot-device-management.CategoryTableConfig`](#@softchef/cdk-iot-device-management.CategoryTableConfig)
 - *Default:* undefined
 
-Category Table Configuration,.
+Category Table Configuration.
 
 ---
 
@@ -462,11 +492,13 @@ public readonly fileTableConfig: FileTableConfig;
 - *Type:* [`@softchef/cdk-iot-device-management.FileTableConfig`](#@softchef/cdk-iot-device-management.FileTableConfig)
 - *Default:* undefined
 
-File Table Configuration,.
+File Table Configuration.
 
 ---
 
 ### FileTableConfig <a name="@softchef/cdk-iot-device-management.FileTableConfig" id="softchefcdkiotdevicemanagementfiletableconfig"></a>
+
+File table capacity config.
 
 #### Initializer <a name="[object Object].Initializer" id="object-objectinitializer"></a>
 
@@ -480,9 +512,9 @@ const fileTableConfig: FileTableConfig = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| [`indexGetFileByChecksumAndVersion`](#softchefcdkiotdevicemanagementfiletableconfigpropertyindexgetfilebychecksumandversion)<span title="Required">*</span> | [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity) | *No description.* |
-| [`indexQueryByCategoryIdAndLocale`](#softchefcdkiotdevicemanagementfiletableconfigpropertyindexquerybycategoryidandlocale)<span title="Required">*</span> | [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity) | *No description.* |
-| [`primaryIndex`](#softchefcdkiotdevicemanagementfiletableconfigpropertyprimaryindex)<span title="Required">*</span> | [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity) | *No description.* |
+| [`indexGetFileByChecksumAndVersion`](#softchefcdkiotdevicemanagementfiletableconfigpropertyindexgetfilebychecksumandversion)<span title="Required">*</span> | [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity) | File table global secondary index `get-file-by-checksum-and-version` capacity specify at `Capacity` interface. |
+| [`indexQueryByCategoryIdAndLocale`](#softchefcdkiotdevicemanagementfiletableconfigpropertyindexquerybycategoryidandlocale)<span title="Required">*</span> | [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity) | File table global secondary index `query-by-category-id-and-locale` capacity specify at `Capacity` interface. |
+| [`primaryIndex`](#softchefcdkiotdevicemanagementfiletableconfigpropertyprimaryindex)<span title="Required">*</span> | [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity) | File table capacity specify at `Capacity` interface. |
 
 ---
 
@@ -494,6 +526,8 @@ public readonly indexGetFileByChecksumAndVersion: Capacity;
 
 - *Type:* [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity)
 
+File table global secondary index `get-file-by-checksum-and-version` capacity specify at `Capacity` interface.
+
 ---
 
 ##### `indexQueryByCategoryIdAndLocale`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileTableConfig.property.indexQueryByCategoryIdAndLocale" id="softchefcdkiotdevicemanagementfiletableconfigpropertyindexquerybycategoryidandlocale"></a>
@@ -503,6 +537,8 @@ public readonly indexQueryByCategoryIdAndLocale: Capacity;
 ```
 
 - *Type:* [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity)
+
+File table global secondary index `query-by-category-id-and-locale` capacity specify at `Capacity` interface.
 
 ---
 
@@ -514,9 +550,13 @@ public readonly primaryIndex: Capacity;
 
 - *Type:* [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity)
 
+File table capacity specify at `Capacity` interface.
+
 ---
 
 ### JobApiProps <a name="@softchef/cdk-iot-device-management.JobApiProps" id="softchefcdkiotdevicemanagementjobapiprops"></a>
+
+Job API props.
 
 #### Initializer <a name="[object Object].Initializer" id="object-objectinitializer"></a>
 
@@ -577,6 +617,8 @@ Specify Schedule Function to enable create schedule job function.
 
 ### ThingApiProps <a name="@softchef/cdk-iot-device-management.ThingApiProps" id="softchefcdkiotdevicemanagementthingapiprops"></a>
 
+Thing API props.
+
 #### Initializer <a name="[object Object].Initializer" id="object-objectinitializer"></a>
 
 ```typescript
@@ -621,6 +663,8 @@ Specify API Gateway's authorizer, CognitoUserPool/Lambda.
 ---
 
 ### ThingGroupApiProps <a name="@softchef/cdk-iot-device-management.ThingGroupApiProps" id="softchefcdkiotdevicemanagementthinggroupapiprops"></a>
+
+Thing Group API props.
 
 #### Initializer <a name="[object Object].Initializer" id="object-objectinitializer"></a>
 

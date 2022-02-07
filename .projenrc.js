@@ -1,17 +1,18 @@
-const { awscdk } = require('projen');
+const { awscdk, AUTOMATION_TOKEN } = require('projen');
 
-const AUTOMATION_TOKEN = 'PROJEN_GITHUB_TOKEN';
+const PROJECT_NAME = '@softchef/cdk-iot-device-management';
+const PROJECT_DESCRIPTION = 'IoT device management is composed of things, thing types, thing groups, jobs, files API services. The constructs can be used independently, that are based on full-managed service to create an API Gateway & Lambda function.';
 
 const project = new awscdk.AwsCdkConstructLibrary({
-  author: 'SoftChef',
+  authorName: 'SoftChef',
   authorEmail: 'poke@softchef.com',
   authorUrl: 'https://www.softchef.com',
   authorOrganization: true,
+  name: PROJECT_NAME,
+  description: PROJECT_DESCRIPTION,
+  repositoryUrl: 'git@github.com:SoftChef/cdk-iot-device-management.git',
   cdkVersion: '1.73.0',
   defaultReleaseBranch: 'main',
-  name: '@softchef/cdk-iot-device-management',
-  description: 'IoT device management is composed of things, thing types, thing groups, jobs, files API services. The constructs can be used independently, that are based on full-managed service to create an API Gateway & Lambda function.',
-  repositoryUrl: 'git@github.com:SoftChef/cdk-iot-device-management.git',
   cdkDependencies: [
     '@aws-cdk/core',
     '@aws-cdk/aws-iam',
@@ -41,7 +42,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'esbuild',
   ],
   depsUpgradeOptions: {
-    ignoreProjen: true,
+    ignoreProjen: false,
     workflowOptions: {
       schedule: {
         cron: ['0 2 * * *'],
@@ -55,17 +56,12 @@ const project = new awscdk.AwsCdkConstructLibrary({
     allowedUsernames: ['MinCheTsai'],
   },
   keywords: [
+    'AWS',
     'CDK',
     'IoT',
     'Device Management',
     'IoT Job',
     'OTA',
-  ],
-  gitignore: [
-    'src/**/dist',
-    'lambda-assets/**/dist',
-    'test/**/dist',
-    'cdk.out',
   ],
   tsconfig: {
     compilerOptions: {
@@ -83,5 +79,14 @@ const project = new awscdk.AwsCdkConstructLibrary({
 project.package.addField('resolutions', {
   'jest-environment-jsdom': '27.3.1',
 });
+
+const commonExclude = [
+  'cdk.out',
+  'cdk.context.json',
+  'yarn-error.log',
+];
+
+project.npmignore.exclude(...commonExclude);
+project.gitignore.exclude(...commonExclude);
 
 project.synth();

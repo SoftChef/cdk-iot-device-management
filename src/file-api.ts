@@ -8,22 +8,60 @@ import { RestApi, HttpMethod } from '@softchef/cdk-restapi';
 
 const LAMBDA_ASSETS_PATH = path.resolve(__dirname, '../lambda-assets/files');
 
+/**
+  * Specify file, category table read/write capacity.
+ */
 export interface Capacity {
+  /**
+   * The write capacity for the table.
+   */
   readonly writeCapacity?: number;
+  /**
+   * The read capacity for the table.
+   */
   readonly readCapacity?: number;
 }
 
+/**
+ * Category table capacity config
+ */
 export interface CategoryTableConfig {
+  /**
+   * Category table capacity,
+   * specify at `Capacity` interface.
+   */
   readonly primaryIndex: Capacity;
+  /**
+   * Category table global secondary index `query-by-parent-id` capacity,
+   * specify at `Capacity` interface.
+   */
   readonly indexQueryByParentId: Capacity;
 }
 
+/**
+ * File table capacity config
+ */
 export interface FileTableConfig {
+  /**
+   * File table capacity
+   * specify at `Capacity` interface
+   */
   readonly primaryIndex: Capacity;
+  /**
+   * File table global secondary index `query-by-category-id-and-locale` capacity
+   * specify at `Capacity` interface.
+   */
   readonly indexQueryByCategoryIdAndLocale: Capacity;
+  /**
+   * File table global secondary index `get-file-by-checksum-and-version` capacity
+   * specify at `Capacity` interface.
+   */
   readonly indexGetFileByChecksumAndVersion: Capacity;
 }
 
+/**
+ * File API props
+ */
 export interface FileApiProps {
   /**
    * Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE
@@ -36,17 +74,20 @@ export interface FileApiProps {
    */
   readonly authorizer?: apigateway.IAuthorizer | undefined;
   /**
-   * Category Table Configuration,
+   * Category Table Configuration
    * @default undefined
    */
   readonly categoryTableConfig?: CategoryTableConfig;
   /**
-   * File Table Configuration,
+   * File Table Configuration
    * @default undefined
    */
   readonly fileTableConfig?: FileTableConfig;
 }
 
+/**
+ * File API construct
+ */
 export class FileApi extends cdk.Construct {
   /**
    * The File API Gateway
@@ -182,6 +223,9 @@ export class FileApi extends cdk.Construct {
     });
   }
 
+  /**
+   * File API API ID
+   */
   get restApiId(): string {
     return this._restApi.restApiId;
   }

@@ -7,6 +7,9 @@ import { RestApi, HttpMethod } from '@softchef/cdk-restapi';
 
 const LAMBDA_ASSETS_PATH = path.resolve(__dirname, '../lambda-assets/thing-groups');
 
+/**
+ * Thing Group API props
+ */
 export interface ThingGroupApiProps {
   /**
    * Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE
@@ -20,6 +23,9 @@ export interface ThingGroupApiProps {
   readonly authorizer?: apigateway.IAuthorizer | undefined;
 }
 
+/**
+ * Thing Group API construct
+ */
 export class ThingGroupApi extends cdk.Construct {
   /**
    * The Thing Group API Gateway
@@ -87,6 +93,9 @@ export class ThingGroupApi extends cdk.Construct {
     });
   }
 
+  /**
+   * Thing Group API API ID
+   */
   get restApiId(): string {
     return this._restApi.restApiId;
   }
