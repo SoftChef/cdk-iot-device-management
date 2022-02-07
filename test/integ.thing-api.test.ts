@@ -1,9 +1,20 @@
-import { SynthUtils } from '@aws-cdk/assert';
-import '@aws-cdk/assert/jest';
-import * as lambda from '@aws-cdk/aws-lambda';
-import * as cdk from '@aws-cdk/core';
-import { ThingApi } from '../src/index';
-import { fnGetAttArn, ref } from './utils';
+import {
+  Template,
+} from 'aws-cdk-lib/assertions';
+import {
+  Runtime,
+} from 'aws-cdk-lib/aws-lambda';
+import {
+  App,
+  Stack,
+} from 'aws-cdk-lib/core';
+import {
+  ThingApi,
+} from '../src/index';
+import {
+  fnGetAttArn,
+  ref,
+} from './utils';
 
 const expectedRoles: {
   [name: string]: string;
@@ -31,52 +42,53 @@ const expectedResources: {
 
 const expected = {
   restApiId: 'ThingApiThingRestApi8AD2DCAF',
-  lambdaFunctionRuntime: lambda.Runtime.NODEJS_14_X.toString(),
+  lambdaFunctionRuntime: Runtime.NODEJS_14_X.toString(),
 };
 
 test('minimal usage', () => {
-  const app = new cdk.App();
-  const stack = new cdk.Stack(app, 'demo-stack');
+  const app = new App();
+  const stack = new Stack(app, 'test-stack');
   new ThingApi(stack, 'ThingApi');
-  expect(SynthUtils.synthesize(stack).template).toMatchSnapshot();
-  expect(stack).toCountResources('AWS::ApiGateway::RestApi', 1);
-  expect(stack).toCountResources('AWS::ApiGateway::Resource', 5);
-  expect(stack).toCountResources('AWS::ApiGateway::Method', 16);
-  expect(stack).toCountResources('AWS::Lambda::Function', 10);
-  expect(stack).toCountResources('AWS::IAM::Role', 11);
-  expect(stack).toCountResources('AWS::IAM::Policy', 10);
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::RestApi', {
+  const template = Template.fromStack(stack);
+  expect(template.toJSON()).toMatchSnapshot();
+  template.resourceCountIs('AWS::ApiGateway::RestApi', 1);
+  template.resourceCountIs('AWS::ApiGateway::Resource', 5);
+  template.resourceCountIs('AWS::ApiGateway::Method', 16);
+  template.resourceCountIs('AWS::Lambda::Function', 10);
+  template.resourceCountIs('AWS::IAM::Role', 11);
+  template.resourceCountIs('AWS::IAM::Policy', 10);
+  template.hasResourceProperties('AWS::ApiGateway::RestApi', {
     Name: 'ThingRestApi',
   });
   // RestAPI: /things
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     PathPart: 'things',
   });
   //  RestAPI: /things/{thingName}
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     ParentId: ref(expectedResources.thingsResourceId),
     PathPart: '{thingName}',
   });
   //  RestAPI: /things/{thingName}/shadows
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     ParentId: ref(expectedResources.thingsThingNameResourceId),
     PathPart: 'shadows',
   });
   //  RestAPI: /things/{thingName}/shadows/{shadowName}
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     ParentId: ref(expectedResources.thingsThingNameShadowsResourceId),
     PathPart: '{shadowName}',
   });
   // CreateThing API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.createThingFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.createThingFunctionRole),
     ],
@@ -90,17 +102,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.thingsResourceId),
     HttpMethod: 'POST',
   });
   // DeleteThing API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.deleteThingFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.deleteThingFunctionRole),
     ],
@@ -114,17 +126,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.thingsThingNameResourceId),
     HttpMethod: 'DELETE',
   });
   // DeleteThingShadow API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.deleteThingShadowFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.deleteThingShadowFunctionRole),
     ],
@@ -138,17 +150,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.thingsThingNameShadowsShadowNameResourceId),
     HttpMethod: 'DELETE',
   });
   // GetThing API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.getThingFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.getThingFunctionRole),
     ],
@@ -162,17 +174,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.thingsThingNameResourceId),
     HttpMethod: 'GET',
   });
   // GetThingShadow API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.getThingShadowFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.getThingShadowFunctionRole),
     ],
@@ -186,17 +198,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.thingsThingNameShadowsShadowNameResourceId),
     HttpMethod: 'GET',
   });
   // ListThingShadows API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.listThingShadowsFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.listThingShadowsFunctionRole),
     ],
@@ -210,17 +222,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.thingsThingNameShadowsResourceId),
     HttpMethod: 'GET',
   });
   // ListThings API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.listThingsFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.listThingsFunctionRole),
     ],
@@ -234,17 +246,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.thingsResourceId),
     HttpMethod: 'GET',
   });
   // UpdateThing API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.updateThingFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.updateThingFunctionRole),
     ],
@@ -258,17 +270,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.thingsThingNameResourceId),
     HttpMethod: 'PUT',
   });
   // UpdateThingShadow API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.updateThingShadowFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.updateThingShadowFunctionRole),
     ],
@@ -282,17 +294,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.thingsThingNameShadowsShadowNameResourceId),
     HttpMethod: 'PUT',
   });
   // QueryThing API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.searchThingsFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.searchThingsFunctionRole),
     ],
@@ -306,7 +318,7 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.thingsResourceId),
     HttpMethod: 'GET',

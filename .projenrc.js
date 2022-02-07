@@ -11,15 +11,20 @@ const project = new awscdk.AwsCdkConstructLibrary({
   name: PROJECT_NAME,
   description: PROJECT_DESCRIPTION,
   repositoryUrl: 'git@github.com:SoftChef/cdk-iot-device-management.git',
-  cdkVersion: '1.73.0',
+  cdkVersion: '2.1.0',
+  majorVersion: 2,
   defaultReleaseBranch: 'main',
-  cdkDependencies: [
-    '@aws-cdk/core',
-    '@aws-cdk/aws-iam',
-    '@aws-cdk/aws-apigateway',
-    '@aws-cdk/aws-lambda',
-    '@aws-cdk/aws-lambda-nodejs',
-    '@aws-cdk/aws-dynamodb',
+  releaseBranches: {
+    cdkv1: {
+      npmDistTag: 'cdkv1',
+      majorVersion: 1,
+    },
+  },
+  deps: [
+    '@aws-cdk/aws-apigatewayv2-alpha',
+    '@aws-cdk/aws-apigatewayv2-integrations-alpha',
+    '@softchef/cdk-restapi',
+    '@softchef/cdk-schedule-function',
   ],
   bundledDeps: [
     '@aws-sdk/client-dynamodb',
@@ -28,8 +33,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
     '@aws-sdk/client-s3',
     '@aws-sdk/lib-dynamodb',
     '@aws-sdk/util-dynamodb',
-    '@softchef/cdk-restapi',
-    '@softchef/cdk-schedule-function',
     '@softchef/lambda-events',
     '@types/semver',
     '@types/uuid',
@@ -38,6 +41,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'uuid',
   ],
   devDeps: [
+    'aws-cdk',
     'aws-sdk-client-mock',
     'esbuild',
   ],

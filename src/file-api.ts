@@ -1,10 +1,27 @@
 import * as path from 'path';
-import * as apigateway from '@aws-cdk/aws-apigateway';
-import * as dynamodb from '@aws-cdk/aws-dynamodb';
-import * as iam from '@aws-cdk/aws-iam';
-import * as lambda from '@aws-cdk/aws-lambda-nodejs';
-import * as cdk from '@aws-cdk/core';
-import { RestApi, HttpMethod } from '@softchef/cdk-restapi';
+import {
+  RestApi,
+  HttpMethod,
+} from '@softchef/cdk-restapi';
+import {
+  AuthorizationType,
+  IAuthorizer,
+} from 'aws-cdk-lib/aws-apigateway';
+import {
+  AttributeType,
+  ProjectionType,
+  Table,
+} from 'aws-cdk-lib/aws-dynamodb';
+import {
+  Policy,
+  PolicyStatement,
+} from 'aws-cdk-lib/aws-iam';
+import {
+  NodejsFunction,
+} from 'aws-cdk-lib/aws-lambda-nodejs';
+import {
+  Construct,
+} from 'constructs';
 
 const LAMBDA_ASSETS_PATH = path.resolve(__dirname, '../lambda-assets/files');
 
@@ -65,14 +82,14 @@ export interface FileTableConfig {
 export interface FileApiProps {
   /**
    * Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE
-   * @default apigateway.AuthorizationType.NONE
+   * @default AuthorizationType.NONE
    */
-  readonly authorizationType?: apigateway.AuthorizationType;
+  readonly authorizationType?: AuthorizationType;
   /**
    * Specify API Gateway's authorizer, CognitoUserPool/Lambda
    * @default undefined
    */
-  readonly authorizer?: apigateway.IAuthorizer | undefined;
+  readonly authorizer?: IAuthorizer | undefined;
   /**
    * Category Table Configuration
    * @default undefined
@@ -88,7 +105,7 @@ export interface FileApiProps {
 /**
  * File API construct
  */
-export class FileApi extends cdk.Construct {
+export class FileApi extends Construct {
   /**
    * The File API Gateway
    */
@@ -96,18 +113,18 @@ export class FileApi extends cdk.Construct {
   /**
    * The category table
    */
-  public readonly categoryTable: dynamodb.Table;
+  public readonly categoryTable: Table;
   /**
    * The file table
    */
-  public readonly fileTable: dynamodb.Table;
+  public readonly fileTable: Table;
 
-  constructor(scope: cdk.Construct, id: string, props?: FileApiProps) {
+  constructor(scope: Construct, id: string, props?: FileApiProps) {
     super(scope, id);
-    this.categoryTable = new dynamodb.Table(this, 'CategoryTable', {
+    this.categoryTable = new Table(this, 'CategoryTable', {
       partitionKey: {
         name: 'categoryId',
-        type: dynamodb.AttributeType.STRING,
+        type: AttributeType.STRING,
       },
       readCapacity: props?.categoryTableConfig?.primaryIndex.readCapacity ?? 1,
       writeCapacity: props?.categoryTableConfig?.primaryIndex.writeCapacity ?? 1,
@@ -116,16 +133,16 @@ export class FileApi extends cdk.Construct {
       indexName: 'query-by-parent-id',
       partitionKey: {
         name: 'parentId',
-        type: dynamodb.AttributeType.STRING,
+        type: AttributeType.STRING,
       },
-      projectionType: dynamodb.ProjectionType.ALL,
+      projectionType: ProjectionType.ALL,
       readCapacity: props?.categoryTableConfig?.indexQueryByParentId.readCapacity ?? 1,
       writeCapacity: props?.categoryTableConfig?.indexQueryByParentId.writeCapacity ?? 1,
     });
-    this.fileTable = new dynamodb.Table(this, 'FileTable', {
+    this.fileTable = new Table(this, 'FileTable', {
       partitionKey: {
         name: 'fileId',
-        type: dynamodb.AttributeType.STRING,
+        type: AttributeType.STRING,
       },
       readCapacity: props?.fileTableConfig?.primaryIndex.readCapacity ?? 1,
       writeCapacity: props?.fileTableConfig?.primaryIndex.writeCapacity ?? 1,
@@ -134,13 +151,13 @@ export class FileApi extends cdk.Construct {
       indexName: 'query-by-category-id-and-locale',
       partitionKey: {
         name: 'categoryId',
-        type: dynamodb.AttributeType.STRING,
+        type: AttributeType.STRING,
       },
       sortKey: {
         name: 'locale',
-        type: dynamodb.AttributeType.STRING,
+        type: AttributeType.STRING,
       },
-      projectionType: dynamodb.ProjectionType.ALL,
+      projectionType: ProjectionType.ALL,
       readCapacity: props?.fileTableConfig?.indexQueryByCategoryIdAndLocale.readCapacity ?? 1,
       writeCapacity: props?.fileTableConfig?.indexQueryByCategoryIdAndLocale.writeCapacity ?? 1,
     });
@@ -148,20 +165,20 @@ export class FileApi extends cdk.Construct {
       indexName: 'get-file-by-checksum-and-version',
       partitionKey: {
         name: 'checksum',
-        type: dynamodb.AttributeType.STRING,
+        type: AttributeType.STRING,
       },
       sortKey: {
         name: 'version',
-        type: dynamodb.AttributeType.STRING,
+        type: AttributeType.STRING,
       },
-      projectionType: dynamodb.ProjectionType.ALL,
+      projectionType: ProjectionType.ALL,
       readCapacity: props?.fileTableConfig?.indexGetFileByChecksumAndVersion.readCapacity ?? 1,
       writeCapacity: props?.fileTableConfig?.indexGetFileByChecksumAndVersion.writeCapacity ?? 1,
     });
 
     this._restApi = new RestApi(this, 'FileRestApi', {
       enableCors: true,
-      authorizationType: props?.authorizationType ?? apigateway.AuthorizationType.NONE,
+      authorizationType: props?.authorizationType ?? AuthorizationType.NONE,
       authorizer: props?.authorizer ?? undefined,
       resources: [
         {
@@ -230,17 +247,17 @@ export class FileApi extends cdk.Construct {
     return this._restApi.restApiId;
   }
 
-  private createCreateCategoryFunction(): lambda.NodejsFunction {
-    const createCategoryFunction = new lambda.NodejsFunction(this, 'CreateCategoryFunction', {
+  private createCreateCategoryFunction(): NodejsFunction {
+    const createCategoryFunction = new NodejsFunction(this, 'CreateCategoryFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/create-category/app.ts`,
       environment: {
         CATEGORY_TABLE_NAME: this.categoryTable.tableName,
       },
     });
     createCategoryFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'create-category-policy', {
+      new Policy(this, 'create-category-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'dynamodb:GetItem',
               'dynamodb:PutItem',
@@ -255,17 +272,17 @@ export class FileApi extends cdk.Construct {
     return createCategoryFunction;
   }
 
-  private createListCategoriesFunction(): lambda.NodejsFunction {
-    const listCategoriesFunction = new lambda.NodejsFunction(this, 'ListCategoriesFunction', {
+  private createListCategoriesFunction(): NodejsFunction {
+    const listCategoriesFunction = new NodejsFunction(this, 'ListCategoriesFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/list-categories/app.ts`,
       environment: {
         CATEGORY_TABLE_NAME: this.categoryTable.tableName,
       },
     });
     listCategoriesFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'list-categories-policy', {
+      new Policy(this, 'list-categories-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'dynamodb:Query',
               'dynamodb:Scan',
@@ -282,17 +299,17 @@ export class FileApi extends cdk.Construct {
     return listCategoriesFunction;
   }
 
-  private createGetCategoryFunction(): lambda.NodejsFunction {
-    const getCategoryFunction = new lambda.NodejsFunction(this, 'GetCategoryFunction', {
+  private createGetCategoryFunction(): NodejsFunction {
+    const getCategoryFunction = new NodejsFunction(this, 'GetCategoryFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/get-category/app.ts`,
       environment: {
         CATEGORY_TABLE_NAME: this.categoryTable.tableName,
       },
     });
     getCategoryFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'get-category-policy', {
+      new Policy(this, 'get-category-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'dynamodb:GetItem',
             ],
@@ -306,17 +323,17 @@ export class FileApi extends cdk.Construct {
     return getCategoryFunction;
   }
 
-  private createUpdateCategoryFunction(): lambda.NodejsFunction {
-    const updateCategoryFunction = new lambda.NodejsFunction(this, 'UpdateCategoryFunction', {
+  private createUpdateCategoryFunction(): NodejsFunction {
+    const updateCategoryFunction = new NodejsFunction(this, 'UpdateCategoryFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/update-category/app.ts`,
       environment: {
         CATEGORY_TABLE_NAME: this.categoryTable.tableName,
       },
     });
     updateCategoryFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'update-category-policy', {
+      new Policy(this, 'update-category-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'dynamodb:GetItem',
               'dynamodb:UpdateItem',
@@ -331,17 +348,17 @@ export class FileApi extends cdk.Construct {
     return updateCategoryFunction;
   }
 
-  private createDeleteCategoryFunction(): lambda.NodejsFunction {
-    const deleteCategoryFunction = new lambda.NodejsFunction(this, 'DeleteCategoryFunction', {
+  private createDeleteCategoryFunction(): NodejsFunction {
+    const deleteCategoryFunction = new NodejsFunction(this, 'DeleteCategoryFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/delete-category/app.ts`,
       environment: {
         CATEGORY_TABLE_NAME: this.categoryTable.tableName,
       },
     });
     deleteCategoryFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'delete-category-policy', {
+      new Policy(this, 'delete-category-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'dynamodb:DeleteItem',
             ],
@@ -355,8 +372,8 @@ export class FileApi extends cdk.Construct {
     return deleteCategoryFunction;
   }
 
-  private createCreateFilesFunction(): lambda.NodejsFunction {
-    const createFilesFunction = new lambda.NodejsFunction(this, 'CreateFilesFunction', {
+  private createCreateFilesFunction(): NodejsFunction {
+    const createFilesFunction = new NodejsFunction(this, 'CreateFilesFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/create-files/app.ts`,
       environment: {
         FILE_TABLE_NAME: this.fileTable.tableName,
@@ -364,9 +381,9 @@ export class FileApi extends cdk.Construct {
       },
     });
     createFilesFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'create-file-policy', {
+      new Policy(this, 'create-file-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'dynamodb:GetItem',
               'dynamodb:Query',
@@ -384,17 +401,17 @@ export class FileApi extends cdk.Construct {
     return createFilesFunction;
   }
 
-  private createListFilesFunction(): lambda.NodejsFunction {
-    const listFilesFunction = new lambda.NodejsFunction(this, 'ListFilesFunction', {
+  private createListFilesFunction(): NodejsFunction {
+    const listFilesFunction = new NodejsFunction(this, 'ListFilesFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/list-files/app.ts`,
       environment: {
         FILE_TABLE_NAME: this.fileTable.tableName,
       },
     });
     listFilesFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'list-files-policy', {
+      new Policy(this, 'list-files-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'dynamodb:Scan',
             ],
@@ -408,17 +425,17 @@ export class FileApi extends cdk.Construct {
     return listFilesFunction;
   }
 
-  private createListFilesByCategoryFunction(): lambda.NodejsFunction {
-    const listFilesByCategoryFunction = new lambda.NodejsFunction(this, 'ListFilesByCategoryFunction', {
+  private createListFilesByCategoryFunction(): NodejsFunction {
+    const listFilesByCategoryFunction = new NodejsFunction(this, 'ListFilesByCategoryFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/list-files-by-category/app.ts`,
       environment: {
         FILE_TABLE_NAME: this.fileTable.tableName,
       },
     });
     listFilesByCategoryFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'list-files-by-category-policy', {
+      new Policy(this, 'list-files-by-category-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'dynamodb:Query',
             ],
@@ -433,17 +450,17 @@ export class FileApi extends cdk.Construct {
     return listFilesByCategoryFunction;
   }
 
-  private createGetFilesFunction(): lambda.NodejsFunction {
-    const getFilesFunction = new lambda.NodejsFunction(this, 'GetFilesFunction', {
+  private createGetFilesFunction(): NodejsFunction {
+    const getFilesFunction = new NodejsFunction(this, 'GetFilesFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/get-files/app.ts`,
       environment: {
         FILE_TABLE_NAME: this.fileTable.tableName,
       },
     });
     getFilesFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'get-files-policy', {
+      new Policy(this, 'get-files-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'dynamodb:Query',
             ],
@@ -457,17 +474,17 @@ export class FileApi extends cdk.Construct {
     return getFilesFunction;
   }
 
-  private createUpdateFilesFunction(): lambda.NodejsFunction {
-    const updateFilesFunction = new lambda.NodejsFunction(this, 'UpdateFilesFunction', {
+  private createUpdateFilesFunction(): NodejsFunction {
+    const updateFilesFunction = new NodejsFunction(this, 'UpdateFilesFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/update-files/app.ts`,
       environment: {
         FILE_TABLE_NAME: this.fileTable.tableName,
       },
     });
     updateFilesFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'update-file-policy', {
+      new Policy(this, 'update-file-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'dynamodb:BatchWriteItem',
               'dynamodb:BatchGetItem',
@@ -482,17 +499,17 @@ export class FileApi extends cdk.Construct {
     return updateFilesFunction;
   }
 
-  private createDeleteFilesFunction(): lambda.NodejsFunction {
-    const deleteFilesFunction = new lambda.NodejsFunction(this, 'DeleteFilesFunction', {
+  private createDeleteFilesFunction(): NodejsFunction {
+    const deleteFilesFunction = new NodejsFunction(this, 'DeleteFilesFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/delete-files/app.ts`,
       environment: {
         FILE_TABLE_NAME: this.fileTable.tableName,
       },
     });
     deleteFilesFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'delete-file-policy', {
+      new Policy(this, 'delete-file-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'dynamodb:BatchWriteItem',
             ],

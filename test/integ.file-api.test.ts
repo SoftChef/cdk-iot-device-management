@@ -1,9 +1,21 @@
-import { SynthUtils } from '@aws-cdk/assert';
-import '@aws-cdk/assert/jest';
-import * as lambda from '@aws-cdk/aws-lambda';
-import * as cdk from '@aws-cdk/core';
-import { FileApi } from '../src/index';
-import { fnGetAttArn, fnJoin, ref } from './utils';
+import {
+  Template,
+} from 'aws-cdk-lib/assertions';
+import {
+  Runtime,
+} from 'aws-cdk-lib/aws-lambda';
+import {
+  App,
+  Stack,
+} from 'aws-cdk-lib/core';
+import {
+  FileApi,
+} from '../src/index';
+import {
+  fnGetAttArn,
+  fnJoin,
+  ref,
+} from './utils';
 
 const expectedRoles: {
   [name: string]: string;
@@ -34,71 +46,72 @@ const expectedResources: {
 
 const expected = {
   restApiId: 'FileApiFileRestApiCF4E0F2A',
-  lambdaFunctionRuntime: lambda.Runtime.NODEJS_14_X.toString(),
+  lambdaFunctionRuntime: Runtime.NODEJS_14_X.toString(),
   categoryTableName: 'FileApiCategoryTable812C14A4',
   fileTableName: 'FileApiFileTable7C90566A',
 };
 
 test('minimal usage', () => {
-  const app = new cdk.App();
-  const stack = new cdk.Stack(app, 'demo-stack');
+  const app = new App();
+  const stack = new Stack(app, 'test-stack');
   new FileApi(stack, 'FileApi');
-  expect(SynthUtils.synthesize(stack).template).toMatchSnapshot();
-  expect(stack).toCountResources('AWS::ApiGateway::RestApi', 1);
-  expect(stack).toCountResources('AWS::ApiGateway::Resource', 7);
-  expect(stack).toCountResources('AWS::ApiGateway::Method', 19);
-  expect(stack).toCountResources('AWS::Lambda::Function', 11);
-  expect(stack).toCountResources('AWS::IAM::Role', 12);
-  expect(stack).toCountResources('AWS::IAM::Policy', 11);
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::RestApi', {
+  const template = Template.fromStack(stack);
+  expect(template.toJSON()).toMatchSnapshot();
+  template.resourceCountIs('AWS::ApiGateway::RestApi', 1);
+  template.resourceCountIs('AWS::ApiGateway::Resource', 7);
+  template.resourceCountIs('AWS::ApiGateway::Method', 19);
+  template.resourceCountIs('AWS::Lambda::Function', 11);
+  template.resourceCountIs('AWS::IAM::Role', 12);
+  template.resourceCountIs('AWS::IAM::Policy', 11);
+  template.hasResourceProperties('AWS::ApiGateway::RestApi', {
     Name: 'FileRestApi',
   });
   // RestAPI: /categories
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     PathPart: 'categories',
   });
   // RestAPI: /categories/{categoryId}
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     ParentId: ref(expectedResources.categoriesResourceId),
     PathPart: '{categoryId}',
   });
   // RestAPI: /categories/{categoryId}/files
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     ParentId: ref(expectedResources.categoriesCategoryIdResourceId),
     PathPart: 'files',
   });
   // RestAPI: /files
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     PathPart: 'files',
   });
   // RestAPI: /files/{checksum}
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     ParentId: ref(expectedResources.filesResourceId),
     PathPart: '{checksum}',
   });
   // RestAPI: /files/{checksum}/versions
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     ParentId: ref(expectedResources.filesChecksumResourceId),
     PathPart: 'versions',
   });
   // RestAPI: /files/{checksum}/versions/{version}
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     ParentId: ref(expectedResources.filesChecksumVersionsResourceId),
     PathPart: '{version}',
   });
   // CreateCategory API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.createCategoryFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.createCategoryFunctionRole),
     ],
@@ -115,17 +128,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.categoriesResourceId),
     HttpMethod: 'POST',
   });
   // CreateFiles API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.createFilesFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.createFilesFunctionRole),
     ],
@@ -150,17 +163,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.filesResourceId),
     HttpMethod: 'POST',
   });
   // DeleteCategory API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.deleteCategoryFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.deleteCategoryFunctionRole),
     ],
@@ -174,17 +187,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.categoriesCategoryIdResourceId),
     HttpMethod: 'DELETE',
   });
   // DeleteFiles API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.deleteFilesFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.deleteFilesFunctionRole),
     ],
@@ -198,17 +211,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.filesResourceId),
     HttpMethod: 'DELETE',
   });
   // GetCategory API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.getCategoryFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.getCategoryFunctionRole),
     ],
@@ -222,17 +235,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.categoriesCategoryIdResourceId),
     HttpMethod: 'GET',
   });
   // GetFiles API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.getFilesFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.getFilesFunctionRole),
     ],
@@ -246,17 +259,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.filesChecksumVersionsVersionResourceId),
     HttpMethod: 'GET',
   });
   // ListCategories API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.listCategoriesFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.listCategoriesFunctionRole),
     ],
@@ -280,17 +293,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.categoriesResourceId),
     HttpMethod: 'GET',
   });
   // ListFilesByCategory API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.listFilesByCategoryFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.listFilesByCategoryFunctionRole),
     ],
@@ -310,17 +323,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.categoriesCategoryIdResourceId),
     HttpMethod: 'GET',
   });
   // UpdateCategory API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.updateCategoryFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.updateCategoryFunctionRole),
     ],
@@ -337,17 +350,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.categoriesCategoryIdResourceId),
     HttpMethod: 'PUT',
   });
   // UpdateFiles API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.updateFilesFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.updateFilesFunctionRole),
     ],
@@ -364,13 +377,13 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.filesResourceId),
     HttpMethod: 'PUT',
   });
   // Category Table
-  expect(stack).toHaveResourceLike('AWS::DynamoDB::Table', {
+  template.hasResourceProperties('AWS::DynamoDB::Table', {
     AttributeDefinitions: [
       {
         AttributeName: 'categoryId',
@@ -411,7 +424,7 @@ test('minimal usage', () => {
     ],
   });
   // File Table
-  expect(stack).toHaveResourceLike('AWS::DynamoDB::Table', {
+  template.hasResourceProperties('AWS::DynamoDB::Table', {
     AttributeDefinitions: [
       {
         AttributeName: 'fileId',

@@ -1,12 +1,25 @@
-import * as cdk from '@aws-cdk/core';
-import { ScheduleFunction } from '@softchef/cdk-schedule-function';
-import { ThingTypeApi, ThingApi, ThingGroupApi, FileApi, JobApi } from '../';
+import {
+  ScheduleFunction,
+} from '@softchef/cdk-schedule-function';
+import {
+  App,
+  CfnOutput,
+  Duration,
+  Stack,
+} from 'aws-cdk-lib/core';
+import {
+  ThingTypeApi,
+  ThingApi,
+  ThingGroupApi,
+  FileApi,
+  JobApi,
+} from '../';
 
-const app = new cdk.App();
-const stack = new cdk.Stack(app, 'cdk-iot-device-management-demo');
+const app = new App();
+const stack = new Stack(app, 'cdk-iot-device-management-demo');
 
 const scheduleFunction = new ScheduleFunction(stack, 'Schedule', {
-  recentMinutes: cdk.Duration.minutes(3),
+  recentMinutes: Duration.minutes(3),
 });
 
 const thingTypeApi = new ThingTypeApi(stack, 'ThingTypeApi');
@@ -17,18 +30,18 @@ const jobApi = new JobApi(stack, 'JobApi', {
   scheduleFunction: scheduleFunction,
 });
 
-new cdk.CfnOutput(stack, 'ThingTypeApiId', {
+new CfnOutput(stack, 'ThingTypeApiId', {
   value: thingTypeApi.restApiId,
 });
-new cdk.CfnOutput(stack, 'ThingApiId', {
+new CfnOutput(stack, 'ThingApiId', {
   value: thingApi.restApiId,
 });
-new cdk.CfnOutput(stack, 'ThingGroupApiId', {
+new CfnOutput(stack, 'ThingGroupApiId', {
   value: thingGroupApi.restApiId,
 });
-new cdk.CfnOutput(stack, 'FileApiId', {
+new CfnOutput(stack, 'FileApiId', {
   value: fileApi.restApiId,
 });
-new cdk.CfnOutput(stack, 'JobApiId', {
+new CfnOutput(stack, 'JobApiId', {
   value: jobApi.restApiId,
 });

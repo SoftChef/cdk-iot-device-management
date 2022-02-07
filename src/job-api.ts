@@ -1,10 +1,25 @@
 import * as path from 'path';
-import * as apigateway from '@aws-cdk/aws-apigateway';
-import * as iam from '@aws-cdk/aws-iam';
-import * as lambda from '@aws-cdk/aws-lambda-nodejs';
-import * as cdk from '@aws-cdk/core';
-import { RestApi, HttpMethod } from '@softchef/cdk-restapi';
-// import { ScheduleFunction } from '@softchef/cdk-schedule-function';
+import {
+  RestApi,
+  HttpMethod,
+} from '@softchef/cdk-restapi';
+import {
+  ScheduleFunction,
+} from '@softchef/cdk-schedule-function';
+import {
+  AuthorizationType,
+  IAuthorizer,
+} from 'aws-cdk-lib/aws-apigateway';
+import {
+  Policy,
+  PolicyStatement,
+} from 'aws-cdk-lib/aws-iam';
+import {
+  NodejsFunction,
+} from 'aws-cdk-lib/aws-lambda-nodejs';
+import {
+  Construct,
+} from 'constructs';
 
 const LAMBDA_ASSETS_PATH = path.resolve(__dirname, '../lambda-assets/jobs');
 
@@ -14,35 +29,35 @@ const LAMBDA_ASSETS_PATH = path.resolve(__dirname, '../lambda-assets/jobs');
 export interface JobApiProps {
   /**
    * Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE
-   * @default apigateway.AuthorizationType.NONE
+   * @default AuthorizationType.NONE
    */
-  readonly authorizationType?: apigateway.AuthorizationType;
+  readonly authorizationType?: AuthorizationType;
   /**
    * Specify API Gateway's authorizer, CognitoUserPool/Lambda
    * @default undefined
    */
-  readonly authorizer?: apigateway.IAuthorizer | undefined;
+  readonly authorizer?: IAuthorizer | undefined;
   /**
    * Specify Schedule Function to enable create schedule job function
    * @default undefined
    */
-  readonly scheduleFunction?: any | undefined; // ScheduleFunction
+  readonly scheduleFunction?: ScheduleFunction;
 }
 
 /**
  * Job API construct
  */
-export class JobApi extends cdk.Construct {
+export class JobApi extends Construct {
   /**
    * The Job API Gateway
    */
   private readonly _restApi: RestApi;
 
-  constructor(scope: cdk.Construct, id: string, props?: JobApiProps) {
+  constructor(scope: Construct, id: string, props?: JobApiProps) {
     super(scope, id);
     this._restApi = new RestApi(this, 'JobRestApi', {
       enableCors: true,
-      authorizationType: props?.authorizationType ?? apigateway.AuthorizationType.NONE,
+      authorizationType: props?.authorizationType ?? AuthorizationType.NONE,
       authorizer: props?.authorizer ?? undefined,
       resources: [
         {
@@ -176,14 +191,14 @@ export class JobApi extends cdk.Construct {
     return this._restApi.restApiId;
   }
 
-  private createCreateScheduleJobFunction(): lambda.NodejsFunction {
-    const createJobFunction = new lambda.NodejsFunction(this, 'CreateScheduleJobFunction', {
+  private createCreateScheduleJobFunction(): NodejsFunction {
+    const createJobFunction = new NodejsFunction(this, 'CreateScheduleJobFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/create-schedule-job/app.ts`,
     });
     createJobFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'iot-create-schedule-job-policy', {
+      new Policy(this, 'iot-create-schedule-job-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:CreateJob',
             ],
@@ -195,14 +210,14 @@ export class JobApi extends cdk.Construct {
     return createJobFunction;
   }
 
-  private createAssociateTargetsWithJobFunction(): lambda.NodejsFunction {
-    const createJobFunction = new lambda.NodejsFunction(this, 'AssociateTargetsWithJobFunction', {
+  private createAssociateTargetsWithJobFunction(): NodejsFunction {
+    const createJobFunction = new NodejsFunction(this, 'AssociateTargetsWithJobFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/associate-targets-with-job/app.ts`,
     });
     createJobFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'iot-associate-targets-with-job', {
+      new Policy(this, 'iot-associate-targets-with-job', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:AssociateTargetsWithJob',
             ],
@@ -214,14 +229,14 @@ export class JobApi extends cdk.Construct {
     return createJobFunction;
   }
 
-  private createCreateJobFunction(): lambda.NodejsFunction {
-    const createJobFunction = new lambda.NodejsFunction(this, 'CreateJobFunction', {
+  private createCreateJobFunction(): NodejsFunction {
+    const createJobFunction = new NodejsFunction(this, 'CreateJobFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/create-job/app.ts`,
     });
     createJobFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'iot-create-job-policy', {
+      new Policy(this, 'iot-create-job-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:CreateJob',
             ],
@@ -233,14 +248,14 @@ export class JobApi extends cdk.Construct {
     return createJobFunction;
   }
 
-  private createListJobsFunction(): lambda.NodejsFunction {
-    const listJobsFunction = new lambda.NodejsFunction(this, 'ListJobsFunction', {
+  private createListJobsFunction(): NodejsFunction {
+    const listJobsFunction = new NodejsFunction(this, 'ListJobsFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/list-jobs/app.ts`,
     });
     listJobsFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'iot-list-jobs-policy', {
+      new Policy(this, 'iot-list-jobs-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:ListJobs',
             ],
@@ -252,14 +267,14 @@ export class JobApi extends cdk.Construct {
     return listJobsFunction;
   }
 
-  private createGetJobFunction(): lambda.NodejsFunction {
-    const getJobFunction = new lambda.NodejsFunction(this, 'GetJobFunction', {
+  private createGetJobFunction(): NodejsFunction {
+    const getJobFunction = new NodejsFunction(this, 'GetJobFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/get-job/app.ts`,
     });
     getJobFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'iot-describe-job-policy', {
+      new Policy(this, 'iot-describe-job-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:DescribeJob',
             ],
@@ -271,14 +286,14 @@ export class JobApi extends cdk.Construct {
     return getJobFunction;
   }
 
-  private createUpdateJobFunction(): lambda.NodejsFunction {
-    const updateJobFunction = new lambda.NodejsFunction(this, 'UpdateJobFunction', {
+  private createUpdateJobFunction(): NodejsFunction {
+    const updateJobFunction = new NodejsFunction(this, 'UpdateJobFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/update-job/app.ts`,
     });
     updateJobFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'iot-update-job-policy', {
+      new Policy(this, 'iot-update-job-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:UpdateJob',
             ],
@@ -290,14 +305,14 @@ export class JobApi extends cdk.Construct {
     return updateJobFunction;
   }
 
-  private createDeleteJobFunction(): lambda.NodejsFunction {
-    const deleteJobFunction = new lambda.NodejsFunction(this, 'DeleteJobFunction', {
+  private createDeleteJobFunction(): NodejsFunction {
+    const deleteJobFunction = new NodejsFunction(this, 'DeleteJobFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/delete-job/app.ts`,
     });
     deleteJobFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'iot-delete-job-policy', {
+      new Policy(this, 'iot-delete-job-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:DeleteJob',
             ],
@@ -309,14 +324,14 @@ export class JobApi extends cdk.Construct {
     return deleteJobFunction;
   }
 
-  private createCancelJobFunction(): lambda.NodejsFunction {
-    const cancelJobFunction = new lambda.NodejsFunction(this, 'CancelJobFunction', {
+  private createCancelJobFunction(): NodejsFunction {
+    const cancelJobFunction = new NodejsFunction(this, 'CancelJobFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/cancel-job/app.ts`,
     });
     cancelJobFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'iot-cancel-job-policy', {
+      new Policy(this, 'iot-cancel-job-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:CancelJob',
             ],
@@ -328,14 +343,14 @@ export class JobApi extends cdk.Construct {
     return cancelJobFunction;
   }
 
-  private createGetJobExecutionFunction(): lambda.NodejsFunction {
-    const getJobExecutionFunction = new lambda.NodejsFunction(this, 'GetJobExecutionFunction', {
+  private createGetJobExecutionFunction(): NodejsFunction {
+    const getJobExecutionFunction = new NodejsFunction(this, 'GetJobExecutionFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/get-job-execution/app.ts`,
     });
     getJobExecutionFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'iot-describe-job-execution-policy', {
+      new Policy(this, 'iot-describe-job-execution-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:DescribeJobExecution',
             ],
@@ -347,14 +362,14 @@ export class JobApi extends cdk.Construct {
     return getJobExecutionFunction;
   }
 
-  private createListJobExecutionsForJobFunction(): lambda.NodejsFunction {
-    const listJobExecutionsForJob = new lambda.NodejsFunction(this, 'listJobExecutionsForJob', {
+  private createListJobExecutionsForJobFunction(): NodejsFunction {
+    const listJobExecutionsForJob = new NodejsFunction(this, 'listJobExecutionsForJob', {
       entry: `${LAMBDA_ASSETS_PATH}/list-job-executions-for-job/app.ts`,
     });
     listJobExecutionsForJob.role?.attachInlinePolicy(
-      new iam.Policy(this, 'list-job-execution-for-job', {
+      new Policy(this, 'list-job-execution-for-job', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:ListJobExecutionsForJob',
             ],
@@ -366,14 +381,14 @@ export class JobApi extends cdk.Construct {
     return listJobExecutionsForJob;
   }
 
-  private createListJobExecutionsForThingFunction(): lambda.NodejsFunction {
-    const listJobExecutionsForThing = new lambda.NodejsFunction(this, 'listJobExecutionsForThing', {
+  private createListJobExecutionsForThingFunction(): NodejsFunction {
+    const listJobExecutionsForThing = new NodejsFunction(this, 'listJobExecutionsForThing', {
       entry: `${LAMBDA_ASSETS_PATH}/list-job-executions-for-thing/app.ts`,
     });
     listJobExecutionsForThing.role?.attachInlinePolicy(
-      new iam.Policy(this, 'list-job-executions-for-thing', {
+      new Policy(this, 'list-job-executions-for-thing', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:ListJobExecutionsForThing',
             ],
@@ -385,14 +400,14 @@ export class JobApi extends cdk.Construct {
     return listJobExecutionsForThing;
   }
 
-  private createDeleteJobExecutionFunction(): lambda.NodejsFunction {
-    const deleteJobExecutionFunction = new lambda.NodejsFunction(this, 'DeleteJobExecutionFunction', {
+  private createDeleteJobExecutionFunction(): NodejsFunction {
+    const deleteJobExecutionFunction = new NodejsFunction(this, 'DeleteJobExecutionFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/delete-job-execution/app.ts`,
     });
     deleteJobExecutionFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'iot-delete-job-execution-policy', {
+      new Policy(this, 'iot-delete-job-execution-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:DeleteJobExecution',
             ],
@@ -404,14 +419,14 @@ export class JobApi extends cdk.Construct {
     return deleteJobExecutionFunction;
   }
 
-  private createCancelJobExecutionFunction(): lambda.NodejsFunction {
-    const cancelJobExecutionFunction = new lambda.NodejsFunction(this, 'CancelJobExecutionFunction', {
+  private createCancelJobExecutionFunction(): NodejsFunction {
+    const cancelJobExecutionFunction = new NodejsFunction(this, 'CancelJobExecutionFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/cancel-job-execution/app.ts`,
     });
     cancelJobExecutionFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'iot-cancel-job-execution-policy', {
+      new Policy(this, 'iot-cancel-job-execution-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:CancelJobExecution',
             ],
@@ -423,14 +438,14 @@ export class JobApi extends cdk.Construct {
     return cancelJobExecutionFunction;
   }
 
-  private createGetJobDocumentFunction(): lambda.NodejsFunction {
-    const getJobDocumentFunction = new lambda.NodejsFunction(this, 'GetJobDocumentFunction', {
+  private createGetJobDocumentFunction(): NodejsFunction {
+    const getJobDocumentFunction = new NodejsFunction(this, 'GetJobDocumentFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/get-job-document/app.ts`,
     });
     getJobDocumentFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'iot-get-job-document', {
+      new Policy(this, 'iot-get-job-document', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:GetJobDocument',
             ],
@@ -442,14 +457,14 @@ export class JobApi extends cdk.Construct {
     return getJobDocumentFunction;
   }
 
-  private createCreateJobTemplateFunction(): lambda.NodejsFunction {
-    const createJobTemplateFunction = new lambda.NodejsFunction(this, 'CreateJobTemplateFunction', {
+  private createCreateJobTemplateFunction(): NodejsFunction {
+    const createJobTemplateFunction = new NodejsFunction(this, 'CreateJobTemplateFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/create-job-template/app.ts`,
     });
     createJobTemplateFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'iot-create-job-template-policy', {
+      new Policy(this, 'iot-create-job-template-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:CreateJobTemplate',
             ],
@@ -460,14 +475,14 @@ export class JobApi extends cdk.Construct {
     );
     return createJobTemplateFunction;
   }
-  private createListJobTemplatesFunction(): lambda.NodejsFunction {
-    const listJobTemplatesFunction = new lambda.NodejsFunction(this, 'ListJobTemplatesFunction', {
+  private createListJobTemplatesFunction(): NodejsFunction {
+    const listJobTemplatesFunction = new NodejsFunction(this, 'ListJobTemplatesFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/list-job-templates/app.ts`,
     });
     listJobTemplatesFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'iot-list-job-templates-policy', {
+      new Policy(this, 'iot-list-job-templates-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:ListJobTemplates',
             ],
@@ -479,14 +494,14 @@ export class JobApi extends cdk.Construct {
     return listJobTemplatesFunction;
   }
 
-  private createGetJobTemplateFunction(): lambda.NodejsFunction {
-    const getJobTemplateFunction = new lambda.NodejsFunction(this, 'GetJobTemplateFunction', {
+  private createGetJobTemplateFunction(): NodejsFunction {
+    const getJobTemplateFunction = new NodejsFunction(this, 'GetJobTemplateFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/get-job-template/app.ts`,
     });
     getJobTemplateFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'iot-get-job-template', {
+      new Policy(this, 'iot-get-job-template', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:DescribeJobTemplate',
             ],
@@ -498,14 +513,14 @@ export class JobApi extends cdk.Construct {
     return getJobTemplateFunction;
   }
 
-  private createDeleteJobTemplateFunction(): lambda.NodejsFunction {
-    const deleteJobTemplateFunction = new lambda.NodejsFunction(this, 'DeleteJobTemplateFunction', {
+  private createDeleteJobTemplateFunction(): NodejsFunction {
+    const deleteJobTemplateFunction = new NodejsFunction(this, 'DeleteJobTemplateFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/delete-job-template/app.ts`,
     });
     deleteJobTemplateFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'iot-delete-job-template-policy', {
+      new Policy(this, 'iot-delete-job-template-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:DeleteJobTemplate',
             ],

@@ -1,9 +1,22 @@
 import * as path from 'path';
-import * as apigateway from '@aws-cdk/aws-apigateway';
-import * as iam from '@aws-cdk/aws-iam';
-import * as lambda from '@aws-cdk/aws-lambda-nodejs';
-import * as cdk from '@aws-cdk/core';
-import { RestApi, HttpMethod } from '@softchef/cdk-restapi';
+import {
+  RestApi,
+  HttpMethod,
+} from '@softchef/cdk-restapi';
+import {
+  AuthorizationType,
+  IAuthorizer,
+} from 'aws-cdk-lib/aws-apigateway';
+import {
+  Policy,
+  PolicyStatement,
+} from 'aws-cdk-lib/aws-iam';
+import {
+  NodejsFunction,
+} from 'aws-cdk-lib/aws-lambda-nodejs';
+import {
+  Construct,
+} from 'constructs';
 
 const LAMBDA_ASSETS_PATH = path.resolve(__dirname, '../lambda-assets/thing-groups');
 
@@ -13,30 +26,30 @@ const LAMBDA_ASSETS_PATH = path.resolve(__dirname, '../lambda-assets/thing-group
 export interface ThingGroupApiProps {
   /**
    * Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE
-   * @default apigateway.AuthorizationType.NONE
+   * @default AuthorizationType.NONE
    */
-  readonly authorizationType?: apigateway.AuthorizationType;
+  readonly authorizationType?: AuthorizationType;
   /**
    * Specify API Gateway's authorizer, CognitoUserPool/Lambda
    * @default undefined
    */
-  readonly authorizer?: apigateway.IAuthorizer | undefined;
+  readonly authorizer?: IAuthorizer | undefined;
 }
 
 /**
  * Thing Group API construct
  */
-export class ThingGroupApi extends cdk.Construct {
+export class ThingGroupApi extends Construct {
   /**
    * The Thing Group API Gateway
    */
   private readonly _restApi: RestApi;
 
-  constructor(scope: cdk.Construct, id: string, props?: ThingGroupApiProps) {
+  constructor(scope: Construct, id: string, props?: ThingGroupApiProps) {
     super(scope, id);
     this._restApi = new RestApi(this, 'ThingGroupRestApi', {
       enableCors: true,
-      authorizationType: props?.authorizationType ?? apigateway.AuthorizationType.NONE,
+      authorizationType: props?.authorizationType ?? AuthorizationType.NONE,
       authorizer: props?.authorizer ?? undefined,
       resources: [
         {
@@ -100,14 +113,14 @@ export class ThingGroupApi extends cdk.Construct {
     return this._restApi.restApiId;
   }
 
-  private createCreateThingGroupFunction(): lambda.NodejsFunction {
-    const createThingGroupFunction = new lambda.NodejsFunction(this, 'CreateThingGroupFunction', {
+  private createCreateThingGroupFunction(): NodejsFunction {
+    const createThingGroupFunction = new NodejsFunction(this, 'CreateThingGroupFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/create-thing-group/app.ts`,
     });
     createThingGroupFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'iot-create-thing-group-policy', {
+      new Policy(this, 'iot-create-thing-group-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:CreateThingGroup',
             ],
@@ -119,14 +132,14 @@ export class ThingGroupApi extends cdk.Construct {
     return createThingGroupFunction;
   }
 
-  private createListThingGroupsFunction(): lambda.NodejsFunction {
-    const listThingGroupsFunction = new lambda.NodejsFunction(this, 'ListThingGroupsFunction', {
+  private createListThingGroupsFunction(): NodejsFunction {
+    const listThingGroupsFunction = new NodejsFunction(this, 'ListThingGroupsFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/list-thing-groups/app.ts`,
     });
     listThingGroupsFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'iot-list-things-policy', {
+      new Policy(this, 'iot-list-things-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:ListThingGroups',
             ],
@@ -138,14 +151,14 @@ export class ThingGroupApi extends cdk.Construct {
     return listThingGroupsFunction;
   }
 
-  private createGetThingGroupFunction(): lambda.NodejsFunction {
-    const getThingGroupFunction = new lambda.NodejsFunction(this, 'GetThingGroupFunction', {
+  private createGetThingGroupFunction(): NodejsFunction {
+    const getThingGroupFunction = new NodejsFunction(this, 'GetThingGroupFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/get-thing-group/app.ts`,
     });
     getThingGroupFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'iot-describe-thing-group-policy', {
+      new Policy(this, 'iot-describe-thing-group-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:DescribeThingGroup',
             ],
@@ -157,14 +170,14 @@ export class ThingGroupApi extends cdk.Construct {
     return getThingGroupFunction;
   }
 
-  private createUpdateThingGroupFunction(): lambda.NodejsFunction {
-    const updateThingGroupFunction = new lambda.NodejsFunction(this, 'UpdateThingGroupFunction', {
+  private createUpdateThingGroupFunction(): NodejsFunction {
+    const updateThingGroupFunction = new NodejsFunction(this, 'UpdateThingGroupFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/update-thing-group/app.ts`,
     });
     updateThingGroupFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'iot-update-thing-group-policy', {
+      new Policy(this, 'iot-update-thing-group-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:UpdateThingGroup',
             ],
@@ -176,14 +189,14 @@ export class ThingGroupApi extends cdk.Construct {
     return updateThingGroupFunction;
   }
 
-  private createDeleteThingGroupFunction(): lambda.NodejsFunction {
-    const deleteThingGroupFunction = new lambda.NodejsFunction(this, 'DeleteThingGroupFunction', {
+  private createDeleteThingGroupFunction(): NodejsFunction {
+    const deleteThingGroupFunction = new NodejsFunction(this, 'DeleteThingGroupFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/delete-thing-group/app.ts`,
     });
     deleteThingGroupFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'iot-delete-thing-group-policy', {
+      new Policy(this, 'iot-delete-thing-group-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:DeleteThingGroup',
             ],
@@ -195,14 +208,14 @@ export class ThingGroupApi extends cdk.Construct {
     return deleteThingGroupFunction;
   }
 
-  private createAddThingToThingGroupFunction(): lambda.NodejsFunction {
-    const addThingToThingGroup = new lambda.NodejsFunction(this, 'AddThingToThingGroupFunction', {
+  private createAddThingToThingGroupFunction(): NodejsFunction {
+    const addThingToThingGroup = new NodejsFunction(this, 'AddThingToThingGroupFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/add-thing-to-thing-group/app.ts`,
     });
     addThingToThingGroup.role?.attachInlinePolicy(
-      new iam.Policy(this, 'iot-add-thing-to-thing-group-policy', {
+      new Policy(this, 'iot-add-thing-to-thing-group-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:AddThingToThingGroup',
             ],
@@ -214,14 +227,14 @@ export class ThingGroupApi extends cdk.Construct {
     return addThingToThingGroup;
   }
 
-  private createRemoveThingFromThingGroupFunction(): lambda.NodejsFunction {
-    const removeThingFromThingGroupFunction = new lambda.NodejsFunction(this, 'RemoveThingFromThingGroupFunction', {
+  private createRemoveThingFromThingGroupFunction(): NodejsFunction {
+    const removeThingFromThingGroupFunction = new NodejsFunction(this, 'RemoveThingFromThingGroupFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/remove-thing-from-thing-group/app.ts`,
     });
     removeThingFromThingGroupFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'iot-remove-thing-from-thing-group-policy', {
+      new Policy(this, 'iot-remove-thing-from-thing-group-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:RemoveThingFromThingGroup',
             ],
@@ -233,14 +246,14 @@ export class ThingGroupApi extends cdk.Construct {
     return removeThingFromThingGroupFunction;
   }
 
-  private createCreateDynamicThingGroupFunction(): lambda.NodejsFunction {
-    const createDynamicThingGroupFunction = new lambda.NodejsFunction(this, 'CreateDynamicThingGroupFunction', {
+  private createCreateDynamicThingGroupFunction(): NodejsFunction {
+    const createDynamicThingGroupFunction = new NodejsFunction(this, 'CreateDynamicThingGroupFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/create-dynamic-thing-group/app.ts`,
     });
     createDynamicThingGroupFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'iot-create-dynamic-thing-group-policy', {
+      new Policy(this, 'iot-create-dynamic-thing-group-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:CreateDynamicThingGroup',
             ],
@@ -252,14 +265,14 @@ export class ThingGroupApi extends cdk.Construct {
     return createDynamicThingGroupFunction;
   }
 
-  private createUpdateDynamicThingGroupFunction(): lambda.NodejsFunction {
-    const updateDynamicThingGroupFunction = new lambda.NodejsFunction(this, 'UpdateDynamicThingGroupFunction', {
+  private createUpdateDynamicThingGroupFunction(): NodejsFunction {
+    const updateDynamicThingGroupFunction = new NodejsFunction(this, 'UpdateDynamicThingGroupFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/update-dynamic-thing-group/app.ts`,
     });
     updateDynamicThingGroupFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'iot-update-dynamic-thing-group-policy', {
+      new Policy(this, 'iot-update-dynamic-thing-group-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:UpdateDynamicThingGroup',
             ],
@@ -271,14 +284,14 @@ export class ThingGroupApi extends cdk.Construct {
     return updateDynamicThingGroupFunction;
   }
 
-  private createDeleteDynamicThingGroupFunction(): lambda.NodejsFunction {
-    const deleteDynamicThingGroupFunction = new lambda.NodejsFunction(this, 'DeleteDynamicThingGroupFunction', {
+  private createDeleteDynamicThingGroupFunction(): NodejsFunction {
+    const deleteDynamicThingGroupFunction = new NodejsFunction(this, 'DeleteDynamicThingGroupFunction', {
       entry: `${LAMBDA_ASSETS_PATH}/delete-dynamic-thing-group/app.ts`,
     });
     deleteDynamicThingGroupFunction.role?.attachInlinePolicy(
-      new iam.Policy(this, 'iot-delete-dynamic-thing-group-policy', {
+      new Policy(this, 'iot-delete-dynamic-thing-group-policy', {
         statements: [
-          new iam.PolicyStatement({
+          new PolicyStatement({
             actions: [
               'iot:DeleteDynamicThingGroup',
             ],

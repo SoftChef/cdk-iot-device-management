@@ -1,9 +1,20 @@
-import { SynthUtils } from '@aws-cdk/assert';
-import '@aws-cdk/assert/jest';
-import * as lambda from '@aws-cdk/aws-lambda';
-import * as cdk from '@aws-cdk/core';
-import { ThingTypeApi } from '../src/index';
-import { fnGetAttArn, ref } from './utils';
+import {
+  Template,
+} from 'aws-cdk-lib/assertions';
+import {
+  Runtime,
+} from 'aws-cdk-lib/aws-lambda';
+import {
+  App,
+  Stack,
+} from 'aws-cdk-lib/core';
+import {
+  ThingTypeApi,
+} from '../src/index';
+import {
+  fnGetAttArn,
+  ref,
+} from './utils';
 
 const expectedRoles: {
   [name: string]: string;
@@ -27,54 +38,55 @@ const expectedResources: {
 
 const expected = {
   restApiId: 'ThingTypeApiThingTypeRestApi6EFAA28D',
-  lambdaFunctionRuntime: lambda.Runtime.NODEJS_14_X.toString(),
+  lambdaFunctionRuntime: Runtime.NODEJS_14_X.toString(),
 };
 
 test('minimal usage', () => {
-  const app = new cdk.App();
-  const stack = new cdk.Stack(app, 'demo-stack');
+  const app = new App();
+  const stack = new Stack(app, 'test-stack');
   new ThingTypeApi(stack, 'ThingTypeApi');
-  expect(SynthUtils.synthesize(stack).template).toMatchSnapshot();
-  expect(stack).toCountResources('AWS::ApiGateway::RestApi', 1);
-  expect(stack).toCountResources('AWS::ApiGateway::Resource', 4);
-  expect(stack).toCountResources('AWS::ApiGateway::Method', 11);
-  expect(stack).toCountResources('AWS::Lambda::Function', 6);
-  expect(stack).toCountResources('AWS::IAM::Role', 7);
-  expect(stack).toCountResources('AWS::IAM::Policy', 6);
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::RestApi', {
+  const template = Template.fromStack(stack);
+  expect(template.toJSON()).toMatchSnapshot();
+  template.resourceCountIs('AWS::ApiGateway::RestApi', 1);
+  template.resourceCountIs('AWS::ApiGateway::Resource', 4);
+  template.resourceCountIs('AWS::ApiGateway::Method', 11);
+  template.resourceCountIs('AWS::Lambda::Function', 6);
+  template.resourceCountIs('AWS::IAM::Role', 7);
+  template.resourceCountIs('AWS::IAM::Policy', 6);
+  template.hasResourceProperties('AWS::ApiGateway::RestApi', {
     Name: 'ThingTypeRestApi',
   });
   // RestAPI: /thing-types
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     PathPart: 'thing-types',
   });
   // RestAPI: /thing-types/{thingTypeName}
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     ParentId: ref(expectedResources.thingTypesResourceId),
     PathPart: '{thingTypeName}',
   });
   // RestAPI: /thing-types/{thingTypeName}/deprecate
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     ParentId: ref(expectedResources.thingTypesThingTypeNameResourceId),
     PathPart: 'deprecate',
   });
   // RestAPI: /thing-types/{thingTypeName}/undeprecate
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     ParentId: ref(expectedResources.thingTypesThingTypeNameResourceId),
     PathPart: 'undeprecate',
   });
   // CreateThingType API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
-    Role: fnGetAttArn(expectedRoles.creaateThingTypeFunctionRole),
+    Role: fnGetAttArn(expectedRoles.createThingTypeFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
-      ref(expectedRoles.creaateThingTypeFunctionRole),
+      ref(expectedRoles.createThingTypeFunctionRole),
     ],
     PolicyDocument: {
       Statement: [
@@ -86,17 +98,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.thingTypesResourceId),
     HttpMethod: 'POST',
   });
   // DeleteThingType API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.deleteThingTypeFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.deleteThingTypeFunctionRole),
     ],
@@ -110,17 +122,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.thingTypesThingTypeNameResourceId),
     HttpMethod: 'DELETE',
   });
   // ListThingTypes API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.listThingTypesFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.listThingTypesFunctionRole),
     ],
@@ -134,17 +146,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.thingTypesResourceId),
     HttpMethod: 'GET',
   });
   // GetThingType API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.getThingTypeFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.getThingTypeFunctionRole),
     ],
@@ -158,17 +170,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.thingTypesThingTypeNameResourceId),
     HttpMethod: 'GET',
   });
   // DeprecateThingType API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.deprecateThingTypeFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.deprecateThingTypeFunctionRole),
     ],
@@ -182,17 +194,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.thingTypesThingTypeNameDeprecateResourceId),
     HttpMethod: 'PUT',
   });
   // UndeprecateThingType API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.undeprecateThingTypeFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.undeprecateThingTypeFunctionRole),
     ],
@@ -206,7 +218,7 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.thingTypesThingTypeNameUndeprecateResourceId),
     HttpMethod: 'PUT',
