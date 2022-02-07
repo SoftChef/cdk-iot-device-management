@@ -1,10 +1,24 @@
-import { SynthUtils } from '@aws-cdk/assert';
-import '@aws-cdk/assert/jest';
-import * as lambda from '@aws-cdk/aws-lambda';
-import * as cdk from '@aws-cdk/core';
-import { ScheduleFunction } from '@softchef/cdk-schedule-function';
-import { JobApi } from '../src/index';
-import { fnGetAttArn, ref } from './utils';
+import {
+  ScheduleFunction,
+} from '@softchef/cdk-schedule-function';
+import {
+  Template,
+} from 'aws-cdk-lib/assertions';
+import {
+  Runtime,
+} from 'aws-cdk-lib/aws-lambda';
+import {
+  App,
+  Duration,
+  Stack,
+} from 'aws-cdk-lib/core';
+import {
+  JobApi,
+} from '../src/index';
+import {
+  fnGetAttArn,
+  ref,
+} from './utils';
 
 const expectedRoles: {
   [name: string]: string;
@@ -50,109 +64,110 @@ const expectedResources: {
 
 const expected = {
   restApiId: 'JobApiJobRestApi36DDDF7E',
-  lambdaFunctionRuntime: lambda.Runtime.NODEJS_14_X.toString(),
+  lambdaFunctionRuntime: Runtime.NODEJS_14_X.toString(),
 };
 
 test('minimal usage', () => {
-  const app = new cdk.App();
-  const stack = new cdk.Stack(app, 'demo-stack');
+  const app = new App();
+  const stack = new Stack(app, 'test-stack');
   const scheduleFunction = new ScheduleFunction(stack, 'ScheduleFunction', {
-    recentMinutes: cdk.Duration.minutes(3),
+    recentMinutes: Duration.minutes(3),
   });
   new JobApi(stack, 'JobApi', {
     scheduleFunction: scheduleFunction,
   });
-  expect(SynthUtils.synthesize(stack).template).toMatchSnapshot();
-  expect(stack).toCountResources('AWS::ApiGateway::RestApi', 1);
-  expect(stack).toCountResources('AWS::ApiGateway::Resource', 16);
-  expect(stack).toCountResources('AWS::ApiGateway::Method', 39);
-  expect(stack).toCountResources('AWS::Lambda::Function', 24);
-  expect(stack).toCountResources('AWS::IAM::Role', 25);
-  expect(stack).toCountResources('AWS::IAM::Policy', 24);
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::RestApi', {
+  const template = Template.fromStack(stack);
+  expect(template.toJSON()).toMatchSnapshot();
+  template.resourceCountIs('AWS::ApiGateway::RestApi', 1);
+  template.resourceCountIs('AWS::ApiGateway::Resource', 16);
+  template.resourceCountIs('AWS::ApiGateway::Method', 39);
+  template.resourceCountIs('AWS::Lambda::Function', 24);
+  template.resourceCountIs('AWS::IAM::Role', 25);
+  template.resourceCountIs('AWS::IAM::Policy', 24);
+  template.hasResourceProperties('AWS::ApiGateway::RestApi', {
     Name: 'JobRestApi',
   });
   // RestAPI: /jobs
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     PathPart: 'jobs',
   });
   // RestAPI: /jobs/{jobId}
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     ParentId: ref(expectedResources.jobsResourceId),
     PathPart: '{jobId}',
   });
   // RestAPI: /jobs/{jobId}/document
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     ParentId: ref(expectedResources.jobsJobIdResourceId),
     PathPart: 'document',
   });
   // RestAPI: /jobs/{jobId}/status
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     ParentId: ref(expectedResources.jobsJobIdResourceId),
     PathPart: 'status',
   });
   // RestAPI: /jobs/{jobId}/associate
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     ParentId: ref(expectedResources.jobsJobIdResourceId),
     PathPart: 'associate',
   });
   // RestAPI: /jobs/{jobId}/cancel
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     ParentId: ref(expectedResources.jobsJobIdThingsThingNameResourceId),
     PathPart: 'cancel',
   });
   // RestAPI: /jobs/{jobId}/things
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     ParentId: ref(expectedResources.jobsJobIdResourceId),
     PathPart: 'things',
   });
   // RestAPI: /jobs/{jobId}/things/{thingName}
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     ParentId: ref(expectedResources.jobsJobIdThingsResourceId),
     PathPart: '{thingName}',
   });
   // RestAPI: /job-templates
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     PathPart: 'job-templates',
   });
   // RestAPI: /job-templates/{jobTemplateId}
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     ParentId: ref(expectedResources.jobTemplatesResourceId),
     PathPart: '{jobTemplateId}',
   });
   // RestAPI: /things
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     PathPart: 'things',
   });
   // RestAPI: /things/{thingName}
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     ParentId: ref(expectedResources.thingsResourceId),
     PathPart: '{thingName}',
   });
   // RestAPI: /things/{thingName}/jobs
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Resource', {
+  template.hasResourceProperties('AWS::ApiGateway::Resource', {
     RestApiId: ref(expected.restApiId),
     ParentId: ref(expectedResources.thingsThingNameResourceId),
     PathPart: 'jobs',
   });
   // AssociateTargetsWithJob API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.associateTargetsWithJobFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.associateTargetsWithJobFunctionRole),
     ],
@@ -166,17 +181,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.jobsJobIdAssociateResourceId),
     HttpMethod: 'PUT',
   });
   // CancelJob API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.cancelJobFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.cancelJobFunctionRole),
     ],
@@ -190,17 +205,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.jobsJobIdCancelResourceId),
     HttpMethod: 'PUT',
   });
   // CancelJobExecution API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.cancelJobExecutionFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.cancelJobExecutionFunctionRole),
     ],
@@ -214,17 +229,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.jobsJobIdThingsThingNameCancelResourceId),
     HttpMethod: 'PUT',
   });
   // CreateJob API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.createJobFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.createJobFunctionRole),
     ],
@@ -238,17 +253,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.jobsResourceId),
     HttpMethod: 'POST',
   });
   // CreateJobTemplate API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.createJobTemplateFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.createJobTemplateFunctionRole),
     ],
@@ -262,7 +277,7 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.jobTemplatesResourceId),
     HttpMethod: 'POST',
@@ -270,11 +285,11 @@ test('minimal usage', () => {
   // CreateScheduleJob API
   // @TODO hook schedule function
   // DeleteJob API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.deleteJobFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.deleteJobFunctionRole),
     ],
@@ -288,17 +303,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.jobsJobIdResourceId),
     HttpMethod: 'DELETE',
   });
   // DeleteJobExecution API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.deleteJobExecutionFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.deleteJobExecutionFunctionRole),
     ],
@@ -312,17 +327,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.jobsJobIdThingsThingNameResourceId),
     HttpMethod: 'DELETE',
   });
   // DeleteJobTemplate API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.deleteJobTemplateFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.deleteJobTemplateFunctionRole),
     ],
@@ -336,17 +351,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.jobTemplatesJobTemplateIdResourceId),
     HttpMethod: 'DELETE',
   });
   // GetJob API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.getJobFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.getJobFunctionRole),
     ],
@@ -360,17 +375,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.jobsJobIdResourceId),
     HttpMethod: 'GET',
   });
   // GetJobDocument API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.getJobDocumentFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.getJobDocumentFunctionRole),
     ],
@@ -384,17 +399,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.jobsJobIdDocumentResourceId),
     HttpMethod: 'GET',
   });
   // GetJobExecution API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.getJobExecutionFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.getJobExecutionFunctionRole),
     ],
@@ -408,17 +423,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.jobsJobIdThingsThingNameResourceId),
     HttpMethod: 'GET',
   });
   // GetJobTemplate API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.getJobTemplateFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.getJobTemplateFunctionRole),
     ],
@@ -432,17 +447,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.jobTemplatesJobTemplateIdResourceId),
     HttpMethod: 'GET',
   });
   // ListJobExecutionsForJob API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.listJobExecutionsForJobFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.listJobExecutionsForJobFunctionRole),
     ],
@@ -456,17 +471,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.jobsJobIdStatusResourceId),
     HttpMethod: 'GET',
   });
   // ListJobExecutionsForThing API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.listJobExecutionsForThingFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.listJobExecutionsForThingFunctionRole),
     ],
@@ -480,17 +495,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.thingsThingNameJobsResourceId),
     HttpMethod: 'GET',
   });
   // ListJobTemplates API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.listJobTemplatesFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.listJobTemplatesFunctionRole),
     ],
@@ -504,17 +519,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.jobTemplatesResourceId),
     HttpMethod: 'GET',
   });
   // ListJobs API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.listJobsFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.listJobsFunctionRole),
     ],
@@ -528,17 +543,17 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.jobsResourceId),
     HttpMethod: 'GET',
   });
   // UpdateJob API
-  expect(stack).toHaveResourceLike('AWS::Lambda::Function', {
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Runtime: expected.lambdaFunctionRuntime,
     Role: fnGetAttArn(expectedRoles.updateJobFunctionRole),
   });
-  expect(stack).toHaveResourceLike('AWS::IAM::Policy', {
+  template.hasResourceProperties('AWS::IAM::Policy', {
     Roles: [
       ref(expectedRoles.updateJobFunctionRole),
     ],
@@ -552,7 +567,7 @@ test('minimal usage', () => {
       ],
     },
   });
-  expect(stack).toHaveResourceLike('AWS::ApiGateway::Method', {
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
     RestApiId: ref(expected.restApiId),
     ResourceId: ref(expectedResources.jobsJobIdResourceId),
     HttpMethod: 'PUT',

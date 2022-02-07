@@ -31,65 +31,10 @@ Object {
     },
   },
   "Parameters": Object {
-    "AssetParameters162207df3d118b3efa44d36d86b190ee01b89f59fbf54a74e4598e0f259bd82eArtifactHash166BB6F6": Object {
-      "Description": "Artifact hash for asset \\"162207df3d118b3efa44d36d86b190ee01b89f59fbf54a74e4598e0f259bd82e\\"",
-      "Type": "String",
-    },
-    "AssetParameters162207df3d118b3efa44d36d86b190ee01b89f59fbf54a74e4598e0f259bd82eS3Bucket897F983C": Object {
-      "Description": "S3 bucket for asset \\"162207df3d118b3efa44d36d86b190ee01b89f59fbf54a74e4598e0f259bd82e\\"",
-      "Type": "String",
-    },
-    "AssetParameters162207df3d118b3efa44d36d86b190ee01b89f59fbf54a74e4598e0f259bd82eS3VersionKey81E510B2": Object {
-      "Description": "S3 key for asset version \\"162207df3d118b3efa44d36d86b190ee01b89f59fbf54a74e4598e0f259bd82e\\"",
-      "Type": "String",
-    },
-    "AssetParameters1901cb17a50f76abd45d454e754c99b85b789be0be29cb6302bf24c08ebf2cf9ArtifactHashDF625ADE": Object {
-      "Description": "Artifact hash for asset \\"1901cb17a50f76abd45d454e754c99b85b789be0be29cb6302bf24c08ebf2cf9\\"",
-      "Type": "String",
-    },
-    "AssetParameters1901cb17a50f76abd45d454e754c99b85b789be0be29cb6302bf24c08ebf2cf9S3BucketEFE29B88": Object {
-      "Description": "S3 bucket for asset \\"1901cb17a50f76abd45d454e754c99b85b789be0be29cb6302bf24c08ebf2cf9\\"",
-      "Type": "String",
-    },
-    "AssetParameters1901cb17a50f76abd45d454e754c99b85b789be0be29cb6302bf24c08ebf2cf9S3VersionKeyE027B447": Object {
-      "Description": "S3 key for asset version \\"1901cb17a50f76abd45d454e754c99b85b789be0be29cb6302bf24c08ebf2cf9\\"",
-      "Type": "String",
-    },
-    "AssetParameters6d673251b6ada441c31c7aace0c0a5b4ce3557aa02503fddd05e3de9b81e84a6ArtifactHashAE639A19": Object {
-      "Description": "Artifact hash for asset \\"6d673251b6ada441c31c7aace0c0a5b4ce3557aa02503fddd05e3de9b81e84a6\\"",
-      "Type": "String",
-    },
-    "AssetParameters6d673251b6ada441c31c7aace0c0a5b4ce3557aa02503fddd05e3de9b81e84a6S3Bucket3CD30841": Object {
-      "Description": "S3 bucket for asset \\"6d673251b6ada441c31c7aace0c0a5b4ce3557aa02503fddd05e3de9b81e84a6\\"",
-      "Type": "String",
-    },
-    "AssetParameters6d673251b6ada441c31c7aace0c0a5b4ce3557aa02503fddd05e3de9b81e84a6S3VersionKey3FE92810": Object {
-      "Description": "S3 key for asset version \\"6d673251b6ada441c31c7aace0c0a5b4ce3557aa02503fddd05e3de9b81e84a6\\"",
-      "Type": "String",
-    },
-    "AssetParametersea5799574ab542efa13133c8dd18c6028166eb83be2503373b2e52f044551190ArtifactHash50B4E9B0": Object {
-      "Description": "Artifact hash for asset \\"ea5799574ab542efa13133c8dd18c6028166eb83be2503373b2e52f044551190\\"",
-      "Type": "String",
-    },
-    "AssetParametersea5799574ab542efa13133c8dd18c6028166eb83be2503373b2e52f044551190S3BucketB25DCC72": Object {
-      "Description": "S3 bucket for asset \\"ea5799574ab542efa13133c8dd18c6028166eb83be2503373b2e52f044551190\\"",
-      "Type": "String",
-    },
-    "AssetParametersea5799574ab542efa13133c8dd18c6028166eb83be2503373b2e52f044551190S3VersionKey54BDD9C1": Object {
-      "Description": "S3 key for asset version \\"ea5799574ab542efa13133c8dd18c6028166eb83be2503373b2e52f044551190\\"",
-      "Type": "String",
-    },
-    "AssetParametersfd7fc7d7d07aa61d4f37155c9c5bcc8e30a3c05806622da7d69d22bbd55a1dbcArtifactHashC14211E3": Object {
-      "Description": "Artifact hash for asset \\"fd7fc7d7d07aa61d4f37155c9c5bcc8e30a3c05806622da7d69d22bbd55a1dbc\\"",
-      "Type": "String",
-    },
-    "AssetParametersfd7fc7d7d07aa61d4f37155c9c5bcc8e30a3c05806622da7d69d22bbd55a1dbcS3Bucket5617029B": Object {
-      "Description": "S3 bucket for asset \\"fd7fc7d7d07aa61d4f37155c9c5bcc8e30a3c05806622da7d69d22bbd55a1dbc\\"",
-      "Type": "String",
-    },
-    "AssetParametersfd7fc7d7d07aa61d4f37155c9c5bcc8e30a3c05806622da7d69d22bbd55a1dbcS3VersionKey218595CA": Object {
-      "Description": "S3 key for asset version \\"fd7fc7d7d07aa61d4f37155c9c5bcc8e30a3c05806622da7d69d22bbd55a1dbc\\"",
-      "Type": "String",
+    "BootstrapVersion": Object {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
     },
   },
   "Resources": Object {
@@ -100,41 +45,9 @@ Object {
       "Properties": Object {
         "Code": Object {
           "S3Bucket": Object {
-            "Ref": "AssetParameters1901cb17a50f76abd45d454e754c99b85b789be0be29cb6302bf24c08ebf2cf9S3BucketEFE29B88",
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                Object {
-                  "Fn::Select": Array [
-                    0,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters1901cb17a50f76abd45d454e754c99b85b789be0be29cb6302bf24c08ebf2cf9S3VersionKeyE027B447",
-                        },
-                      ],
-                    },
-                  ],
-                },
-                Object {
-                  "Fn::Select": Array [
-                    1,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters1901cb17a50f76abd45d454e754c99b85b789be0be29cb6302bf24c08ebf2cf9S3VersionKeyE027B447",
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            ],
-          },
+          "S3Key": "1901cb17a50f76abd45d454e754c99b85b789be0be29cb6302bf24c08ebf2cf9.zip",
         },
         "Environment": Object {
           "Variables": Object {
@@ -190,41 +103,9 @@ Object {
       "Properties": Object {
         "Code": Object {
           "S3Bucket": Object {
-            "Ref": "AssetParameters6d673251b6ada441c31c7aace0c0a5b4ce3557aa02503fddd05e3de9b81e84a6S3Bucket3CD30841",
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                Object {
-                  "Fn::Select": Array [
-                    0,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters6d673251b6ada441c31c7aace0c0a5b4ce3557aa02503fddd05e3de9b81e84a6S3VersionKey3FE92810",
-                        },
-                      ],
-                    },
-                  ],
-                },
-                Object {
-                  "Fn::Select": Array [
-                    1,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters6d673251b6ada441c31c7aace0c0a5b4ce3557aa02503fddd05e3de9b81e84a6S3VersionKey3FE92810",
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            ],
-          },
+          "S3Key": "6d673251b6ada441c31c7aace0c0a5b4ce3557aa02503fddd05e3de9b81e84a6.zip",
         },
         "Environment": Object {
           "Variables": Object {
@@ -280,41 +161,9 @@ Object {
       "Properties": Object {
         "Code": Object {
           "S3Bucket": Object {
-            "Ref": "AssetParametersfd7fc7d7d07aa61d4f37155c9c5bcc8e30a3c05806622da7d69d22bbd55a1dbcS3Bucket5617029B",
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                Object {
-                  "Fn::Select": Array [
-                    0,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParametersfd7fc7d7d07aa61d4f37155c9c5bcc8e30a3c05806622da7d69d22bbd55a1dbcS3VersionKey218595CA",
-                        },
-                      ],
-                    },
-                  ],
-                },
-                Object {
-                  "Fn::Select": Array [
-                    1,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParametersfd7fc7d7d07aa61d4f37155c9c5bcc8e30a3c05806622da7d69d22bbd55a1dbcS3VersionKey218595CA",
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            ],
-          },
+          "S3Key": "fd7fc7d7d07aa61d4f37155c9c5bcc8e30a3c05806622da7d69d22bbd55a1dbc.zip",
         },
         "Environment": Object {
           "Variables": Object {
@@ -370,41 +219,9 @@ Object {
       "Properties": Object {
         "Code": Object {
           "S3Bucket": Object {
-            "Ref": "AssetParameters1901cb17a50f76abd45d454e754c99b85b789be0be29cb6302bf24c08ebf2cf9S3BucketEFE29B88",
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                Object {
-                  "Fn::Select": Array [
-                    0,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters1901cb17a50f76abd45d454e754c99b85b789be0be29cb6302bf24c08ebf2cf9S3VersionKeyE027B447",
-                        },
-                      ],
-                    },
-                  ],
-                },
-                Object {
-                  "Fn::Select": Array [
-                    1,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters1901cb17a50f76abd45d454e754c99b85b789be0be29cb6302bf24c08ebf2cf9S3VersionKeyE027B447",
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            ],
-          },
+          "S3Key": "1901cb17a50f76abd45d454e754c99b85b789be0be29cb6302bf24c08ebf2cf9.zip",
         },
         "Environment": Object {
           "Variables": Object {
@@ -460,41 +277,9 @@ Object {
       "Properties": Object {
         "Code": Object {
           "S3Bucket": Object {
-            "Ref": "AssetParametersea5799574ab542efa13133c8dd18c6028166eb83be2503373b2e52f044551190S3BucketB25DCC72",
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                Object {
-                  "Fn::Select": Array [
-                    0,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParametersea5799574ab542efa13133c8dd18c6028166eb83be2503373b2e52f044551190S3VersionKey54BDD9C1",
-                        },
-                      ],
-                    },
-                  ],
-                },
-                Object {
-                  "Fn::Select": Array [
-                    1,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParametersea5799574ab542efa13133c8dd18c6028166eb83be2503373b2e52f044551190S3VersionKey54BDD9C1",
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            ],
-          },
+          "S3Key": "ea5799574ab542efa13133c8dd18c6028166eb83be2503373b2e52f044551190.zip",
         },
         "Environment": Object {
           "Variables": Object {
@@ -621,9 +406,6 @@ Object {
       "Type": "AWS::ApiGateway::Deployment",
     },
     "ThingTypeApiThingTypeRestApiDeploymentStageprod06642ED0": Object {
-      "DependsOn": Array [
-        "ThingTypeApiThingTypeRestApiAccount84C58937",
-      ],
       "Properties": Object {
         "DeploymentId": Object {
           "Ref": "ThingTypeApiThingTypeRestApiDeployment6D978410a41bf235ae43918aa7182f3e3af498e6",
@@ -732,7 +514,7 @@ Object {
       },
       "Type": "AWS::ApiGateway::Method",
     },
-    "ThingTypeApiThingTypeRestApithingtypesGETApiPermissionTestdemostackThingTypeApiThingTypeRestApiDA3B48E7GETthingtypes5F0DA464": Object {
+    "ThingTypeApiThingTypeRestApithingtypesGETApiPermissionTestteststackThingTypeApiThingTypeRestApi2EA8A9EBGETthingtypes20F79EEF": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -769,7 +551,7 @@ Object {
       },
       "Type": "AWS::Lambda::Permission",
     },
-    "ThingTypeApiThingTypeRestApithingtypesGETApiPermissiondemostackThingTypeApiThingTypeRestApiDA3B48E7GETthingtypesF3333952": Object {
+    "ThingTypeApiThingTypeRestApithingtypesGETApiPermissionteststackThingTypeApiThingTypeRestApi2EA8A9EBGETthingtypes135F7D34": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -889,7 +671,7 @@ Object {
       },
       "Type": "AWS::ApiGateway::Method",
     },
-    "ThingTypeApiThingTypeRestApithingtypesPOSTApiPermissionTestdemostackThingTypeApiThingTypeRestApiDA3B48E7POSTthingtypes9A44BB56": Object {
+    "ThingTypeApiThingTypeRestApithingtypesPOSTApiPermissionTestteststackThingTypeApiThingTypeRestApi2EA8A9EBPOSTthingtypesB1D7B103": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -926,7 +708,7 @@ Object {
       },
       "Type": "AWS::Lambda::Permission",
     },
-    "ThingTypeApiThingTypeRestApithingtypesPOSTApiPermissiondemostackThingTypeApiThingTypeRestApiDA3B48E7POSTthingtypes09106FE5": Object {
+    "ThingTypeApiThingTypeRestApithingtypesPOSTApiPermissionteststackThingTypeApiThingTypeRestApi2EA8A9EBPOSTthingtypes1CD17A8F": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -979,7 +761,7 @@ Object {
       },
       "Type": "AWS::ApiGateway::Resource",
     },
-    "ThingTypeApiThingTypeRestApithingtypesthingTypeNameDELETEApiPermissionTestdemostackThingTypeApiThingTypeRestApiDA3B48E7DELETEthingtypesthingTypeName3CAB2F02": Object {
+    "ThingTypeApiThingTypeRestApithingtypesthingTypeNameDELETEApiPermissionTestteststackThingTypeApiThingTypeRestApi2EA8A9EBDELETEthingtypesthingTypeName4B0A2064": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -1016,7 +798,7 @@ Object {
       },
       "Type": "AWS::Lambda::Permission",
     },
-    "ThingTypeApiThingTypeRestApithingtypesthingTypeNameDELETEApiPermissiondemostackThingTypeApiThingTypeRestApiDA3B48E7DELETEthingtypesthingTypeNameB9D48DD0": Object {
+    "ThingTypeApiThingTypeRestApithingtypesthingTypeNameDELETEApiPermissionteststackThingTypeApiThingTypeRestApi2EA8A9EBDELETEthingtypesthingTypeName9E0CCE0D": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -1097,7 +879,7 @@ Object {
       },
       "Type": "AWS::ApiGateway::Method",
     },
-    "ThingTypeApiThingTypeRestApithingtypesthingTypeNameGETApiPermissionTestdemostackThingTypeApiThingTypeRestApiDA3B48E7GETthingtypesthingTypeNameBF6C51D6": Object {
+    "ThingTypeApiThingTypeRestApithingtypesthingTypeNameGETApiPermissionTestteststackThingTypeApiThingTypeRestApi2EA8A9EBGETthingtypesthingTypeName08F9ECA9": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -1134,7 +916,7 @@ Object {
       },
       "Type": "AWS::Lambda::Permission",
     },
-    "ThingTypeApiThingTypeRestApithingtypesthingTypeNameGETApiPermissiondemostackThingTypeApiThingTypeRestApiDA3B48E7GETthingtypesthingTypeNameC280D12E": Object {
+    "ThingTypeApiThingTypeRestApithingtypesthingTypeNameGETApiPermissionteststackThingTypeApiThingTypeRestApi2EA8A9EBGETthingtypesthingTypeNameC4430936": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -1305,7 +1087,7 @@ Object {
       },
       "Type": "AWS::ApiGateway::Method",
     },
-    "ThingTypeApiThingTypeRestApithingtypesthingTypeNamedeprecatePUTApiPermissionTestdemostackThingTypeApiThingTypeRestApiDA3B48E7PUTthingtypesthingTypeNamedeprecate5B7C7C18": Object {
+    "ThingTypeApiThingTypeRestApithingtypesthingTypeNamedeprecatePUTApiPermissionTestteststackThingTypeApiThingTypeRestApi2EA8A9EBPUTthingtypesthingTypeNamedeprecateC9899C7F": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -1342,7 +1124,7 @@ Object {
       },
       "Type": "AWS::Lambda::Permission",
     },
-    "ThingTypeApiThingTypeRestApithingtypesthingTypeNamedeprecatePUTApiPermissiondemostackThingTypeApiThingTypeRestApiDA3B48E7PUTthingtypesthingTypeNamedeprecate82A747E5": Object {
+    "ThingTypeApiThingTypeRestApithingtypesthingTypeNamedeprecatePUTApiPermissionteststackThingTypeApiThingTypeRestApi2EA8A9EBPUTthingtypesthingTypeNamedeprecate0706E78F": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -1514,7 +1296,7 @@ Object {
       },
       "Type": "AWS::ApiGateway::Method",
     },
-    "ThingTypeApiThingTypeRestApithingtypesthingTypeNameundeprecatePUTApiPermissionTestdemostackThingTypeApiThingTypeRestApiDA3B48E7PUTthingtypesthingTypeNameundeprecate91D81E7E": Object {
+    "ThingTypeApiThingTypeRestApithingtypesthingTypeNameundeprecatePUTApiPermissionTestteststackThingTypeApiThingTypeRestApi2EA8A9EBPUTthingtypesthingTypeNameundeprecate2DDA403B": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -1551,7 +1333,7 @@ Object {
       },
       "Type": "AWS::Lambda::Permission",
     },
-    "ThingTypeApiThingTypeRestApithingtypesthingTypeNameundeprecatePUTApiPermissiondemostackThingTypeApiThingTypeRestApiDA3B48E7PUTthingtypesthingTypeNameundeprecate4AEE0D26": Object {
+    "ThingTypeApiThingTypeRestApithingtypesthingTypeNameundeprecatePUTApiPermissionteststackThingTypeApiThingTypeRestApi2EA8A9EBPUTthingtypesthingTypeNameundeprecate23DCAA6C": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -1599,41 +1381,9 @@ Object {
       "Properties": Object {
         "Code": Object {
           "S3Bucket": Object {
-            "Ref": "AssetParameters162207df3d118b3efa44d36d86b190ee01b89f59fbf54a74e4598e0f259bd82eS3Bucket897F983C",
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                Object {
-                  "Fn::Select": Array [
-                    0,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters162207df3d118b3efa44d36d86b190ee01b89f59fbf54a74e4598e0f259bd82eS3VersionKey81E510B2",
-                        },
-                      ],
-                    },
-                  ],
-                },
-                Object {
-                  "Fn::Select": Array [
-                    1,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters162207df3d118b3efa44d36d86b190ee01b89f59fbf54a74e4598e0f259bd82eS3VersionKey81E510B2",
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            ],
-          },
+          "S3Key": "162207df3d118b3efa44d36d86b190ee01b89f59fbf54a74e4598e0f259bd82e.zip",
         },
         "Environment": Object {
           "Variables": Object {
@@ -1807,6 +1557,33 @@ Object {
         ],
       },
       "Type": "AWS::IAM::Policy",
+    },
+  },
+  "Rules": Object {
+    "CheckBootstrapVersion": Object {
+      "Assertions": Array [
+        Object {
+          "Assert": Object {
+            "Fn::Not": Array [
+              Object {
+                "Fn::Contains": Array [
+                  Array [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  Object {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
     },
   },
 }
