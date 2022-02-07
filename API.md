@@ -1,12 +1,12 @@
-# API Reference <a name="API Reference"></a>
+# API Reference <a name="API Reference" id="api-reference"></a>
 
-## Constructs <a name="Constructs"></a>
+## Constructs <a name="Constructs" id="constructs"></a>
 
-### FileApi <a name="@softchef/cdk-iot-device-management.FileApi"></a>
+### FileApi <a name="@softchef/cdk-iot-device-management.FileApi" id="softchefcdkiotdevicemanagementfileapi"></a>
 
 File API construct.
 
-#### Initializers <a name="@softchef/cdk-iot-device-management.FileApi.Initializer"></a>
+#### Initializers <a name="@softchef/cdk-iot-device-management.FileApi.Initializer" id="softchefcdkiotdevicemanagementfileapiinitializer"></a>
 
 ```typescript
 import { FileApi } from '@softchef/cdk-iot-device-management'
@@ -14,19 +14,27 @@ import { FileApi } from '@softchef/cdk-iot-device-management'
 new FileApi(scope: Construct, id: string, props?: FileApiProps)
 ```
 
-##### `scope`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileApi.parameter.scope"></a>
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| [`scope`](#softchefcdkiotdevicemanagementfileapiparameterscope)<span title="Required">*</span> | [`@aws-cdk/core.Construct`](#@aws-cdk/core.Construct) | *No description.* |
+| [`id`](#softchefcdkiotdevicemanagementfileapiparameterid)<span title="Required">*</span> | `string` | *No description.* |
+| [`props`](#softchefcdkiotdevicemanagementfileapiparameterprops) | [`@softchef/cdk-iot-device-management.FileApiProps`](#@softchef/cdk-iot-device-management.FileApiProps) | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileApi.parameter.scope" id="softchefcdkiotdevicemanagementfileapiparameterscope"></a>
 
 - *Type:* [`@aws-cdk/core.Construct`](#@aws-cdk/core.Construct)
 
 ---
 
-##### `id`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileApi.parameter.id"></a>
+##### `id`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileApi.parameter.id" id="softchefcdkiotdevicemanagementfileapiparameterid"></a>
 
 - *Type:* `string`
 
 ---
 
-##### `props`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApi.parameter.props"></a>
+##### `props`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApi.parameter.props" id="softchefcdkiotdevicemanagementfileapiparameterprops"></a>
 
 - *Type:* [`@softchef/cdk-iot-device-management.FileApiProps`](#@softchef/cdk-iot-device-management.FileApiProps)
 
@@ -34,9 +42,17 @@ new FileApi(scope: Construct, id: string, props?: FileApiProps)
 
 
 
-#### Properties <a name="Properties"></a>
+#### Properties <a name="Properties" id="properties"></a>
 
-##### `categoryTable`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileApi.property.categoryTable"></a>
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| [`categoryTable`](#softchefcdkiotdevicemanagementfileapipropertycategorytable)<span title="Required">*</span> | [`@aws-cdk/aws-dynamodb.Table`](#@aws-cdk/aws-dynamodb.Table) | The category table. |
+| [`fileTable`](#softchefcdkiotdevicemanagementfileapipropertyfiletable)<span title="Required">*</span> | [`@aws-cdk/aws-dynamodb.Table`](#@aws-cdk/aws-dynamodb.Table) | The file table. |
+| [`restApiId`](#softchefcdkiotdevicemanagementfileapipropertyrestapiid)<span title="Required">*</span> | `string` | File API API ID. |
+
+---
+
+##### `categoryTable`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileApi.property.categoryTable" id="softchefcdkiotdevicemanagementfileapipropertycategorytable"></a>
 
 ```typescript
 public readonly categoryTable: Table;
@@ -48,7 +64,7 @@ The category table.
 
 ---
 
-##### `fileTable`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileApi.property.fileTable"></a>
+##### `fileTable`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileApi.property.fileTable" id="softchefcdkiotdevicemanagementfileapipropertyfiletable"></a>
 
 ```typescript
 public readonly fileTable: Table;
@@ -60,7 +76,7 @@ The file table.
 
 ---
 
-##### `restApiId`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileApi.property.restApiId"></a>
+##### `restApiId`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileApi.property.restApiId" id="softchefcdkiotdevicemanagementfileapipropertyrestapiid"></a>
 
 ```typescript
 public readonly restApiId: string;
@@ -73,11 +89,11 @@ File API API ID.
 ---
 
 
-### JobApi <a name="@softchef/cdk-iot-device-management.JobApi"></a>
+### JobApi <a name="@softchef/cdk-iot-device-management.JobApi" id="softchefcdkiotdevicemanagementjobapi"></a>
 
 Job API construct.
 
-#### Initializers <a name="@softchef/cdk-iot-device-management.JobApi.Initializer"></a>
+#### Initializers <a name="@softchef/cdk-iot-device-management.JobApi.Initializer" id="softchefcdkiotdevicemanagementjobapiinitializer"></a>
 
 ```typescript
 import { JobApi } from '@softchef/cdk-iot-device-management'
@@ -85,19 +101,27 @@ import { JobApi } from '@softchef/cdk-iot-device-management'
 new JobApi(scope: Construct, id: string, props?: JobApiProps)
 ```
 
-##### `scope`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.JobApi.parameter.scope"></a>
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| [`scope`](#softchefcdkiotdevicemanagementjobapiparameterscope)<span title="Required">*</span> | [`@aws-cdk/core.Construct`](#@aws-cdk/core.Construct) | *No description.* |
+| [`id`](#softchefcdkiotdevicemanagementjobapiparameterid)<span title="Required">*</span> | `string` | *No description.* |
+| [`props`](#softchefcdkiotdevicemanagementjobapiparameterprops) | [`@softchef/cdk-iot-device-management.JobApiProps`](#@softchef/cdk-iot-device-management.JobApiProps) | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.JobApi.parameter.scope" id="softchefcdkiotdevicemanagementjobapiparameterscope"></a>
 
 - *Type:* [`@aws-cdk/core.Construct`](#@aws-cdk/core.Construct)
 
 ---
 
-##### `id`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.JobApi.parameter.id"></a>
+##### `id`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.JobApi.parameter.id" id="softchefcdkiotdevicemanagementjobapiparameterid"></a>
 
 - *Type:* `string`
 
 ---
 
-##### `props`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.JobApi.parameter.props"></a>
+##### `props`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.JobApi.parameter.props" id="softchefcdkiotdevicemanagementjobapiparameterprops"></a>
 
 - *Type:* [`@softchef/cdk-iot-device-management.JobApiProps`](#@softchef/cdk-iot-device-management.JobApiProps)
 
@@ -105,9 +129,15 @@ new JobApi(scope: Construct, id: string, props?: JobApiProps)
 
 
 
-#### Properties <a name="Properties"></a>
+#### Properties <a name="Properties" id="properties"></a>
 
-##### `restApiId`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.JobApi.property.restApiId"></a>
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| [`restApiId`](#softchefcdkiotdevicemanagementjobapipropertyrestapiid)<span title="Required">*</span> | `string` | Job API API ID. |
+
+---
+
+##### `restApiId`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.JobApi.property.restApiId" id="softchefcdkiotdevicemanagementjobapipropertyrestapiid"></a>
 
 ```typescript
 public readonly restApiId: string;
@@ -120,11 +150,11 @@ Job API API ID.
 ---
 
 
-### ThingApi <a name="@softchef/cdk-iot-device-management.ThingApi"></a>
+### ThingApi <a name="@softchef/cdk-iot-device-management.ThingApi" id="softchefcdkiotdevicemanagementthingapi"></a>
 
 Thing API construct.
 
-#### Initializers <a name="@softchef/cdk-iot-device-management.ThingApi.Initializer"></a>
+#### Initializers <a name="@softchef/cdk-iot-device-management.ThingApi.Initializer" id="softchefcdkiotdevicemanagementthingapiinitializer"></a>
 
 ```typescript
 import { ThingApi } from '@softchef/cdk-iot-device-management'
@@ -132,19 +162,27 @@ import { ThingApi } from '@softchef/cdk-iot-device-management'
 new ThingApi(scope: Construct, id: string, props?: ThingApiProps)
 ```
 
-##### `scope`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingApi.parameter.scope"></a>
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| [`scope`](#softchefcdkiotdevicemanagementthingapiparameterscope)<span title="Required">*</span> | [`@aws-cdk/core.Construct`](#@aws-cdk/core.Construct) | *No description.* |
+| [`id`](#softchefcdkiotdevicemanagementthingapiparameterid)<span title="Required">*</span> | `string` | *No description.* |
+| [`props`](#softchefcdkiotdevicemanagementthingapiparameterprops) | [`@softchef/cdk-iot-device-management.ThingApiProps`](#@softchef/cdk-iot-device-management.ThingApiProps) | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingApi.parameter.scope" id="softchefcdkiotdevicemanagementthingapiparameterscope"></a>
 
 - *Type:* [`@aws-cdk/core.Construct`](#@aws-cdk/core.Construct)
 
 ---
 
-##### `id`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingApi.parameter.id"></a>
+##### `id`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingApi.parameter.id" id="softchefcdkiotdevicemanagementthingapiparameterid"></a>
 
 - *Type:* `string`
 
 ---
 
-##### `props`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingApi.parameter.props"></a>
+##### `props`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingApi.parameter.props" id="softchefcdkiotdevicemanagementthingapiparameterprops"></a>
 
 - *Type:* [`@softchef/cdk-iot-device-management.ThingApiProps`](#@softchef/cdk-iot-device-management.ThingApiProps)
 
@@ -152,9 +190,15 @@ new ThingApi(scope: Construct, id: string, props?: ThingApiProps)
 
 
 
-#### Properties <a name="Properties"></a>
+#### Properties <a name="Properties" id="properties"></a>
 
-##### `restApiId`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingApi.property.restApiId"></a>
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| [`restApiId`](#softchefcdkiotdevicemanagementthingapipropertyrestapiid)<span title="Required">*</span> | `string` | Thing API API ID. |
+
+---
+
+##### `restApiId`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingApi.property.restApiId" id="softchefcdkiotdevicemanagementthingapipropertyrestapiid"></a>
 
 ```typescript
 public readonly restApiId: string;
@@ -167,11 +211,11 @@ Thing API API ID.
 ---
 
 
-### ThingGroupApi <a name="@softchef/cdk-iot-device-management.ThingGroupApi"></a>
+### ThingGroupApi <a name="@softchef/cdk-iot-device-management.ThingGroupApi" id="softchefcdkiotdevicemanagementthinggroupapi"></a>
 
 Thing Group API construct.
 
-#### Initializers <a name="@softchef/cdk-iot-device-management.ThingGroupApi.Initializer"></a>
+#### Initializers <a name="@softchef/cdk-iot-device-management.ThingGroupApi.Initializer" id="softchefcdkiotdevicemanagementthinggroupapiinitializer"></a>
 
 ```typescript
 import { ThingGroupApi } from '@softchef/cdk-iot-device-management'
@@ -179,19 +223,27 @@ import { ThingGroupApi } from '@softchef/cdk-iot-device-management'
 new ThingGroupApi(scope: Construct, id: string, props?: ThingGroupApiProps)
 ```
 
-##### `scope`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingGroupApi.parameter.scope"></a>
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| [`scope`](#softchefcdkiotdevicemanagementthinggroupapiparameterscope)<span title="Required">*</span> | [`@aws-cdk/core.Construct`](#@aws-cdk/core.Construct) | *No description.* |
+| [`id`](#softchefcdkiotdevicemanagementthinggroupapiparameterid)<span title="Required">*</span> | `string` | *No description.* |
+| [`props`](#softchefcdkiotdevicemanagementthinggroupapiparameterprops) | [`@softchef/cdk-iot-device-management.ThingGroupApiProps`](#@softchef/cdk-iot-device-management.ThingGroupApiProps) | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingGroupApi.parameter.scope" id="softchefcdkiotdevicemanagementthinggroupapiparameterscope"></a>
 
 - *Type:* [`@aws-cdk/core.Construct`](#@aws-cdk/core.Construct)
 
 ---
 
-##### `id`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingGroupApi.parameter.id"></a>
+##### `id`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingGroupApi.parameter.id" id="softchefcdkiotdevicemanagementthinggroupapiparameterid"></a>
 
 - *Type:* `string`
 
 ---
 
-##### `props`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingGroupApi.parameter.props"></a>
+##### `props`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingGroupApi.parameter.props" id="softchefcdkiotdevicemanagementthinggroupapiparameterprops"></a>
 
 - *Type:* [`@softchef/cdk-iot-device-management.ThingGroupApiProps`](#@softchef/cdk-iot-device-management.ThingGroupApiProps)
 
@@ -199,9 +251,15 @@ new ThingGroupApi(scope: Construct, id: string, props?: ThingGroupApiProps)
 
 
 
-#### Properties <a name="Properties"></a>
+#### Properties <a name="Properties" id="properties"></a>
 
-##### `restApiId`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingGroupApi.property.restApiId"></a>
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| [`restApiId`](#softchefcdkiotdevicemanagementthinggroupapipropertyrestapiid)<span title="Required">*</span> | `string` | Thing Group API API ID. |
+
+---
+
+##### `restApiId`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingGroupApi.property.restApiId" id="softchefcdkiotdevicemanagementthinggroupapipropertyrestapiid"></a>
 
 ```typescript
 public readonly restApiId: string;
@@ -214,9 +272,9 @@ Thing Group API API ID.
 ---
 
 
-### ThingTypeApi <a name="@softchef/cdk-iot-device-management.ThingTypeApi"></a>
+### ThingTypeApi <a name="@softchef/cdk-iot-device-management.ThingTypeApi" id="softchefcdkiotdevicemanagementthingtypeapi"></a>
 
-#### Initializers <a name="@softchef/cdk-iot-device-management.ThingTypeApi.Initializer"></a>
+#### Initializers <a name="@softchef/cdk-iot-device-management.ThingTypeApi.Initializer" id="softchefcdkiotdevicemanagementthingtypeapiinitializer"></a>
 
 ```typescript
 import { ThingTypeApi } from '@softchef/cdk-iot-device-management'
@@ -224,19 +282,27 @@ import { ThingTypeApi } from '@softchef/cdk-iot-device-management'
 new ThingTypeApi(scope: Construct, id: string, props?: ThingTypeApiProps)
 ```
 
-##### `scope`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingTypeApi.parameter.scope"></a>
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| [`scope`](#softchefcdkiotdevicemanagementthingtypeapiparameterscope)<span title="Required">*</span> | [`@aws-cdk/core.Construct`](#@aws-cdk/core.Construct) | *No description.* |
+| [`id`](#softchefcdkiotdevicemanagementthingtypeapiparameterid)<span title="Required">*</span> | `string` | *No description.* |
+| [`props`](#softchefcdkiotdevicemanagementthingtypeapiparameterprops) | [`@softchef/cdk-iot-device-management.ThingTypeApiProps`](#@softchef/cdk-iot-device-management.ThingTypeApiProps) | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingTypeApi.parameter.scope" id="softchefcdkiotdevicemanagementthingtypeapiparameterscope"></a>
 
 - *Type:* [`@aws-cdk/core.Construct`](#@aws-cdk/core.Construct)
 
 ---
 
-##### `id`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingTypeApi.parameter.id"></a>
+##### `id`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingTypeApi.parameter.id" id="softchefcdkiotdevicemanagementthingtypeapiparameterid"></a>
 
 - *Type:* `string`
 
 ---
 
-##### `props`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingTypeApi.parameter.props"></a>
+##### `props`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingTypeApi.parameter.props" id="softchefcdkiotdevicemanagementthingtypeapiparameterprops"></a>
 
 - *Type:* [`@softchef/cdk-iot-device-management.ThingTypeApiProps`](#@softchef/cdk-iot-device-management.ThingTypeApiProps)
 
@@ -244,9 +310,15 @@ new ThingTypeApi(scope: Construct, id: string, props?: ThingTypeApiProps)
 
 
 
-#### Properties <a name="Properties"></a>
+#### Properties <a name="Properties" id="properties"></a>
 
-##### `restApiId`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingTypeApi.property.restApiId"></a>
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| [`restApiId`](#softchefcdkiotdevicemanagementthingtypeapipropertyrestapiid)<span title="Required">*</span> | `string` | *No description.* |
+
+---
+
+##### `restApiId`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.ThingTypeApi.property.restApiId" id="softchefcdkiotdevicemanagementthingtypeapipropertyrestapiid"></a>
 
 ```typescript
 public readonly restApiId: string;
@@ -257,13 +329,13 @@ public readonly restApiId: string;
 ---
 
 
-## Structs <a name="Structs"></a>
+## Structs <a name="Structs" id="structs"></a>
 
-### Capacity <a name="@softchef/cdk-iot-device-management.Capacity"></a>
+### Capacity <a name="@softchef/cdk-iot-device-management.Capacity" id="softchefcdkiotdevicemanagementcapacity"></a>
 
 Specify file, category table read/write capacity.
 
-#### Initializer <a name="[object Object].Initializer"></a>
+#### Initializer <a name="[object Object].Initializer" id="object-objectinitializer"></a>
 
 ```typescript
 import { Capacity } from '@softchef/cdk-iot-device-management'
@@ -271,7 +343,16 @@ import { Capacity } from '@softchef/cdk-iot-device-management'
 const capacity: Capacity = { ... }
 ```
 
-##### `readCapacity`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.Capacity.property.readCapacity"></a>
+#### Properties <a name="Properties" id="properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| [`readCapacity`](#softchefcdkiotdevicemanagementcapacitypropertyreadcapacity) | `number` | The read capacity for the table. |
+| [`writeCapacity`](#softchefcdkiotdevicemanagementcapacitypropertywritecapacity) | `number` | The write capacity for the table. |
+
+---
+
+##### `readCapacity`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.Capacity.property.readCapacity" id="softchefcdkiotdevicemanagementcapacitypropertyreadcapacity"></a>
 
 ```typescript
 public readonly readCapacity: number;
@@ -283,7 +364,7 @@ The read capacity for the table.
 
 ---
 
-##### `writeCapacity`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.Capacity.property.writeCapacity"></a>
+##### `writeCapacity`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.Capacity.property.writeCapacity" id="softchefcdkiotdevicemanagementcapacitypropertywritecapacity"></a>
 
 ```typescript
 public readonly writeCapacity: number;
@@ -295,11 +376,11 @@ The write capacity for the table.
 
 ---
 
-### CategoryTableConfig <a name="@softchef/cdk-iot-device-management.CategoryTableConfig"></a>
+### CategoryTableConfig <a name="@softchef/cdk-iot-device-management.CategoryTableConfig" id="softchefcdkiotdevicemanagementcategorytableconfig"></a>
 
 Category table capacity config.
 
-#### Initializer <a name="[object Object].Initializer"></a>
+#### Initializer <a name="[object Object].Initializer" id="object-objectinitializer"></a>
 
 ```typescript
 import { CategoryTableConfig } from '@softchef/cdk-iot-device-management'
@@ -307,7 +388,16 @@ import { CategoryTableConfig } from '@softchef/cdk-iot-device-management'
 const categoryTableConfig: CategoryTableConfig = { ... }
 ```
 
-##### `indexQueryByParentId`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.CategoryTableConfig.property.indexQueryByParentId"></a>
+#### Properties <a name="Properties" id="properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| [`indexQueryByParentId`](#softchefcdkiotdevicemanagementcategorytableconfigpropertyindexquerybyparentid)<span title="Required">*</span> | [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity) | Category table global secondary index `query-by-parent-id` capacity, specify at `Capacity` interface. |
+| [`primaryIndex`](#softchefcdkiotdevicemanagementcategorytableconfigpropertyprimaryindex)<span title="Required">*</span> | [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity) | Category table capacity, specify at `Capacity` interface. |
+
+---
+
+##### `indexQueryByParentId`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.CategoryTableConfig.property.indexQueryByParentId" id="softchefcdkiotdevicemanagementcategorytableconfigpropertyindexquerybyparentid"></a>
 
 ```typescript
 public readonly indexQueryByParentId: Capacity;
@@ -319,7 +409,7 @@ Category table global secondary index `query-by-parent-id` capacity, specify at 
 
 ---
 
-##### `primaryIndex`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.CategoryTableConfig.property.primaryIndex"></a>
+##### `primaryIndex`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.CategoryTableConfig.property.primaryIndex" id="softchefcdkiotdevicemanagementcategorytableconfigpropertyprimaryindex"></a>
 
 ```typescript
 public readonly primaryIndex: Capacity;
@@ -331,11 +421,11 @@ Category table capacity, specify at `Capacity` interface.
 
 ---
 
-### FileApiProps <a name="@softchef/cdk-iot-device-management.FileApiProps"></a>
+### FileApiProps <a name="@softchef/cdk-iot-device-management.FileApiProps" id="softchefcdkiotdevicemanagementfileapiprops"></a>
 
 File API props.
 
-#### Initializer <a name="[object Object].Initializer"></a>
+#### Initializer <a name="[object Object].Initializer" id="object-objectinitializer"></a>
 
 ```typescript
 import { FileApiProps } from '@softchef/cdk-iot-device-management'
@@ -343,7 +433,18 @@ import { FileApiProps } from '@softchef/cdk-iot-device-management'
 const fileApiProps: FileApiProps = { ... }
 ```
 
-##### `authorizationType`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.authorizationType"></a>
+#### Properties <a name="Properties" id="properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| [`authorizationType`](#softchefcdkiotdevicemanagementfileapipropspropertyauthorizationtype) | [`@aws-cdk/aws-apigateway.AuthorizationType`](#@aws-cdk/aws-apigateway.AuthorizationType) | Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE. |
+| [`authorizer`](#softchefcdkiotdevicemanagementfileapipropspropertyauthorizer) | [`@aws-cdk/aws-apigateway.IAuthorizer`](#@aws-cdk/aws-apigateway.IAuthorizer) | Specify API Gateway's authorizer, CognitoUserPool/Lambda. |
+| [`categoryTableConfig`](#softchefcdkiotdevicemanagementfileapipropspropertycategorytableconfig) | [`@softchef/cdk-iot-device-management.CategoryTableConfig`](#@softchef/cdk-iot-device-management.CategoryTableConfig) | Category Table Configuration. |
+| [`fileTableConfig`](#softchefcdkiotdevicemanagementfileapipropspropertyfiletableconfig) | [`@softchef/cdk-iot-device-management.FileTableConfig`](#@softchef/cdk-iot-device-management.FileTableConfig) | File Table Configuration. |
+
+---
+
+##### `authorizationType`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.authorizationType" id="softchefcdkiotdevicemanagementfileapipropspropertyauthorizationtype"></a>
 
 ```typescript
 public readonly authorizationType: AuthorizationType;
@@ -356,7 +457,7 @@ Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE.
 
 ---
 
-##### `authorizer`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.authorizer"></a>
+##### `authorizer`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.authorizer" id="softchefcdkiotdevicemanagementfileapipropspropertyauthorizer"></a>
 
 ```typescript
 public readonly authorizer: IAuthorizer;
@@ -369,7 +470,7 @@ Specify API Gateway's authorizer, CognitoUserPool/Lambda.
 
 ---
 
-##### `categoryTableConfig`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.categoryTableConfig"></a>
+##### `categoryTableConfig`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.categoryTableConfig" id="softchefcdkiotdevicemanagementfileapipropspropertycategorytableconfig"></a>
 
 ```typescript
 public readonly categoryTableConfig: CategoryTableConfig;
@@ -382,7 +483,7 @@ Category Table Configuration.
 
 ---
 
-##### `fileTableConfig`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.fileTableConfig"></a>
+##### `fileTableConfig`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.FileApiProps.property.fileTableConfig" id="softchefcdkiotdevicemanagementfileapipropspropertyfiletableconfig"></a>
 
 ```typescript
 public readonly fileTableConfig: FileTableConfig;
@@ -395,11 +496,11 @@ File Table Configuration.
 
 ---
 
-### FileTableConfig <a name="@softchef/cdk-iot-device-management.FileTableConfig"></a>
+### FileTableConfig <a name="@softchef/cdk-iot-device-management.FileTableConfig" id="softchefcdkiotdevicemanagementfiletableconfig"></a>
 
 File table capacity config.
 
-#### Initializer <a name="[object Object].Initializer"></a>
+#### Initializer <a name="[object Object].Initializer" id="object-objectinitializer"></a>
 
 ```typescript
 import { FileTableConfig } from '@softchef/cdk-iot-device-management'
@@ -407,7 +508,17 @@ import { FileTableConfig } from '@softchef/cdk-iot-device-management'
 const fileTableConfig: FileTableConfig = { ... }
 ```
 
-##### `indexGetFileByChecksumAndVersion`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileTableConfig.property.indexGetFileByChecksumAndVersion"></a>
+#### Properties <a name="Properties" id="properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| [`indexGetFileByChecksumAndVersion`](#softchefcdkiotdevicemanagementfiletableconfigpropertyindexgetfilebychecksumandversion)<span title="Required">*</span> | [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity) | File table global secondary index `get-file-by-checksum-and-version` capacity specify at `Capacity` interface. |
+| [`indexQueryByCategoryIdAndLocale`](#softchefcdkiotdevicemanagementfiletableconfigpropertyindexquerybycategoryidandlocale)<span title="Required">*</span> | [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity) | File table global secondary index `query-by-category-id-and-locale` capacity specify at `Capacity` interface. |
+| [`primaryIndex`](#softchefcdkiotdevicemanagementfiletableconfigpropertyprimaryindex)<span title="Required">*</span> | [`@softchef/cdk-iot-device-management.Capacity`](#@softchef/cdk-iot-device-management.Capacity) | File table capacity specify at `Capacity` interface. |
+
+---
+
+##### `indexGetFileByChecksumAndVersion`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileTableConfig.property.indexGetFileByChecksumAndVersion" id="softchefcdkiotdevicemanagementfiletableconfigpropertyindexgetfilebychecksumandversion"></a>
 
 ```typescript
 public readonly indexGetFileByChecksumAndVersion: Capacity;
@@ -419,7 +530,7 @@ File table global secondary index `get-file-by-checksum-and-version` capacity sp
 
 ---
 
-##### `indexQueryByCategoryIdAndLocale`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileTableConfig.property.indexQueryByCategoryIdAndLocale"></a>
+##### `indexQueryByCategoryIdAndLocale`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileTableConfig.property.indexQueryByCategoryIdAndLocale" id="softchefcdkiotdevicemanagementfiletableconfigpropertyindexquerybycategoryidandlocale"></a>
 
 ```typescript
 public readonly indexQueryByCategoryIdAndLocale: Capacity;
@@ -431,7 +542,7 @@ File table global secondary index `query-by-category-id-and-locale` capacity spe
 
 ---
 
-##### `primaryIndex`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileTableConfig.property.primaryIndex"></a>
+##### `primaryIndex`<sup>Required</sup> <a name="@softchef/cdk-iot-device-management.FileTableConfig.property.primaryIndex" id="softchefcdkiotdevicemanagementfiletableconfigpropertyprimaryindex"></a>
 
 ```typescript
 public readonly primaryIndex: Capacity;
@@ -443,11 +554,11 @@ File table capacity specify at `Capacity` interface.
 
 ---
 
-### JobApiProps <a name="@softchef/cdk-iot-device-management.JobApiProps"></a>
+### JobApiProps <a name="@softchef/cdk-iot-device-management.JobApiProps" id="softchefcdkiotdevicemanagementjobapiprops"></a>
 
 Job API props.
 
-#### Initializer <a name="[object Object].Initializer"></a>
+#### Initializer <a name="[object Object].Initializer" id="object-objectinitializer"></a>
 
 ```typescript
 import { JobApiProps } from '@softchef/cdk-iot-device-management'
@@ -455,7 +566,17 @@ import { JobApiProps } from '@softchef/cdk-iot-device-management'
 const jobApiProps: JobApiProps = { ... }
 ```
 
-##### `authorizationType`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.JobApiProps.property.authorizationType"></a>
+#### Properties <a name="Properties" id="properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| [`authorizationType`](#softchefcdkiotdevicemanagementjobapipropspropertyauthorizationtype) | [`@aws-cdk/aws-apigateway.AuthorizationType`](#@aws-cdk/aws-apigateway.AuthorizationType) | Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE. |
+| [`authorizer`](#softchefcdkiotdevicemanagementjobapipropspropertyauthorizer) | [`@aws-cdk/aws-apigateway.IAuthorizer`](#@aws-cdk/aws-apigateway.IAuthorizer) | Specify API Gateway's authorizer, CognitoUserPool/Lambda. |
+| [`scheduleFunction`](#softchefcdkiotdevicemanagementjobapipropspropertyschedulefunction) | `any` | Specify Schedule Function to enable create schedule job function. |
+
+---
+
+##### `authorizationType`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.JobApiProps.property.authorizationType" id="softchefcdkiotdevicemanagementjobapipropspropertyauthorizationtype"></a>
 
 ```typescript
 public readonly authorizationType: AuthorizationType;
@@ -468,7 +589,7 @@ Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE.
 
 ---
 
-##### `authorizer`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.JobApiProps.property.authorizer"></a>
+##### `authorizer`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.JobApiProps.property.authorizer" id="softchefcdkiotdevicemanagementjobapipropspropertyauthorizer"></a>
 
 ```typescript
 public readonly authorizer: IAuthorizer;
@@ -481,7 +602,7 @@ Specify API Gateway's authorizer, CognitoUserPool/Lambda.
 
 ---
 
-##### `scheduleFunction`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.JobApiProps.property.scheduleFunction"></a>
+##### `scheduleFunction`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.JobApiProps.property.scheduleFunction" id="softchefcdkiotdevicemanagementjobapipropspropertyschedulefunction"></a>
 
 ```typescript
 public readonly scheduleFunction: any;
@@ -494,11 +615,11 @@ Specify Schedule Function to enable create schedule job function.
 
 ---
 
-### ThingApiProps <a name="@softchef/cdk-iot-device-management.ThingApiProps"></a>
+### ThingApiProps <a name="@softchef/cdk-iot-device-management.ThingApiProps" id="softchefcdkiotdevicemanagementthingapiprops"></a>
 
 Thing API props.
 
-#### Initializer <a name="[object Object].Initializer"></a>
+#### Initializer <a name="[object Object].Initializer" id="object-objectinitializer"></a>
 
 ```typescript
 import { ThingApiProps } from '@softchef/cdk-iot-device-management'
@@ -506,7 +627,16 @@ import { ThingApiProps } from '@softchef/cdk-iot-device-management'
 const thingApiProps: ThingApiProps = { ... }
 ```
 
-##### `authorizationType`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingApiProps.property.authorizationType"></a>
+#### Properties <a name="Properties" id="properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| [`authorizationType`](#softchefcdkiotdevicemanagementthingapipropspropertyauthorizationtype) | [`@aws-cdk/aws-apigateway.AuthorizationType`](#@aws-cdk/aws-apigateway.AuthorizationType) | Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE. |
+| [`authorizer`](#softchefcdkiotdevicemanagementthingapipropspropertyauthorizer) | [`@aws-cdk/aws-apigateway.IAuthorizer`](#@aws-cdk/aws-apigateway.IAuthorizer) | Specify API Gateway's authorizer, CognitoUserPool/Lambda. |
+
+---
+
+##### `authorizationType`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingApiProps.property.authorizationType" id="softchefcdkiotdevicemanagementthingapipropspropertyauthorizationtype"></a>
 
 ```typescript
 public readonly authorizationType: AuthorizationType;
@@ -519,7 +649,7 @@ Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE.
 
 ---
 
-##### `authorizer`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingApiProps.property.authorizer"></a>
+##### `authorizer`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingApiProps.property.authorizer" id="softchefcdkiotdevicemanagementthingapipropspropertyauthorizer"></a>
 
 ```typescript
 public readonly authorizer: IAuthorizer;
@@ -532,11 +662,11 @@ Specify API Gateway's authorizer, CognitoUserPool/Lambda.
 
 ---
 
-### ThingGroupApiProps <a name="@softchef/cdk-iot-device-management.ThingGroupApiProps"></a>
+### ThingGroupApiProps <a name="@softchef/cdk-iot-device-management.ThingGroupApiProps" id="softchefcdkiotdevicemanagementthinggroupapiprops"></a>
 
 Thing Group API props.
 
-#### Initializer <a name="[object Object].Initializer"></a>
+#### Initializer <a name="[object Object].Initializer" id="object-objectinitializer"></a>
 
 ```typescript
 import { ThingGroupApiProps } from '@softchef/cdk-iot-device-management'
@@ -544,7 +674,16 @@ import { ThingGroupApiProps } from '@softchef/cdk-iot-device-management'
 const thingGroupApiProps: ThingGroupApiProps = { ... }
 ```
 
-##### `authorizationType`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingGroupApiProps.property.authorizationType"></a>
+#### Properties <a name="Properties" id="properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| [`authorizationType`](#softchefcdkiotdevicemanagementthinggroupapipropspropertyauthorizationtype) | [`@aws-cdk/aws-apigateway.AuthorizationType`](#@aws-cdk/aws-apigateway.AuthorizationType) | Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE. |
+| [`authorizer`](#softchefcdkiotdevicemanagementthinggroupapipropspropertyauthorizer) | [`@aws-cdk/aws-apigateway.IAuthorizer`](#@aws-cdk/aws-apigateway.IAuthorizer) | Specify API Gateway's authorizer, CognitoUserPool/Lambda. |
+
+---
+
+##### `authorizationType`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingGroupApiProps.property.authorizationType" id="softchefcdkiotdevicemanagementthinggroupapipropspropertyauthorizationtype"></a>
 
 ```typescript
 public readonly authorizationType: AuthorizationType;
@@ -557,7 +696,7 @@ Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE.
 
 ---
 
-##### `authorizer`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingGroupApiProps.property.authorizer"></a>
+##### `authorizer`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingGroupApiProps.property.authorizer" id="softchefcdkiotdevicemanagementthinggroupapipropspropertyauthorizer"></a>
 
 ```typescript
 public readonly authorizer: IAuthorizer;
@@ -570,9 +709,9 @@ Specify API Gateway's authorizer, CognitoUserPool/Lambda.
 
 ---
 
-### ThingTypeApiProps <a name="@softchef/cdk-iot-device-management.ThingTypeApiProps"></a>
+### ThingTypeApiProps <a name="@softchef/cdk-iot-device-management.ThingTypeApiProps" id="softchefcdkiotdevicemanagementthingtypeapiprops"></a>
 
-#### Initializer <a name="[object Object].Initializer"></a>
+#### Initializer <a name="[object Object].Initializer" id="object-objectinitializer"></a>
 
 ```typescript
 import { ThingTypeApiProps } from '@softchef/cdk-iot-device-management'
@@ -580,7 +719,16 @@ import { ThingTypeApiProps } from '@softchef/cdk-iot-device-management'
 const thingTypeApiProps: ThingTypeApiProps = { ... }
 ```
 
-##### `authorizationType`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingTypeApiProps.property.authorizationType"></a>
+#### Properties <a name="Properties" id="properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| [`authorizationType`](#softchefcdkiotdevicemanagementthingtypeapipropspropertyauthorizationtype) | [`@aws-cdk/aws-apigateway.AuthorizationType`](#@aws-cdk/aws-apigateway.AuthorizationType) | Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE. |
+| [`authorizer`](#softchefcdkiotdevicemanagementthingtypeapipropspropertyauthorizer) | [`@aws-cdk/aws-apigateway.IAuthorizer`](#@aws-cdk/aws-apigateway.IAuthorizer) | Specify API Gateway's authorizer, CognitoUserPool/Lambda. |
+
+---
+
+##### `authorizationType`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingTypeApiProps.property.authorizationType" id="softchefcdkiotdevicemanagementthingtypeapipropspropertyauthorizationtype"></a>
 
 ```typescript
 public readonly authorizationType: AuthorizationType;
@@ -593,7 +741,7 @@ Specify API Gateway all resources's authorization type, COGNTIO/IAM/CUSTOM/NONE.
 
 ---
 
-##### `authorizer`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingTypeApiProps.property.authorizer"></a>
+##### `authorizer`<sup>Optional</sup> <a name="@softchef/cdk-iot-device-management.ThingTypeApiProps.property.authorizer" id="softchefcdkiotdevicemanagementthingtypeapipropspropertyauthorizer"></a>
 
 ```typescript
 public readonly authorizer: IAuthorizer;
