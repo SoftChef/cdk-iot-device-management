@@ -1,8 +1,8 @@
+# CDK Construct - IoT Device Management
+
 [![npm version](https://badge.fury.io/js/%40softchef%2Fcdk-iot-device-management.svg)](https://badge.fury.io/js/%40softchef%2Fcdk-iot-device-management)
 ![Release](https://github.com/SoftChef/cdk-iot-device-management/workflows/Release/badge.svg)
 ![npm](https://img.shields.io/npm/dt/@softchef/cdk-iot-device-management?label=NPM%20Downloads&color=orange)
-
-# CDK Construct - IoT Device Management
 
 IoT device management is composed of things, thing types, thing groups, jobs, files API services. The constructs can be used independently, that are based on full-managed service to create an API Gateway & Lambda function.
 
@@ -27,15 +27,15 @@ yarn add @softchef/cdk-iot-device-management
 
 This construct library provides five constructs:
 
-- **Thing Type API construct** - Create and modify thing types' information.
-- **Thing API construct** - Create and modify things' information.
-- **Thing Group construct** - Create and modify thing groups' information.
-- **Job API construct** - Create and modify thing's jobs.
-- **File API construct** - Integrate API Gateway and DynamoDB to store device firmware information.
+- **ThingTypeApi** - Create and modify thing types' information.
+- **ThingApi** - Create and modify things' information.
+- **ThingGroupApi** - Create and modify thing groups' information.
+- **JobApi** - Create and modify thing's jobs.
+- **FileApi** - Integrate API Gateway and DynamoDB to store device firmware information.
 
 ## Constructs
 
-### Thing Type API construct
+### Thing Type API
 
 Use thing type API to manage thing types.
 
@@ -50,7 +50,7 @@ const thingTypeApi = new ThingTypeApi(scope, id, {
 
 [Thing Type API Docs](./docs/thing-type-api.md)
 
-### Thing API construct
+### Thing API
 
 Use thing API to manage things' information.
 
@@ -65,7 +65,7 @@ const thingApi = new ThingApi(scope, id, {
 
 [Thing API Docs](./docs/thing-api.md)
 
-### Thing Group API construct
+### Thing Group API
 
 Use thing API to manage thing groups' information.
 
@@ -80,7 +80,7 @@ const thingGroupApi = new ThingGroupApi(scope, id, {
 
 [Thing Group API Docs](./docs/thing-group-api.md)
 
-### Job API construct
+### Job API
 
 Use job API to manage jobs' information.
 
@@ -98,12 +98,12 @@ const jobApi = new JobApi(scope, id, {
 
 [Job API Docs](./docs/job-api.md)
 
-### File API construct
+### File API
 
 Use File API to manage IoT devices firmware. File API contains category and file.
 
 ```typescript
-import { fileApi } from '@softchef/cdk-iot-device-management'
+import { FileApi } from '@softchef/cdk-iot-device-management'
 
 const FileApi = new FileApi(scope, id, {
   authorizationType?: apigateway.AuthorizationType;
@@ -112,6 +112,8 @@ const FileApi = new FileApi(scope, id, {
 ```
 
 [File API Docs](./docs/file-api.md)
+
+## DynamoDB Tables
 
 ### Category Table Schema
 
