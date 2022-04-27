@@ -10,7 +10,7 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@aws-cdk/assert@^1.153.1":
+"@aws-cdk/assert@^1.73.0":
   version "1.153.1"
   resolved "https://registry.yarnpkg.com/@aws-cdk/assert/-/assert-1.153.1.tgz#a0a5d6b976fdc9dae9515f0e3bdf3f3d9067627c"
   integrity sha512-O0LfV5JYzbWQ0vL8K7i6iHQo4j+WycRGFX29oML20hSzZHSstO3AevqpnnLb4EHde4/tPZFED3nq/1EPAx2LSA==
@@ -37,7 +37,7 @@
     "@aws-cdk/core" "1.153.1"
     constructs "^3.3.69"
 
-"@aws-cdk/aws-apigateway@1.153.1", "@aws-cdk/aws-apigateway@^1.153.1", "@aws-cdk/aws-apigateway@^1.73.0":
+"@aws-cdk/aws-apigateway@1.153.1", "@aws-cdk/aws-apigateway@^1.73.0":
   version "1.153.1"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-apigateway/-/aws-apigateway-1.153.1.tgz#209057ee0ddab100978e5e012049a997f430eae8"
   integrity sha512-nmS3oUgwCXiDTEY+JcOR8Xtwf7ZIFo2Tom+R+4I9Ackqmyt3s44/wny2AjvxHyMglTIMIf5t67LlcZPXBbGqDQ==
@@ -239,7 +239,7 @@
     constructs "^3.3.69"
     punycode "^2.1.1"
 
-"@aws-cdk/aws-dynamodb@^1.153.1", "@aws-cdk/aws-dynamodb@^1.73.0":
+"@aws-cdk/aws-dynamodb@^1.73.0":
   version "1.153.1"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-dynamodb/-/aws-dynamodb-1.153.1.tgz#a342f041bdba72c541eccd3f98370ee97ee8dec2"
   integrity sha512-AFzbk7PCA5c/qmsYebkkX1FwA7DC5eU+SF+vleAbwIdoc1IBiqh+93Qdjlm1+ozsB/Ayht72VLefYVC+2dQaCA==
@@ -413,7 +413,7 @@
     "@aws-cdk/custom-resources" "1.153.1"
     constructs "^3.3.69"
 
-"@aws-cdk/aws-iam@1.153.1", "@aws-cdk/aws-iam@^1.153.1", "@aws-cdk/aws-iam@^1.73.0":
+"@aws-cdk/aws-iam@1.153.1", "@aws-cdk/aws-iam@^1.73.0":
   version "1.153.1"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-iam/-/aws-iam-1.153.1.tgz#aef45f34f5115e5c2c7c8a4e1a3ca28aa58baaa2"
   integrity sha512-i+OtyvgrPDZ2/9E5YZMqAXycKJ06tP7izbHSHy7ZbEQs05mR1uuW6lE4/2zjXXYnuXZAYecbRaF28vkfpFYo8w==
@@ -463,7 +463,7 @@
     "@aws-cdk/cx-api" "1.153.1"
     constructs "^3.3.69"
 
-"@aws-cdk/aws-lambda-nodejs@^1.153.1", "@aws-cdk/aws-lambda-nodejs@^1.73.0":
+"@aws-cdk/aws-lambda-nodejs@^1.73.0":
   version "1.153.1"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-lambda-nodejs/-/aws-lambda-nodejs-1.153.1.tgz#011e0abc1e2b1a9338adddfc46e81230f32257e5"
   integrity sha512-PlP7KA3iNDY/8B5oXjrswDyl3aVKu/hW7+0YbZiLgRgcQekpJae0+lDtNUMMObU74c83kfiEqSCpLMcs6edNKA==
@@ -472,7 +472,7 @@
     "@aws-cdk/core" "1.153.1"
     constructs "^3.3.69"
 
-"@aws-cdk/aws-lambda@1.153.1", "@aws-cdk/aws-lambda@^1.153.1", "@aws-cdk/aws-lambda@^1.73.0":
+"@aws-cdk/aws-lambda@1.153.1", "@aws-cdk/aws-lambda@^1.73.0":
   version "1.153.1"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-lambda/-/aws-lambda-1.153.1.tgz#efe43a41de80a74352bc95610de2cce374425555"
   integrity sha512-AgBk6vDKFQdz0uA0IjydeBkDI+UABujWlGXyUmVpvyomeK0q9nmcqCh/ZZCAqudv/EWHP0ofQTLoib5qLwQQqw==
@@ -700,7 +700,7 @@
     string-width "^4.2.3"
     table "^6.8.0"
 
-"@aws-cdk/core@1.153.1", "@aws-cdk/core@^1.153.1", "@aws-cdk/core@^1.73.0":
+"@aws-cdk/core@1.153.1", "@aws-cdk/core@^1.73.0":
   version "1.153.1"
   resolved "https://registry.yarnpkg.com/@aws-cdk/core/-/core-1.153.1.tgz#a480984e41e64be6888ae47cfedbc78fa634e660"
   integrity sha512-HTjvidW0moK46VHYonURpNYEFJcH8u1XHxR5rjr9HuIRIYzzFIdWBEzRtPSFCagxvjlnhwgjLslZzI5PF/rVjQ==
@@ -3236,9 +3236,9 @@ axios@^0.21.1:
     follow-redirects "^1.14.0"
 
 axios@^0.27.1:
-  version "0.27.1"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.27.1.tgz#badcc8cc38cfa812320221b600776452141ea5d4"
-  integrity sha512-ePNMai55xo5GsXajb/k756AqZqpqeDaGwGcdvbZLSSELbbYwsIn2jNmGfUPEwd8j/yu4OoMstLLIVa4t0MneEA==
+  version "0.27.2"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.27.2.tgz#207658cc8621606e586c85db4b41a750e756d972"
+  integrity sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==
   dependencies:
     follow-redirects "^1.14.9"
     form-data "^4.0.0"

@@ -38,7 +38,7 @@
     "organization": true
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.153.1",
+    "@aws-cdk/assert": "^1.73.0",
     "@types/jest": "^27.4.1",
     "@types/node": "^12",
     "@typescript-eslint/eslint-plugin": "^5",
@@ -63,21 +63,21 @@
     "typescript": "^4.6.3"
   },
   "peerDependencies": {
-    "@aws-cdk/aws-apigateway": "^1.153.1",
-    "@aws-cdk/aws-dynamodb": "^1.153.1",
-    "@aws-cdk/aws-iam": "^1.153.1",
-    "@aws-cdk/aws-lambda": "^1.153.1",
-    "@aws-cdk/aws-lambda-nodejs": "^1.153.1",
-    "@aws-cdk/core": "^1.153.1",
-    "constructs": "^3.3.280"
+    "@aws-cdk/aws-apigateway": "^1.73.0",
+    "@aws-cdk/aws-dynamodb": "^1.73.0",
+    "@aws-cdk/aws-iam": "^1.73.0",
+    "@aws-cdk/aws-lambda": "^1.73.0",
+    "@aws-cdk/aws-lambda-nodejs": "^1.73.0",
+    "@aws-cdk/core": "^1.73.0",
+    "constructs": "^3.2.27"
   },
   "dependencies": {
-    "@aws-cdk/aws-apigateway": "^1.153.1",
-    "@aws-cdk/aws-dynamodb": "^1.153.1",
-    "@aws-cdk/aws-iam": "^1.153.1",
-    "@aws-cdk/aws-lambda": "^1.153.1",
-    "@aws-cdk/aws-lambda-nodejs": "^1.153.1",
-    "@aws-cdk/core": "^1.153.1",
+    "@aws-cdk/aws-apigateway": "^1.73.0",
+    "@aws-cdk/aws-dynamodb": "^1.73.0",
+    "@aws-cdk/aws-iam": "^1.73.0",
+    "@aws-cdk/aws-lambda": "^1.73.0",
+    "@aws-cdk/aws-lambda-nodejs": "^1.73.0",
+    "@aws-cdk/core": "^1.73.0",
     "@aws-sdk/client-dynamodb": "^3.78.0",
     "@aws-sdk/client-iot": "^3.78.0",
     "@aws-sdk/client-iot-data-plane": "^3.78.0",
