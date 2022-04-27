@@ -13,6 +13,13 @@ const project = new awscdk.AwsCdkConstructLibrary({
   repositoryUrl: 'git@github.com:SoftChef/cdk-iot-device-management.git',
   cdkVersion: '1.73.0',
   defaultReleaseBranch: 'main',
+  majorVersion: 2,
+  releaseBranches: {
+    cdkv1: {
+      npmDistTag: 'cdkv1',
+      majorVersion: 1,
+    },
+  },
   cdkDependencies: [
     '@aws-cdk/core',
     '@aws-cdk/aws-iam',
